@@ -1,44 +1,32 @@
-# React Express Starter Pack
-
-> Heroku deployable full stack React app boilerplate
-
-### Redux Version
-
-This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter)
+# MyMargdarshaka
 
 ## Quick Start
 
 ```bash
 # Install dependencies for server
-npm install
+$ npm install
 
 # Install dependencies for client
-npm run client-install
+$ npm run client-install
 
 # Run the client & server with concurrently
-npm run dev
+$ npm run dev
 
 # Run the Express server only
-npm run server
+$ npm run server
 
 # Run the React client only
-npm run client
+$ npm run client
 
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 
-## App Info
+## Note
 
-### Author
+If you create a new js file, please add the following comment in the first line of the file:
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+```js
+//@ts-check
+```
 
-### Version
-
-1.0.0
-
-### License
-
-This project is licensed under the MIT License
+This comment will enable type checking in VSCode and will help detect errors during development.

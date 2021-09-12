@@ -1,18 +1,28 @@
+//@ts-check
+
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Customers from "./components/customers";
 
 class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            message: "Waiting for the message from the server",
+        };
+    }
+
+    componentDidMount() {
+        fetch("/api/message")
+            .then((res) => res.text())
+            .then((data) => this.setState({ message: data }));
+    }
+
     render() {
         return (
             <div className='App'>
-                <header className='App-header'>
-                    <img src={logo} className='App-logo' alt='logo' />
-                    <h1 className='App-title'>React Express Starter</h1>
-                </header>
-
-                <Customers />
+                <div>This is the frontend of the app</div>
+                <br></br>
+                <div>{this.state.message}</div>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 {
-    "name": "reactexpress",
+    "name": "mymargdarshaka",
     "version": "1.0.0",
-    "description": "Starter kit for creating React and Express apps",
+    "description": "",
     "main": "server.js",
     "scripts": {
         "client-install": "cd client && npm install",
@@ -11,8 +11,8 @@
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
     },
-    "author": "Brad Traversy",
-    "license": "MIT",
+    "author": "",
+    "license": "",
     "devDependencies": {
         "nodemon": "^1.14.6"
     },
