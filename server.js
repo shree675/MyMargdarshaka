@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 
 app.get("/api/message", (req, res) => {
-    res.send("If you are seeing this message, then it means the app is successfully deployed");
+    res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
 });
 
 if (process.env.NODE_ENV === "production") {
