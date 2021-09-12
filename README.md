@@ -13,16 +13,16 @@ $ npm install
 # Install dependencies for client
 $ npm run client-install
 
-# Run the client & server with concurrently
+# Run the app
 $ npm run dev
 
-# Run the Express server only
+# Server runs on http://localhost:5000 and client on http://localhost:3000
+
+# (Optional) Run the Express server only
 $ npm run server
 
-# Run the React client only
+# (Optional) Run the React client only
 $ npm run client
-
-# Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 
 ## Note
