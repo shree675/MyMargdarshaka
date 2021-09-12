@@ -1,6 +1,6 @@
 # MyMargdarshaka
 
-https://mymargdarshaka.herokuapp.com/
+Deployed site: https://mymargdarshaka.herokuapp.com/
 
 ## Quick Start
 
