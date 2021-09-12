@@ -25,7 +25,7 @@ $ npm run client
 
 ## Note
 
-If you create a new js file, please add the following comment in the first line of the file:
+If you create a new JS file, please add the following comment in the first line of the file:
 
 ```js
 //@ts-check
