@@ -39,4 +39,4 @@ $ npm run client
 
 -   All the backend files and folders must be present/created in the `./` directory.
 -   All the frontend files and folders must be present/created in the `./client` directory.
--   All the SVGs, PNGs and other assets must be placed in the `./client/public/assets` folder.
+-   All the SVGs, PNGs and other assets must be placed in the `./client/src/assets` folder.

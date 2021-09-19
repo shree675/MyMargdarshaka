@@ -1,0 +1,79 @@
+.landing-body {
+    color: #ffffff;
+}
+
+.landing-content1 {
+    background-color: #5d1049;
+    padding: 2.5vw;
+}
+
+.landing-content1-img {
+    width: 80%;
+}
+
+.landing-content1-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.landing-content1-body-comp {
+    flex: 1;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.landing-logo {
+    margin-top: 3vw;
+    filter: drop-shadow(0px 0px 15px rgb(255, 255, 255));
+}
+
+.landing-button {
+    border-radius: 1.25vw;
+    height: 2.5vw;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2vw;
+    margin-top: 2.5vw;
+    transition: all 0.25s;
+    cursor: pointer;
+    font-family: "Raleway", sans-serif;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.landing-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.25s;
+}
+
+.landing-button span:after {
+    content: "🡢";
+    position: absolute;
+    opacity: 0;
+    top: -20px;
+    right: -20px;
+    transition: 0.25s;
+}
+
+.landing-button:hover span {
+    padding-right: 20px;
+}
+
+.landing-button:hover span:after {
+    opacity: 1;
+    right: -20px;
+}
+
+.landing-content2 {
+    background-color: #720d5d;
+    padding: 2.5vw;
+    line-height: 1.9vw;
+    font-size: 1.5vw;
+    word-spacing: 0.4vw;
+    font-weight: light;
+    color: rgba(255, 255, 255, 0.74);
+}
