@@ -6,6 +6,7 @@ import LandingPage from "./components/LandingPage/landing.js";
 import InitiateSignin from "./components/InitiateSigninPage/initiate-signin.js";
 import Navbar from "./components/Navbar/navbar.js";
 import Home from "./components/Navbar/home";
+import Authentication from "./components/AuthenticationPage/authentication.js";
 
 class App extends Component {
     // constructor() {
@@ -23,18 +24,13 @@ class App extends Component {
 
     render() {
         return (
-            
-            // {/* <Switch>
-            //     {/* <Route exact path='/' component={LandingPage} /> */}
-            //         <Route exact path='/' component={InitiateSignin} />
-            //     </Switch> */}
-
-                <Router>
-                    <Navbar />
-                        <Switch>
-                            <Route path="/" exact component={Home} />
-                        </Switch>
-                </Router>
+            <Router>
+                <Switch>
+                    <Route exact path='/' component={LandingPage} />
+                    <Route exact path='/initsignin' component={InitiateSignin} />
+                    <Route exact path='/authentication' component={Authentication} />
+                </Switch>
+            </Router>
         );
     }
 }
