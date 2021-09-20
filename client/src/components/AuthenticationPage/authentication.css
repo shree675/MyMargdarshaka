@@ -1,0 +1,51 @@
+.auth-body {
+    background-color: #e8dee5;
+    text-align: center;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.auth-heading {
+    font-size: 3.4vw;
+    font-weight: bold;
+    color: #720d5d;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+.auth-content {
+    background-color: white;
+    border-radius: 2vw 2vw 0 0;
+    position: relative;
+    height: 100vh;
+}
+
+.auth-background-img {
+    width: 38%;
+    position: absolute;
+    bottom: 10vh;
+    z-index: 0;
+}
+
+.auth-wave-back {
+    width: 115%;
+    position: absolute;
+    top: 64vh;
+    left: -12vh;
+    z-index: 1;
+}
+
+.auth-wave-front {
+    width: 115%;
+    position: absolute;
+    top: 68vh;
+    left: -12vh;
+    z-index: 2;
+}
+
+.auth-humans {
+    position: absolute;
+    top: 38vh;
+    width: 25%;
+    left: 12vh;
+}

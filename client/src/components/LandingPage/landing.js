@@ -22,7 +22,12 @@ class LandingPage extends Component {
                             <div style={{ fontSize: "3.4vw", marginTop: "4vw" }}>Welcome to</div>
                             <img src={main_logo} className='landing-logo'></img>
                             <div style={{ fontSize: "4vw", marginTop: "3vw", fontWeight: "bold" }}>MyMargdarshaka</div>
-                            <button className='landing-button'>
+                            <button
+                                className='landing-button'
+                                onClick={() => {
+                                    window.location = "/initsignin";
+                                }}
+                            >
                                 GET STARTED
                                 <span style={{ color: "gray" }}></span>
                             </button>

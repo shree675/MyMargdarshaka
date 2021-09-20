@@ -18,8 +18,6 @@
 }
 
 .init-signin-left {
-    position: relative;
-    top: 0;
     width: 50%;
     float: left;
 }
@@ -45,6 +43,10 @@
 }
 
 .init-signin-button {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 5;
     height: 2.5vw;
     border-radius: 1.25vw;
     background-color: #464646;
