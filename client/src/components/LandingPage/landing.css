@@ -5,10 +5,12 @@
 .landing-content1 {
     background-color: #5d1049;
     padding: 2.5vw;
+    text-align: center;
 }
 
 .landing-content1-img {
-    width: 80%;
+    width: 100%;
+    padding-top: 1.5vw;
 }
 
 .landing-content1-body {
@@ -38,7 +40,7 @@
     margin-top: 2.5vw;
     transition: all 0.25s;
     cursor: pointer;
-    font-family: "Raleway", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding-left: 32px;
     padding-right: 32px;
 }
@@ -51,6 +53,7 @@
 }
 
 .landing-button span:after {
+    font-family: Arial, Helvetica, sans-serif;
     content: "🡢";
     position: absolute;
     opacity: 0;
@@ -76,4 +79,13 @@
     word-spacing: 0.4vw;
     font-weight: light;
     color: rgba(255, 255, 255, 0.74);
+}
+
+.scroll-down-button {
+    background-color: #5d1049;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
 }

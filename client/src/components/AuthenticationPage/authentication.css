@@ -49,3 +49,43 @@
     width: 25%;
     left: 12vh;
 }
+
+.auth-content-body {
+    position: relative;
+    z-index: 8;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 8vw;
+}
+
+.textfield {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 18%;
+}
+
+#auth-textfield {
+    background-color: #e8dee5;
+}
+
+.auth-button {
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1vw;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    background-color: #5d1049;
+    height: 2.5vw;
+    border-radius: 1.25vw;
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+.bottom-fact {
+    font-size: 1.25vw;
+    font-weight: bold;
+    margin-top: calc(12%);
+}
