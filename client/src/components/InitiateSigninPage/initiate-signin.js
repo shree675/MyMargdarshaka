@@ -6,6 +6,7 @@ import left from "../../assets/initiate-signin-left.svg";
 import right from "../../assets/initiate-signin-right.svg";
 import "./initiate-signin.css";
 import { useSpring, animated } from "react-spring";
+import { Link } from "react-router-dom";
 
 const InitiateSignin = () => {
     const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
@@ -20,11 +21,13 @@ const InitiateSignin = () => {
                 <img src={main_logo}></img>
             </div>
             <div className='init-signin-content1' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+                <Link to='/adminauth' className='init-signin-admin'>
+                    Sign in as an admin
+                </Link>
                 <div className='init-signin-left'>
                     <animated.div style={{ transform: props.xy.to(trans1) }}>
                         <img src={left} width='80%'></img>
                     </animated.div>
-
                     <div className='init-signin-left-content'>
                         <button
                             className='init-signin-button'
