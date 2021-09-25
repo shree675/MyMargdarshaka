@@ -51,6 +51,7 @@ const Authentication = () => {
                                 defaultValue=''
                                 size='small'
                                 placeholder=''
+                                color='error'
                             />
                         </div>
                         <br></br>
@@ -79,7 +80,15 @@ const Authentication = () => {
                         <br></br>
                         <br></br>
                         <div className='textfield'>
-                            <TextField fullWidth label='OTP' id='auth-textfield' defaultValue='' size='small' placeholder='' />
+                            <TextField
+                                fullWidth
+                                label='OTP'
+                                id='auth-textfield'
+                                defaultValue=''
+                                size='small'
+                                placeholder=''
+                                color='error'
+                            />
                         </div>
                         <br></br>
                         <br></br>
