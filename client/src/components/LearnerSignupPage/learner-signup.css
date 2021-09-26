@@ -1,6 +1,7 @@
 .main{
     margin-left: 15%;
     margin-top: 5%;
+    display: flex;
 }
 
 .title{
@@ -21,10 +22,14 @@
    padding-left: 10px;
 }
 
+select.input-field{
+    width: 415px;
+}
+
 .class-sub{
     background: #F0CCE2;
     height: 200px;
-    width: 30%;
+    width: 70%;
     padding-top: 20px;
     padding-left: 20px;
     border-radius: 10px;
@@ -61,13 +66,14 @@
 .pref-time{
     background: #F0CCE2;
     display: flex;
-    width: 15%;
+    width: 30%;
     flex-direction: column;
     justify-content: center;
     padding-left: 20px;
     padding-bottom: 20px;
     margin-left: 20px;
     border-radius: 10px;
+    z-index: 1;
 }
 
 .pref-time > h4{
@@ -82,5 +88,31 @@
     margin-top: 50px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: end;
+}
+
+.learner-img-div {
+    margin-left: -200px;
+    height: max-content;
+}
+
+.learner-img-div > img {
+    height: 400px;
+    width: 700px;
+}
+
+.submit-button{
+    height: 30px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #720D5D;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    margin-left: 400px;
+    margin-top: 70px;
+    z-index: 2;
 }
