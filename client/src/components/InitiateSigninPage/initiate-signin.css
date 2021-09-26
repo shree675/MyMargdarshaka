@@ -89,3 +89,65 @@
     margin: 0;
     float: right;
 }
+
+@media screen and (max-width: 480px) {
+    .init-phone-logo {
+        width: 15%;
+    }
+
+    .init-signin-logo {
+        margin: 0;
+        position: relative;
+        top: 0;
+        left: 0;
+        padding: 0;
+    }
+
+    .init-signin-content1 {
+        overflow: visible;
+    }
+
+    .init-signin-body {
+        background-color: #f0cce2;
+        overflow: visible;
+        height: 100%;
+    }
+
+    .init-signin-admin {
+        font-size: 3.2vw;
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        z-index: 5;
+    }
+
+    .init-signin-left {
+        width: 100%;
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .init-signin-right {
+        width: 100%;
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .init-signin-text1 {
+        font-size: 4vw;
+        margin-bottom: 0;
+        padding-bottom: 6.8vw;
+    }
+
+    .init-signin-text2 {
+        font-size: 4vw;
+    }
+
+    .init-signin-button {
+        height: 8vw;
+        border-radius: 4vw;
+        font-size: 4vw;
+    }
+}

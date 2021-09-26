@@ -110,3 +110,100 @@
     font-weight: bold;
     margin-top: calc(12%);
 }
+
+.auth-svg {
+    width: 3.5vw;
+    margin: 0.4vw;
+    margin-bottom: -1vw;
+}
+
+.auth-num {
+    font-size: 2vw;
+}
+
+.auth-humans-phone {
+    display: none;
+}
+
+.auth-background-img-phone {
+    display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .auth-body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .auth-heading {
+        font-size: 7.2vw;
+        padding: 20px;
+    }
+
+    .auth-content {
+        border-radius: 30px 30px 0 0;
+        overflow: hidden;
+    }
+
+    .auth-content-body {
+        padding: 8vw;
+        padding-top: 10vw;
+    }
+
+    .auth-svg {
+        width: 10vw;
+        margin: 4vw;
+        margin-bottom: -3vw;
+    }
+
+    .auth-num {
+        font-size: 6vw;
+    }
+
+    .textfield {
+        width: 80%;
+    }
+
+    .auth-button {
+        height: 8vw;
+        border-radius: 4vw;
+        font-size: 4vw;
+        background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #720d5d, #4e0d3a, #720d5d);
+        background-size: 400%;
+        animation: glowing 15s linear infinite;
+        transition: 0.3s;
+    }
+
+    .bottom-fact {
+        font-size: 4vw;
+        font-weight: bold;
+        position: fixed;
+        bottom: 20vw;
+        left: 0;
+    }
+
+    .auth-phone-svg {
+        display: none;
+    }
+
+    .auth-background-img-phone {
+        display: block;
+        position: relative;
+        width: 80%;
+        margin-top: -60%;
+        padding: 0;
+        margin-left: 6vw;
+        z-index: 5;
+    }
+
+    .auth-humans-phone {
+        display: block;
+        position: relative;
+        width: 60%;
+        margin: 0;
+        padding: 0;
+        margin-left: 10vw;
+        margin-top: 10vw;
+        z-index: 7;
+    }
+}

@@ -8,7 +8,6 @@ import humans from "../../assets/auth-human-comp.svg";
 import lock from "../../assets/lock.svg";
 import "./authentication.css";
 import { useSpring, animated } from "react-spring";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 const AdminAuthentication = () => {

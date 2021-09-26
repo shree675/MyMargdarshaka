@@ -9,7 +9,6 @@ import telephone from "../../assets/telephone.svg";
 import otp from "../../assets/otp.svg";
 import "./authentication.css";
 import { useSpring, animated } from "react-spring";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 const Authentication = () => {
@@ -25,20 +24,22 @@ const Authentication = () => {
         <div className='auth-body'>
             <div className='auth-heading'>Verify your phone number</div>
             <div className='auth-content' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-                <img src={auth_background} className='auth-background-img' />
-                <animated.div style={{ transform: props.xy.to(trans1) }}>
-                    <img src={humans} className='auth-humans' />
-                    <img src={waveback} className='auth-wave-back' />
-                </animated.div>
-                <animated.div style={{ transform: props.xy.to(trans2) }}>
-                    <img src={wavefront} className='auth-wave-front' />
-                </animated.div>
+                <div className='auth-phone-svg'>
+                    <img src={auth_background} className='auth-background-img' />
+                    <animated.div style={{ transform: props.xy.to(trans1) }}>
+                        <img src={humans} className='auth-humans' />
+                        <img src={waveback} className='auth-wave-back' />
+                    </animated.div>
+                    <animated.div style={{ transform: props.xy.to(trans2) }}>
+                        <img src={wavefront} className='auth-wave-front' />
+                    </animated.div>
+                </div>
                 {toggle ? (
                     <div className='auth-content-body'>
                         <div className='auth-91'>
-                            <span style={{ fontSize: "2vw" }}>+91 </span>
+                            <span className='auth-num'>+91 </span>
                             <span>
-                                <img src={telephone} style={{ width: "3.5vw", margin: "0.4vw", marginBottom: "-1vw" }}></img>
+                                <img src={telephone} className='auth-svg'></img>
                             </span>
                         </div>
                         <br></br>
@@ -74,7 +75,7 @@ const Authentication = () => {
                     <div className='auth-content-body'>
                         <div className='auth-91'>
                             <span>
-                                <img src={otp} style={{ width: "3.5vw", margin: "0.4vw", marginBottom: "-1vw" }}></img>
+                                <img src={otp} className='auth-svg'></img>
                             </span>
                         </div>
                         <br></br>
@@ -107,6 +108,8 @@ const Authentication = () => {
                         </div>
                     </div>
                 )}
+                <img src={humans} className='auth-humans-phone' />
+                <img src={auth_background} className='auth-background-img-phone' />
             </div>
         </div>
     );

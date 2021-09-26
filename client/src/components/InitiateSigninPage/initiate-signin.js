@@ -17,9 +17,6 @@ const InitiateSignin = () => {
 
     return (
         <div className='init-signin-body'>
-            <div className='init-signin-logo'>
-                <img src={main_logo}></img>
-            </div>
             <div className='init-signin-content1' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
                 <Link to='/adminauth' className='init-signin-admin'>
                     Sign in as an admin
@@ -42,6 +39,9 @@ const InitiateSignin = () => {
                             Your mentors can reach you via your contact number or email address. Sign up and take the first step
                             towards education and success!
                         </div>
+                    </div>
+                    <div className='init-signin-logo'>
+                        <img src={main_logo} className='init-phone-logo'></img>
                     </div>
                 </div>
                 <div className='init-signin-right'>
