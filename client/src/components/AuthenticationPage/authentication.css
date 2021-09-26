@@ -62,7 +62,8 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 18%;
+    font-family: "Raleway", sans-serif;
+    width: 20%;
 }
 
 #auth-textfield {
@@ -79,9 +80,29 @@
     background-color: #5d1049;
     height: 2.5vw;
     border-radius: 1.25vw;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 45px;
+    padding-right: 45px;
     cursor: pointer;
+    transition: 0.4s;
+}
+
+.auth-button:hover {
+    background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #720d5d, #4e0d3a, #720d5d);
+    background-size: 400%;
+    animation: glowing 15s linear infinite;
+    transition: 0.3s;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
 
 .bottom-fact {

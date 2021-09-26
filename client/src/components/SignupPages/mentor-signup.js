@@ -62,11 +62,13 @@ const ClassAndSubs = () => {
     )
 }
 
-const PrefTimeSlots = () => {
 
+const Checkboxes = (props) => {
+
+    console.log("props : ", props);
     const [state, setState] = React.useState([]);
 
-    const handle3 = (e) => {
+    const handleCheck = (e) => {
         if(e.target.checked)
             setState([...state, e.target.name]);
         else{
@@ -79,32 +81,31 @@ const PrefTimeSlots = () => {
 
     return(
         <div>
-            <h4>Preferred Timeslots : </h4>
+            <h4>{props.title}</h4>
 
-            <input type="Checkbox" name="Morning" onChange={handle3}/>
-            <label>Morning</label>
-            <input type="Checkbox" name="Afternoon" onChange={handle3}/>
-            <label>Afternoon</label>
-            <input type="Checkbox" name="Evening" onChange={handle3}/>
-            <label>Evening</label>
+            {
+                props.checks.map(element => <>
+                            <input type="Checkbox" name={element} onChange={handleCheck}/>
+                            <label>{element}</label>
+                </>)
+            }
         </div>
     )
 }
 
-const LearnerSignup = () => {
+const PrefLang = (props) => {
+
     const [state, setState] = React.useState({lang : ""});
 
-    const handle1 = (e) => {
+    const handleLang = (e) => {
         console.log(e.target.value);
         setState({...state, lang: e.target.value})
     }
+
     return(
         <div>
-            <h1>Learner signup</h1>
-            <input name="Name" placeholder="Name"/>
-            <input name="Email" placeholder="Email (optional)"/>
 
-            <select  style={{fontFamily: 'raleway'}} onChange={handle1} value={state.lang}>
+            <select  style={{fontFamily: 'raleway'}} onChange={handleLang} value={state.lang}>
                 <option value="" disabled selected>Preferred Language</option>
                 <option value="English">English</option>
                 <option value="Hindi">Hindi</option>
@@ -113,13 +114,20 @@ const LearnerSignup = () => {
                 <option value="Kannada">Kannada</option>
                 <option value="Malayalm">Malayalam</option>
             </select>  
-
-            <ClassAndSubs/>
-            <PrefTimeSlots/>
-
-
         </div>
     )
+}
+
+const LearnerSignup = () => {
+
+    return <>
+                <h1>Mentor signup</h1>
+                <input name="Name" placeholder="Name"/>
+                <input name="Email" placeholder="Email (optional)"/>
+                <PrefLang/>
+                <ClassAndSubs/>
+                <Checkboxes title="Preferred TimeSlots" checks={["Morning", "Afternoon", "Evening"]}/>
+    </>
 }
 
 export default LearnerSignup;
