@@ -1,123 +1,96 @@
 //@ts-check
-import React, { useEffect } from "react";
-import styled from 'styled-components';
+import React from "react";
+import './learner-signup.css'
+import imgSrc from '../../assets/learner-signup.svg'
 
-const ClassAndSubs = () => {
+let classes = [6,7,8,9,10,11,12]
+let primSubs = ['Hindi', 'Telugu', 'Maths', 'Science', 'Social']
+let secSubs = ['Physics', 'Chemistry', 'Biology']
+let langs = ['English', 'Hindi', 'Telugu', 'Tamil', 'Kannada', 'Malayalam']
+let times = ["Morning", "Afternoon", "Evening"]
 
-    const [state, setState] = React.useState({cls : 6, subs : []});
 
-    const handle2 = (e) => {
-        setState({
-            cls : e.target.value,
-            subs : []
-        })
-    }
+const LearnerSignup = () => {
 
-    const handle3 = (e) => {
-        console.log(e.target.name);
-        console.log(e.target.checked);
-    }
+    const [state, setState] = React.useState({name: "", email: "", prefLang: "", class: 6, subs: [], times: []})
 
-    return(
-        <div>
-            <h3>Class/Subjects : </h3>
-            <select style={{fontFamily: 'raleway'}} onChange={handle2} value={state.cls}>
-                <option value={6}>Class 6</option>
-                <option value={7}>Class 7</option>
-                <option value={8}>Class 8</option>
-                <option value={9}>Class 9</option>
-                <option value={12}>Class 12</option>
-            </select> 
-
-            {state.cls <= 10 && 
-                <div>
-                    <input type="Checkbox" name="English" onChange={handle3}/>
-                    <label>English</label>
-                    <input type="Checkbox" name="Hindi" onChange={handle3}/>
-                    <label>Hindi</label>
-                    <input type="Checkbox" name="Telugu" onChange={handle3}/>
-                    <label>Telugu</label>
-                    <input type="Checkbox" name="Maths" onChange={handle3}/>
-                    <label>Maths</label>
-                    <input type="Checkbox" name="Science" onChange={handle3}/>
-                    <label>Science</label>
-                    <input type="Checkbox" name="Social" onChange={handle3}/>
-                    <label>Social</label>
-                </div>
+    const handleChange = e => {
+        if(e.target.name == 'class'){
+            setState({...state, class: e.target.value, subs: []})
+        }else if(e.target.name == 'subs' || e.target.name == 'times'){
+            let field = e.target.name
+            if(e.target.checked){
+                setState({...state, [field]: [...state[field], e.target.value]})
+            }else{
+                var tmp = state[field].filter(item => item != e.target.value)
+                setState({...state, [field]: tmp});
             }
-
-            {state.cls == 12 &&
-                <div>
-                    <input type="checkbox" name="Physics" onChange={handle3}/>
-                    <label>Physics</label>
-                    <input type="checkbox" name="Chemistry" onChange={handle3}/>
-                    <label>Chemistry</label>
-                    <input type="checkbox" name="Biology" onChange={handle3}/>
-                    <label>Biology</label>
-                </div>
-            }
-
-        </div>
-        
-    )
-}
-
-const PrefTimeSlots = () => {
-
-    const [state, setState] = React.useState([]);
-
-    const handle3 = (e) => {
-        if(e.target.checked)
-            setState([...state, e.target.name]);
-        else{
-            var tmp = state.filter(slot => slot != e.target.name)
-            setState(tmp);
+        }else{
+            setState({...state, [e.target.name]: e.target.value})
         }
     }
 
-    useEffect(() => {console.log(state);}, [state]);
-
-    return(
-        <div>
-            <h4>Preferred Timeslots : </h4>
-
-            <input type="Checkbox" name="Morning" onChange={handle3}/>
-            <label>Morning</label>
-            <input type="Checkbox" name="Afternoon" onChange={handle3}/>
-            <label>Afternoon</label>
-            <input type="Checkbox" name="Evening" onChange={handle3}/>
-            <label>Evening</label>
-        </div>
-    )
-}
-
-const LearnerSignup = () => {
-    const [state, setState] = React.useState({lang : ""});
-
-    const handle1 = (e) => {
-        console.log(e.target.value);
-        setState({...state, lang: e.target.value})
+    const handleClick = () => {
+        console.log("clicked");
+        console.log(state);
     }
+    
     return(
-        <div>
-            <h1>Learner signup</h1>
-            <input name="Name" placeholder="Name"/>
-            <input name="Email" placeholder="Email (optional)"/>
+        <div className="main">
+            <div>
+                <div className='title'>Sign Up</div>
+                <input className="input-field" name="name" onChange={handleChange}  placeholder="Name"/> <br/>
+                <input className="input-field" name="email" onChange={handleChange}  placeholder="Email (optional)"/>
+                <div>
+                    <select className="input-field" name="prefLang" onChange={handleChange} value={state.prefLang}>
+                        <option value="" disabled selected>Preferred Language</option>
+                        { langs.map(lang => <option value={lang}>{lang}</option>) }
+                    </select>  
+                </div>
+                <div className="bottom-row">
+                    <div className="class-sub">
+                        <label>Class/Subjects : </label>
 
-            <select  style={{fontFamily: 'raleway'}} onChange={handle1} value={state.lang}>
-                <option value="" disabled selected>Preferred Language</option>
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-                <option value="Telugu">Telugu</option>
-                <option value="Tamil">Tamil</option>
-                <option value="Kannada">Kannada</option>
-                <option value="Malayalm">Malayalam</option>
-            </select>  
+                        <select onChange={handleChange} name="class" value={state.class}>
+                            {classes.map(cls => <option value={cls}>Class {cls}</option>)}
+                        </select>
 
-            <ClassAndSubs/>
-            <PrefTimeSlots/>
-
-
+                        {state.class <= 10 && <div>
+                                {
+                                    primSubs.map(sub => <div>
+                                        <input type="Checkbox" name="subs" value={sub} checked={state.subs.includes(sub)} onChange={handleChange}/>
+                                        <label>{sub}</label>
+                                    </div>)
+                                }
+                            </div>
+                        }
+                        {state.class > 10 && <div>
+                                {
+                                    secSubs.map(sub => <div>
+                                        <input type="Checkbox" name="subs" value={sub} checked={state.subs.includes(sub)} onChange={handleChange}/>
+                                        <label>{sub}</label>
+                                    </div>)
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div className="pref-time">
+                        <h4>Preferred Timeslots : </h4>
+                        <div>
+                            {
+                                times.map(time => <div>
+                                    <input type="Checkbox" name="times" value={time} onChange={handleChange}/>
+                                    <label>{time}</label>
+                                </div>)
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="submit-button" onClick={handleClick}>ASSIGN MENTORS</div>
+            </div>
+            <div className="learner-img-div">
+                <img src={imgSrc}/>
+            </div>
         </div>
     )
 }

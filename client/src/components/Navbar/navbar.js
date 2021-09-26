@@ -12,7 +12,7 @@ import {
 // @ts-ignore
 import mainLogo from "../../assets/main-logo.svg"
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div>
       <Nav>
@@ -22,6 +22,8 @@ const Navbar = () => {
         <Bars />
 
         <NavMenu>
+
+
             <NavLink to="/applications">
               APPLICATIONS
             </NavLink>
