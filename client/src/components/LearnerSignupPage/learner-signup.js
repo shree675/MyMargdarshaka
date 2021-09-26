@@ -1,7 +1,7 @@
 //@ts-check
 import React from "react";
 import './learner-signup.css'
-import Scene from '../../assets/Scene.svg'
+import imgSrc from '../../assets/learner-signup.svg'
 
 let classes = [6,7,8,9,10,11,12]
 let primSubs = ['Hindi', 'Telugu', 'Maths', 'Science', 'Social']
@@ -89,7 +89,7 @@ const LearnerSignup = () => {
                 <div className="submit-button" onClick={handleClick}>ASSIGN MENTORS</div>
             </div>
             <div className="learner-img-div">
-                <img src={Scene}/>
+                <img src={imgSrc}/>
             </div>
         </div>
     )

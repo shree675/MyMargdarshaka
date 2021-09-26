@@ -1,7 +1,7 @@
 //@ts-check
 import React from "react";
 import './mentor-signup.css'
-import mainLogo from '../../assets/Group.svg'
+import imgSrc from '../../assets/mentor-signup.svg'
 
 let classes = [6,7,8,9,10,11,12]
 let primSubs = ['Hindi', 'Telugu', 'Maths', 'Science', 'Social']
@@ -78,7 +78,7 @@ const MentorSignup = () => {
                     </div>
                 </div>
                 <div className="img-div">
-                    <img src={mainLogo}/>
+                    <img src={imgSrc}/>
                 </div>
             </div>
             <div className="class-and-sub">
