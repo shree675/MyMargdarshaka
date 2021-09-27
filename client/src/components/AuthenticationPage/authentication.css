@@ -58,7 +58,7 @@
     padding-top: 8vw;
 }
 
-.textfield {
+.auth-text {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -108,17 +108,18 @@
 .bottom-fact {
     font-size: 1.25vw;
     font-weight: bold;
-    margin-top: calc(12%);
+    margin-top: calc(10%);
 }
 
 .auth-svg {
     width: 3.5vw;
     margin: 0.4vw;
-    margin-bottom: -1vw;
+    margin-bottom: 0.5vw;
 }
 
 .auth-num {
     font-size: 2vw;
+    margin-top: 10vw;
 }
 
 .auth-humans-phone {
@@ -153,14 +154,14 @@
     .auth-svg {
         width: 10vw;
         margin: 4vw;
-        margin-bottom: -3vw;
+        margin-bottom: 3.2vw;
     }
 
     .auth-num {
         font-size: 6vw;
     }
 
-    .textfield {
+    .auth-text {
         width: 80%;
     }
 

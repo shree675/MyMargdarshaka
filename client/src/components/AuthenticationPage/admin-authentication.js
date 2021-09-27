@@ -22,22 +22,23 @@ const AdminAuthentication = () => {
             <div className='auth-body'>
                 <div className='auth-heading'>You are signing in as an admin</div>
                 <div className='auth-content' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-                    <img src={auth_background} className='auth-background-img' />
-                    <animated.div style={{ transform: props.xy.to(trans1) }}>
-                        <img src={humans} className='auth-humans' />
-                        <img src={waveback} className='auth-wave-back' />
-                    </animated.div>
-                    <animated.div style={{ transform: props.xy.to(trans2) }}>
-                        <img src={wavefront} className='auth-wave-front' />
-                    </animated.div>
-
+                    <div className='auth-phone-svg'>
+                        <img src={auth_background} className='auth-background-img' />
+                        <animated.div style={{ transform: props.xy.to(trans1) }}>
+                            <img src={humans} className='auth-humans' />
+                            <img src={waveback} className='auth-wave-back' />
+                        </animated.div>
+                        <animated.div style={{ transform: props.xy.to(trans2) }}>
+                            <img src={wavefront} className='auth-wave-front' />
+                        </animated.div>
+                    </div>
                     <div className='auth-content-body'>
                         <div className='auth-91'>
-                            <img src={lock} style={{ width: "3.5vw", margin: "0.4vw", marginBottom: "-1vw" }}></img>
+                            <img src={lock} className='auth-svg'></img>
                         </div>
                         <br></br>
                         <br></br>
-                        <div className='textfield'>
+                        <div className='auth-text'>
                             <TextField
                                 fullWidth
                                 label='Full Name'
@@ -49,7 +50,7 @@ const AdminAuthentication = () => {
                             />
                         </div>
                         <br></br>
-                        <div className='textfield'>
+                        <div className='auth-text'>
                             <TextField
                                 fullWidth
                                 label='Password'
@@ -67,6 +68,8 @@ const AdminAuthentication = () => {
                             <button className='auth-button'>LOGIN</button>
                         </div>
                     </div>
+                    <img src={humans} className='auth-humans-phone' />
+                    <img src={auth_background} className='auth-background-img-phone' />
                 </div>
             </div>
         </div>

@@ -44,7 +44,7 @@ const Authentication = () => {
                         </div>
                         <br></br>
                         <br></br>
-                        <div className='textfield'>
+                        <div className='auth-text'>
                             <TextField
                                 fullWidth
                                 label='Phone Number'
@@ -80,7 +80,7 @@ const Authentication = () => {
                         </div>
                         <br></br>
                         <br></br>
-                        <div className='textfield'>
+                        <div className='auth-text'>
                             <TextField
                                 fullWidth
                                 label='OTP'
