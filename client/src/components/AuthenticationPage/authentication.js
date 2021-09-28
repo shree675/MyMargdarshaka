@@ -14,7 +14,7 @@ import firebase from "../../firebase";
 
 const Authentication = () => {
     const [toggle, setToggle] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState("No user is logged in");
+    const [curuser, setCuruser] = useState("No user is logged in");
     const [phone, setPhone] = useState("");
     const [otp, setOtp] = useState("");
 
@@ -22,18 +22,20 @@ const Authentication = () => {
         verify();
     }, []);
 
+    // checks if a user is already logged in
     const verify = () => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                setIsLoggedIn(user.uid);
+                setCuruser(user.uid); // user.uid is the unique identifier of the user
                 // alert("You are logged in as " + user.uid);
             } else {
-                setIsLoggedIn("No user found");
+                setCuruser("No user found");
             }
         });
-        console.log(isLoggedIn);
+        console.log(curuser);
     };
 
+    // invisibly checks if user is human
     const setupCaptcha = () => {
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("auth-signin-button", {
             size: "invisible",
@@ -45,6 +47,7 @@ const Authentication = () => {
         });
     };
 
+    // sends otp
     const verifyPhone = (e) => {
         e.preventDefault();
         setupCaptcha();
@@ -65,6 +68,7 @@ const Authentication = () => {
             });
     };
 
+    // signs in the user
     const verifyOtp = (e) => {
         e.preventDefault();
         let otpInput = otp;
@@ -74,10 +78,8 @@ const Authentication = () => {
             .then(function (result) {
                 // User signed in successfully.
                 console.log("Successful sign up");
-                // let user = result.user;
-                // console.log(result);
-                const userid = result.user.X.X;
-                // console.log(userid);
+
+                const userid = result.user.X.X; // userid should be used as the unique identifier
                 alert("Successfully signed in as " + userid);
                 window.location = "/learner-signup";
             })
