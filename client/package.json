@@ -20,6 +20,7 @@
         "@lottiefiles/lottie-player": "^1.4.0",
         "@mui/material": "^5.0.1",
         "chart.js": "^3.5.1",
+        "firebase": "^8.6.7",
         "react": "^16.2.0",
         "react-chartjs-2": "^3.0.5",
         "react-dom": "^16.2.0",

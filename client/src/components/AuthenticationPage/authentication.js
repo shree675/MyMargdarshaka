@@ -1,18 +1,92 @@
 //@ts-check
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import auth_background from "../../assets/auth-background-comp.svg";
 import wavefront from "../../assets/wavefront.svg";
 import waveback from "../../assets/waveback.svg";
 import humans from "../../assets/auth-human-comp.svg";
 import telephone from "../../assets/telephone.svg";
-import otp from "../../assets/otp.svg";
+import otp_img from "../../assets/otp.svg";
 import "./authentication.css";
 import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
+import firebase from "../../firebase";
 
 const Authentication = () => {
     const [toggle, setToggle] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState("No user is logged in");
+    const [phone, setPhone] = useState("");
+    const [otp, setOtp] = useState("");
+
+    useEffect(() => {
+        verify();
+    }, []);
+
+    const verify = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                setIsLoggedIn(user.uid);
+                // alert("You are logged in as " + user.uid);
+            } else {
+                setIsLoggedIn("No user found");
+            }
+        });
+        console.log(isLoggedIn);
+    };
+
+    const setupCaptcha = () => {
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("auth-signin-button", {
+            size: "invisible",
+            callback: (response) => {
+                // reCAPTCHA solved
+                verifyPhone();
+            },
+            defaultCountry: "IN",
+        });
+    };
+
+    const verifyPhone = (e) => {
+        e.preventDefault();
+        setupCaptcha();
+        const phoneNumber = "+91" + phone;
+        console.log(phoneNumber);
+        const appVerifier = window.recaptchaVerifier;
+
+        firebase
+            .auth()
+            .signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then(function (confirmationResult) {
+                // SMS sent
+                window.confirmationResult = confirmationResult;
+                console.log("OTP is sent");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const verifyOtp = (e) => {
+        e.preventDefault();
+        let otpInput = otp;
+        let optConfirm = window.confirmationResult;
+        optConfirm
+            .confirm(otpInput)
+            .then(function (result) {
+                // User signed in successfully.
+                console.log("Successful sign up");
+                // let user = result.user;
+                // console.log(result);
+                const userid = result.user.X.X;
+                // console.log(userid);
+                alert("Successfully signed in as " + userid);
+                window.location = "/learner-signup";
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert("Incorrect OTP");
+            });
+        verify();
+    };
 
     const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
     const trans1 = (x, y) => `translate3d(${x / 16}px,${y / 16}px,0)`;
@@ -47,21 +121,28 @@ const Authentication = () => {
                         <div className='auth-text'>
                             <TextField
                                 fullWidth
+                                onChange={(e) => {
+                                    setPhone(e.target.value);
+                                }}
                                 label='Phone Number'
                                 id='auth-textfield'
                                 defaultValue=''
                                 size='small'
                                 placeholder=''
                                 color='error'
+                                value={phone}
                             />
                         </div>
                         <br></br>
                         <br></br>
                         <div className=''>
                             <button
+                                id='auth-signin-button'
                                 className='auth-button'
-                                onClick={() => {
+                                onClick={(e) => {
                                     setToggle(false);
+                                    verifyPhone(e);
+                                    setPhone("");
                                 }}
                             >
                                 GET OTP
@@ -75,7 +156,7 @@ const Authentication = () => {
                     <div className='auth-content-body'>
                         <div className='auth-91'>
                             <span>
-                                <img src={otp} className='auth-svg'></img>
+                                <img src={otp_img} className='auth-svg'></img>
                             </span>
                         </div>
                         <br></br>
@@ -83,21 +164,26 @@ const Authentication = () => {
                         <div className='auth-text'>
                             <TextField
                                 fullWidth
+                                onChange={(e) => {
+                                    setOtp(e.target.value);
+                                }}
                                 label='OTP'
                                 id='auth-textfield'
                                 defaultValue=''
                                 size='small'
                                 placeholder=''
                                 color='error'
+                                value={otp}
                             />
                         </div>
                         <br></br>
                         <br></br>
                         <div className=''>
                             <button
+                                id='auth-signin-button'
                                 className='auth-button'
-                                onClick={() => {
-                                    setToggle(true);
+                                onClick={(e) => {
+                                    verifyOtp(e);
                                 }}
                             >
                                 SUBMIT

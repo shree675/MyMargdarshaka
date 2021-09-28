@@ -35,7 +35,7 @@ class App extends Component {
                     <Route exact path='/authentication' component={Authentication} />
                     <Route exact path='/learner-signup' component={LearnerSignup} />
                     <Route exact path='/mentor-signup' component={MentorSignup} />
-                    {/* <Route exact path='/' component={Feedback} /> */}
+                    <Route exact path='/' component={Feedback} />
                     <Route exact path='/adminauth' component={AdminAuthentication} />
                 </Switch>
             </Router>
