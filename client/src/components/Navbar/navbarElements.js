@@ -5,13 +5,14 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   background: #5D1049;
-  height: 70px;
+  height: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.2rem calc((100vw - 1000px) / 2);
-  z-index: 12;
-  border-bottom: 40px solid #720D5D;
+  padding-top: 20px;
+  z-index: 1;
+  border-bottom: 50px solid #720D5D;
 `;
 
 export const NavLogo = styled(Link)`
@@ -19,6 +20,7 @@ export const NavLogo = styled(Link)`
   color: #fff;
   font-size: 2rem;
   text-decoration: none;
+  margin-left: -100px;
 `;
 
 export const NavLink = styled(Link)`
@@ -59,7 +61,7 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -24px;
+  margin-left: -100px;
 
   @media screen and (max-width: 768px) {
     display: none;

@@ -1,17 +1,22 @@
-
-.subject-details-back{
+.learner-subject-details-back{
     background: #464646;
     color: white;
-    width: 70px;
-    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
     display:flex;
     justify-content: center;
     cursor: pointer;
     margin-left: 130px;
     margin-top: 20px;
+    font-size: large;
+    text-decoration: none;
+}
+.learner-subject-details-back:hover {
+    color: white;
 }
 
-.subject-details-chapters {
+.learner-subject-details-chapters {
     background: #4F0A3A;
     height: 500px;
     border-radius: 20px;
@@ -23,7 +28,7 @@
     width: 70%;
 }
 
-.chapter-element {
+.learner-chapter-element {
     background: #720D5D;
     color: #F0CCE2;
     margin-top: 5px;
@@ -32,9 +37,15 @@
     border-radius: 20px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
-.subject-details-subtopics {
+.learner-chapter-element > input {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.learner-subject-details-subtopics {
     background: #4F0A3A;
     border-radius: 20px;
     margin: 10px;
@@ -46,13 +57,13 @@
     height: 445px;
 }
 
-.subject-details-tests {
+.learner-subject-details-tests {
     height: 500px;
     width: 100%;
 
 }
 
-.test-tab-button{
+.learner-test-tab-button{
     cursor: pointer;
     opacity: 0.5;
     border-radius: 20px;
@@ -68,15 +79,15 @@
     font-weight: 600;
 }
 
-.tests-tab-inner {
-    background: url('../../assets/scene-living-room.svg');
+.learner-tests-tab-inner {
+    background: url('../../assets/scene-living-room.svg') #F9F6F8;
     background-repeat: no-repeat;
     background-size: 675px 415px;
-    height: 415px;
+    height: 400px;
     padding: 10px;
 }
 
-.subtopic-test-element {
+.learner-subtopic-test-element {
     background: white;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -85,7 +96,7 @@
     padding: 20px;
 }
 
-.launch-test-button {
+.learner-launch-test-button {
    background: #720D5D; 
    color: white;
    border-radius: 20px;
@@ -96,3 +107,4 @@
    margin-left: 420px;
    cursor: pointer;
 }
+
