@@ -1,7 +1,7 @@
 //@ts-check
 
 import React from "react";
-import Navbar from "../Navbar/navbar";
+import Navbar from "../Navbar/learner-navbar";
 import TextField from "@mui/material/TextField";
 import "./feedback.css";
 import feedbackcomp from "../../assets/feedback-comp.svg";

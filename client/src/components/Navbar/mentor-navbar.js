@@ -11,33 +11,39 @@ import {
 } from "./navbarElements";
 // @ts-ignore
 import mainLogo from "../../assets/main-logo.svg"
+import profileLogo from '../../assets/profile.svg'
 
 const Navbar = (props) => {
   return (
     <div>
       <Nav>
         <NavLogo to="/">
-          <img src={mainLogo}/>
+          <img src={mainLogo} style={{height: '80px'}}/>
         </NavLogo>
         <Bars />
 
         <NavMenu>
 
 
-            <NavLink to="/applications">
-              APPLICATIONS
+            <NavLink to="/mentor-guidelines">
+              GUIDELINES
             </NavLink>
-            <NavLink to="/issues">
-              ISSUES
+            <NavLink to="/my-students">
+              MY STUDENTS
             </NavLink>
-            <NavLink to="/stats">
-              STATS
+            <NavLink to="/mentor-dashboard">
+              DASHBOARD
+            </NavLink>
+            <NavLink to="/mentor-feedback">
+              FEEDBACK
             </NavLink>
             <NavLink to="/logout">
               LOGOUT
             </NavLink>
             
-            <NavLogo to="/profile">PROFILE</NavLogo>
+            <NavLink to="/mentor-profile">
+                <img src={profileLogo} style={{height: '40px'}}/>
+            </NavLink>
 {/* 
           <NavBtn>
             <NavBtnLink to="/sign-up">Sign Up</NavBtnLink>
@@ -48,3 +54,4 @@ const Navbar = (props) => {
   );
 };
 export default Navbar;
+

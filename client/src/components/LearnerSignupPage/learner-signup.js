@@ -3,9 +3,9 @@ import React from "react";
 import './learner-signup.css'
 import imgSrc from '../../assets/learner-signup.svg'
 import  data from '../../data'
+import firebase from "../../firebase";
 
 const {classes, primSubs, secSubs,langs, times} = data;
-import firebase from "../../firebase";
 
 const LearnerSignup = () => {
     const [state, setState] = React.useState({ name: "", email: "", prefLang: "", class: 6, subs: [], times: [] });

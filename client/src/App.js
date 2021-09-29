@@ -4,14 +4,13 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/landing.js";
 import InitiateSignin from "./components/InitiateSigninPage/initiate-signin.js";
-import Navbar from "./components/Navbar/navbar.js";
-import Home from "./components/Navbar/home";
 import Authentication from "./components/AuthenticationPage/authentication.js";
 import LearnerSignup from "./components/LearnerSignupPage/learner-signup.js";
 import MentorSignup from "./components/MentorSignupPage/mentor-signup.js";
 import Feedback from "./components/FeedbackPage/feedback.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
-import SubjectDetails from "./components/SubjectDetailsPage/subject-details.js";
+import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
+import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
 
 class App extends Component {
     // constructor() {
@@ -38,7 +37,8 @@ class App extends Component {
                     <Route exact path='/mentor-signup' component={MentorSignup} />
                     <Route exact path='/' component={Feedback} />
                     <Route exact path='/adminauth' component={AdminAuthentication} />
-                    <Route exact path='/subject-details' component={SubjectDetails} />
+                    <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} />
+                    <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} />
                 </Switch>
             </Router>
         );
