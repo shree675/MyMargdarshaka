@@ -1,14 +1,11 @@
 //@ts-check
 import React from "react";
-import "./learner-signup.css";
-import imgSrc from "../../assets/learner-signup.svg";
-import firebase from "../../firebase";
+import './learner-signup.css'
+import imgSrc from '../../assets/learner-signup.svg'
+import  data from '../../data'
 
-let classes = [6, 7, 8, 9, 10, 11, 12];
-let primSubs = ["Hindi", "Telugu", "Maths", "Science", "Social"];
-let secSubs = ["Physics", "Chemistry", "Biology"];
-let langs = ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"];
-let times = ["Morning", "Afternoon", "Evening"];
+const {classes, primSubs, secSubs,langs, times} = data;
+import firebase from "../../firebase";
 
 const LearnerSignup = () => {
     const [state, setState] = React.useState({ name: "", email: "", prefLang: "", class: 6, subs: [], times: [] });
@@ -32,10 +29,10 @@ const LearnerSignup = () => {
     const handleClick = () => {
         console.log("clicked");
         console.log(state);
-    };
-
-    return (
-        <div className='main'>
+    }
+    
+    return(
+        <div className="learner-signup-main">
             <div>
                 {/* Temporary logout button: */}
                 <button
@@ -46,21 +43,17 @@ const LearnerSignup = () => {
                 >
                     Logout (temporary button here)
                 </button>
-                <div className='title'>Sign Up</div>
-                <input className='input-field' name='name' onChange={handleChange} placeholder='Name' /> <br />
-                <input className='input-field' name='email' onChange={handleChange} placeholder='Email (optional)' />
+                <div className='learner-signup-title'>Sign Up</div>
+                <input className="learner-signup-input-field" name="name" onChange={handleChange}  placeholder="Name"/> <br/>
+                <input className="learner-signup-input-field" name="email" onChange={handleChange}  placeholder="Email (optional)"/>
                 <div>
-                    <select className='input-field' name='prefLang' onChange={handleChange} value={state.prefLang}>
-                        <option value='' disabled selected>
-                            Preferred Language
-                        </option>
-                        {langs.map((lang) => (
-                            <option value={lang}>{lang}</option>
-                        ))}
-                    </select>
+                    <select className="learner-signup-input-field" name="prefLang" onChange={handleChange} value={state.prefLang}>
+                        <option value="" disabled selected>Preferred Language</option>
+                        { langs.map(lang => <option value={lang}>{lang}</option>) }
+                    </select>  
                 </div>
-                <div className='bottom-row'>
-                    <div className='class-sub'>
+                <div className="learner-signup-bottom-row">
+                    <div className="learner-signup-class-sub">
                         <label>Class/Subjects : </label>
 
                         <select onChange={handleChange} name='class' value={state.class}>
@@ -102,8 +95,8 @@ const LearnerSignup = () => {
                             </div>
                         )}
                     </div>
-                    <div className='pref-time'>
-                        <h4>Preferred Timeslots : </h4>
+                    <div className="learner-signup-pref-time">
+                        <div className="learner-signup-pref-time-title">Preferred Timeslots : </div>
                         <div>
                             {times.map((time) => (
                                 <div>
@@ -114,12 +107,10 @@ const LearnerSignup = () => {
                         </div>
                     </div>
                 </div>
-                <div className='submit-button' onClick={handleClick}>
-                    ASSIGN MENTORS
-                </div>
+                <div className="learner-signup-submit-button" onClick={handleClick}>ASSIGN MENTORS</div>
             </div>
-            <div className='learner-img-div'>
-                <img src={imgSrc} />
+            <div className="learner-signup-img-div">
+                <img src={imgSrc}/>
             </div>
         </div>
     );

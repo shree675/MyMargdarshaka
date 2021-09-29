@@ -11,6 +11,7 @@ import LearnerSignup from "./components/LearnerSignupPage/learner-signup.js";
 import MentorSignup from "./components/MentorSignupPage/mentor-signup.js";
 import Feedback from "./components/FeedbackPage/feedback.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
+import SubjectDetails from "./components/SubjectDetailsPage/subject-details.js";
 
 class App extends Component {
     // constructor() {
@@ -37,6 +38,7 @@ class App extends Component {
                     <Route exact path='/mentor-signup' component={MentorSignup} />
                     <Route exact path='/' component={Feedback} />
                     <Route exact path='/adminauth' component={AdminAuthentication} />
+                    <Route exact path='/subject-details' component={SubjectDetails} />
                 </Switch>
             </Router>
         );
