@@ -54,10 +54,12 @@
 
 .landing-button span:after {
     font-family: Arial, Helvetica, sans-serif;
-    content: "🡢";
+    /* content: "🡢"; */
+    content: "\00BB";
+    font-size: 1.5vw;
     position: absolute;
     opacity: 0;
-    top: -20px;
+    top: -25px;
     right: -20px;
     transition: 0.25s;
 }
@@ -151,10 +153,12 @@
 
     .landing-button span:after {
         font-family: Arial, Helvetica, sans-serif;
-        content: "🡢";
+        /* content: "🡢"; */
+        content: "\00BB";
+        font-size: 6vw;
         position: absolute;
         opacity: 0;
-        top: -10px;
+        top: -25px;
         right: -20px;
         transition: 0.25s;
     }
