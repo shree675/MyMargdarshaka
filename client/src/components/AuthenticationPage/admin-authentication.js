@@ -9,6 +9,29 @@ import lock from "../../assets/lock.svg";
 import "./authentication.css";
 import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
+
+const CssTextField = styled(TextField)({
+    "& label.Mui-focused": {
+        color: "#4e0d3a",
+    },
+    "& .MuiInput-underline:after": {
+        borderBottomColor: "#4e0d3a",
+    },
+    "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+            borderColor: "gray",
+        },
+        "&:hover fieldset": {
+            borderColor: "gray",
+        },
+        "&.Mui-focused fieldset": {
+            border: "none",
+            borderBottom: "2px solid #4e0d3a",
+            borderRadius: "0px",
+        },
+    },
+});
 
 const AdminAuthentication = () => {
     const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
@@ -39,7 +62,7 @@ const AdminAuthentication = () => {
                         <br></br>
                         <br></br>
                         <div className='auth-text'>
-                            <TextField
+                            <CssTextField
                                 fullWidth
                                 label='Full Name'
                                 id='auth-textfield'
@@ -51,7 +74,7 @@ const AdminAuthentication = () => {
                         </div>
                         <br></br>
                         <div className='auth-text'>
-                            <TextField
+                            <CssTextField
                                 fullWidth
                                 label='Password'
                                 id='auth-textfield'

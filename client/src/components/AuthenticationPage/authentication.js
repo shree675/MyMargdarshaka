@@ -11,6 +11,29 @@ import "./authentication.css";
 import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
 import firebase from "../../firebase";
+import { styled } from "@mui/material/styles";
+
+const CssTextField = styled(TextField)({
+    "& label.Mui-focused": {
+        color: "#4e0d3a",
+    },
+    "& .MuiInput-underline:after": {
+        borderBottomColor: "#4e0d3a",
+    },
+    "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+            borderColor: "gray",
+        },
+        "&:hover fieldset": {
+            borderColor: "gray",
+        },
+        "&.Mui-focused fieldset": {
+            border: "none",
+            borderBottom: "2px solid #4e0d3a",
+            borderRadius: "0px",
+        },
+    },
+});
 
 const Authentication = () => {
     const [toggle, setToggle] = useState(true);
@@ -121,7 +144,7 @@ const Authentication = () => {
                         <br></br>
                         <br></br>
                         <div className='auth-text'>
-                            <TextField
+                            <CssTextField
                                 fullWidth
                                 onChange={(e) => {
                                     setPhone(e.target.value);
@@ -164,7 +187,7 @@ const Authentication = () => {
                         <br></br>
                         <br></br>
                         <div className='auth-text'>
-                            <TextField
+                            <CssTextField
                                 fullWidth
                                 onChange={(e) => {
                                     setOtp(e.target.value);
