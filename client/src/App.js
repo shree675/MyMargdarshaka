@@ -13,6 +13,7 @@ import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-s
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
 import LearnerHome from "./components/LearnerHomePage/learner-home.js";
 import AdminApplications from "./components/AdminApplicationsPage/admin-applications";
+import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboard.js";
 
 class App extends Component {
   // constructor() {
@@ -49,6 +50,8 @@ class App extends Component {
             path="/learner-subject-details"
             component={LearnerSubjectDetails}
           />
+          <Route exact path="/learner-home" component={LearnerHome} />
+          <Route exact path="/learner-dashboard" component={LearnerDashboard} />
         </Switch>
       </Router>
     );
