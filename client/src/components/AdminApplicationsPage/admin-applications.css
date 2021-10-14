@@ -1,0 +1,18 @@
+.admin-main {
+}
+
+.admin-applications-tab-button {
+  cursor: pointer;
+  opacity: 0.5;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: max-content;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-weight: 600;
+}

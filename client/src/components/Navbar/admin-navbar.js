@@ -1,4 +1,3 @@
-//@ts-check
 import React from "react";
 import {
   Nav,
@@ -13,7 +12,7 @@ import {
 import mainLogo from "../../assets/main-logo.svg";
 import profileLogo from "../../assets/profile.svg";
 
-const LearnerNavbar = (props) => {
+const AdminNavbar = (props) => {
   return (
     <div>
       <Nav>
@@ -23,13 +22,12 @@ const LearnerNavbar = (props) => {
         <Bars />
 
         <NavMenu>
-          <NavLink to="/learner-guidelines">GUIDELINES</NavLink>
-          <NavLink to="/my-mentors">MY MENTORS</NavLink>
-          <NavLink to="/learner-dashboard">DASHBOARD</NavLink>
-          <NavLink to="/learner-feedback">FEEDBACK</NavLink>
+          <NavLink to="/admin-applications">APPLICATIONS</NavLink>
+          <NavLink to="/admin-issues">ISSUES</NavLink>
+          <NavLink to="/admin-stats">STATS</NavLink>
           <NavLink to="/logout">LOGOUT</NavLink>
 
-          <NavLink to="/learner-profile">
+          <NavLink to="/admin-profile">
             <img src={profileLogo} style={{ height: "40px" }} />
           </NavLink>
           {/* 
@@ -41,4 +39,4 @@ const LearnerNavbar = (props) => {
     </div>
   );
 };
-export default LearnerNavbar;
+export default AdminNavbar;
