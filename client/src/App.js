@@ -11,6 +11,9 @@ import Feedback from "./components/FeedbackPage/feedback.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
 import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
+import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboard.js";
+import LearnerHomepage from "./components/LearnerHomePage/learner-home.js"
+
 
 class App extends Component {
     // constructor() {
@@ -35,10 +38,12 @@ class App extends Component {
                     <Route exact path='/authentication' component={Authentication} />
                     <Route exact path='/learner-signup' component={LearnerSignup} />
                     <Route exact path='/mentor-signup' component={MentorSignup} />
-                    <Route exact path='/' component={Feedback} />
+                    <Route exact path='/learner-feedback' component={Feedback} />
                     <Route exact path='/adminauth' component={AdminAuthentication} />
                     <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} />
                     <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} />
+                    <Route exact path='/learner-dashboard' component={LearnerDashboard} />
+                    <Route exact path='/my-mentors' component={LearnerHomepage} />
                 </Switch>
             </Router>
         );
