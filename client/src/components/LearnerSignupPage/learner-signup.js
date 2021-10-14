@@ -4,9 +4,11 @@ import "./learner-signup.css";
 import imgSrc from "../../assets/learner-signup.svg";
 import data from "../../data";
 import firebase from "../../firebase";
+import axios from 'axios';
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
+//need to pass phone number as props
 const LearnerSignup = () => {
   const [state, setState] = React.useState({
     name: "",
@@ -33,9 +35,22 @@ const LearnerSignup = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    //assign mentors button clicked
+    //on sign-up, we first push all sign up data to database
     console.log("clicked");
     console.log(state);
+   
+    const learner={
+      /* phone: LearnerSignup.phone, */ //pass as props
+      phone: 1234567,
+      name: state.name
+      }
+    console.log(learner)
+    await axios.post(`/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
+            /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
+            window.name=this.state.username;
+            window.location='/browse'; */
   };
 
   return (
