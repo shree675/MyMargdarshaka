@@ -1,110 +1,121 @@
-.learner-subject-details-back{
-    background: #464646;
-    color: white;
-    width: 100px;
-    height: 30px;
-    border-radius: 20px;
-    display:flex;
-    justify-content: center;
-    cursor: pointer;
-    margin-left: 130px;
-    margin-top: 20px;
-    font-size: large;
-    text-decoration: none;
+.learner-subject-details-back {
+  background: #464646;
+  color: white;
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 130px;
+  margin-top: 20px;
+  font-size: large;
+  text-decoration: none;
 }
 .learner-subject-details-back:hover {
-    color: white;
+  color: white;
 }
 
 .learner-subject-details-chapters {
-    background: #4F0A3A;
-    height: 500px;
-    border-radius: 20px;
-    margin-top: 20px;
-    margin-left: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
+  background: #4f0a3a;
+  height: 500px;
+  width: 70%;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-left: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.learner-subject-details-chapters::-webkit-scrollbar {
+  display: none;
 }
 
 .learner-chapter-element {
-    background: #720D5D;
-    color: #F0CCE2;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 90%;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
+  background: #720d5d;
+  color: #f0cce2;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  height: 35px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .learner-chapter-element > input {
-    margin-top: 5px;
-    margin-right: 10px;
+  margin-top: 5px;
+  margin-right: 10px;
 }
 
 .learner-subject-details-subtopics {
-    background: #4F0A3A;
-    border-radius: 20px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 120px;
-    width: 20%;
-    height: 445px;
+  background: #4f0a3a;
+  border-radius: 20px;
+  margin: 10px;
+  margin-left: -20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+  width: 20%;
+  height: 445px;
+  overflow-y: scroll;
+}
+
+.learner-subject-details-subtopics::-webkit-scrollbar {
+  display: none;
 }
 
 .learner-subject-details-tests {
-    height: 500px;
-    width: 100%;
-
+  height: 500px;
+  width: 100%;
 }
 
-.learner-test-tab-button{
-    cursor: pointer;
-    opacity: 0.5;
-    border-radius: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: max-content;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    justify-content: center;
-    color: red;
-    font-weight: 600;
+.learner-test-tab-button {
+  cursor: pointer;
+  opacity: 0.5;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: max-content;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-weight: 600;
 }
 
 .learner-tests-tab-inner {
-    background: url('../../assets/scene-living-room.svg') #F9F6F8;
-    background-repeat: no-repeat;
-    background-size: 675px 415px;
-    height: 400px;
-    padding: 10px;
+  background: url("../../assets/scene-living-room.svg") #f9f6f8;
+  background-repeat: no-repeat;
+  background-size: 675px 415px;
+  height: 400px;
+  padding: 10px;
 }
 
 .learner-subtopic-test-element {
-    background: white;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    height: 15%;
-    display: flex;
-    padding: 20px;
+  background: white;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 15%;
+  display: flex;
+  padding: 20px;
 }
 
 .learner-launch-test-button {
-   background: #720D5D; 
-   color: white;
-   border-radius: 20px;
-   width: 130px;
-   height: 27px;
-   display: flex;
-   justify-content: center;
-   margin-left: 420px;
-   cursor: pointer;
+  background: #720d5d;
+  color: white;
+  border-radius: 20px;
+  width: 130px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  margin-left: 420px;
+  cursor: pointer;
 }
-

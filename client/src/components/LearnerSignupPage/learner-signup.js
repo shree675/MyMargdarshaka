@@ -17,6 +17,11 @@ const LearnerSignup = () => {
     class: 6,
     subs: [],
     times: [],
+    nameValid: true,
+    emailValid: true,
+    langValid: true,
+    subValid: true,
+    timeValid: true,
   });
 
   const handleChange = (e) => {
@@ -39,6 +44,26 @@ const LearnerSignup = () => {
     //assign mentors button clicked
     //on sign-up, we first push all sign up data to database
     console.log("clicked");
+
+    let temp = {};
+
+    if (state.name.length == 0) temp.nameValid = false;
+    else temp.nameValid = true;
+
+    if (state.email.length == 0) temp.emailValid = false;
+    else temp.emailValid = true;
+
+    if (state.prefLang.length == 0) temp.langValid = false;
+    else temp.langValid = true;
+
+    if (state.subs.length == 0) temp.subValid = false;
+    else temp.subValid = true;
+
+    if (state.times.length == 0) temp.timeValid = false;
+    else temp.timeValid = true;
+
+    setState({ ...state, ...temp });
+
     console.log(state);
    
     const learner={
@@ -55,7 +80,7 @@ const LearnerSignup = () => {
 
   return (
     <div className="learner-signup-main">
-      <div>
+      <div style={{ width: "800px" }}>
         {/* Temporary logout button: */}
         <button
           onClick={() => {
@@ -66,6 +91,9 @@ const LearnerSignup = () => {
           Logout (temporary button here)
         </button>
         <div className="learner-signup-title">Sign Up</div>
+        <div className="valid-div">
+          {state.nameValid ? "" : "*this field is required"}
+        </div>
         <input
           className="learner-signup-input-field"
           name="name"
@@ -73,13 +101,20 @@ const LearnerSignup = () => {
           placeholder="Name"
         />{" "}
         <br />
+        <div className="valid-div">
+          {state.emailValid ? "" : "*this field is required"}
+        </div>
         <input
+          type="email"
           className="learner-signup-input-field"
           name="email"
           onChange={handleChange}
           placeholder="Email (optional)"
         />
         <div>
+          <div className="valid-div">
+            {state.langValid ? "" : "*this field is required"}
+          </div>
           <select
             className="learner-signup-input-field"
             name="prefLang"
@@ -96,7 +131,7 @@ const LearnerSignup = () => {
         </div>
         <div className="learner-signup-bottom-row">
           <div className="learner-signup-class-sub">
-            <label>Class/Subjects : </label>
+            <label>Class & Subjects : </label>
 
             <select onChange={handleChange} name="class" value={state.class}>
               {classes.map((cls) => (
@@ -136,7 +171,11 @@ const LearnerSignup = () => {
                 ))}
               </div>
             )}
+            <div className="valid-div">
+              {state.subValid ? "" : "*this field is required"}
+            </div>
           </div>
+
           <div className="learner-signup-pref-time">
             <div className="learner-signup-pref-time-title">
               Preferred Timeslots :{" "}
@@ -153,6 +192,9 @@ const LearnerSignup = () => {
                   <label>{time}</label>
                 </div>
               ))}
+            </div>
+            <div className="valid-div">
+              {state.timeValid ? "" : "*this field is required"}
             </div>
           </div>
         </div>

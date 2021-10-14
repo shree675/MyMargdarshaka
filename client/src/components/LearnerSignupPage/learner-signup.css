@@ -1,129 +1,134 @@
-.learner-signup-main{
-    margin-left: 15%;
-    margin-top: 5%;
-    display: flex;
+.learner-signup-main {
+  margin-left: 15%;
+  margin-top: 2%;
+  display: flex;
 }
 
-.learner-signup-title{
-    color: #720D5D;
-    margin-left: 90px;
-    margin-bottom: 20px;
-    font-size: 40px;
+.learner-signup-title {
+  color: #720d5d;
+  margin-left: 90px;
+  margin-bottom: 20px;
+  font-size: 40px;
 }
 
-.learner-signup-input-field{
-   color: #720D5D; 
-   height: 25px;
-   width: 400px;
-   margin: 5px;
-   border: solid 1px ;
-   border-radius: 20px;
-   font-family: "Raleway", sans-serif;
-   padding-left: 10px;
+.learner-signup-input-field {
+  color: #720d5d;
+  height: 30px;
+  width: 450px;
+  margin: 5px;
+  border: solid 1px;
+  border-radius: 20px;
+  font-family: "Raleway", sans-serif;
+  padding-left: 10px;
+  margin-left: 0px;
 }
 
+.valid-div {
+  margin-left: 10px;
+  color: red;
+}
 
 label {
-    color: #720D5D;
+  color: #720d5d;
 }
 
-.learner-signup-class-sub{
-    background: #F0CCE2;
-    height: 220px;
-    width: 60%;
-    padding-top: 20px;
-    padding-left: 20px;
-    border-radius: 10px;
+.learner-signup-class-sub {
+  background: #f0cce2;
+  height: 250px;
+  width: 450px;
+  padding-top: 20px;
+  padding-left: 20px;
+  border-radius: 10px;
 }
 
-.learner-signup-class-sub > label{
-    color: #720D5D;
-    margin-right: 30px;
-    font-weight: bold;
-    font-size: large;
+.learner-signup-class-sub > label {
+  color: #720d5d;
+  margin-right: 30px;
+  font-weight: bold;
+  font-size: large;
 }
 
-.learner-signup-class-sub > select{
-    font-family: "Raleway", sans-serif;
-    background: #F0CCE2;
-    border: solid 1px #720D5D;
-    border-radius: 10px;
-    color: #720D5D;
-    height: 25px;
-    width: 150px;
-    padding-left: 40px;
-    font-weight: bold;
+.learner-signup-class-sub > select {
+  font-family: "Raleway", sans-serif;
+  background: #f0cce2;
+  border: solid 1px #720d5d;
+  border-radius: 10px;
+  color: #720d5d;
+  height: 25px;
+  width: 150px;
+  padding-left: 40px;
+  font-weight: bold;
 }
 
-.learner-signup-class-sub > div{
-    margin-top: 10px;
-    padding-left: 20px;
+.learner-signup-class-sub > div {
+  margin-top: 10px;
+  padding-left: 20px;
 }
 
-.learner-signup-lass-sub > div > div {
-    margin: 7px;
+.learner-signup-class-sub > div > div {
+  margin: 7px;
 }
 
-[name="subs"]{
-    margin-right: 10px;
+[name="subs"] {
+  margin-right: 10px;
 }
 
-.learner-signup-pref-time{
-    background: #F0CCE2;
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    margin-left: 20px;
-    border-radius: 10px;
-    z-index: 1;
+.learner-signup-pref-time {
+  background: #f0cce2;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 20px;
+  margin-left: 40px;
+  height: 150px;
+  width: 200px;
+  border-radius: 10px;
+  z-index: 1;
 }
 
 .learner-signup-pref-time-title {
-    color: #720D5D;
-    margin-bottom: 10px;
-    font-weight: bold;
-
+  color: #720d5d;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-.learner-signup-pref-time > div{
-    margin-top: -5px;
+.learner-signup-pref-time > div {
+  margin-top: -5px;
 }
 
-[name="times"]{
-    margin-right: 10px;
+[name="times"] {
+  margin-right: 10px;
 }
 
-.learner-signup-bottom-row{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: end;
+.learner-signup-bottom-row {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
 }
 
 .learner-signup-img-div {
-    margin-left: -200px;
-    height: max-content;
+  margin-left: -200px;
+  height: max-content;
 }
 
 .learner-signup-img-div > img {
-    height: 400px;
-    width: 700px;
+  height: 400px;
+  width: 700px;
 }
 
-.learner-signup-submit-button{
-    height: 30px;
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #720D5D;
-    border-radius: 20px;
-    color: white;
-    cursor: pointer;
-    margin-left: 400px;
-    margin-top: 70px;
-    z-index: 2;
+.learner-signup-submit-button {
+  height: 30px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #720d5d;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 400px;
+  margin-top: 50px;
+  z-index: 2;
 }

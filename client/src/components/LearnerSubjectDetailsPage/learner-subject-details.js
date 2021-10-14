@@ -2,23 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LearnerNavbar from "../Navbar/learner-navbar";
 import "./learner-subject-details.css";
+import data from "../../data";
 
-const Chapters = ({ curChapter }) => {
-  const chapters = [
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-  ];
+const Chapters = ({ handleClickChapter }) => {
+  const chapters = [];
+  data.chapters.Science.forEach((ch) => {
+    chapters.push(ch.name);
+  });
+
+  const [ch, setCh] = React.useState(0);
+
+  React.useEffect(() => {
+    handleClickChapter(ch);
+  }, [ch]);
   return (
     <div className="learner-subject-details-chapters">
       <div
@@ -34,27 +30,24 @@ const Chapters = ({ curChapter }) => {
       >
         Chapters
       </div>
-      {chapters.map((ch) => (
-        <div className="learner-chapter-element">{ch}</div>
+      {chapters.map((chName, i) => (
+        <div
+          className="mentor-chapter-element"
+          onClick={() => {
+            setCh(i);
+          }}
+          style={i == ch ? { border: "1px solid white" } : {}}
+        >
+          {chName}
+        </div>
       ))}
     </div>
   );
 };
 
-const SubTopics = () => {
-  const subTopics = [
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-    "chapter1",
-  ];
+const SubTopics = ({ curChapter }) => {
+  const subTopics = data.chapters.Science[curChapter].subtopics;
+
   return (
     <div className="learner-subject-details-subtopics">
       <div
@@ -70,8 +63,8 @@ const SubTopics = () => {
       >
         SubTopics
       </div>
-      {subTopics.map((ch) => (
-        <div className="learner-chapter-element">{ch}</div>
+      {subTopics.map((t) => (
+        <div className="learner-chapter-element">{t}</div>
       ))}
     </div>
   );
@@ -95,8 +88,14 @@ class SubjectDetails extends React.Component {
     super(props);
     this.state = {
       subjectName: props.subjectName || "Subject Name",
-      curChapter: 1,
+      curChapter: 0,
     };
+    this.handleClickChapter = this.handleClickChapter.bind(this);
+  }
+
+  handleClickChapter(ch) {
+    console.log(ch);
+    this.setState({ curChapter: ch });
   }
 
   render() {
@@ -118,9 +117,9 @@ class SubjectDetails extends React.Component {
             <Link to="/my-mentors" className="learner-subject-details-back">
               BACK
             </Link>
-            <Chapters curChapter={this.state.curChapter} />
+            <Chapters handleClickChapter={this.handleClickChapter} />
           </div>
-          <SubTopics />
+          <SubTopics curChapter={this.state.curChapter} />
           <div
             style={{
               width: "60%",
@@ -149,7 +148,14 @@ class SubjectDetails extends React.Component {
             >
               PENDING TESTS!
             </div>
-            <PendingTests pendingTests={["SUBTOPIC1", "SUBTOPIC2"]} />
+
+            {/* temporarily pending tests are stored in data.js , these need to be queried from DB */}
+
+            <PendingTests
+              pendingTests={
+                data.chapters.Science[this.state.curChapter].pendingTests
+              }
+            />
           </div>
         </div>
       </div>
