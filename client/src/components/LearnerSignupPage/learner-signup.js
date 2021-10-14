@@ -14,7 +14,7 @@ const LearnerSignup = () => {
     name: "",
     email: "",
     prefLang: "",
-    class: 6,
+    Class: 6,
     subs: [],
     times: [],
     nameValid: true,
@@ -26,7 +26,7 @@ const LearnerSignup = () => {
 
   const handleChange = (e) => {
     if (e.target.name == "class") {
-      setState({ ...state, class: e.target.value, subs: [] });
+      setState({ ...state, Class: e.target.value, subs: [] });
     } else if (e.target.name == "subs" || e.target.name == "times") {
       let field = e.target.name;
       if (e.target.checked) {
@@ -65,13 +65,26 @@ const LearnerSignup = () => {
     setState({ ...state, ...temp });
 
     console.log(state);
+    const SUBJECTS = []
+    for(let subject in state.subs){
+      const item  = {
+        code: subject,
+
+      }
+      SUBJECTS.push(item);
+    }
    
     const learner={
       /* phone: LearnerSignup.phone, */ //pass as props
-      phone: 1234567,
-      name: state.name
+      phone: 1234567890,
+      name: state.name,
+      email: state.email,
+      language: state.prefLang,
+      time: state.times,
+      Class: state.Class,
+      subjects: SUBJECTS
       }
-    console.log(learner)
+    console.log("Printing learner before pushing:", learner)
     await axios.post(`/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
             /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
@@ -133,13 +146,13 @@ const LearnerSignup = () => {
           <div className="learner-signup-class-sub">
             <label>Class & Subjects : </label>
 
-            <select onChange={handleChange} name="class" value={state.class}>
+            <select onChange={handleChange} name="class" value={state.Class}>
               {classes.map((cls) => (
                 <option value={cls}>Class {cls}</option>
               ))}
             </select>
 
-            {state.class <= 10 && (
+            {state.Class <= 10 && (
               <div>
                 {primSubs.map((sub) => (
                   <div>
@@ -155,7 +168,7 @@ const LearnerSignup = () => {
                 ))}
               </div>
             )}
-            {state.class > 10 && (
+            {state.Class > 10 && (
               <div>
                 {secSubs.map((sub) => (
                   <div>

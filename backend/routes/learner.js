@@ -9,9 +9,16 @@ router.route('/login/submitlearner').get((req,res)=>{
 router.route('/signup/createlearner').post((req,res)=>{
     const phone=req.body.phone;
     const name=req.body.name;
-    // console.log(username);
-    const learner=new Learner({phone,name});
-    console.log(learner)
+    const email = req.body.email;
+    const language = req.body.language;
+    const time = req.body.time;
+    const Class = req.body.Class;
+    const profile_picture_url = req.body.profile_picture_url;
+    const subjects = req.body.subjects;
+    const NIOS_status = req.body.NIOS_status; 
+    //console.log(subjects);
+    const learner=new Learner({phone,name, email, language, time, Class, profile_picture_url, subjects, NIOS_status});
+    //console.log(learner)
     learner.save().then(()=>res.json('Added new learner!')).catch(err=>res.status(400).json('Error: ' + err));
 });
 
