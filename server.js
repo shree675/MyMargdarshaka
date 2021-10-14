@@ -1,11 +1,27 @@
 //@ts-check
-
-const express = require("express");
-const cors = require("cors");
+require("dotenv").config({ path: './config.env' });
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const path = require("path");
 
-const app = express();
+const connectionString = process.env.MONGO_URI
 
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+/* app.use(express.json()); */
+
+mongoose.connect(connectionString);
+const connection = mongoose.connection;
+connection.once('open', function() {
+    console.log("MongoDB database connection established successfully")
+})
+let Learner = require('./backend/models/learner.model');
+
+
+//-------------------------------------------
 app.use(cors());
 
 app.get("/api/message", (req, res) => {
@@ -19,6 +35,19 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
+
+const learnerRouter=require('./backend/routes/learner');
+/* const prefRouter=require('./backend/routes/preference');
+const apiRouter=require('./backend/routes/api');
+ */
+app.use('/',learnerRouter);
+/* app.use('/pref',prefRouter);
+app.use('/api',apiRouter); */
+
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => `Server running on port ${port}`);
+///------------------------------------------------
+
+

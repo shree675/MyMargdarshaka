@@ -11,9 +11,11 @@ import Feedback from "./components/FeedbackPage/feedback.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
 import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
+
 import LearnerHome from "./components/LearnerHomePage/learner-home.js";
 import AdminApplications from "./components/AdminApplicationsPage/admin-applications";
 import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboard.js";
+import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
 
 class App extends Component {
   // constructor() {
@@ -40,6 +42,8 @@ class App extends Component {
           <Route exact path="/mentor-signup" component={MentorSignup} />
           <Route exact path="/feedback" component={Feedback} />
           <Route exact path="/adminauth" component={AdminAuthentication} />
+          <Route exact path="/learner-dashboard" component={LearnerDashboard} />
+          <Route exact path="/my-mentors" component={LearnerHomepage} />
           <Route
             exact
             path="/mentor-subject-details"
