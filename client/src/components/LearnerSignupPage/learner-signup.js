@@ -110,7 +110,7 @@ const LearnerSignup = () => {
       subjects: SUBJECTS
       }
     console.log("Printing learner before pushing:", learner)
-    await axios.post(`/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
+    await axios.post(`/learner/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
             /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
             window.location='/browse'; */         

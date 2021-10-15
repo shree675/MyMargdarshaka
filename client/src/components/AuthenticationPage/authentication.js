@@ -13,6 +13,8 @@ import TextField from "@mui/material/TextField";
 import firebase from "../../firebase";
 import { styled } from "@mui/material/styles";
 import {useParams} from "react-router-dom";
+import axios from 'axios';
+
 
 const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -38,8 +40,9 @@ const CssTextField = styled(TextField)({
 //we need to know which button was clicked
 
 const Authentication = () => {
-    let userType = useParams();
-    console.log(userType.id); //:student or :mentor
+    let user = useParams();
+    let userType = (user.id).slice(1);
+    console.log(userType); //:student or :mentor
     const [toggle, setToggle] = useState(true);
     const [curuser, setCuruser] = useState("No user is logged in");
     const [phone, setPhone] = useState("");
@@ -50,17 +53,28 @@ const Authentication = () => {
     }, []);
 
     // checks if a user is already logged in
-    const verify = () => {
+    const verify = async () => {
+
+
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 setCuruser(user.uid); // user.uid is the unique identifier of the user
                 // alert("You are logged in as " + user.uid);
-                console.log(user.phoneNumber);
+                setPhone(user.phoneNumber);
+                //console.log(user.phoneNumber);
             } else {
                 setCuruser("No user found");
             }
         });
         console.log(curuser);
+
+        /* const user={
+            phone: '1234567890',
+            user_type: userType,
+            valid_signup: false,
+            }
+          console.log("Printing user before pushing:", user)
+          await axios.post(`user/signup/createUser`, user).then(res=>console.log('Pushing user Sign up data')); */
     };
 
     // invisibly checks if user is human
@@ -76,7 +90,7 @@ const Authentication = () => {
     };
 
     // sends otp
-    const verifyPhone = (e) => {
+    const verifyPhone = async (e) => {
         e.preventDefault();
 
         //query the mongodb users database - 
@@ -84,11 +98,25 @@ const Authentication = () => {
         // 2. if number exists by=ut sign up is not successful - continue with sign up
         // 3. successful sign up number exists - route accordingly to homepage
 
-        //set variables and use them for routing
+        //set variables - mentor or learner, valid signup or not and use them for routing
 
+        await axios.get('user/login/getUser').then((e)=>{
+            //console.log(e);
+            e.data.map(user=>{
+                console.log(user.phone)
+                if(user.phone===phone){                    
+                    /* this.setState({
+                        prefgens: user.genre
+                    }); */
+                    console.log("Phone number found ", phone)
+                }
+            })
+        });
         
         setupCaptcha();
-        const phoneNumber = "+91" + phone;
+        let phoneNumber = phone;
+        if(phone[0]!='+') phoneNumber = "+91" + phoneNumber;
+        setPhone(phone)
         console.log(phoneNumber);
         const appVerifier = window.recaptchaVerifier;
 
@@ -112,14 +140,24 @@ const Authentication = () => {
         let optConfirm = window.confirmationResult;
         optConfirm
             .confirm(otpInput)
-            .then(function (result) {
+            .then(async function (result) {
                 // User signed in successfully.
-                console.log("Successful sign up");
-                window.location = "/learner-signup";
-                //here do the appropriate routing
+                console.log("Successful log in");
+                const user={
+                    /* phone: LearnerSignup.phone, */ //pass as props
+                    phone: phone,
+                    user_type: userType,
+                    valid_signup: false,
+                    }
+                  console.log("Printing user before pushing:", user)
+                  await axios.post(`user/signup/createUser`, user).then(res=>console.log('Pushing user Sign up data'));
 
+
+                window.location = "/learner-signup";
+
+                //here do the appropriate routing
                 //create a collection in mongodb - for all users - storing (phone number, mentor/learner, successful signup: true/false) {firebase UID ?}
-               //remember to update sign up successful at the end of sign up
+                //remember to update sign up successful at the end of sign up
             })
             .catch(function (error) {
                 console.log(error);
