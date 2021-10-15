@@ -25,14 +25,16 @@ connection.once('open', function() {
 app.use(cors());
 
 app.get("/api/message", (req, res) => {
-    res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
+  res.send(
+    "Message from the server: If you are seeing this message, then it means the app is successfully deployed"
+  );
 });
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 
 
@@ -51,7 +53,4 @@ app.use('/api',apiRouter); */
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => `Server running on port ${port}`);
-///------------------------------------------------
-
-
+app.listen(port, () => console.log(`Server running on port ${port}`));
