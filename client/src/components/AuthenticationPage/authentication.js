@@ -47,6 +47,8 @@ const Authentication = () => {
     const [curuser, setCuruser] = useState("No user is logged in");
     const [phone, setPhone] = useState("");
     const [otp, setOtp] = useState("");
+    const [valid_mentor, setValidMentor] = useState(false);
+    const [valid_learner, setValidLearner] = useState(false);
 
     useEffect(() => {
         verify();
@@ -54,8 +56,6 @@ const Authentication = () => {
 
     // checks if a user is already logged in
     const verify = async () => {
-
-
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 setCuruser(user.uid); // user.uid is the unique identifier of the user
@@ -91,7 +91,7 @@ const Authentication = () => {
 
     // sends otp
     const verifyPhone = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
 
         //query the mongodb users database - 
         // 1. if number does not exist - continue with sign up process
@@ -101,14 +101,27 @@ const Authentication = () => {
         //set variables - mentor or learner, valid signup or not and use them for routing
 
         await axios.get('user/login/getUser').then((e)=>{
-            //console.log(e);
+            console.log(e);
             e.data.map(user=>{
                 console.log(user.phone)
-                if(user.phone===phone){                    
-                    /* this.setState({
-                        prefgens: user.genre
-                    }); */
+                if(user.phone===phone){ 
+                    if(user.user_type=='mentor'){
+                        userType = 'mentor'
+                        if(user.valid_signup){
+                            setValidMentor(true)
+                        }
+                    }
+                    else if(user.user_type=='learner'){
+                        userType = 'learner'
+                        if(user.valid_signup){
+                            setValidMentor(true)
+                        }
+                    }
                     console.log("Phone number found ", phone)
+                }
+                else
+                {
+
                 }
             })
         });
@@ -116,7 +129,7 @@ const Authentication = () => {
         setupCaptcha();
         let phoneNumber = phone;
         if(phone[0]!='+') phoneNumber = "+91" + phoneNumber;
-        setPhone(phone)
+        setPhone(phoneNumber)
         console.log(phoneNumber);
         const appVerifier = window.recaptchaVerifier;
 
@@ -152,8 +165,15 @@ const Authentication = () => {
                   console.log("Printing user before pushing:", user)
                   await axios.post(`user/signup/createUser`, user).then(res=>console.log('Pushing user Sign up data'));
 
-
-                window.location = "/learner-signup";
+                if(userType == 'mentor'){
+                    if(valid_mentor) window.location = "/mentor-homepage";
+                    else window.location = "/mentor-signup";
+                }
+                else if(userType == 'learner'){
+                    if(valid_learner) window.location = "/my-mentors";
+                    else window.location = "/learner-signup";
+                }    
+                
 
                 //here do the appropriate routing
                 //create a collection in mongodb - for all users - storing (phone number, mentor/learner, successful signup: true/false) {firebase UID ?}

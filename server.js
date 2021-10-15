@@ -37,11 +37,13 @@ if (process.env.NODE_ENV === "production") {
 
 
 const learnerRouter=require('./backend/routes/learner');
+const mentorRouter=require('./backend/routes/mentor');
 const userRouter=require('./backend/routes/user');
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */
 app.use('/learner',learnerRouter);
+app.use('/mentor',mentorRouter);
 app.use('/user',userRouter);
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
