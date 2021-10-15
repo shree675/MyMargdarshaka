@@ -37,7 +37,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/initsignin" component={InitiateSignin} />
-          <Route exact path="/authentication" component={Authentication} />
+          <Route exact path="/authentication:id" component={Authentication} />
           <Route exact path="/learner-signup" component={LearnerSignup} />
           <Route exact path="/mentor-signup" component={MentorSignup} />
           <Route exact path="/feedback" component={Feedback} />
