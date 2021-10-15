@@ -12,9 +12,8 @@ import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
 import firebase from "../../firebase";
 import { styled } from "@mui/material/styles";
-import {useParams} from "react-router-dom";
-import axios from 'axios';
-
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -41,12 +40,18 @@ const CssTextField = styled(TextField)({
 
 const Authentication = () => {
     let user = useParams();
-    let userType = (user.id).slice(1);
+    let userType = user.id.slice(1);
     console.log(userType); //:student or :mentor
     const [toggle, setToggle] = useState(true);
     const [curuser, setCuruser] = useState("No user is logged in");
     const [phone, setPhone] = useState("");
     const [otp, setOtp] = useState("");
+    const slides = ["The average time that students spend on social networks has risen to an all-time high", "lorem ipsum"];
+    const [time, setTime] = useState(0);
+    const interval = setInterval(() => {
+        setTime(time + 1);
+        clearInterval(interval);
+    }, 4000);
 
     useEffect(() => {
         verify();
@@ -54,8 +59,6 @@ const Authentication = () => {
 
     // checks if a user is already logged in
     const verify = async () => {
-
-
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 setCuruser(user.uid); // user.uid is the unique identifier of the user
@@ -91,32 +94,31 @@ const Authentication = () => {
 
     // sends otp
     const verifyPhone = async (e) => {
-        e.preventDefault();
-
-        //query the mongodb users database - 
+        // e.preventDefault();
+        //query the mongodb users database -
         // 1. if number does not exist - continue with sign up process
         // 2. if number exists by=ut sign up is not successful - continue with sign up
         // 3. successful sign up number exists - route accordingly to homepage
 
         //set variables - mentor or learner, valid signup or not and use them for routing
 
-        await axios.get('user/login/getUser').then((e)=>{
+        await axios.get("user/login/getUser").then((e) => {
             //console.log(e);
-            e.data.map(user=>{
-                console.log(user.phone)
-                if(user.phone===phone){                    
+            e.data.map((user) => {
+                console.log(user.phone);
+                if (user.phone === phone) {
                     /* this.setState({
                         prefgens: user.genre
                     }); */
-                    console.log("Phone number found ", phone)
+                    console.log("Phone number found ", phone);
                 }
-            })
+            });
         });
-        
+
         setupCaptcha();
         let phoneNumber = phone;
-        if(phone[0]!='+') phoneNumber = "+91" + phoneNumber;
-        setPhone(phone)
+        if (phone[0] != "+") phoneNumber = "+91" + phoneNumber;
+        setPhone(phone);
         console.log(phoneNumber);
         const appVerifier = window.recaptchaVerifier;
 
@@ -143,15 +145,14 @@ const Authentication = () => {
             .then(async function (result) {
                 // User signed in successfully.
                 console.log("Successful log in");
-                const user={
+                const user = {
                     /* phone: LearnerSignup.phone, */ //pass as props
                     phone: phone,
                     user_type: userType,
                     valid_signup: false,
-                    }
-                  console.log("Printing user before pushing:", user)
-                  await axios.post(`user/signup/createUser`, user).then(res=>console.log('Pushing user Sign up data'));
-
+                };
+                console.log("Printing user before pushing:", user);
+                await axios.post(`user/signup/createUser`, user).then((res) => console.log("Pushing user Sign up data"));
 
                 window.location = "/learner-signup";
 
@@ -226,9 +227,7 @@ const Authentication = () => {
                                 GET OTP
                             </button>
                         </div>
-                        <div className='bottom-fact'>
-                            The average time that students spend on social networks has risen to an all-time high
-                        </div>
+                        <div className='bottom-fact'>{slides[time % slides.length]}</div>
                     </div>
                 ) : (
                     <div className='auth-content-body'>
@@ -267,9 +266,7 @@ const Authentication = () => {
                                 SUBMIT
                             </button>
                         </div>
-                        <div className='bottom-fact'>
-                            The average time that students spend on social networks has risen to an all-time high
-                        </div>
+                        <div className='bottom-fact'>{slides[time % slides.length]}</div>
                     </div>
                 )}
                 <img src={humans} className='auth-humans-phone' />
