@@ -29,7 +29,7 @@ const InitiateSignin = () => {
                         <button
                             className='init-signin-button'
                             onClick={() => {
-                                window.location = "/authentication";
+                                window.location = "/authentication:student";
                             }}
                         >
                             SIGN IN AS A LEARNER
@@ -54,7 +54,7 @@ const InitiateSignin = () => {
                         <button
                             className='init-signin-button'
                             onClick={() => {
-                                window.location = "/authentication";
+                                window.location = "/authentication:mentor";
                             }}
                         >
                             SIGN IN AS A MENTOR

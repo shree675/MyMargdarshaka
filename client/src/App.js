@@ -11,11 +11,13 @@ import Feedback from "./components/FeedbackPage/feedback.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
 import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
+
 import LearnerHome from "./components/LearnerHomePage/learner-home.js";
 import AdminApplications from "./components/AdminApplicationsPage/admin-applications";
 import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboard.js";
 import MentorHome from "./components/MentorHomePage/mentor-home.js";
 import MentorDashBoard from "./components/MentorDashboardPage/mentor-dashboard.js";
+import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
 
 class App extends Component {
   // constructor() {
@@ -37,7 +39,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/initsignin" component={InitiateSignin} />
-          <Route exact path="/authentication" component={Authentication} />
+          <Route exact path="/authentication:id" component={Authentication} />
           <Route exact path="/learner-signup" component={LearnerSignup} />
           <Route exact path="/mentor-signup" component={MentorSignup} />
           <Route exact path="/feedback" component={Feedback} />
@@ -46,6 +48,9 @@ class App extends Component {
           <Route exact path="/admin-auth" component={AdminAuthentication} />
           <Route exact path="/mentor-home" component={MentorHome} />
           <Route exact path="/mentor-dashboard" component={MentorDashBoard} />
+          <Route exact path="/adminauth" component={AdminAuthentication} />
+          <Route exact path="/learner-dashboard" component={LearnerDashboard} />
+          <Route exact path="/my-mentors" component={LearnerHomepage} />
           <Route
             exact
             path="/mentor-subject-details"
@@ -56,6 +61,8 @@ class App extends Component {
             path="/learner-subject-details"
             component={LearnerSubjectDetails}
           />
+          <Route exact path="/learner-home" component={LearnerHome} />
+          <Route exact path="/learner-dashboard" component={LearnerDashboard} />
         </Switch>
       </Router>
     );
