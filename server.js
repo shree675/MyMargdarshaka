@@ -18,7 +18,7 @@ const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully")
 })
-let Learner = require('./backend/models/learner.model');
+
 
 
 //-------------------------------------------
@@ -37,10 +37,12 @@ if (process.env.NODE_ENV === "production") {
 
 
 const learnerRouter=require('./backend/routes/learner');
+const userRouter=require('./backend/routes/user');
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */
-app.use('/',learnerRouter);
+app.use('/learner',learnerRouter);
+app.use('/user',userRouter);
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
 
