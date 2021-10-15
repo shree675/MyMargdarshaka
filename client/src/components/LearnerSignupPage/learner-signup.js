@@ -101,7 +101,7 @@ const LearnerSignup = () => {
    
     const learner={
       /* phone: LearnerSignup.phone, */ //pass as props
-      phone: 1234567890,
+      phone: phone,
       name: state.name,
       email: state.email,
       language: state.prefLang,

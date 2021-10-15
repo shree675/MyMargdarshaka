@@ -2,6 +2,10 @@
 import React from "react";
 import './mentor-signup.css'
 import imgSrc from '../../assets/mentor-signup.svg'
+import firebase from "../../firebase";
+import axios from 'axios';
+import { useEffect } from "react";
+import { useState } from "react";
 
 let classes = [6,7,8,9,10,11,12]
 let primSubs = ['Hindi', 'Telugu', 'Maths', 'Science', 'Social']
@@ -19,6 +23,28 @@ const MentorSignup = () => {
         prefTime: "",
         clsAndSub: {6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[]}
     })
+
+    const [curuser, setCuruser] = useState("No user is logged in");
+    const [phone, setPhone] = useState("Null phone");
+
+    useEffect(() => {
+        verify();
+      }, []);
+  
+      // checks if a user is already logged in
+      const verify = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                setCuruser(user.uid); // user.uid is the unique identifier of the user
+                // alert("You are logged in as " + user.uid);
+                console.log(user.phoneNumber);
+                setPhone(user.phoneNumber);
+            } else {
+                setCuruser("No user found");
+            }
+        });
+        console.log(curuser);
+      };
 
 
     const handleChange = e => {
@@ -52,9 +78,32 @@ const MentorSignup = () => {
         }
     }
     
-    const handleClick = () => {
+    const handleClick = async () => {
         console.log("clicked");
         console.log(state);
+
+        //setState({ ...state, ...temp });
+
+        
+        /* const SUBJECTS = []
+        for(let subject in state.subs){
+        const item  = {
+            code: subject,
+
+        }
+        SUBJECTS.push(item);
+        } */
+    
+        const mentor={
+        phone: phone,
+        name: state.name,
+        email: state.email,
+        language: state.prefLang,
+        time: state.prefTime,
+        }
+        console.log("Printing mentor before pushing:", mentor)
+        await axios.post(`/mentor/signup/creatementor`, mentor).then(res=>console.log('Pushing Sign up data'));
+
     }
 
     return(
