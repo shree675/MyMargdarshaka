@@ -3,11 +3,11 @@ import React from "react";
 const LearnerDashboardEditAttributes = () => {
   return (
     <div
-      className="container card mt-3 p-3"
+      className="container p-0 card col-md-7 col-12 mx-md-0 mx-3 mt-3 p-3 me-3"
       style={{ border: "1px solid #ff0000", borderRadius: "20px" }}
     >
       <div className="row justify-content-center">
-        <div className="col-3 my-3" style={{ color: "#5D1049" }}>
+        <div className="col-4 my-3" style={{ color: "#5D1049" }}>
           <strong>ADD OR REMOVE SUBJECTS</strong>
           <ul className="list-group" id="preferred-subjects">
             <li className="list-group-item">

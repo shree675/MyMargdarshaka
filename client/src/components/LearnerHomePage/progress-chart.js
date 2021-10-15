@@ -23,7 +23,7 @@ const ProgressChart = () => (
   <>
     <div className="container" style={{ width: "200px", height: "200px" }}>
       <div className="header">
-        <p className="title">Mathematics</p>
+        <p>Mathematics</p>
       </div>
       <Doughnut data={data} options={options} />
     </div>
