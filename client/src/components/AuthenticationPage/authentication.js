@@ -12,6 +12,7 @@ import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
 import firebase from "../../firebase";
 import { styled } from "@mui/material/styles";
+import {useParams} from "react-router-dom";
 
 const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -34,8 +35,11 @@ const CssTextField = styled(TextField)({
         },
     },
 });
+//we need to know which button was clicked
 
 const Authentication = () => {
+    let userType = useParams();
+    console.log(userType.id); //:student or :mentor
     const [toggle, setToggle] = useState(true);
     const [curuser, setCuruser] = useState("No user is logged in");
     const [phone, setPhone] = useState("");
@@ -51,6 +55,7 @@ const Authentication = () => {
             if (user) {
                 setCuruser(user.uid); // user.uid is the unique identifier of the user
                 // alert("You are logged in as " + user.uid);
+                console.log(user.phoneNumber);
             } else {
                 setCuruser("No user found");
             }
@@ -73,6 +78,15 @@ const Authentication = () => {
     // sends otp
     const verifyPhone = (e) => {
         e.preventDefault();
+
+        //query the mongodb users database - 
+        // 1. if number does not exist - continue with sign up process
+        // 2. if number exists by=ut sign up is not successful - continue with sign up
+        // 3. successful sign up number exists - route accordingly to homepage
+
+        //set variables and use them for routing
+
+        
         setupCaptcha();
         const phoneNumber = "+91" + phone;
         console.log(phoneNumber);
@@ -101,10 +115,11 @@ const Authentication = () => {
             .then(function (result) {
                 // User signed in successfully.
                 console.log("Successful sign up");
-
-                const userid = result.user.X.X; // userid should be used as the unique identifier
-                alert("Successfully signed in as " + userid);
                 window.location = "/learner-signup";
+                //here do the appropriate routing
+
+                //create a collection in mongodb - for all users - storing (phone number, mentor/learner, successful signup: true/false) {firebase UID ?}
+               //remember to update sign up successful at the end of sign up
             })
             .catch(function (error) {
                 console.log(error);

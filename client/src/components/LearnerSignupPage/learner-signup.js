@@ -5,12 +5,15 @@ import imgSrc from "../../assets/learner-signup.svg";
 import data from "../../data";
 import firebase from "../../firebase";
 import axios from 'axios';
+import { useEffect } from "react";
+import { useState } from "react";
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
+
 //need to pass phone number as props
 const LearnerSignup = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     name: "",
     email: "",
     prefLang: "",
@@ -23,6 +26,28 @@ const LearnerSignup = () => {
     subValid: true,
     timeValid: true,
   });
+  const [curuser, setCuruser] = useState("No user is logged in");
+  const [phone, setPhone] = useState("Null phone")
+
+    useEffect(() => {
+      verify();
+    }, []);
+
+    // checks if a user is already logged in
+    const verify = () => {
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+              setCuruser(user.uid); // user.uid is the unique identifier of the user
+              // alert("You are logged in as " + user.uid);
+              console.log(user.phoneNumber);
+              setPhone(user.phoneNumber);
+          } else {
+              setCuruser("No user found");
+          }
+      });
+      console.log(curuser);
+    };
+
 
   const handleChange = (e) => {
     if (e.target.name == "class") {
@@ -88,7 +113,7 @@ const LearnerSignup = () => {
     await axios.post(`/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
             /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
-            window.location='/browse'; */
+            window.location='/browse'; */         
   };
 
   return (
@@ -98,7 +123,7 @@ const LearnerSignup = () => {
         <button
           onClick={() => {
             firebase.auth().signOut();
-            window.location = "/authentication";
+            window.location = "/initsignin";
           }}
         >
           Logout (temporary button here)
