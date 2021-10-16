@@ -4,12 +4,11 @@ import "./learner-signup.css";
 import imgSrc from "../../assets/learner-signup.svg";
 import data from "../../data";
 import firebase from "../../firebase";
-import axios from 'axios';
+import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 
 const { classes, primSubs, secSubs, langs, times } = data;
-
 
 //need to pass phone number as props
 const LearnerSignup = () => {
@@ -27,27 +26,26 @@ const LearnerSignup = () => {
     timeValid: true,
   });
   const [curuser, setCuruser] = useState("No user is logged in");
-  const [phone, setPhone] = useState("Null phone")
+  const [phone, setPhone] = useState("Null phone");
 
-    useEffect(() => {
-      verify();
-    }, []);
+  useEffect(() => {
+    verify();
+  }, []);
 
-    // checks if a user is already logged in
-    const verify = () => {
-      firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-              setCuruser(user.uid); // user.uid is the unique identifier of the user
-              // alert("You are logged in as " + user.uid);
-              console.log(user.phoneNumber);
-              setPhone(user.phoneNumber);
-          } else {
-              setCuruser("No user found");
-          }
-      });
-      console.log(curuser);
-    };
-
+  // checks if a user is already logged in
+  const verify = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCuruser(user.uid); // user.uid is the unique identifier of the user
+        // alert("You are logged in as " + user.uid);
+        console.log(user.phoneNumber);
+        setPhone(user.phoneNumber);
+      } else {
+        setCuruser("No user found");
+      }
+    });
+    console.log(curuser);
+  };
 
   const handleChange = (e) => {
     if (e.target.name == "class") {
@@ -90,16 +88,15 @@ const LearnerSignup = () => {
     setState({ ...state, ...temp });
 
     console.log(state);
-    const SUBJECTS = []
-    for(let subject in state.subs){
-      const item  = {
+    const SUBJECTS = [];
+    for (let subject in state.subs) {
+      const item = {
         code: subject,
-
-      }
+      };
       SUBJECTS.push(item);
     }
-   
-    const learner={
+
+    const learner = {
       /* phone: LearnerSignup.phone, */ //pass as props
       phone: phone,
       name: state.name,
@@ -107,13 +104,15 @@ const LearnerSignup = () => {
       language: state.prefLang,
       time: state.times,
       Class: state.Class,
-      subjects: SUBJECTS
-      }
-    console.log("Printing learner before pushing:", learner)
-    await axios.post(`/learner/signup/createlearner`, learner).then(res=>console.log('Pushing Sign up data'));
-            /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
+      subjects: SUBJECTS,
+    };
+    console.log("Printing learner before pushing:", learner);
+    await axios
+      .post(`/learner/signup/createlearner`, learner)
+      .then((res) => console.log("Pushing Sign up data"));
+    /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
-            window.location='/browse'; */         
+            window.location='/browse'; */
   };
 
   return (
