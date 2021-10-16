@@ -85,9 +85,18 @@ const LearnerSignup = () => {
     if (state.times.length == 0) temp.timeValid = false;
     else temp.timeValid = true;
 
-    setState({ ...state, ...temp });
+    let ok = true;
+    let tempKeys = Object.keys(temp);
+    for (let key in tempKeys) {
+      ok = ok && temp[key];
+    }
 
-    console.log(state);
+    if (!ok) {
+      setState({ ...state, ...temp });
+    } else {
+      // push to DB
+    }
+
     const SUBJECTS = [];
     for (let subject in state.subs) {
       const item = {

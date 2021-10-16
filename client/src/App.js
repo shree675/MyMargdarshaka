@@ -18,6 +18,7 @@ import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboar
 import MentorHome from "./components/MentorHomePage/mentor-home.js";
 import MentorDashBoard from "./components/MentorDashboardPage/mentor-dashboard.js";
 import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
+import TestPage from "./components/TestPage/test.js";
 
 class App extends Component {
   // constructor() {
@@ -51,7 +52,8 @@ class App extends Component {
           <Route exact path="/adminauth" component={AdminAuthentication} />
           <Route exact path="/learner-dashboard" component={LearnerDashboard} />
           <Route exact path="/my-mentors" component={LearnerHomepage} />
-          <Route exact path="/mentor-homepage" component={MentorHome} /> {/* //temporary - remove it */}
+          <Route exact path="/mentor-homepage" component={MentorHome} />{" "}
+          {/* //temporary - remove it */}
           <Route
             exact
             path="/mentor-subject-details"
@@ -64,6 +66,7 @@ class App extends Component {
           />
           <Route exact path="/learner-home" component={LearnerHome} />
           <Route exact path="/learner-dashboard" component={LearnerDashboard} />
+          <Route exact path="/test" component={TestPage} />
         </Switch>
       </Router>
     );
