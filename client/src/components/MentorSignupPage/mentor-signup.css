@@ -1,72 +1,77 @@
-.mentor-main{
-    margin-left: 15%;
-    margin-top: 5%;
+.mentor-main {
+  margin-left: 15%;
+  margin-top: 5%;
 }
 
-.title{
-    color: #720D5D;
-    margin-left: 90px;
-    margin-bottom: 20px;
-    font-size: 40px;
+.title {
+  color: #720d5d;
+  margin-left: 90px;
+  margin-bottom: 20px;
+  font-size: 40px;
 }
 
-.mentor-row-1{
-    display: flex;
+.mentor-row-1 {
+  display: flex;
 }
 
 .img-div > img {
-    width: 600px;
-    height: 250px;
+  width: 600px;
+  height: 250px;
 }
 
-.input-field{
-   color: #720D5D; 
-   height: 25px;
-   width: 400px;
-   margin: 5px;
-   border: solid 1px ;
-   border-radius: 20px;
-   font-family: "Raleway", sans-serif;
-   padding-left: 10px;
+.input-field {
+  color: #720d5d;
+  height: 30px;
+  width: 450px;
+  margin: 5px;
+  border: solid 1px;
+  border-radius: 20px;
+  font-family: "Raleway", sans-serif;
+  padding-left: 10px;
+  margin-left: 0px;
 }
 
-select.input-field{
-    width: 415px;
+.valid-div {
+  margin-left: 10px;
+  color: red;
+}
+select.input-field {
+  width: 415px;
 }
 
-.class-and-sub{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 20px;
+.class-and-sub {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 20px;
 }
 
 .class-and-sub > div {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
-.class-name{
-    width: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #720D5D;
-    color: white;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    height: 35px;
+.class-name {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #720d5d;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  height: 35px;
 }
 
-.submit-button{
-    height: 30px;
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #720D5D;
-    border-radius: 20px;
-    color: white;
-    cursor: pointer;
-    margin-left: 400px;
-    margin-top: 20px;
+.submit-button {
+  height: 30px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #720d5d;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 400px;
+  margin-top: 20px;
 }
