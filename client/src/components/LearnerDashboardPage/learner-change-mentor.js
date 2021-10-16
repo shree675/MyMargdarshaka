@@ -24,7 +24,7 @@ const LearnerRequestChangeOfMentor = () => {
   return (
     <div
       className="request-change-of-mentor card p-3"
-      style={{ borderRadius: "20px" }}
+      style={{ border: "1px solid #FF0000", borderRadius: "20px" }}
     >
       <h1 className="mb-3" style={{ color: "#5D1049" }}>
         <strong>REQUEST CHANGE OF MENTORS</strong>
@@ -32,28 +32,42 @@ const LearnerRequestChangeOfMentor = () => {
 
       <SubjectTitle style={style} subject="Mathematics" />
 
-      <div className="col-3">
-        <Card details={details} />
+      <div className="row justify-content-center">
+        <div className="col-lg-3 col-6">
+          <Card details={details} />
+        </div>
+        <div className="col-lg-3 col-6">
+          <Card details={details} />
+        </div>
+        <div className="col-lg-3 col-6">
+          <Card details={details} />
+        </div>
       </div>
 
       <SubjectTitle style={style} subject="Science" />
 
-      <div className="row">
-        <div className="col-3">
+      <div className="row justify-content-center">
+        <div className="col-lg-3 col-6">
+          <Card details={details} />
+        </div>
+        {/* <div className="col-lg-3 col-6">
+          <Card details={details} />
+        </div> */}
+        <div className="col-lg-3 col-6">
           <Card details={details} />
         </div>
       </div>
 
       <SubjectTitle style={style} subject="English" />
 
-      <div className="row">
-        <div className="col-3">
+      <div className="row justify-content-center">
+        <div className="col-lg-3 col-6">
           <Card details={details} />
         </div>
-        <div className="col-3">
+        <div className="col-lg-3 col-6">
           <Card details={details} />
         </div>
-        <div className="col-3">
+        <div className="col-lg-3 col-6">
           <Card details={details} />
         </div>
       </div>

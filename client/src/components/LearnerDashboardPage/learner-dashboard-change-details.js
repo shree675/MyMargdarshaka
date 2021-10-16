@@ -24,9 +24,9 @@ function validate() {
 // TODO: Replace the hardcoded colors
 const LearnerDashboardChangeDetails = () => {
   return (
-    <div className="learner-dashboard-change-details col px-md-5 py-3 justify-content-start">
+    <div className="learner-dashboard-change-details">
       <div
-        className="card col-8 px-4 py-5 mt-3 mx-md-0 mx-auto"
+        className="card px-4 py-5 mt-3 mx-md-0 mx-auto"
         style={{ borderRadius: "20px", borderColor: "#FF0000" }}
       >
         <div className="d-flex justify-content-center">

@@ -51,7 +51,7 @@ class App extends Component {
           <Route exact path="/adminauth" component={AdminAuthentication} />
           <Route exact path="/learner-dashboard" component={LearnerDashboard} />
           <Route exact path="/my-mentors" component={LearnerHomepage} />
-          <Route exact path="/mentor-homepage" component={LearnerHomepage} /> {/* //temporary - remove it */}
+          <Route exact path="/mentor-homepage" component={MentorHome} /> {/* //temporary - remove it */}
           <Route
             exact
             path="/mentor-subject-details"

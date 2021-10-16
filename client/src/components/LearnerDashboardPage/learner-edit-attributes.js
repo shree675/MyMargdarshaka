@@ -3,11 +3,11 @@ import React from "react";
 const LearnerDashboardEditAttributes = () => {
   return (
     <div
-      className="container p-0 card col-md-7 col-12 mx-md-0 mx-3 mt-3 p-3 me-3"
+      className="container p-xl-0 card mx-auto mt-3 mx-xl-0"
       style={{ border: "1px solid #ff0000", borderRadius: "20px" }}
     >
-      <div className="row justify-content-center">
-        <div className="col-4 my-3" style={{ color: "#5D1049" }}>
+      <div className="row justify-content-center mt-4">
+        <div className="col-md-4 my-md-3" style={{ color: "#5D1049" }}>
           <strong>ADD OR REMOVE SUBJECTS</strong>
           <ul className="list-group" id="preferred-subjects">
             <li className="list-group-item">
@@ -33,7 +33,7 @@ const LearnerDashboardEditAttributes = () => {
           </ul>
         </div>
 
-        <div className="col-3 my-3" style={{ color: "#5D1049" }}>
+        <div className="col-md-4 my-3" style={{ color: "#5D1049" }}>
           <strong>PREFERRED TIMES</strong>
           <ul className="list-group" id="preferred-subjects">
             <li className="list-group-item">
@@ -53,7 +53,7 @@ const LearnerDashboardEditAttributes = () => {
       </div>
 
       <div className="row justify-content-center">
-        <div className="col-3 my-3" style={{ color: "#5D1049" }}>
+        <div className="col-md-4 col-12 my-3" style={{ color: "#5D1049" }}>
           <strong>PREFERRED LANGUAGES</strong>
           <ul className="list-group" id="preferred-subjects">
             <li className="list-group-item">
@@ -78,7 +78,7 @@ const LearnerDashboardEditAttributes = () => {
 
       <div className="text-center">
         <a
-          className="rounded-pill btn px-3"
+          className="rounded-pill btn px-3 mb-3"
           style={{ border: "none", backgroundColor: "#5D1049", color: "white" }}
         >
           SAVE

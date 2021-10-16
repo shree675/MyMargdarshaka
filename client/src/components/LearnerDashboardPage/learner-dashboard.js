@@ -9,10 +9,14 @@ const LearnerDashboard = () => {
   return (
     <div className="mb-3">
       <LearnerNavbar />
-      <div className="container">
-        <div className="row">
-          <LearnerDashboardChangeDetails />
-          <LearnerDashboardEditAttributes />
+      <div className="container-fluid">
+        <div className="row align-items-end">
+          <div className="col-lg-3 col-12">
+            <LearnerDashboardChangeDetails />
+          </div>
+          <div className="col-lg-9 col-12">
+            <LearnerDashboardEditAttributes />
+          </div>
         </div>
         <NIOSStatus />
         <LearnerRequestChangeOfMentor />

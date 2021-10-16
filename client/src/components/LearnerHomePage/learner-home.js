@@ -29,7 +29,7 @@ const LearnerHome = (props) => {
   var cards = [];
   for (let i = 0; i < num_mentors; i++) {
     cards.push(
-      <div className="col-6">
+      <div className="col-8 mx-auto col-sm-6 mx-md-0">
         <Card details={details} />
       </div>
     );

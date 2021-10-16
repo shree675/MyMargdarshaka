@@ -27,7 +27,7 @@ const MentorHome = () => {
       <Navbar />
       <div className="container-fluid">
         <div className="row px-3">
-          <div className="col-3">
+          <div className="d-none d-xl-flex col-md-3 mb-3">
             {/* TODO: remove hardcoded color */}
             <div className="card mt-3 p-5" style={style}>
               <p style={{ fontSize: "34px" }}>
@@ -46,38 +46,38 @@ const MentorHome = () => {
           <div className="col">
             <div className="row p-3">
               <SubjectTitle style={style} subject={"Mathematics"} />
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
             </div>
 
             <div className="row p-3">
               <SubjectTitle style={style} subject={"Science"} />
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
-              <div className="col-3">
+              <div className="col-6 col-md-3">
                 <Card details={details} />
               </div>
             </div>
