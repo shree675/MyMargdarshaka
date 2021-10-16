@@ -33,6 +33,7 @@ let Learner = new Schema({
     subjects: { 
         type:[{ code: { type: String, required: true },
                 mentor_id: {type: Number, default: -1},
+                consent: {type: Boolean, default: false},
                 subtopics: {type: [(String,Boolean)], default: [('Introduction', false)]} //Pairs of subtopic and completion status 
                 }],
                 /* required: true */
