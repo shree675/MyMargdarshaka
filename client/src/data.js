@@ -60,6 +60,19 @@ const data = {
       },
     ],
   },
+  test: [
+    {
+      q: "Who is the PM?",
+      op: ["option1", "option2", "option3", "option4"],
+      ans: 2,
+    },
+
+    {
+      q: "Who is the pres?",
+      op: ["option1", "option2", "option3", "option4"],
+      ans: 2,
+    },
+  ],
 };
 
 export default data;
