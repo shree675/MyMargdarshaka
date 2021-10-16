@@ -1,9 +1,31 @@
 const data = {
   classes: [6, 7, 8, 9, 10, 11, 12],
-  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social"],
+  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social"],//English
   secSubs: ["Physics", "Chemistry", "Biology"],
   langs: ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"],
   times: ["Morning", "Afternoon", "Evening"],
+  codes: {
+    Hindi: "HIN",
+    Telugu: "TEL",
+    Maths: "MAT",
+    Science: "SCI",
+    Social: "SOC",
+    Physics: "PHY",
+    Chemistry: "CHEM",
+    Biology: "BIO"
+  },
+
+
+  //some example data pf subtopics for one or 2 class codes
+  PHY10: ['kinematics', 'kinetics', 'optics', 'electrodynamics'],
+  ENG9: ['Punctuation', 'grammar', 'Reading', 'Writing'],
+  default: {
+    chapters: [
+      {name: 'Chapter 1',
+        subtopics: [['Subtopic 1.1',false], ['Subtopic 1.2',false], ['Subtopic 1.3',false], ['Subtopic 1.4',false]]},
+    ]
+  },
+
   chapters: {
     Science: [
       {

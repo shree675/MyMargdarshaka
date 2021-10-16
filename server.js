@@ -33,17 +33,11 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-<<<<<<< HEAD
 
 const learnerRouter=require('./backend/routes/learner.router');
 const mentorRouter=require('./backend/routes/mentor.router');
 const userRouter=require('./backend/routes/user.router');
-=======
-const learnerRouter = require("./backend/routes/learner");
-const mentorRouter = require("./backend/routes/mentor");
-const userRouter = require("./backend/routes/user");
-const feedbackRouter = require("./backend/routes/feedback");
->>>>>>> 1eced6044c20c848aec8168e4c2fad76bc0e7b52
+const feedbackRouter=require('./backend/routes/feedback.router');
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */

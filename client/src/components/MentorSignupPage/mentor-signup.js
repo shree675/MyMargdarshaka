@@ -6,12 +6,21 @@ import firebase from "../../firebase";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import data from "../../data";
 
-let classes = [6, 7, 8, 9, 10, 11, 12];
+/* let classes = [6, 7, 8, 9, 10, 11, 12];
 let primSubs = ["Hindi", "Telugu", "Maths", "Science", "Social"];
 let secSubs = ["Physics", "Chemistry", "Biology"];
 let langs = ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"];
-let times = ["Morning", "Afternoon", "Evening"];
+let times = ["Morning", "Afternoon", "Evening"]; */
+
+let classes = data.classes
+let primSubs = data.primSubs
+let secSubs = data.secSubs
+let langs = data.langs
+let times = data.times
+
+
 
 const MentorSignup = () => {
   const [state, setState] = React.useState({
@@ -26,6 +35,8 @@ const MentorSignup = () => {
     prefTimeCheck: true,
     subCheck: true,
   });
+
+  //{6:['English', 'Science']} -> [ENG6, SCI6]
 
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
@@ -118,31 +129,45 @@ const MentorSignup = () => {
     } else {
       // push to DB
       console.log("ok");
-    }
 
-    //setState({ ...state, ...temp });
+      const classes_list = []
+      /* let keys = Object.keys(state.clsAndSub)
 
-    /* const SUBJECTS = []
-        for(let subject in state.subs){
-        const item  = {
-            code: subject,
-
-        }
-        SUBJECTS.push(item);
-        } */
-
-    /* const mentor = {
+      for(let key in keys) {
+            console.log(key)
+      } */
+      console.log(state.clsAndSub)
+      for(let i =6; i<=12; i++)
+      {
+        let subjects = state.clsAndSub[i]
+        subjects.forEach(subject => {
+            console.log(i, subject);
+            let code = data.codes[subject] + i;
+            console.log(code)
+            const item  = {
+                code: code,
+                chapters: data.default.chapters,    
+                //TODO: Add nice data to ENG9 and PHY10 and add it here
+            }
+            classes_list.push(item);
+        }) 
+      }
+    
+      console.log(classes_list)
+      const mentor = {
       phone: phone,
       name: state.name,
       email: state.email,
       language: state.prefLang,
       time: state.prefTime,
+      Classes: classes_list
     };
     console.log("Printing mentor before pushing:", mentor);
     await axios
       .post(`/mentor/signup/creatementor`, mentor)
       .then((res) => console.log("Pushing Sign up data"));
-    */
+    
+    } 
   };
 
   return (

@@ -1,3 +1,5 @@
+const match =require('./matching.learner');
+
 const express=require('express');
 const router=express.Router();
 var Learner=require('../models/learner.model');
@@ -6,7 +8,7 @@ router.route('/login/submitlearner').get((req,res)=>{
     Learner.find().then((e)=>res.json(e)).catch(err=>res.status(400).json('notfound'));
 });
 
-router.route('/signup/createlearner').post((req,res)=>{
+router.route('/signup/createlearner').post(async(req,res)=>{
     const phone=req.body.phone;
     const name=req.body.name;
     const email = req.body.email;
@@ -19,8 +21,13 @@ router.route('/signup/createlearner').post((req,res)=>{
     //console.log(subjects);
     const learner=new Learner({phone,name, email, language, time, Class, profile_picture_url, subjects, NIOS_status});
     //console.log(learner)
+    //matching algorithm 
     learner.save().then(()=>res.json('Added new learner!')).catch(err=>res.status(400).json('Error: ' + err));
+    const data = await match('English', 'Morning', ['HIN7', 'SCI7'])
+    console.log("Printing the data", data)
 });
+
+
 
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {

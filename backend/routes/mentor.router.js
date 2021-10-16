@@ -14,6 +14,7 @@ router.route('/signup/creatementor').post((req,res)=>{
     const time = req.body.time;
     const approved = req.body.approved;
     const Classes = req.body.Classes;
+    console.log(req.body.Classes);
     const profile_picture_url = req.body.profile_picture_url;
     
     const mentor=new Mentor({phone,name, email, language, time, approved, Classes, profile_picture_url});
