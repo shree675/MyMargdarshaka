@@ -25,6 +25,9 @@ const CssTextField = styled(TextField)({
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
             borderColor: "gray",
+            border: "none",
+            borderBottom: "2px solid #4e0d3a",
+            borderRadius: "0px",
         },
         "&:hover fieldset": {
             borderColor: "gray",
