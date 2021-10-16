@@ -10,9 +10,13 @@ const MentorDashBoard = () => {
     <div className="mb-3">
       <Navbar />
       <div className="container">
-        <div className="row">
-          <LearnerDashboardChangeDetails />
-          <LearnerDashboardEditAttributes />
+        <div className="row align-items-end">
+          <div className="col-xl-3 col-12">
+            <LearnerDashboardChangeDetails />
+          </div>
+          <div className="col-xl-9 col-12">
+            <LearnerDashboardEditAttributes />
+          </div>
         </div>
       </div>
     </div>
