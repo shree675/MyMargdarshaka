@@ -29,7 +29,10 @@ let Mentor = new Schema({
     Classes: {
         type: [{code: {type: String, required: true},
                 students: [{id: {type: String}, consent: {type: Boolean},
-                subtopics: {type: [(String,Boolean)], default: [('Introduction', false)]} //Pairs of subtopic and completion status 
+                chapters: {
+                    type: [{name: String, subtopics: {type: [(String,Boolean)], default: [('Introduction', false)]} //Pairs of subtopic and completion status 
+                }]
+                }
             }]    
     
         /* required: true */
