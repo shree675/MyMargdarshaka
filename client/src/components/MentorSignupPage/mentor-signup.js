@@ -178,6 +178,7 @@ const MentorSignup = () => {
               name="prefTime"
               onChange={handleChange}
               value={state.prefTime}
+              style={{ width: "450px" }}
             >
               <option value="" disabled selected>
                 Preferred Timeslot
@@ -196,6 +197,7 @@ const MentorSignup = () => {
               name="prefLang"
               onChange={handleChange}
               value={state.prefLang}
+              style={{ width: "450px" }}
             >
               <option value="" disabled selected>
                 Preferred Language

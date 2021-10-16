@@ -21,13 +21,14 @@
 
 .input-field {
   color: #720d5d;
-  height: 25px;
-  width: 400px;
+  height: 30px;
+  width: 450px;
   margin: 5px;
   border: solid 1px;
   border-radius: 20px;
   font-family: "Raleway", sans-serif;
   padding-left: 10px;
+  margin-left: 0px;
 }
 
 .valid-div {
