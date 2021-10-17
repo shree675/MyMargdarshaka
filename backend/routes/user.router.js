@@ -14,6 +14,18 @@ router.route('/signup/createUser').post((req,res)=>{
     user.save().then(()=>res.json('Added new user!')).catch(err=>res.status(400).json('Error: ' + err));
 });
 
+router.route('/update/:phone').post((req, res) => {
+
+    //console.log(req)
+    console.log(req.body)
+    User.find({phone: req.body.phone}).then(user => {
+    
+    user.valid_signup=req.body.valid_signup;  //the error is here
+    console.log("User", user)
+    user.save().then(() => res.json('Sign up status updated!')).catch(err => res.status(400).json('Error: ' + err)); 
+    }).catch(err => res.status(400).json('Error: ' + err));
+});
+
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {
 

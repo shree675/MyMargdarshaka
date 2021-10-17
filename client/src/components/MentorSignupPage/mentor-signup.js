@@ -159,10 +159,24 @@ const MentorSignup = () => {
         time: state.prefTime,
         Classes: classes_list,
       };
+      const user = {
+        phone: phone,
+        user_type: 'mentor',
+        valid_signup: true
+      };
       console.log("Printing mentor before pushing:", mentor);
       await axios
         .post(`/mentor/signup/creatementor`, mentor)
-        .then((res) => console.log("Pushing Sign up data"));
+        .then(async (res) => {
+          console.log("Pushing Sign up data", phone)
+          
+        }
+        
+        );
+      //update valid user
+      await axios 
+            .post('user/update/'+phone, user)
+            .then((res) => console.log("User table has been updated"))
     }
   };
 
