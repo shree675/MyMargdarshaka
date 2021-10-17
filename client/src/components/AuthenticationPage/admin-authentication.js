@@ -1,6 +1,6 @@
 //@ts-check
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import auth_background from "../../assets/auth-background-comp.svg";
 import wavefront from "../../assets/wavefront.svg";
 import waveback from "../../assets/waveback.svg";
@@ -10,6 +10,9 @@ import "./authentication.css";
 import { useSpring, animated } from "react-spring";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import axios from "axios";
+
+var aesjs = require("aes-js");
 
 const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -40,8 +43,53 @@ const AdminAuthentication = () => {
     const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
     const trans1 = (x, y) => `translate3d(${x / 16}px,${y / 16}px,0)`;
     const trans2 = (x, y) => `translate3d(${x / 7.5}px,${y / 7.5}px,0)`;
-    const trans3 = (x, y) => `translate3d(${x / 6}px,${y / 6}px,0)`;
     const [props, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }));
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    useEffect(() => {
+        if (localStorage.getItem("isloggedin") == "true") {
+            // window.location='/'
+        }
+    }, []);
+
+    const submit = async (e) => {
+        e.preventDefault();
+        if (username == null || password == null) {
+            alert("Please fill all the fields");
+            return;
+        }
+
+        var key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+        var passwordBytes = aesjs.utils.utf8.toBytes(password);
+        var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(4));
+        var encryptedBytes = aesCtr.encrypt(passwordBytes);
+        var encryptedPassword = aesjs.utils.hex.fromBytes(encryptedBytes);
+
+        var successfulLogin = false;
+
+        await axios.get("/admin/login/submitadmin").then((res) => {
+            if (!res) {
+                alert("Incorrect username or password");
+                return;
+            }
+            console.log(res);
+            console.log(res.data);
+            res.data.map((data) => {
+                if (data.username == username && data.password == encryptedPassword) {
+                    localStorage.setItem("isloggedin", "true");
+                    // window.location='/'
+                    alert("Successfully logged in");
+                    successfulLogin = true;
+                }
+            });
+        });
+
+        if (!successfulLogin) {
+            alert("Incorrect username or password");
+        }
+    };
 
     return (
         <div className='admin-body'>
@@ -67,12 +115,15 @@ const AdminAuthentication = () => {
                         <div className='auth-text'>
                             <CssTextField
                                 fullWidth
-                                label='Full Name'
+                                label='Username'
                                 id='auth-textfield'
                                 defaultValue=''
                                 size='small'
                                 placeholder=''
                                 color='error'
+                                onChange={(e) => {
+                                    setUsername(e.target.value);
+                                }}
                             />
                         </div>
                         <br></br>
@@ -86,12 +137,17 @@ const AdminAuthentication = () => {
                                 placeholder=''
                                 color='error'
                                 type='password'
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
                             />
                         </div>
                         <br></br>
                         <br></br>
                         <div className=''>
-                            <button className='auth-button'>LOGIN</button>
+                            <button className='auth-button' onClick={submit}>
+                                LOGIN
+                            </button>
                         </div>
                     </div>
                     <img src={humans} className='auth-humans-phone' />
