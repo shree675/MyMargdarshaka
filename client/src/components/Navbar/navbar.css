@@ -1,0 +1,24 @@
+.sidebar-mobile {
+  display: none;
+}
+.nav-link-mobile {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: raleway;
+  color: white;
+  margin-bottom: 5vh;
+}
+
+.nav-link-mobile:active {
+  color: white;
+  font-weight: 550;
+  border: 2px solid white;
+  border-radius: 25px;
+}
+.nav-link-mobile:hover {
+  color: white;
+}
