@@ -155,42 +155,23 @@ class MentorSubjectDetails extends React.Component {
     return (
       <div>
         <MentorNavbar />
-        <div
-          style={{
-            display: "flex",
-            borderRadius: "10px",
-            marginTop: "-20px",
-            zIndex: "2",
-            background: "white",
-          }}
-        >
+        <div className="mentor-subject-details-main">
           <div
             style={{ width: "30%", display: "flex", flexDirection: "column" }}
           >
             <Link to="/my-students" className="mentor-subject-details-back">
               BACK
             </Link>
+            <div className="mentor-subject-details-subjectname-mobile">
+              {this.state.subjectName}
+            </div>
             <Chapters handleClickChapter={this.handleClickChapter} />
           </div>
           <SubTopics curChapter={this.state.curChapter} />
-          <div
-            style={{
-              width: "60%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <div
-              style={{
-                marginLeft: "-150px",
-                height: "100px",
-                paddingTop: "30px",
-                fontSize: "50px",
-                color: "#5D1049",
-              }}
-            >
-              Subject Name
+
+          <div className="mentor-subject-details-col3">
+            <div className="mentor-subject-details-subjectname">
+              {this.state.subjectName}
             </div>
 
             {/* temporarily pending and completed tests are stored in data.js , these need to be queried from DB */}

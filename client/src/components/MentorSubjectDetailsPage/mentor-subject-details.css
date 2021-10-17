@@ -1,3 +1,11 @@
+.mentor-subject-details-main {
+  display: flex;
+  border-radius: 10px;
+  margin-top: -20px;
+  z-index: 2;
+  background: white;
+}
+
 .mentor-subject-details-back {
   background: #464646;
   color: white;
@@ -14,6 +22,14 @@
 }
 .mentor-subject-details-back:hover {
   color: white;
+}
+
+.mentor-subject-details-subjectname {
+  margin-left: -150px;
+  height: 100px;
+  padding-top: 30px;
+  font-size: 50px;
+  color: #5d1049;
 }
 
 .mentor-subject-details-chapters {
@@ -50,6 +66,13 @@
 .mentor-chapter-element > input {
   margin-top: 5px;
   margin-right: 10px;
+}
+
+.mentor-subject-details-col3 {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .mentor-subject-details-subtopics {
@@ -118,4 +141,57 @@
   justify-content: center;
   margin-left: 420px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .mentor-subject-details-back {
+    margin-left: 35vw;
+  }
+  .mentor-subject-details-main {
+    display: block;
+    text-align: center;
+  }
+  .mentor-subject-details-chapters {
+    width: 80vw;
+    margin-left: 10vw;
+    height: auto;
+    padding-bottom: 3vh;
+  }
+  .mentor-subject-details-subtopics {
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 5vh;
+    height: auto;
+    padding-bottom: 3vh;
+  }
+  .mentor-subject-details-subjectname {
+    display: none;
+  }
+  .mentor-subject-details-subjectname-mobile {
+    display: flex;
+    width: 100vw;
+    font-size: 9vw;
+    padding-left: 23vw;
+    margin-top: 3vh;
+  }
+  .mentor-subject-details-col3 {
+    display: block;
+    width: 100vw;
+    margin-top: 5vh;
+  }
+  .mentor-tests-tab-inner {
+    display: block;
+    width: 90vw;
+    margin-right: 0px;
+  }
+  .mentor-subtopic-test-element {
+    display: flex;
+    width: 90vw;
+    margin-right: 0px;
+  }
+  .mentor-launch-test-button {
+    width: 40vw;
+    height: 4vh;
+    margin-left: 20vw;
+  }
 }
