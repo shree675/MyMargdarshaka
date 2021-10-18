@@ -178,9 +178,6 @@
     .bottom-fact {
         font-size: 4vw;
         font-weight: bold;
-        position: fixed;
-        bottom: 20vw;
-        left: 0;
     }
 
     .auth-phone-svg {

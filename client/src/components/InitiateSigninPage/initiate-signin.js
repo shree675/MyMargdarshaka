@@ -29,7 +29,7 @@ const InitiateSignin = () => {
                         <button
                             className='init-signin-button'
                             onClick={() => {
-                                window.location = "/authentication:student";
+                                window.location = "/authentication:learner";
                             }}
                         >
                             SIGN IN AS A LEARNER

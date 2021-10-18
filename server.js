@@ -34,11 +34,11 @@ const adminRouter = require("./backend/routes/admin.router");
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */
-app.use("/learner", learnerRouter);
-app.use("/mentor", mentorRouter);
+app.use("/api/learner", learnerRouter);
+app.use("/api/mentor", mentorRouter);
 app.use("/api/user", userRouter);
-app.use("/feedback", feedbackRouter);
-app.use("/admin", adminRouter);
+app.use("/api/feedback", feedbackRouter);
+app.use("/api/admin", adminRouter);
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
 
