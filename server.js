@@ -26,13 +26,6 @@ app.use(cors());
 //     res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
 // });
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
-}
-
 const learnerRouter = require("./backend/routes/learner.router");
 const mentorRouter = require("./backend/routes/mentor.router");
 const userRouter = require("./backend/routes/user.router");
@@ -43,11 +36,18 @@ const apiRouter=require('./backend/routes/api');
  */
 app.use("/learner", learnerRouter);
 app.use("/mentor", mentorRouter);
-app.get("/user", userRouter);
+app.use("/api/user", userRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/admin", adminRouter);
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
 
 const port = process.env.PORT || 5000;
 

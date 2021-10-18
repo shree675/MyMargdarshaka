@@ -108,7 +108,7 @@ const Authentication = () => {
 
         //set variables - mentor or learner, valid signup or not and use them for routing
 
-        await axios.get("user/login/getUser").then((e) => {
+        await axios.get("api/user/login/getUser").then((e) => {
             console.log(e);
             e.data.map((user) => {
                 console.log(user.phone);
