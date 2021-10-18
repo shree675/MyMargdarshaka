@@ -123,55 +123,45 @@ const MentorSignup = () => {
     } else {
       // push to DB
       console.log("ok");
+            const classes_list = [];
+            console.log(state.clsAndSub);
+            for (let i = 6; i <= 12; i++) {
+                let subjects = state.clsAndSub[i];
+                subjects.forEach((subject) => {
+                    console.log(i, subject);
+                    let code = data.codes[subject] + i;
+                    console.log(code);
+                    const item = {
+                        code: code,
+                        chapters: data.default.chapters,
+                        //TODO: Add nice data to ENG9 and PHY10 and add it here
+                    };
+                    classes_list.push(item);
+                });
+            }
 
-      const classes_list = [];
-      /* let keys = Object.keys(state.clsAndSub)
-
-      for(let key in keys) {
-            console.log(key)
-      } */
-      console.log(state.clsAndSub);
-      for (let i = 6; i <= 12; i++) {
-        let subjects = state.clsAndSub[i];
-        subjects.forEach((subject) => {
-          console.log(i, subject);
-          let code = data.codes[subject] + i;
-          console.log(code);
-          const item = {
-            code: code,
-            chapters: data.default.chapters,
-            //TODO: Add nice data to ENG9 and PHY10 and add it here
-          };
-          classes_list.push(item);
-        });
-      }
-
-      console.log(classes_list);
-      const mentor = {
-        phone: phone,
-        name: state.name,
-        email: state.email,
-        language: state.prefLang,
-        time: state.prefTime,
-        Classes: classes_list,
-      };
-      const user = {
-        phone: phone,
-        user_type: "mentor",
-        valid_signup: true,
-      };
-      console.log("Printing mentor before pushing:", mentor);
-      await axios
-        .post(`/api/mentor/signup/creatementor`, mentor)
-        .then(async (res) => {
-          console.log("Pushing Sign up data", phone);
-        });
-      //update valid user
-      await axios
-        .post("/api/user/update/" + phone, user)
-        .then((res) => console.log("User table has been updated"));
-    }
-  };
+            console.log(classes_list);
+            const mentor = {
+                phone: phone,
+                name: state.name,
+                email: state.email,
+                language: state.prefLang,
+                time: state.prefTime,
+                Classes: classes_list,
+            };
+            const user = {
+                phone: phone,
+                user_type: "mentor",
+                valid_signup: true,
+            };
+            console.log("Printing mentor before pushing:", mentor);
+            await axios.post(`/api/mentor/signup/creatementor`, mentor).then(async (res) => {
+                console.log("Pushing Sign up data", phone);
+            });
+            //update valid user
+            await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
+        }
+    };
 
   return (
     <div className="mentor-main">

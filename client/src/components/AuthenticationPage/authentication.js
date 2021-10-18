@@ -100,31 +100,46 @@ const Authentication = () => {
     // sends otp
     const verifyPhone = async (e) => {
         //e.preventDefault();
+        
+        /* if (phone[0] != "+") phoneNumber = "+91" + phoneNumber;
+        setPhone(phoneNumber)
+        console.log("Phone number was updated") */
 
         //query the mongodb users database -
         // 1. if number does not exist - continue with sign up process
-        // 2. if number exists by=ut sign up is not successful - continue with sign up
+        // 2. if number exists but sign up is not successful - continue with sign up
         // 3. successful sign up number exists - route accordingly to homepage
 
         //set variables - mentor or learner, valid signup or not and use them for routing
 
         await axios.get("/api/user/login/getUser").then((e) => {
+            //console.log("*****************")
             console.log(e);
+            if (phone[0] != "+") setPhone("+91"+phone)
+            console.log("Phone number was updated")
+
             e.data.map((user) => {
-                console.log(user.phone);
-                if (user.phone === phone) {
+                let p = phone;
+                if (p[0] != "+") p = "+91" + p;
+                //if (phone[0] != "+") setPhone("+91"+phone)
+                console.log("*****", user.phone, p);
+
+                if (user.phone === p) {
+                    console.log("Valid phone number matched: ", p)
                     if (user.user_type == "mentor") {
                         userType = "mentor";
                         if (user.valid_signup) {
+                            console.log("Set to valid mentor")
                             setValidMentor(true);
                         }
                     } else if (user.user_type == "learner") {
                         userType = "learner";
                         if (user.valid_signup) {
-                            setValidMentor(true);
+                            console.log("Set to valid learner")
+                            setValidLearner(true);
                         }
                     }
-                    console.log("Phone number found ", phone);
+                    console.log("Phone number found ", p);
                 } else {
                 }
             });
@@ -170,7 +185,7 @@ const Authentication = () => {
                 await axios.post(`/api/user/signup/createUser`, user).then((res) => console.log("Pushing user Sign up data"));
 
                 if (userType == "mentor") {
-                    if (valid_mentor) window.location = "/mentor-homepage";
+                    if (valid_mentor) window.location = "/my-students";
                     else window.location = "/mentor-signup";
                 } else if (userType == "learner") {
                     if (valid_learner) window.location = "/my-mentors";
@@ -222,7 +237,9 @@ const Authentication = () => {
                             <CssTextField
                                 fullWidth
                                 onChange={(e) => {
+                                    
                                     setPhone(e.target.value);
+                                    
                                 }}
                                 label='Phone Number'
                                 id='auth-textfield'
