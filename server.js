@@ -22,9 +22,9 @@ connection.once("open", function () {
 //-------------------------------------------
 app.use(cors());
 
-app.get("/api/message", (req, res) => {
-    res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
-});
+// app.get("/api/message", (req, res) => {
+//     res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
+// });
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -33,18 +33,19 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-
-const learnerRouter=require('./backend/routes/learner.router');
-const mentorRouter=require('./backend/routes/mentor.router');
-const userRouter=require('./backend/routes/user.router');
-const feedbackRouter=require('./backend/routes/feedback.router');
+const learnerRouter = require("./backend/routes/learner.router");
+const mentorRouter = require("./backend/routes/mentor.router");
+const userRouter = require("./backend/routes/user.router");
+const feedbackRouter = require("./backend/routes/feedback.router");
+const adminRouter = require("./backend/routes/admin.router");
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */
 app.use("/learner", learnerRouter);
 app.use("/mentor", mentorRouter);
-app.use("/user", userRouter);
+app.get("/user", userRouter);
 app.use("/feedback", feedbackRouter);
+app.use("/admin", adminRouter);
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
 

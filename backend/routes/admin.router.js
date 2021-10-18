@@ -1,9 +1,11 @@
-const express=require('express');
-const router=express.Router();
-var Admin=require('../models/admin.model');
+const express = require("express");
+const router = express.Router();
+var Admin = require("../models/admin.model");
 
-router.route('/login/submitadmin').get((req,res)=>{
-    Admin.find().then((e)=>res.json(e)).catch(err=>res.status(400).json('notfound'));
+router.route("/login/submitadmin").get((req, res) => {
+    Admin.find()
+        .then((e) => res.json(e))
+        .catch((err) => res.status(400).json(null));
 });
 
 //TODO: @Shreetesh admins just need sign in functionality for now. No need update functionality or anything
@@ -26,4 +28,4 @@ router.route('/login/submitadmin').get((req,res)=>{
     }).catch(err => res.status(400).json('Error: ' + err));
 }); */
 
-module.exports=router;
+module.exports = router;
