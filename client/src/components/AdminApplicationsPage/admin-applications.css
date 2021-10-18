@@ -1,7 +1,12 @@
 .admin-main {
+  display: flex;
 }
 
-.admin-application-tab-switcher {
+.admin-applications-leftbox {
+  width: 70%;
+}
+
+.admin-applications-tab-switcher {
   display: flex;
   margin-top: 2vh;
   margin-bottom: 2vh;
@@ -15,7 +20,7 @@
   margin-left: 2vw;
   margin-right: 2vw;
   width: max-content;
-  height: 30px;
+  height: 5vh;
   padding-left: 2vw;
   padding-right: 2vw;
   display: flex;
@@ -25,10 +30,7 @@
 }
 .admin-applications-applications {
   background: #e8dee5;
-}
-
-.admin-applications-applications > :first-child {
-  margin-top: 2vh;
+  padding: 2vh 1vw 2vh 1vw;
 }
 
 .admin-applications-card {
@@ -85,4 +87,60 @@
   justify-content: center;
   align-items: center;
   margin-right: 2vw;
+  cursor: pointer;
+}
+
+.admin-applications-right-box {
+  padding: 5vh 1vw 2vh 1vw;
+}
+
+.admin-applications-right-box > :first-child {
+  width: 28vw;
+}
+
+.admin-applications-search-results {
+  background: url("../../assets/admin-applications-right.svg") white;
+  background-repeat: no-repeat;
+  background-size: 50vw 100vh;
+  background-position: right;
+  display: block;
+  align-items: center;
+  height: 80vh;
+  padding: 1vh 1vw 5vh 1vw;
+  margin-top: 3vh;
+  border: solid 0.3px lightgray;
+}
+
+.admin-applications-search-results > :first-child {
+  margin-bottom: 2vh;
+  color: grey;
+}
+
+.admin-applications-search-results-card {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 1vh 1vw 1vh 1vw;
+  margin-bottom: 0.5vh;
+  box-shadow: 0.3vw 0.4vh lightgray;
+}
+
+/* name phone div */
+.admin-applications-search-results-card > :first-child {
+  display: block;
+}
+
+/* ban user button */
+.admin-applications-search-results-card > :nth-child(2) {
+  background-color: white;
+  color: #4f0a3a;
+  font-weight: bold;
+  border-radius: 20px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 7vw;
 }

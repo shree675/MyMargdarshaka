@@ -1,6 +1,8 @@
 import React from "react";
 import AdminNavbar from "../Navbar/admin-navbar";
 import "./admin-applications.css";
+import TextField from "@mui/material/TextField";
+import { IoBan } from "react-icons/io5";
 
 const openApp = [
   {
@@ -41,6 +43,13 @@ const rejApp = [
 ];
 
 const ApplicationCard = (props) => {
+  const handleApprove = (user) => {
+    console.log("approve ", user.name);
+  };
+  const handleReject = (user) => {
+    console.log("reject ", user.name);
+  };
+
   return (
     <div className="admin-applications-card">
       <div className="admin-applications-card-row1">
@@ -66,8 +75,22 @@ const ApplicationCard = (props) => {
       </div>
 
       <div className="admin-applications-card-row3">
-        <div className="admin-applications-card-button">APPROVE</div>
-        <div className="admin-applications-card-button">DISAPPROVE</div>
+        <div
+          className="admin-applications-card-button"
+          onClick={() => {
+            handleApprove(props.app);
+          }}
+        >
+          APPROVE
+        </div>
+        <div
+          className="admin-applications-card-button"
+          onClick={() => {
+            handleReject(props.app);
+          }}
+        >
+          REJECT
+        </div>
       </div>
     </div>
   );
@@ -78,7 +101,23 @@ class AdminApplications extends React.Component {
     super(props);
     this.state = {
       tab: 0,
+      searchText: "",
+      searchResultText: "",
     };
+    this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleSubmitText = this.handleSubmitText.bind(this);
+  }
+
+  handleSearchTextChange(e) {
+    this.setState({ searchText: e.target.value });
+  }
+
+  handleSubmitText(e) {
+    if (e.keyCode === 13) {
+      console.log(this.state.searchText);
+      this.setState({ searchResultText: this.state.searchText });
+      // submit this search text to Backend for Query
+    }
   }
 
   render() {
@@ -132,7 +171,41 @@ class AdminApplications extends React.Component {
               ))}
             </div>
           </div>
-          <div></div>
+          <div className="admin-applications-right-box">
+            <TextField
+              id="outlined-basic"
+              label="Search for User by Name or Phone Number"
+              variant="outlined"
+              value={this.state.searchText}
+              onChange={this.handleSearchTextChange}
+              onKeyUp={this.handleSubmitText}
+            />
+            <div className="admin-applications-search-results">
+              <div>
+                {this.state.searchResultText != ""
+                  ? `Search results for \"${this.state.searchResultText}\"`
+                  : ""}
+              </div>
+              {
+                /* dummy data */
+                openApp.map((user, i) => (
+                  <div
+                    className="admin-applications-search-results-card"
+                    style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
+                  >
+                    <div>
+                      <div>{user.name}</div>
+                      <div>{user.phone}</div>
+                    </div>
+                    <div>
+                      BAN USER{" "}
+                      <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     );
