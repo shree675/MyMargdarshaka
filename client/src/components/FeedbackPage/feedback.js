@@ -143,7 +143,7 @@ const Feedback = () => {
                             };
                             if (!err) {
                                 axios
-                                    .post("feedback/api/submitfeedback", feedback)
+                                    .post("/api/feedback/api/submitfeedback", feedback)
                                     .then((res) => console.log(res))
                                     .catch((err) => console.error(err));
                             }

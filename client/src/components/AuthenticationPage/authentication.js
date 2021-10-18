@@ -108,7 +108,7 @@ const Authentication = () => {
 
         //set variables - mentor or learner, valid signup or not and use them for routing
 
-        await axios.get("user/login/getUser").then((e) => {
+        await axios.get("/api/user/login/getUser").then((e) => {
             console.log(e);
             e.data.map((user) => {
                 console.log(user.phone);
@@ -167,7 +167,7 @@ const Authentication = () => {
                     valid_signup: false,
                 };
                 console.log("Printing user before pushing:", user);
-                await axios.post(`user/signup/createUser`, user).then((res) => console.log("Pushing user Sign up data"));
+                await axios.post(`/api/user/signup/createUser`, user).then((res) => console.log("Pushing user Sign up data"));
 
                 if (userType == "mentor") {
                     if (valid_mentor) window.location = "/mentor-homepage";
@@ -248,7 +248,6 @@ const Authentication = () => {
                                 GET OTP
                             </button>
                         </div>
-                        <div className='bottom-fact'>{slides[time % slides.length]}</div>
                     </div>
                 ) : (
                     <div className='auth-content-body'>
@@ -287,11 +286,11 @@ const Authentication = () => {
                                 SUBMIT
                             </button>
                         </div>
-                        <div className='bottom-fact'>{slides[time % slides.length]}</div>
                     </div>
                 )}
                 <img src={humans} className='auth-humans-phone' />
                 <img src={auth_background} className='auth-background-img-phone' />
+                <div className='bottom-fact'>{slides[time % slides.length]}</div>
             </div>
         </div>
     );

@@ -69,7 +69,7 @@ const AdminAuthentication = () => {
 
         var successfulLogin = false;
 
-        await axios.get("/admin/login/submitadmin").then((res) => {
+        await axios.get("/api/admin/login/submitadmin").then((res) => {
             if (!res) {
                 alert("Incorrect username or password");
                 return;
