@@ -106,6 +106,7 @@ class AdminApplications extends React.Component {
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
+    this.handleBanUser = this.handleBanUser.bind(this);
   }
 
   handleSearchTextChange(e) {
@@ -118,6 +119,10 @@ class AdminApplications extends React.Component {
       this.setState({ searchResultText: this.state.searchText });
       // submit this search text to Backend for Query
     }
+  }
+
+  handleBanUser(user) {
+    console.log("ban ", user.name);
   }
 
   render() {
@@ -197,8 +202,12 @@ class AdminApplications extends React.Component {
                       <div>{user.name}</div>
                       <div>{user.phone}</div>
                     </div>
-                    <div>
-                      BAN USER{" "}
+                    <div
+                      onClick={() => {
+                        this.handleBanUser(user);
+                      }}
+                    >
+                      BAN USER
                       <IoBan style={{ color: "red", marginLeft: "1vw" }} />
                     </div>
                   </div>
