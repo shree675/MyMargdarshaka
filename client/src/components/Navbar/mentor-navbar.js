@@ -68,9 +68,6 @@ const Navbar = (props) => {
         </Link>
       </div>
       <Nav style={open ? { display: "none" } : {}}>
-        <NavLogo to="/">
-          <img src={mainLogo} style={{ height: "80px" }} />
-        </NavLogo>
         <div
           onClick={() => {
             setOpen(true);
@@ -78,22 +75,21 @@ const Navbar = (props) => {
         >
           <Bars />
         </div>
-
+        <NavLogo to="/">
+          <img src={mainLogo} style={{ height: "80px" }} />
+        </NavLogo>
         <NavMenu>
           <NavLink to="/mentor-guidelines">GUIDELINES</NavLink>
           <NavLink to="/my-students">MY STUDENTS</NavLink>
           <NavLink to="/mentor-dashboard">DASHBOARD</NavLink>
           <NavLink to="/mentor-feedback">FEEDBACK</NavLink>
           <NavLink to="/logout">LOGOUT</NavLink>
-
-          <NavLink to="/mentor-profile">
-            <img src={profileLogo} style={{ height: "40px" }} />
-          </NavLink>
-          {/* 
-          <NavBtn>
-            <NavBtnLink to="/sign-up">Sign Up</NavBtnLink>
-          </NavBtn> */}
         </NavMenu>
+        <img
+          src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
+          style={{ borderRadius: "20px" }}
+          className="profile-photo"
+        />
       </Nav>
     </div>
   );

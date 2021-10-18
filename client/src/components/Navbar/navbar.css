@@ -22,3 +22,12 @@
 .nav-link-mobile:hover {
   color: white;
 }
+.profile-photo {
+  margin-left: -10vw;
+}
+
+@media screen and (max-width: 480px) {
+  .profile-photo {
+    margin-right: 10vw;
+  }
+}
