@@ -23,7 +23,7 @@ const AdminNavbar = (props) => {
         style={
           open
             ? {
-                height: "60vh",
+                height: "50vh",
                 background: "#5d1049",
                 display: "block",
                 paddingTop: "5vh",
@@ -64,9 +64,6 @@ const AdminNavbar = (props) => {
         </Link>
       </div>
       <Nav style={open ? { display: "none" } : {}}>
-        <NavLogo to="/">
-          <img src={mainLogo} style={{ height: "80px" }} />
-        </NavLogo>
         <div
           onClick={() => {
             setOpen(true);
@@ -74,21 +71,20 @@ const AdminNavbar = (props) => {
         >
           <Bars />
         </div>
-
+        <NavLogo to="/">
+          <img src={mainLogo} style={{ height: "80px" }} />
+        </NavLogo>
         <NavMenu>
           <NavLink to="/admin-applications">APPLICATIONS</NavLink>
           <NavLink to="/admin-issues">ISSUES</NavLink>
           <NavLink to="/admin-stats">STATS</NavLink>
           <NavLink to="/logout">LOGOUT</NavLink>
-
-          <NavLink to="/admin-profile">
-            <img src={profileLogo} style={{ height: "40px" }} />
-          </NavLink>
-          {/* 
-          <NavBtn>
-            <NavBtnLink to="/sign-up">Sign Up</NavBtnLink>
-          </NavBtn> */}
         </NavMenu>
+        <img
+          src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
+          style={{ borderRadius: "20px" }}
+          className="profile-photo"
+        />
       </Nav>
     </div>
   );
