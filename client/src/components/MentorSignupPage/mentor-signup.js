@@ -129,11 +129,6 @@ const MentorSignup = () => {
             console.log("ok");
 
             const classes_list = [];
-            /* let keys = Object.keys(state.clsAndSub)
-
-      for(let key in keys) {
-            console.log(key)
-      } */
             console.log(state.clsAndSub);
             for (let i = 6; i <= 12; i++) {
                 let subjects = state.clsAndSub[i];
@@ -169,7 +164,7 @@ const MentorSignup = () => {
                 console.log("Pushing Sign up data", phone);
             });
             //update valid user
-            await axios.post("/api/user/update/" + phone, user).then((res) => console.log("User table has been updated"));
+            await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
         }
     };
 

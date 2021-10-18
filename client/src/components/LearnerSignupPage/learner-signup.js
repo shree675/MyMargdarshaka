@@ -106,13 +106,18 @@ const LearnerSignup = () => {
             Class: state.Class,
             subjects: SUBJECTS,
         };
-
+        const user = {
+            phone: phone,
+            user_type: "learner",
+            valid_signup: true,
+        };
         console.log("Printing learner before pushing:", learner);
         await axios.post(`/api/learner/signup/createlearner`, learner).then((res) => console.log("Pushing Sign up data"));
         /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
             window.location='/browse'; */
-
+        //update valid user
+        await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
         //Matching algorithm - we request the database using find() passing the
     };
 

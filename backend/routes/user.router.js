@@ -17,11 +17,17 @@ router.route('/signup/createUser').post((req,res)=>{
 router.route('/update/:phone').post((req, res) => {
 
     //console.log(req)
-    console.log(req.body)
-    User.find({phone: req.body.phone}).then(user => {
-    
+    //console.log("req.body", req.body)
+    User.find({phone: req.body.phone}).then(users => {
+    //console.log("User", users)
+    //console.log(users.length)
+    if(users.length==0) {
+        console.log("user not found")
+        return
+    } 
+    let user = users[0]
     user.valid_signup=req.body.valid_signup;  //the error is here
-    console.log("User", user)
+    //console.log("User", user)
     user.save().then(() => res.json('Sign up status updated!')).catch(err => res.status(400).json('Error: ' + err)); 
     }).catch(err => res.status(400).json('Error: ' + err));
 });
