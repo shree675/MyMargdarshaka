@@ -1,6 +1,6 @@
 const data = {
   classes: [6, 7, 8, 9, 10, 11, 12],
-  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social"],//English
+  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social"], //English
   secSubs: ["Physics", "Chemistry", "Biology"],
   langs: ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"],
   times: ["Morning", "Afternoon", "Evening"],
@@ -12,18 +12,71 @@ const data = {
     Social: "SOC",
     Physics: "PHY",
     Chemistry: "CHEM",
-    Biology: "BIO"
+    Biology: "BIO",
   },
 
-
   //some example data pf subtopics for one or 2 class codes
-  PHY10: ['kinematics', 'kinetics', 'optics', 'electrodynamics'],
-  ENG9: ['Punctuation', 'grammar', 'Reading', 'Writing'],
+  ENG9: ["Punctuation", "grammar", "Reading", "Writing"],
+  SCI10: {
+    chapters: [
+      {
+        name: "Metals and Non-metals",
+        subtopics: [
+          ["Physical properties", false],
+          ["Chemical properties of metals", false],
+          ["How do metals and non-metals react?", false],
+          ["Occurrence of Metals", false],
+          ["Corrosion", false],
+        ],
+      },
+      {
+        name: "Carbon and its compounds",
+        subtopics: [
+          ["Bonding in carbon", false],
+          ["Versatile nature of carbon", false],
+          ["Chemical properties of carbon compounds", false],
+          ["Important Carbon compunds", false],
+          ["Sopas and detergents", false],
+        ],
+      },
+      {
+        name: "Life Processes",
+        subtopics: [
+          ["What are life processes?", false],
+          ["Nutrition", false],
+          ["Respiration", false],
+          ["Transportation", false],
+          ["Excretion", false],
+        ],
+      },
+      {
+        name: "Electricity",
+        subtopics: [
+          ["Electric current and circuit", false],
+          ["Electric potential and potential difference", false],
+          ["Circuit Diagram", false],
+          ["OHM's Law", false],
+          ["Factors on which the resistance of a conductor depends", false],
+          ["Resistance of a system of resistors", false],
+          ["Heating effect of Electric current", false],
+          ["Electric power", false],
+        ],
+      },
+    ],
+  },
+
   default: {
     chapters: [
-      {name: 'Chapter 1',
-        subtopics: [['Subtopic 1.1',false], ['Subtopic 1.2',false], ['Subtopic 1.3',false], ['Subtopic 1.4',false]]},
-    ]
+      {
+        name: "Chapter 1",
+        subtopics: [
+          ["Subtopic 1.1", false],
+          ["Subtopic 1.2", false],
+          ["Subtopic 1.3", false],
+          ["Subtopic 1.4", false],
+        ],
+      },
+    ],
   },
 
   chapters: {
