@@ -25,6 +25,9 @@ export const NavLogo = styled(Link)`
   font-size: 2rem;
   text-decoration: none;
   margin-left: -100px;
+  @media screen and (max-width: 480px) {
+    margin-left: 6vw;
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -54,9 +57,8 @@ export const Bars = styled(FaBars)`
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 75%);
+    top: 4vh;
+    left: 10vw;
     font-size: 1.8rem;
     cursor: pointer;
   }
