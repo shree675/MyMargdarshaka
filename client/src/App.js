@@ -67,6 +67,11 @@ class App extends Component {
           <Route exact path="/learner-home" component={LearnerHome} />
           <Route exact path="/learner-dashboard" component={LearnerDashboard} />
           <Route exact path="/test" component={TestPage} />
+          <Route
+            exact
+            path="/admin-applications"
+            component={AdminApplications}
+          />
         </Switch>
       </Router>
     );

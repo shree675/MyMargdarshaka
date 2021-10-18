@@ -1,18 +1,88 @@
 .admin-main {
 }
 
+.admin-application-tab-switcher {
+  display: flex;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  padding-left: 2vw;
+}
+
 .admin-applications-tab-button {
   cursor: pointer;
   opacity: 0.5;
   border-radius: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 2vw;
+  margin-right: 2vw;
   width: max-content;
   height: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 2vw;
+  padding-right: 2vw;
   display: flex;
   justify-content: center;
   color: red;
   font-weight: 600;
+}
+.admin-applications-applications {
+  background: #e8dee5;
+}
+
+.admin-applications-applications > :first-child {
+  margin-top: 2vh;
+}
+
+.admin-applications-card {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 2vh;
+  padding: 3vh 2vw 3vh 2vw;
+}
+
+.admin-applications-card-row1 {
+  display: flex;
+}
+
+.admin-applications-card-row1 > :first-child {
+  background: #4f0a3a;
+  color: white;
+  border-radius: 20px;
+  padding: 0 2vw 0 2vw;
+  margin-right: 2vw;
+}
+
+.admin-applications-card-row1 > :nth-child(2) {
+  font-weight: bold;
+}
+
+.admin-applications-card-row2 {
+  display: block;
+  padding-left: 3vw;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.admin-applications-card-row2 > :first-child {
+  font-weight: 700;
+}
+
+.admin-applications-card-row2 > :nth-child(4) {
+  display: flex;
+}
+
+.admin-applications-card-row3 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.admin-applications-card-button {
+  font-weight: bold;
+  border: solid 2px #4f0a3a;
+  border-radius: 20px;
+  height: 5vh;
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2vw;
 }
