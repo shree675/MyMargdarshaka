@@ -143,6 +143,10 @@
   cursor: pointer;
 }
 
+.mentor-subject-details-subjectname-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .mentor-subject-details-back {
     margin-left: 35vw;

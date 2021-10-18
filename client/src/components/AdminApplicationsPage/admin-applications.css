@@ -1,5 +1,8 @@
 .admin-main {
   display: flex;
+  margin-top: -2vh;
+  background: white;
+  border-radius: 10px;
 }
 
 .admin-applications-leftbox {
@@ -8,7 +11,7 @@
 
 .admin-applications-tab-switcher {
   display: flex;
-  margin-top: 2vh;
+  margin-top: 4vh;
   margin-bottom: 2vh;
   padding-left: 2vw;
 }
@@ -144,4 +147,51 @@
   align-items: center;
   margin-left: 7vw;
   cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .admin-main {
+    display: block;
+  }
+  .admin-applications-leftbox {
+    margin: 0px;
+    width: 100vw;
+  }
+  .admin-applications-tab-switcher {
+    display: block;
+    padding-left: 20vw;
+    padding-top: 1vh;
+    margin-top: -2vh;
+    background: white;
+    border-radius: 10px;
+  }
+  .admin-applications-tab-switcher > div {
+    margin-top: 2vh;
+  }
+  .admin-applications-card {
+    width: 100vw;
+  }
+  .admin-applications-card-row3 {
+    display: block;
+  }
+  .admin-applications-card-button {
+    margin-left: 60vw;
+    width: 30vw;
+    margin-top: 1vh;
+  }
+  .admin-applications-right-box {
+    margin: 0px;
+    width: 100vw;
+  }
+  .admin-applications-right-box > :first-child {
+    margin-left: 10vw;
+    width: 80vw;
+  }
+
+  /* ban user button */
+  .admin-applications-search-results-card > :nth-child(2) {
+    margin-left: 40vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
 }
