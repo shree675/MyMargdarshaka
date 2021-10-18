@@ -127,33 +127,6 @@ const LearnerSignup = () => {
       
     }
 
-    const handleClick = async () => {
-        //assign mentors button clicked
-        //on sign-up, we first push all sign up data to database
-        console.log("clicked");
-
-        let temp = {};
-
-        if (state.name.length == 0) temp.nameValid = false;
-        else temp.nameValid = true;
-
-        if (state.email.length == 0) temp.emailValid = false;
-        else temp.emailValid = true;
-
-        if (state.prefLang.length == 0) temp.langValid = false;
-        else temp.langValid = true;
-
-        if (state.subs.length == 0) temp.subValid = false;
-        else temp.subValid = true;
-
-        if (state.times.length == 0) temp.timeValid = false;
-        else temp.timeValid = true;
-
-        setState({ ...state, ...temp });
-
-        console.log(state);
-
-
   return (
     <div className="learner-signup-main">
       <div style={{ width: "800px" }}>
