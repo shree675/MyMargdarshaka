@@ -92,37 +92,67 @@ const LearnerSignup = () => {
     } else {
       console.log(state);
       // push to DB
-    }
+      const SUBJECTS = [];
+        for (let subject in state.subs) {
+            const item = {
+                code: subject,
+            };
+            SUBJECTS.push(item);
+        }
 
-    const SUBJECTS = [];
-    for (let subject in state.subs) {
-      const item = {
-        code: subject,
-      };
-      SUBJECTS.push(item);
-    }
-
-    const learner = {
-      /* phone: LearnerSignup.phone, */ //pass as props
-      phone: phone,
-      name: state.name,
-      email: state.email,
-      language: state.prefLang,
-      time: state.times,
-      Class: state.Class,
-      subjects: SUBJECTS,
-    };
-
-    console.log("Printing learner before pushing:", learner);
-    await axios
-      .post(`/api/learner/signup/createlearner`, learner)
-      .then((res) => console.log("Pushing Sign up data"));
-    /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
+        const learner = {
+            /* phone: LearnerSignup.phone, */ //pass as props
+            phone: phone,
+            name: state.name,
+            email: state.email,
+            language: state.prefLang,
+            time: state.times,
+            Class: state.Class,
+            subjects: SUBJECTS,
+        };
+        const user = {
+            phone: phone,
+            user_type: "learner",
+            valid_signup: true,
+        };
+        console.log("Printing learner before pushing:", learner);
+        await axios.post(`/api/learner/signup/createlearner`, learner).then((res) => console.log("Pushing Sign up data"));
+        /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
             window.location='/browse'; */
+        //update valid user
+        await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
+        //Matching algorithm - we request the database using find() passing the
+      };
+      
+    }
 
-    //Matching algorithm - we request the database using find() passing the
-  };
+    const handleClick = async () => {
+        //assign mentors button clicked
+        //on sign-up, we first push all sign up data to database
+        console.log("clicked");
+
+        let temp = {};
+
+        if (state.name.length == 0) temp.nameValid = false;
+        else temp.nameValid = true;
+
+        if (state.email.length == 0) temp.emailValid = false;
+        else temp.emailValid = true;
+
+        if (state.prefLang.length == 0) temp.langValid = false;
+        else temp.langValid = true;
+
+        if (state.subs.length == 0) temp.subValid = false;
+        else temp.subValid = true;
+
+        if (state.times.length == 0) temp.timeValid = false;
+        else temp.timeValid = true;
+
+        setState({ ...state, ...temp });
+
+        console.log(state);
+
 
   return (
     <div className="learner-signup-main">
