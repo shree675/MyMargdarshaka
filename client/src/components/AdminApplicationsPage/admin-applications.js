@@ -80,6 +80,7 @@ const ApplicationCard = (props) => {
           onClick={() => {
             handleApprove(props.app);
           }}
+          style={props.rej ? { display: "none" } : {}}
         >
           APPROVE
         </div>
@@ -88,6 +89,7 @@ const ApplicationCard = (props) => {
           onClick={() => {
             handleReject(props.app);
           }}
+          style={props.rej ? { display: "none" } : {}}
         >
           REJECT
         </div>
@@ -172,7 +174,7 @@ class AdminApplications extends React.Component {
               className="admin-applications-applications"
             >
               {rejApp.map((item) => (
-                <ApplicationCard app={item} />
+                <ApplicationCard app={item} rej={true} />
               ))}
             </div>
           </div>
