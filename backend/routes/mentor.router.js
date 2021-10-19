@@ -3,6 +3,7 @@ const lodash = require("lodash");
 const express = require("express");
 const router = express.Router();
 var Mentor = require("../models/mentor.model");
+var {mentorSchema} = require("../utils/joiSchemas")
 
 router.route("/login/submitmentor").get((req, res) => {
   Mentor.find()
@@ -22,10 +23,10 @@ router.route("/signup/creatementor").post((req, res) => {
   const Classes = lodash.cloneDeep(req.body.Classes);
   //const Classes = req.body.Classes;
   //console.log(req.body)
-  console.log("--------------------------------------------------");
-  console.log(req.body.Classes);
-  console.log(Classes[0].chapters);
-  console.log(Classes[0].chapters[0].subtopics);
+  //console.log("--------------------------------------------------");
+  //console.log(req.body.Classes);
+  //console.log(Classes[0].chapters);
+  //console.log(Classes[0].chapters[0].subtopics);
   //console.log(req.body.Classes[0].name)
   //let t = req.body.Classes[0]
   //console.log(t.chapters)
@@ -42,11 +43,35 @@ router.route("/signup/creatementor").post((req, res) => {
     profile_picture_url,
   });
   //console.log(learner)
+  mentorSchema.validate(mentor)
   mentor
     .save()
     .then(() => res.json("Added new mentor!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
+router.route("/signup/findmatches/:phone").get((req, res) => {
+    const phone = req.body.phone;
+    const language = req.body.language;
+    const times = req.body.times;
+    const codes = req.body.codes;
+  
+    let mentors = [];
+    for (let code of codes) {
+      console.log(language, times, codes); //also approved mentor should be in the criteria
+      const matched_mentors = Mentor.find({
+        language: language,
+        time: { $in: [...times] },
+        code: code,
+        approved: true
+      })
+      .then(()=>
+        console.log(matched_mentors))
+        //mentors = [...mentors, ...matched_mentors])
+      .catch((err) => res.status(400).json("Error: " + err)) 
+    }
+  });
+
+
 
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {
