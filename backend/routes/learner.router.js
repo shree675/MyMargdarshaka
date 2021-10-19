@@ -38,7 +38,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
     .save()
     .then(() => res.json("Added new learner!"))
     .catch((err) => res.status(400).json("Error: " + err));
-  const data = await match("English", "Morning", ["HIN7", "SCI7"]);
+  //const data = await match("English", "Morning", ["HIN7", "SCI7"]);
   console.log("Printing the data", data);
 });
 

@@ -7,6 +7,7 @@ import firebase from "../../firebase";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+//import match_learner from "../../../../backend/routes/matching.learner"
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
@@ -106,7 +107,7 @@ const LearnerSignup = () => {
         name: state.name,
         email: state.email,
         language: state.prefLang,
-        time: state.times,
+        times: state.times,
         Class: state.Class,
         subjects: SUBJECTS,
       };
@@ -127,6 +128,16 @@ const LearnerSignup = () => {
         .post(`/api/user/update/` + phone, user)
         .then((res) => console.log("User table has been updated"));
       //Matching algorithm - we request the database using find() passing the
+      //call match here
+      let language = 'English'
+      let time = 'Morning'
+      let codes = ['HIN8']
+      await axios 
+        .get(`/signup/findmatches/`+phone)
+        .then((res) => console.log(res))
+      //const mentors = await match_learner(language, time, codes)
+      //console.log(mentors)
+
     }
   };
 
@@ -137,7 +148,7 @@ const LearnerSignup = () => {
         <button
           onClick={() => {
             firebase.auth().signOut();
-            window.location = "/initsignin";
+            window.location = "/init-signin";
           }}
         >
           Logout (temporary button here)

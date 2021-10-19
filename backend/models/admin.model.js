@@ -5,14 +5,14 @@ const Admin = new Schema(
   {
     username: {
       type: String,
-      minlength: 1,
+      minlength: 6,
       required: true,
       trim: true,
       unique: true,
     },
     password: {
       type: String,
-      minlength: 1,
+      minlength: 6,
       required: true,
       unique: false,
     },

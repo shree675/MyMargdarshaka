@@ -18,7 +18,7 @@ let Learner = new Schema({
     type: String,
     /* required: true */
   },
-  time: {
+  times: {
     //TODO: change this name to times
     type: [String],
     /* required: true */
