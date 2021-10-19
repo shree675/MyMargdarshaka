@@ -156,7 +156,7 @@ const MentorSignup = () => {
             };
             console.log("Printing mentor before pushing:", mentor.Classes);
             await axios.post(`/api/mentor/signup/creatementor`, mentor).then(async (res) => {
-                console.log("Pushing Sign up data", phone);
+                console.log("Pushing Sign up data of phone number", phone);
             });
             //update valid user
             //await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
