@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 mongoose.connect(connectionString);
 const connection = mongoose.connection;
 connection.once("open", function () {
-    console.log("MongoDB database connection established successfully");
+  console.log("MongoDB database connection established successfully");
 });
 
 //-------------------------------------------
@@ -43,10 +43,10 @@ app.use("/api/admin", adminRouter);
 app.use('/api',apiRouter); */
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 
 const port = process.env.PORT || 5000;

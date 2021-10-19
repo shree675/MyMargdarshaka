@@ -41,8 +41,7 @@ const MentorHome = () => {
             </div>
           </div>
 
-
-        {/* TODO: Update these values dynamically */}
+          {/* TODO: Update these values dynamically */}
           <div className="col">
             <div className="row p-3">
               <SubjectTitle style={style} subject={"Mathematics"} />

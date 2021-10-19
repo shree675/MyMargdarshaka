@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let chapter = new Schema({
@@ -68,3 +68,4 @@ let Mentor = new Schema({
 });
 
 module.exports = mongoose.model('Mentor', Mentor), mongoose.model('chapter', chapter);
+
