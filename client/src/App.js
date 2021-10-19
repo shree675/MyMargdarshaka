@@ -39,7 +39,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/initsignin" component={InitiateSignin} />
+          <Route exact path="/init-signin" component={InitiateSignin} />
           <Route exact path="/authentication:id" component={Authentication} />
           <Route exact path="/learner-signup" component={LearnerSignup} />
           <Route exact path="/mentor-signup" component={MentorSignup} />
@@ -49,7 +49,6 @@ class App extends Component {
           <Route exact path="/admin-auth" component={AdminAuthentication} />
           <Route exact path="/mentor-home" component={MentorHome} />
           <Route exact path="/mentor-dashboard" component={MentorDashBoard} />
-          <Route exact path="/adminauth" component={AdminAuthentication} />
           <Route exact path="/learner-dashboard" component={LearnerDashboard} />
           <Route exact path="/my-mentors" component={LearnerHomepage} />
           <Route exact path="/my-students" component={MentorHome} />{" "}
@@ -72,6 +71,7 @@ class App extends Component {
             path="/admin-applications"
             component={AdminApplications}
           />
+          <Route path='/' component={Feedback} />
         </Switch>
       </Router>
     );

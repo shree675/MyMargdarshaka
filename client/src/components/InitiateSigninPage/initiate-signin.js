@@ -27,7 +27,7 @@ const InitiateSignin = () => {
         className="init-signin-content1"
         onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}
       >
-        <Link to="/adminauth" className="init-signin-admin">
+        <Link to="/admin-auth" className="init-signin-admin">
           Sign in as an admin
         </Link>
         <div className="init-signin-left">
