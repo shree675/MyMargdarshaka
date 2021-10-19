@@ -1,6 +1,7 @@
 .sidebar-mobile {
   display: none;
 }
+/*
 .nav-link-mobile {
   width: 100vw;
   display: flex;
@@ -13,15 +14,19 @@
   margin-bottom: 5vh;
 }
 
+
 .nav-link-mobile:active {
   color: white;
   font-weight: 550;
   border: 2px solid white;
   border-radius: 25px;
 }
+
 .nav-link-mobile:hover {
   color: white;
 }
+
+*/
 .profile-photo {
   margin-left: -10vw;
 }

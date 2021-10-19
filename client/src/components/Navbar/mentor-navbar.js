@@ -1,6 +1,5 @@
 //@ts-check
 import React from "react";
-import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
 import {
   Nav,
@@ -10,6 +9,7 @@ import {
   NavLink,
   NavBtn,
   NavBtnLink,
+  MobileNavLink,
 } from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
@@ -24,7 +24,7 @@ const Navbar = (props) => {
         style={
           open
             ? {
-                height: "60vh",
+                height: "63vh",
                 background: "#5d1049",
                 display: "block",
                 paddingTop: "5vh",
@@ -34,7 +34,7 @@ const Navbar = (props) => {
       >
         <div
           style={{
-            border: "1px solid white",
+            border: "1px solid red",
             height: "5vh",
             width: "60vw",
             margin: "0 0 5vh 20vw",
@@ -46,27 +46,28 @@ const Navbar = (props) => {
             setOpen(false);
           }}
         >
-          <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
+          <div style={{ color: "red", marginLeft: "20vw" }}>CLOSE</div>
           <CloseIcon
-            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
+            style={{ color: "red", fontSize: "3vh", marginLeft: "5vw" }}
           />
         </div>
-        <Link className="nav-link-mobile" to="/mentor-guidelines">
+        <MobileNavLink className="nav-link-mobile" to="/mentor-guidelines">
           GUIDELINES
-        </Link>
-        <Link className="nav-link-mobile" to="/my-students">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/my-students">
           MY STUDENTS
-        </Link>
-        <Link className="nav-link-mobile" to="/mentor-dashboard">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/mentor-dashboard">
           DASHBOARD
-        </Link>
-        <Link className="nav-link-mobile" to="/mentor-feedback">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/mentor-feedback">
           FEEDBACK
-        </Link>
-        <Link className="nav-link-mobile" to="/logout">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/logout">
           LOGOUT
-        </Link>
+        </MobileNavLink>
       </div>
+
       <Nav style={open ? { display: "none" } : {}}>
         <div
           onClick={() => {

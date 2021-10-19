@@ -11,6 +11,7 @@ import {
   NavLink,
   NavBtn,
   NavBtnLink,
+  MobileNavLink,
 } from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
@@ -26,7 +27,7 @@ const LearnerNavbar = (props) => {
         style={
           open
             ? {
-                height: "60vh",
+                height: "63vh",
                 background: "#5d1049",
                 display: "block",
                 paddingTop: "5vh",
@@ -36,7 +37,7 @@ const LearnerNavbar = (props) => {
       >
         <div
           style={{
-            border: "1px solid white",
+            border: "1px solid red",
             height: "5vh",
             width: "60vw",
             margin: "0 0 5vh 20vw",
@@ -48,26 +49,24 @@ const LearnerNavbar = (props) => {
             setOpen(false);
           }}
         >
-          <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
+          <div style={{ color: "red", marginLeft: "20vw" }}>CLOSE</div>
           <CloseIcon
-            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
+            style={{ color: "red", fontSize: "3vh", marginLeft: "5vw" }}
           />
         </div>
-        <Link className="nav-link-mobile" to="/learner-guidelines">
+        <MobileNavLink className="nav-link-mobile" to="/learner-guidelines">
           GUIDELINES
-        </Link>
-        <Link className="nav-link-mobile" to="/my-mentors">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/my-mentors">
           MY MENTORS
-        </Link>
-        <Link className="nav-link-mobile" to="/learner-dashboard">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/learner-dashboard">
           DASHBOARD
-        </Link>
-        <Link className="nav-link-mobile" to="/learner-feedback">
+        </MobileNavLink>
+        <MobileNavLink className="nav-link-mobile" to="/learner-feedback">
           FEEDBACK
-        </Link>
-        <Link className="nav-link-mobile" to="/logout">
-          LOGOUT
-        </Link>
+        </MobileNavLink>
+        <MobileNavLink to="/logout">LOGOUT</MobileNavLink>
       </div>
 
       <Nav style={open ? { display: "none" } : {}}>
