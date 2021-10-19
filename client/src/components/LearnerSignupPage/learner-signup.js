@@ -128,9 +128,7 @@ const LearnerSignup = () => {
         .then((res) => console.log("User table has been updated"));
       //Matching algorithm - we request the database using find() passing the
     }
-
   };
-
 
   return (
     <div className="learner-signup-main">
@@ -183,7 +181,8 @@ const LearnerSignup = () => {
               value=""
               disabled
               selected
-            >Preferred Language
+            >
+              Preferred Language
             </option>
             {langs.map((lang) => (
               <option className="learner-signup-dropdown" value={lang}>
