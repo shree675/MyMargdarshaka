@@ -145,6 +145,12 @@ class AdminHomePage extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
+            // window.location='/admin-auth'
+        }
+    }
+
     render() {
         return (
             <div>

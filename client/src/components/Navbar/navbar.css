@@ -1,33 +1,47 @@
 .sidebar-mobile {
-  display: none;
+    display: none;
 }
 .nav-link-mobile {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-family: raleway;
-  color: white;
-  margin-bottom: 5vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: raleway;
+    color: white;
+    margin-bottom: 5vh;
 }
 
 .nav-link-mobile:active {
-  color: white;
-  font-weight: 550;
-  border: 2px solid white;
-  border-radius: 25px;
+    color: white;
+    font-weight: 550;
+    border: 2px solid white;
+    border-radius: 25px;
 }
 .nav-link-mobile:hover {
-  color: white;
+    color: white;
 }
 .profile-photo {
-  margin-left: -10vw;
+    margin-left: -10vw;
+}
+
+.nav-logout-pc {
+    border: none;
+    color: #cacaca;
+    background-color: inherit;
+}
+
+.nav-logout-phone {
+    border: none;
+    color: white;
+    background-color: inherit;
+    text-align: center;
+    width: 100vw;
 }
 
 @media screen and (max-width: 480px) {
-  .profile-photo {
-    margin-right: 10vw;
-  }
+    .profile-photo {
+        margin-right: 10vw;
+    }
 }

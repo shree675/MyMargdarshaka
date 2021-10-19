@@ -155,6 +155,12 @@ class AdminApplications extends React.Component {
         console.log("ban ", user.name);
     }
 
+    componentDidMount() {
+        if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
+            // window.location='/admin-auth'
+        }
+    }
+
     render() {
         return (
             <div>
