@@ -107,11 +107,11 @@ const ApplicationCard = (props) => {
                 <div>{props.app.body}</div>
             </div>
             <div className='admin-applications-card-row3'>
-                {props.pageNo == 1 ? (
+                {props.pageNo === 1 ? (
                     <div className='admin-applications-card-button' onClick={() => {}}>
                         MANAGE ISSUE
                     </div>
-                ) : props.pageNo == 2 ? (
+                ) : props.pageNo === 2 ? (
                     <div className='admin-applications-card-button' onClick={() => {}}>
                         MARK RESOLVED
                     </div>
@@ -154,7 +154,7 @@ class AdminHomePage extends React.Component {
                         <div className='admin-applications-tab-switcher'>
                             <div
                                 className='admin-applications-tab-button'
-                                style={this.state.tab == 0 ? { border: "solid 3px red", opacity: 1 } : {}}
+                                style={this.state.tab === 0 ? { border: "solid 3px red", opacity: 1 } : {}}
                                 onClick={() => {
                                     this.setState({ tab: 0 });
                                 }}
@@ -163,7 +163,7 @@ class AdminHomePage extends React.Component {
                             </div>
                             <div
                                 className='admin-applications-tab-button'
-                                style={this.state.tab == 1 ? { border: "solid 3px red", opacity: 1 } : {}}
+                                style={this.state.tab === 1 ? { border: "solid 3px red", opacity: 1 } : {}}
                                 onClick={() => {
                                     this.setState({ tab: 1 });
                                 }}
@@ -172,7 +172,7 @@ class AdminHomePage extends React.Component {
                             </div>
                             <div
                                 className='admin-applications-tab-button'
-                                style={this.state.tab == 2 ? { border: "solid 3px red", opacity: 1 } : {}}
+                                style={this.state.tab === 2 ? { border: "solid 3px red", opacity: 1 } : {}}
                                 onClick={() => {
                                     this.setState({ tab: 2 });
                                 }}
@@ -180,8 +180,38 @@ class AdminHomePage extends React.Component {
                                 RESOLVED ISSUES
                             </div>
                         </div>
+                        <div className='admin-applications-right-box-phone'>
+                            <CssTextField
+                                id='outlined-basic'
+                                label='🔍Search for User by Name or Phone Number'
+                                variant='outlined'
+                                value={this.state.searchText}
+                                onChange={this.handleSearchTextChange}
+                                onKeyUp={this.handleSubmitText}
+                            />
+                            <div className='admin-applications-search-results'>
+                                <div>
+                                    {this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}
+                                </div>
+                                {/* {newIssues.map((user, i) => (
+                                    <div
+                                        className='admin-applications-search-results-card'
+                                        style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
+                                    >
+                                        <div>
+                                            <div>{user.name}</div>
+                                            <div>{user.phone}</div>
+                                        </div>
+                                        <div onClick={() => {}}>
+                                            BAN USER
+                                            <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                                        </div>
+                                    </div>
+                                ))}{" "} */}
+                            </div>
+                        </div>
                         <div
-                            style={this.state.tab == 1 || this.state.tab == 2 ? { display: "none" } : {}}
+                            style={this.state.tab === 1 || this.state.tab === 2 ? { display: "none" } : {}}
                             className='admin-applications-applications'
                         >
                             {newIssues.map((item) => (
@@ -189,7 +219,7 @@ class AdminHomePage extends React.Component {
                             ))}
                         </div>
                         <div
-                            style={this.state.tab == 0 || this.state.tab == 2 ? { display: "none" } : {}}
+                            style={this.state.tab === 0 || this.state.tab === 2 ? { display: "none" } : {}}
                             className='admin-applications-applications'
                         >
                             {manage.map((item) => (
@@ -197,7 +227,7 @@ class AdminHomePage extends React.Component {
                             ))}
                         </div>
                         <div
-                            style={this.state.tab == 0 || this.state.tab == 1 ? { display: "none" } : {}}
+                            style={this.state.tab === 0 || this.state.tab === 1 ? { display: "none" } : {}}
                             className='admin-applications-applications'
                         >
                             {resolvedIssues.map((item) => (
@@ -216,7 +246,7 @@ class AdminHomePage extends React.Component {
                         />
                         <div className='admin-applications-search-results'>
                             <div>
-                                {this.state.searchResultText != "" ? `Search results for \"${this.state.searchResultText}\"` : ""}
+                                {this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}
                             </div>
                             {/* {
                                 openApp.map((user, i) => (

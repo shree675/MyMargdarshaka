@@ -155,6 +155,17 @@
     cursor: pointer;
 }
 
+.admin-applications-right-box-phone {
+    display: none;
+    margin: 0px;
+    width: 100vw;
+}
+.admin-applications-right-box-phone > :first-child {
+    display: none;
+    margin-left: 10vw;
+    width: 80vw;
+}
+
 @media screen and (max-width: 480px) {
     .admin-main {
         display: block;
@@ -199,10 +210,22 @@
         font-size: 3.5vw;
     }
     .admin-applications-right-box {
+        display: none;
         margin: 0px;
         width: 100vw;
     }
     .admin-applications-right-box > :first-child {
+        display: none;
+        margin-left: 10vw;
+        width: 80vw;
+    }
+    .admin-applications-right-box-phone {
+        display: block;
+        margin: 0px;
+        width: 100%;
+    }
+    .admin-applications-right-box-phone > :first-child {
+        display: flex;
         margin-left: 10vw;
         width: 80vw;
     }
