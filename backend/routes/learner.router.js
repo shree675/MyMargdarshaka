@@ -15,7 +15,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const language = req.body.language;
-  const time = req.body.time;
+  const times = req.body.times;
   const Class = req.body.Class;
   const profile_picture_url = req.body.profile_picture_url;
   const subjects = req.body.subjects;
@@ -26,7 +26,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
     name,
     email,
     language,
-    time,
+    times,
     Class,
     profile_picture_url,
     subjects,
@@ -39,7 +39,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
     .then(() => res.json("Added new learner!"))
     .catch((err) => res.status(400).json("Error: " + err));
   //const data = await match("English", "Morning", ["HIN7", "SCI7"]);
-  console.log("Printing the data", data);
+  //console.log("Printing the data", data);
 });
 
 /* router.route('/update/:id').post((req, res) => {

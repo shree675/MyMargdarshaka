@@ -12,6 +12,7 @@ let Feedback = new Schema({
   },
   issueType: {
     type: String,
+    enum: ['Report Abuse', 'Platform Issue', 'Question', 'Other']
   },
   issueBody: {
     type: String,

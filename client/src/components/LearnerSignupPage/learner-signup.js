@@ -93,13 +93,28 @@ const LearnerSignup = () => {
     } else {
       console.log(state);
       // push to DB
-      const SUBJECTS = [];
+      /* const SUBJECTS = [];
       for (let subject in state.subs) {
         const item = {
           code: subject,
         };
         SUBJECTS.push(item);
       }
+ */
+      const subjects_list = [];
+      console.log(state.subs);
+      let subjects = state.subs
+      subjects.forEach((subject) => {
+        console.log(state.Class, subject)
+        let code = data.codes[subject]+state.Class
+        console.log(code)
+        const item = {
+          code: code,
+          chapters: data.default.chapters,
+        };
+        subjects_list.push(item)
+      })
+      console.log(subjects_list)
 
       const learner = {
         /* phone: LearnerSignup.phone, */ //pass as props
@@ -109,7 +124,7 @@ const LearnerSignup = () => {
         language: state.prefLang,
         times: state.times,
         Class: state.Class,
-        subjects: SUBJECTS,
+        subjects: subjects_list,
       };
       const user = {
         phone: phone,
@@ -129,15 +144,19 @@ const LearnerSignup = () => {
         .then((res) => console.log("User table has been updated"));
       //Matching algorithm - we request the database using find() passing the
       //call match here
-      let language = 'English'
-      let time = 'Morning'
+      /* let language = 'English'
+      let times = ['Morning']
       let codes = ['HIN8']
+      learner.language = language
+      learner.times = times
+      learner.codes = codes */
+
+      console.log(learner)
       await axios 
-        .get(`/signup/findmatches/`+phone)
+        .post(`api/mentor/signup/findmatches/`+phone, learner)
         .then((res) => console.log(res))
       //const mentors = await match_learner(language, time, codes)
       //console.log(mentors)
-
     }
   };
 

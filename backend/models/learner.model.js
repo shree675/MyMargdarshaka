@@ -1,5 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+//const data = require("../../client/src/data")
+//import data from '../../client/src/data'
+
+let chapter = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  subtopics: {
+    type: [[String, Boolean]],
+    default: [["Introduction", false]], //Pairs of subtopic and completion status
+  },
+});
 
 let Learner = new Schema({
   phone: {
@@ -16,11 +29,14 @@ let Learner = new Schema({
   },
   language: {
     type: String,
+    /* enum: data.langs, */
+    enum: ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"],
     /* required: true */
   },
   times: {
     //TODO: change this name to times
     type: [String],
+    enum: ["Morning", "Afternoon", "Evening"],
     /* required: true */
   },
   Class: {
@@ -38,18 +54,18 @@ let Learner = new Schema({
         code: { type: String, required: true },
         mentor_id: { type: Number, default: -1 },
         consent: { type: Boolean, default: false },
-        subtopics: {
-          type: [(String, Boolean)],
-          default: [("Introduction", false)],
-        }, //Pairs of subtopic and completion status
+        chapters: {
+          type: [chapter],
+        },
       },
     ],
     /* required: true */
   },
 
   NIOS_status: {
-    type: Number,
-    default: 4,
+    type: String,
+    default: 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM',
+    enum: ['I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM', 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM', 'I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM', 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM']
   },
   //1: I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
   //2: I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
