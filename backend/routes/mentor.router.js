@@ -22,7 +22,10 @@ router.route("/signup/creatementor").post((req, res) => {
   const Classes = lodash.cloneDeep(req.body.Classes);
   //const Classes = req.body.Classes;
   //console.log(req.body)
+  console.log("--------------------------------------------------");
   console.log(req.body.Classes);
+  console.log(Classes[0].chapters);
+  console.log(Classes[0].chapters[0].subtopics);
   //console.log(req.body.Classes[0].name)
   //let t = req.body.Classes[0]
   //console.log(t.chapters)

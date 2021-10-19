@@ -1,6 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+let chapter = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  subtopics: {
+    type: [[String, Boolean]],
+    default: [["Introduction", false]],
+  },
+});
+
 let Mentor = new Schema({
   phone: {
     type: String,
@@ -19,39 +30,30 @@ let Mentor = new Schema({
     /* required: true */
   },
   time: {
+    //use enum here
     type: String,
+    enum: ["Morning", "Afternoon", "Evening"],
     /* required: true */
   },
   approved: {
     type: Boolean,
     default: true, // remember to change to false
   },
+
   Classes: {
     type: [
       {
         code: { type: String, required: true },
-        students: [
-          {
-            id: { type: String },
-            consent: { type: Boolean },
-            chapters: {
-              type: [
-                {
-                  name: String,
-                  subtopics: {
-                    type: [(String, Boolean)],
-                    default: [("Introduction", false)],
-                  }, // Pairs of subtopic and completion status
-                },
-              ],
-            },
-          },
-        ],
-
-        /* required: true */
+        students: [{ id: { type: String }, consent: { type: Boolean } }],
+        chapters: {
+          type: [chapter], //Pairs of subtopic and completion status
+        },
       },
     ],
+
+    /* required: true */
   },
+
   profile_picture_url: {
     type: String,
     default:
@@ -59,4 +61,5 @@ let Mentor = new Schema({
   },
 });
 
-module.exports = mongoose.model("Mentor", Mentor);
+(module.exports = mongoose.model("Mentor", Mentor)),
+  mongoose.model("chapter", chapter);
