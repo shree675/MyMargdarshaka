@@ -24,7 +24,7 @@ let Mentor = new Schema({
   },
   approved: {
     type: Boolean,
-    default: true, //remember to change to false
+    default: true, // remember to change to false
   },
   Classes: {
     type: [
@@ -41,7 +41,7 @@ let Mentor = new Schema({
                   subtopics: {
                     type: [(String, Boolean)],
                     default: [("Introduction", false)],
-                  }, //Pairs of subtopic and completion status
+                  }, // Pairs of subtopic and completion status
                 },
               ],
             },
