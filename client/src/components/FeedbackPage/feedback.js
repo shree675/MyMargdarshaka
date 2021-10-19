@@ -43,16 +43,43 @@ const Feedback = () => {
     const [body, setBody] = useState(null);
     const [curuser, setCuruser] = useState(null);
     const [phone, setPhone] = useState(null);
+    const [name, setName] = useState(null);
 
     useEffect(() => {
         verify();
     }, []);
 
     const verify = async () => {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 setCuruser(user.uid);
                 setPhone(user.phoneNumber);
+                await axios
+                    .get("/api/learner/login/submitlearner")
+                    .then((e) => {
+                        e.data.map((data) => {
+                            if (data.phone === user.phoneNumber) {
+                                setName(data.name);
+                                console.log(data.name);
+                            }
+                        });
+                    })
+                    .catch((err) => {
+                        alert(err.message);
+                    });
+                await axios
+                    .get("/api/mentor/login/submitmentor")
+                    .then((e) => {
+                        e.data.map((data) => {
+                            if (data.phone === user.phoneNumber) {
+                                setName(data.name);
+                                console.log(data.name);
+                            }
+                        });
+                    })
+                    .catch((err) => {
+                        alert(err.message);
+                    });
             } else {
                 window.location = "/init-signin";
             }
@@ -139,13 +166,20 @@ const Feedback = () => {
                                 issueSubject: subject,
                                 issueType: issue,
                                 issueBody: body,
+                                username: name,
                                 timestamp: new Date().toString(),
                             };
                             if (!err) {
                                 axios
                                     .post("/api/feedback/api/submitfeedback", feedback)
-                                    .then((res) => console.log(res))
-                                    .catch((err) => console.error(err));
+                                    .then((res) => {
+                                        console.log(res);
+                                        alert("Feedback submitted successfully");
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                        alert("Feedback submission failed. Check console for further details");
+                                    });
                             }
                         }}
                     >
