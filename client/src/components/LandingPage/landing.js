@@ -33,7 +33,7 @@ const LandingPage = () => {
             <button
               className="landing-button"
               onClick={() => {
-                window.location = "/initsignin";
+                window.location = "/init-signin";
               }}
             >
               GET STARTED

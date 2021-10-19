@@ -17,6 +17,7 @@
         "nodemon": "^2.0.13"
     },
     "dependencies": {
+        "aes-js": "^3.1.2",
         "axios": "^0.23.0",
         "concurrently": "^3.5.1",
         "cors": "^2.8.5",

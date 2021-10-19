@@ -37,7 +37,7 @@ let Mentor = new Schema({
   },
   approved: {
     type: Boolean,
-    default: true, //remember to change to false
+    default: true, // remember to change to false
   },
 
   Classes: {

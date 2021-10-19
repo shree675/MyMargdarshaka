@@ -54,7 +54,7 @@ const Feedback = () => {
         setCuruser(user.uid);
         setPhone(user.phoneNumber);
       } else {
-        window.location = "/initsignin";
+        window.location = "/init-signin";
       }
     });
   };
