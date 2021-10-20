@@ -3,7 +3,7 @@ const lodash = require("lodash");
 const express = require("express");
 const router = express.Router();
 var Mentor = require("../models/mentor.model");
-var {mentorSchema} = require("../utils/joiSchemas")
+var { mentorSchema } = require("../utils/joiSchemas");
 
 router.route("/login/submitmentor").get((req, res) => {
   Mentor.find()
@@ -43,35 +43,32 @@ router.route("/signup/creatementor").post((req, res) => {
     profile_picture_url,
   });
   //console.log(learner)
-  mentorSchema.validate(mentor)
+  mentorSchema.validate(mentor);
   mentor
     .save()
     .then(() => res.json("Added new mentor!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 router.route("/signup/findmatches/:phone").get((req, res) => {
-    const phone = req.body.phone;
-    const language = req.body.language;
-    const times = req.body.times;
-    const codes = req.body.codes;
-  
-    let mentors = [];
-    for (let code of codes) {
-      console.log(language, times, codes); //also approved mentor should be in the criteria
-      const matched_mentors = Mentor.find({
-        language: language,
-        time: { $in: [...times] },
-        code: code,
-        approved: true
-      })
-      .then(()=>
-        console.log(matched_mentors))
-        //mentors = [...mentors, ...matched_mentors])
-      .catch((err) => res.status(400).json("Error: " + err)) 
-    }
-  });
+  const phone = req.body.phone;
+  const language = req.body.language;
+  const times = req.body.times;
+  const codes = req.body.codes;
 
-
+  let mentors = [];
+  for (let code of codes) {
+    console.log(language, times, codes); //also approved mentor should be in the criteria
+    const matched_mentors = Mentor.find({
+      language: language,
+      time: { $in: [...times] },
+      code: code,
+      approved: true,
+    })
+      .then(() => console.log(matched_mentors))
+      //mentors = [...mentors, ...matched_mentors])
+      .catch((err) => res.status(400).json("Error: " + err));
+  }
+});
 
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {
@@ -81,6 +78,8 @@ router.route("/signup/findmatches/:phone").get((req, res) => {
 
     user.save().then(() => res.json('Password updated!')).catch(err => res.status(400).json('Error: ' + err));
     }).catch(err => res.status(400).json('Error: ' + err));
-}); */
+}); 
+
+*/
 
 module.exports = router;

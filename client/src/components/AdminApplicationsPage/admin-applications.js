@@ -178,11 +178,12 @@ class AdminApplications extends React.Component {
               ))}
             </div>
           </div>
+
           <div className="admin-applications-right-box">
             <TextField
-              id="outlined-basic"
+              id="standard-basic"
               label="Search for User by Name or Phone Number"
-              variant="outlined"
+              variant="standard"
               value={this.state.searchText}
               onChange={this.handleSearchTextChange}
               onKeyUp={this.handleSubmitText}
