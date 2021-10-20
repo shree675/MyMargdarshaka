@@ -109,6 +109,8 @@
     font-size: 1.25vw;
     font-weight: bold;
     margin-top: calc(10%);
+    position: relative;
+    z-index: 15;
 }
 
 .auth-svg {
@@ -178,6 +180,8 @@
     .bottom-fact {
         font-size: 4vw;
         font-weight: bold;
+        position: relative;
+        z-index: 15;
     }
 
     .auth-phone-svg {

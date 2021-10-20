@@ -5,9 +5,9 @@ const router = express.Router();
 var Learner = require("../models/learner.model");
 
 router.route("/login/submitlearner").get((req, res) => {
-  Learner.find()
-    .then((e) => res.json(e))
-    .catch((err) => res.status(400).json("notfound"));
+    Learner.find()
+        .then((e) => res.json(e))
+        .catch((err) => res.status(400).json("notfound"));
 });
 
 router.route("/signup/createlearner").post(async (req, res) => {
@@ -40,6 +40,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
   //const data = await match("English", "Morning", ["HIN7", "SCI7"]);
   //console.log("Printing the data", data);
+
 });
 
 /* router.route('/update/:id').post((req, res) => {
