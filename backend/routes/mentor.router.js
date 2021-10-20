@@ -49,15 +49,17 @@ router.route("/signup/creatementor").post((req, res) => {
     .then(() => res.json("Added new mentor!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-router.route("/signup/findmatches/:phone").get((req, res) => {
+router.route("/signup/findmatches/:phone").post((req, res) => {
     const phone = req.body.phone;
     const language = req.body.language;
     const times = req.body.times;
-    const codes = req.body.codes;
-  
-    let mentors = [];
+    //const codes = req.body.codes;
+    console.log(req.body)
+
+    /* let mentors = [];
     for (let code of codes) {
-      console.log(language, times, codes); //also approved mentor should be in the criteria
+      console.log(language, times, codes); 
+
       const matched_mentors = Mentor.find({
         language: language,
         time: { $in: [...times] },
@@ -68,7 +70,7 @@ router.route("/signup/findmatches/:phone").get((req, res) => {
         console.log(matched_mentors))
         //mentors = [...mentors, ...matched_mentors])
       .catch((err) => res.status(400).json("Error: " + err)) 
-    }
+    } */
   });
 
 
