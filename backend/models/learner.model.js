@@ -18,6 +18,7 @@ let Learner = new Schema({
   phone: {
     type: String,
     required: true,
+    /* unique: true */
   },
   name: {
     type: String,

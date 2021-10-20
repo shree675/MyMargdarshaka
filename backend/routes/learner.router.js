@@ -43,26 +43,27 @@ router.route("/signup/createlearner").post(async (req, res) => {
 
 });
 
-router.route("/update/:phone").post((req, res) => {
+router.route("/assign/update/:phone").post((req, res) => {
   //console.log(req)
   //console.log("req.body", req.body)
   Learner.find({ phone: req.body.phone })
     .then((learners) => {
-      console.log("Learners", learners)
+      //console.log("Learners", learners)
       //console.log(users.length)
       if (learners.length == 0) {
         console.log("learner not found");
         return;
       }
-      /* let learner = learner[0];
-      learner.name = "HAPPY"
+      let learner = learners[0];
+      //learner.name = "HAPPY"
+      learner.subjects = req.body.subjects
+      console.log(learner.subjects)
       //assign values here
-      //user.valid_signup = req.body.valid_signup; //the error is here
       //console.log("User", user)
       learner
         .save()
         .then(() => res.json("Learner status updated!"))
-        .catch((err) => res.status(400).json("Error: " + err)); */
+        .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
