@@ -112,10 +112,10 @@ async function getMentors(language, times, code) {
         var matched_list = await Mentor.find({ 
             language: language,
             time: { $in: [...times] },
-            //code: code,
+            'Classes.code': code,
             approved: true
         })
-        console.log("matched list", matched_list)
+        //console.log("matched list", matched_list)
         return matched_list
         /* .then((res)=> {
         //console.log(res)
@@ -132,29 +132,60 @@ async function getMentors(language, times, code) {
     const language = req.body.language;
     const times = req.body.times;
     let codes = [];
-    console.log(req.body)
+    //console.log(req.body)
     const subjects = req.body.subjects;
     subjects.forEach((subject) => {
         codes.push(subject.code)
       })
 
-    codes = ['HIN6', 'HIN7']
+    codes = ['HIN6', 'TEL6']
     console.log(language, times, codes); 
     let mentors = [];
     let counter =0
     for(let code of codes)
     {
-        console.log(counter++)
+        //console.log(counter++)
         try {
-            var response = await getMentors(language, times, code);
-            console.log("response", response);
+            var response = await getMentors(language, times, code)
+            /* .then(() => res.json("LALALAALALALAL"))
+            .catch((err) => res.status(400).json("Error: " + err));; */
+            //console.log("response", response);
+            //choose 1 among many responses and append to mentors
+            var theChosenMentor = -1;
+            let max = 0;
+            for(let x of response)
+            {
+                let all_Classes = x.Classes
+                for(let Class of all_Classes)
+                {
+                    //console.log(Class)
+                    if(Class.code == code)
+                    {
+                        //console.log(code, Class.students.length)
+                        if(Class.students.length>=max)
+                            theChosenMentor = x._id
+                    }
+                }
+                //console.log("The chosen mentor", theChosenMentor)
+                //console.log(x.Classes)
+                /* if(Class.code == code)
+                {
+                    console.log("Mentor match name", Class.students)
+                } */
+            }
+            mentors.push(theChosenMentor)
         }
         catch(err){
             console.log(err);
         }
     }
-    console.log("TEST")
+    var matched_list = await Mentor.find({name:"Elon Musk"})
+    //let myVar = setTimeout(function(){ alert("Hello");}, 1000)
+    .then(() => res.json(mentors))
+    //return "If youre happy and you know it"
+    //console.log("TEST")
 });
+
     
 
     //Attempt 3 - bring all that match (language, times, codes) - then process
