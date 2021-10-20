@@ -1,3 +1,11 @@
+<p>
+  <img src="https://img.shields.io/badge/frontent-react-%23ff69b4">&emsp;
+  <img src="https://img.shields.io/badge/database-mongodb-green">&emsp;
+  <img src="https://img.shields.io/badge/backend-express-lightgrey">&emsp;
+  <img src="https://img.shields.io/badge/BaaS-firebase-important">&emsp;
+  <img src="https://img.shields.io/badge/build-success-success">
+</p>
+
 # MyMargdarshaka
 
 <img src="client/src/assets/main-logo.svg" />
