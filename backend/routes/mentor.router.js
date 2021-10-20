@@ -20,8 +20,8 @@ router.route("/signup/creatementor").post((req, res) => {
   const approved = req.body.approved;
 
   //const deepCopyWithLodashCloneDeep = _.cloneDeep(nestedArray)
-  const Classes = lodash.cloneDeep(req.body.Classes);
-  //const Classes = req.body.Classes;
+  //const Classes = lodash.cloneDeep(req.body.Classes); //not required
+  const Classes = req.body.Classes;
   //console.log(req.body)
   //console.log("--------------------------------------------------");
   //console.log(req.body.Classes);
@@ -49,16 +49,23 @@ router.route("/signup/creatementor").post((req, res) => {
     .then(() => res.json("Added new mentor!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-router.route("/signup/findmatches/:phone").post((req, res) => {
+/* router.route("/signup/findmatches/:phone").post((req, res) => {
     const phone = req.body.phone;
     const language = req.body.language;
     const times = req.body.times;
-    //const codes = req.body.codes;
+    const codes = [];
     console.log(req.body)
+    const subjects = req.body.subjects;
+    subjects.forEach((subject) => {
+        codes.push(subject.code)
+      })
 
-    /* let mentors = [];
+    console.log(language, times, codes); 
+    let mentors = [];
+    let counter =0
     for (let code of codes) {
-      console.log(language, times, codes); 
+     
+      console.log(counter++)
 
       const matched_mentors = Mentor.find({
         language: language,
@@ -66,15 +73,122 @@ router.route("/signup/findmatches/:phone").post((req, res) => {
         code: code,
         approved: true
       })
-      .then(()=>
-        console.log(matched_mentors))
-        //mentors = [...mentors, ...matched_mentors])
+      .then((res)=> {
+        //console.log(matched_mentors))
+        mentors = [...mentors, ...res]
+        console.log(print, mentors)
+      })
       .catch((err) => res.status(400).json("Error: " + err)) 
-    } */
-  });
 
+    }
+    console.log("After", mentors)
+    
+  }); */
 
+  /* async function getTodos(learner_id, language, times, code) {
+    return new Promise(function(resolve, reject){
+        Mentor.updateOne({ 
+            language: langauge,
+            time: { $in: [...times] },
+            code: code,
+            approved: true
+        },{ 
+            $push: { name: "ABCD" } 
+        }, function(err,response){
+            if (err) {
+                reject(err);
+            } else if (response.nModified === 0){
+                reject("Id not found");
+            } else {
+                resolve(response.nModified + " items modified");
+            }
+        });
+    });
+} */
 
+async function getMentors(language, times, code) {
+    /* return new Promise(function(resolve, reject){ */
+        let mentors = []
+        var matched_list = await Mentor.find({ 
+            language: language,
+            time: { $in: [...times] },
+            //code: code,
+            approved: true
+        })
+        console.log("matched list", matched_list)
+        return matched_list
+        /* .then((res)=> {
+        //console.log(res)
+        mentors = [...mentors, ...res]
+        //console.log(mentors)
+      }) */
+      //.catch((err) => res.status(400).json("Error: " + err));
+   /*  }) */
+}
+
+  router.route("/signup/findmatches/:phone").post(async (req, res) => {
+    //const learner_id = req.body._id
+    const phone = req.body.phone;
+    const language = req.body.language;
+    const times = req.body.times;
+    let codes = [];
+    console.log(req.body)
+    const subjects = req.body.subjects;
+    subjects.forEach((subject) => {
+        codes.push(subject.code)
+      })
+
+    codes = ['HIN6', 'HIN7']
+    console.log(language, times, codes); 
+    let mentors = [];
+    let counter =0
+    for(let code of codes)
+    {
+        console.log(counter++)
+        try {
+            var response = await getMentors(language, times, code);
+            console.log("response", response);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    console.log("TEST")
+});
+    
+
+    //Attempt 3 - bring all that match (language, times, codes) - then process
+    /* router.route("/signup/findmatches/:phone").post(async (req, res) => {
+        //const learner_id = req.body._id
+        const phone = req.body.phone;
+        const language = req.body.language;
+        const times = req.body.times;
+        let codes = [];
+        console.log("Passed learner", req.body)
+        const subjects = req.body.subjects;
+        subjects.forEach((subject) => {
+            codes.push(subject.code)
+          })
+    
+        codes = ['HIN6', 'MAT10'] //temp
+        console.log(language, times, codes); 
+        let mentors = [];
+        let counter =0
+
+        Mentor.find({ 
+            language: language,
+            time: { $in: [...times] },
+            'Classes.code': {$in: [...codes]},
+            approved: true
+        })
+        .then((res)=> {
+        console.log(res)
+        //mentors = [...mentors, ...res]
+        //console.log(mentors)
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+    }); */
+    
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {
 
