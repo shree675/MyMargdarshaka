@@ -152,7 +152,7 @@ async function getMentors(language, times, code) {
             //console.log("response", response);
             //choose 1 among many responses and append to mentors
             var theChosenMentor = -1;
-            let max = 0;
+            let min = 1000; //maximum number of students is assumed to be 1000 (realistic assumption)
             for(let x of response)
             {
                 let all_Classes = x.Classes
@@ -162,7 +162,7 @@ async function getMentors(language, times, code) {
                     if(Class.code == code)
                     {
                         //console.log(code, Class.students.length)
-                        if(Class.students.length>=max)
+                        if(Class.students.length<=min)
                             theChosenMentor = x._id
                     }
                 }
@@ -220,14 +220,37 @@ async function getMentors(language, times, code) {
       .catch((err) => res.status(400).json("Error: " + err));
     }); */
     
-/* router.route('/update/:id').post((req, res) => {
-    User.findById(req.params.id).then(user => {
+    router.route("/assign/update/:phone").post((req, res) => {
+        //console.log(req)
+        //console.log("req.body", req.body)
+        Mentor.find({ phone: req.body.phone })
+          .then((mentors) => {
+            //console.log("Learners", learners)
+            //console.log(users.length)
+            if (mentors.length == 0) {
+              console.log("mentor not found");
+              return;
+            }
+            let mentor = mentors[0];
+            mentor.name = "HAPPYIER"
+            //learner.subjects = req.body.subjects
+            //console.log(learner.subjects)
+            //assign values here
+            //console.log("User", user)
+            /* mentor
+              .save()
+              .then(() => res.json("Mentor status updated!"))
+              .catch((err) => res.status(400).json("Error: " + err)); */
+          })
+          .catch((err) => res.status(400).json("Error: " + err));
+      });
+router.route('/updateId/:id').post((req, res) => {
+    Mentor.findById(req.params.id).then(mentor => {
 
-    user.username=req.body.username;
-    user.password=req.body.password;
-
-    user.save().then(() => res.json('Password updated!')).catch(err => res.status(400).json('Error: ' + err));
+    mentor.name=req.body.name;
+    
+    name.save().then(() => res.json('mentor updated!')).catch(err => res.status(400).json('Error: ' + err));
     }).catch(err => res.status(400).json('Error: ' + err));
-}); */
+});
 
 module.exports = router;
