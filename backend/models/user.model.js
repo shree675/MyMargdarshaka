@@ -9,6 +9,7 @@ let User = new Schema({
   user_type: {
     type: String,
     required: true,
+    enum: ["learner", "mentor"],
     default: "learner",
   },
   valid_signup: {

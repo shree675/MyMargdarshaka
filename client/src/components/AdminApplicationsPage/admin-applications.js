@@ -1,8 +1,36 @@
+//@ts-check
+
 import React from "react";
 import AdminNavbar from "../Navbar/admin-navbar";
 import "./admin-applications.css";
 import TextField from "@mui/material/TextField";
 import { IoBan } from "react-icons/io5";
+import { styled } from "@mui/material/styles";
+
+const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#4e0d3a",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#4e0d3a",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "gray",
+      border: "none",
+      borderBottom: "2px solid #4e0d3a",
+      borderRadius: "0px",
+    },
+    "&:hover fieldset": {
+      borderColor: "gray",
+    },
+    "&.Mui-focused fieldset": {
+      border: "none",
+      borderBottom: "2px solid #4e0d3a",
+      borderRadius: "0px",
+    },
+  },
+});
 
 const openApp = [
   {
@@ -127,6 +155,15 @@ class AdminApplications extends React.Component {
     console.log("ban ", user.name);
   }
 
+  componentDidMount() {
+    if (
+      localStorage.getItem("isloggedin") === null ||
+      localStorage.getItem("isloggedin") === "false"
+    ) {
+      // window.location='/admin-auth'
+    }
+  }
+
   render() {
     return (
       <div>
@@ -161,6 +198,38 @@ class AdminApplications extends React.Component {
                 REJECTED APPLICATIONS
               </div>
             </div>
+            <div className="admin-applications-right-box-phone">
+              <CssTextField
+                id="outlined-basic"
+                label="🔍Search for User by Name or Phone Number"
+                variant="outlined"
+                value={this.state.searchText}
+                onChange={this.handleSearchTextChange}
+                onKeyUp={this.handleSubmitText}
+              />
+              <div className="admin-applications-search-results">
+                <div>
+                  {this.state.searchResultText !== ""
+                    ? `Search results for \"${this.state.searchResultText}\"`
+                    : ""}
+                </div>
+                {/* {newIssues.map((user, i) => (
+                                    <div
+                                        className='admin-applications-search-results-card'
+                                        style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
+                                    >
+                                        <div>
+                                            <div>{user.name}</div>
+                                            <div>{user.phone}</div>
+                                        </div>
+                                        <div onClick={() => {}}>
+                                            BAN USER
+                                            <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                                        </div>
+                                    </div>
+                                ))}{" "} */}
+              </div>
+            </div>
             <div
               style={this.state.tab == 1 ? { display: "none" } : {}}
               className="admin-applications-applications"
@@ -178,12 +247,11 @@ class AdminApplications extends React.Component {
               ))}
             </div>
           </div>
-
           <div className="admin-applications-right-box">
-            <TextField
-              id="standard-basic"
-              label="Search for User by Name or Phone Number"
-              variant="standard"
+            <CssTextField
+              id="outlined-basic"
+              label="🔍Search for User by Name or Phone Number"
+              variant="outlined"
               value={this.state.searchText}
               onChange={this.handleSearchTextChange}
               onKeyUp={this.handleSubmitText}

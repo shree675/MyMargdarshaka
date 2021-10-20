@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
+import firebase from "../../firebase";
 
 import {
   Nav,
@@ -11,7 +12,6 @@ import {
   NavLink,
   NavBtn,
   NavBtnLink,
-  MobileNavLink,
 } from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
@@ -27,7 +27,7 @@ const LearnerNavbar = (props) => {
         style={
           open
             ? {
-                height: "63vh",
+                height: "60vh",
                 background: "#5d1049",
                 display: "block",
                 paddingTop: "5vh",
@@ -37,7 +37,7 @@ const LearnerNavbar = (props) => {
       >
         <div
           style={{
-            border: "1px solid red",
+            border: "1px solid white",
             height: "5vh",
             width: "60vw",
             margin: "0 0 5vh 20vw",
@@ -49,24 +49,35 @@ const LearnerNavbar = (props) => {
             setOpen(false);
           }}
         >
-          <div style={{ color: "red", marginLeft: "20vw" }}>CLOSE</div>
+          <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
           <CloseIcon
-            style={{ color: "red", fontSize: "3vh", marginLeft: "5vw" }}
+            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
           />
         </div>
-        <MobileNavLink className="nav-link-mobile" to="/learner-guidelines">
+        <Link className="nav-link-mobile" to="/learner-guidelines">
           GUIDELINES
-        </MobileNavLink>
-        <MobileNavLink className="nav-link-mobile" to="/my-mentors">
+        </Link>
+        <Link className="nav-link-mobile" to="/my-mentors">
           MY MENTORS
-        </MobileNavLink>
-        <MobileNavLink className="nav-link-mobile" to="/learner-dashboard">
+        </Link>
+        <Link className="nav-link-mobile" to="/learner-dashboard">
           DASHBOARD
-        </MobileNavLink>
-        <MobileNavLink className="nav-link-mobile" to="/learner-feedback">
+        </Link>
+        <Link className="nav-link-mobile" to="/learner-feedback">
           FEEDBACK
-        </MobileNavLink>
-        <MobileNavLink to="/logout">LOGOUT</MobileNavLink>
+        </Link>
+        {/* <Link className="nav-link-mobile" to="/logout">
+          LOGOUT
+        </Link> */}
+        <button
+          onClick={() => {
+            firebase.auth().signOut();
+            // window.location='/init-signin';
+          }}
+          className="nav-logout-phone"
+        >
+          LOGOUT
+        </button>
       </div>
 
       <Nav style={open ? { display: "none" } : {}}>
@@ -87,7 +98,16 @@ const LearnerNavbar = (props) => {
           <NavLink to="/my-mentors">MY MENTORS</NavLink>
           <NavLink to="/learner-dashboard">DASHBOARD</NavLink>
           <NavLink to="/learner-feedback">FEEDBACK</NavLink>
-          <NavLink to="/logout">LOGOUT</NavLink>
+          {/* <NavLink to='/logout'>LOGOUT</NavLink> */}
+          <button
+            onClick={() => {
+              firebase.auth().signOut();
+              // window.location='/init-signin';
+            }}
+            className="nav-logout-pc"
+          >
+            LOGOUT
+          </button>
         </NavMenu>
 
         <img

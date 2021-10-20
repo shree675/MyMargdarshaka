@@ -5,9 +5,9 @@ const router = express.Router();
 var Learner = require("../models/learner.model");
 
 router.route("/login/submitlearner").get((req, res) => {
-  Learner.find()
-    .then((e) => res.json(e))
-    .catch((err) => res.status(400).json("notfound"));
+    Learner.find()
+        .then((e) => res.json(e))
+        .catch((err) => res.status(400).json("notfound"));
 });
 
 router.route("/signup/createlearner").post(async (req, res) => {
@@ -15,7 +15,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const language = req.body.language;
-  const time = req.body.time;
+  const times = req.body.times;
   const Class = req.body.Class;
   const profile_picture_url = req.body.profile_picture_url;
   const subjects = req.body.subjects;
@@ -26,7 +26,7 @@ router.route("/signup/createlearner").post(async (req, res) => {
     name,
     email,
     language,
-    time,
+    times,
     Class,
     profile_picture_url,
     subjects,
@@ -39,7 +39,33 @@ router.route("/signup/createlearner").post(async (req, res) => {
     .then(() => res.json("Added new learner!"))
     .catch((err) => res.status(400).json("Error: " + err));
   //const data = await match("English", "Morning", ["HIN7", "SCI7"]);
-  console.log("Printing the data", data);
+  //console.log("Printing the data", data);
+
+});
+
+router.route("/assign/update/:phone").post((req, res) => {
+  //console.log(req)
+  //console.log("req.body", req.body)
+  Learner.find({ phone: req.body.phone })
+    .then((learners) => {
+      //console.log("Learners", learners)
+      //console.log(users.length)
+      if (learners.length == 0) {
+        console.log("learner not found");
+        return;
+      }
+      let learner = learners[0];
+      //learner.name = "HAPPY"
+      learner.subjects = req.body.subjects
+      console.log(learner.subjects)
+      //assign values here
+      //console.log("User", user)
+      learner
+        .save()
+        .then(() => res.json("Learner status updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 /* router.route('/update/:id').post((req, res) => {

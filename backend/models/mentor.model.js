@@ -8,7 +8,7 @@ let chapter = new Schema({
   },
   subtopics: {
     type: [[String, Boolean]],
-    default: [["Introduction", false]],
+    default: [["Introduction", false]], //Pairs of subtopic and completion status
   },
 });
 
@@ -16,6 +16,7 @@ let Mentor = new Schema({
   phone: {
     type: String,
     required: true,
+    /* unique: true */
   },
   name: {
     type: String,
@@ -27,6 +28,7 @@ let Mentor = new Schema({
   },
   language: {
     type: String,
+    enum: ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"],
     /* required: true */
   },
   time: {
@@ -46,7 +48,7 @@ let Mentor = new Schema({
         code: { type: String, required: true },
         students: [{ id: { type: String }, consent: { type: Boolean } }],
         chapters: {
-          type: [chapter], //Pairs of subtopic and completion status
+          type: [chapter],
         },
       },
     ],

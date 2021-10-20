@@ -93,13 +93,29 @@ const LearnerSignup = () => {
     } else {
       console.log(state);
       // push to DB
-      const SUBJECTS = [];
+      /* const SUBJECTS = [];
       for (let subject in state.subs) {
         const item = {
           code: subject,
         };
         SUBJECTS.push(item);
       }
+ */
+      const subjects_list = [];
+      console.log(state.subs);
+      let subjects = state.subs
+      subjects.forEach((subject) => {
+        console.log(state.Class, subject)
+        let code = data.codes[subject]+state.Class
+        console.log(code)
+        const item = {
+          code: code,
+          mentor_id: -1,
+          chapters: data.default.chapters,
+        };
+        subjects_list.push(item)
+      })
+      console.log(subjects_list)
 
       const learner = {
         /* phone: LearnerSignup.phone, */ //pass as props
@@ -109,35 +125,66 @@ const LearnerSignup = () => {
         language: state.prefLang,
         times: state.times,
         Class: state.Class,
-        subjects: SUBJECTS,
+        subjects: subjects_list,
       };
       const user = {
         phone: phone,
         user_type: "learner",
         valid_signup: true,
       };
-      console.log("Printing learner before pushing:", learner);
-      await axios
+      console.log("Printing learner before pushing:", learner); //remember to uncomment
+      /* await axios
         .post(`/api/learner/signup/createlearner`, learner)
-        .then((res) => console.log("Pushing Sign up data"));
+        .then((res) => console.log("Pushing Sign up data")); */
       /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
             window.location='/browse'; */
       //update valid user
       await axios
         .post(`/api/user/update/` + phone, user)
-        .then((res) => console.log("User table has been updated"));
+        .then((res) => console.log("User table has been updated", res));
       //Matching algorithm - we request the database using find() passing the
       //call match here
-      let language = 'English'
-      let time = 'Morning'
+      /* let language = 'English'
+      let times = ['Morning']
       let codes = ['HIN8']
-      await axios 
-        .get(`/signup/findmatches/`+phone)
-        .then((res) => console.log(res))
-      //const mentors = await match_learner(language, time, codes)
-      //console.log(mentors)
+      learner.language = language
+      learner.times = times
+      learner.codes = codes */
 
+      //console.log(learner)
+      let mentors = {};
+      await axios 
+        .post(`api/mentor/signup/findmatches/`+phone, learner)
+        .then((res) => {
+          console.log("res", res.data);
+          mentors = res.data})
+      //const mentors = await match_learner(language, time, codes)
+      console.log(mentors)
+      //now update learner
+      
+      for(let i=0; i<learner.subjects.length; i++)
+      {
+        //console.log(learner.subjects[i].mentor_id)
+        learner.subjects[i].mentor_id = mentors[i]
+      }
+      //console.log(learner.subjects)
+      //updating the learner database with the assigned mentors
+      console.log(learner)
+      await axios
+        .post(`/api/learner/assign/update/` + phone, learner)
+        .then((res) => console.log("Learner table has been updated", res));
+
+      //updating the mentors database with the assigned students
+      //get the current learners id
+      //loop through each of the mentors in the mentors list and add the learner id to the correct class code
+      const mentor = {
+
+      }
+      let id = mentors[0]
+      /* await axios
+        .post(`/api/mentor/updateId/` + id, mentor)
+        .then((res) => console.log("Learner table has been updated", res)); */
     }
   };
 
