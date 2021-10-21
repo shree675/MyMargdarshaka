@@ -23,6 +23,23 @@ The My Margdarshaka App is aimed at connecting these two types of people so that
 
 There are similar existing solutions but they provide limitations like absence of personal guidance, lack of direction in passive resources, unaffordable and not easy to use with certification, to name a few. MyMargdarshaka is unique in the way that it aims at addressing such limitations and providing the best features of the existing solutions, keeping in mind that the students may not be well versed in technology.
 
+## Quick Start
+1. Fork and clone this repository.
+2. Open up a terminal in the `./` directory and run:
+
+```bash
+# Install dependencies for server
+$ npm install
+
+# Install dependencies for client
+$ npm run client-install
+
+# Run the app
+$ npm run dev
+
+# Server runs on http://localhost:5000 and client on http://localhost:3000
+```
+
 ## User Guide and Features
 To use this platform as a student/learner:
 * Click on 'GET STARTED' and then 'SIGNIN AS A STUDENT'.
@@ -62,22 +79,6 @@ To use this platform as an admin:
 
 [INSERT_IMAGE_AFTER_COMPLETION]
 
-## Quick Start
-1. Fork and clone this repository.
-2. Open up a terminal in the `./` directory and run:
-
-```bash
-# Install dependencies for server
-$ npm install
-
-# Install dependencies for client
-$ npm run client-install
-
-# Run the app
-$ npm run dev
-
-# Server runs on http://localhost:5000 and client on http://localhost:3000
-```
-
-## Technologies Used
-MERN stack with Firebase
+## Tools and Technologies Used
+* MERN stack with Firebase for the app
+* Figma for the design and wireframing
