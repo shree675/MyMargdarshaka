@@ -5,9 +5,9 @@ const router = express.Router();
 var Learner = require("../models/learner.model");
 
 router.route("/login/submitlearner").get((req, res) => {
-    Learner.find()
-        .then((e) => res.json(e))
-        .catch((err) => res.status(400).json("notfound"));
+  Learner.find()
+    .then((e) => res.json(e))
+    .catch((err) => res.status(400).json("notfound"));
 });
 
 router.route("/signup/createlearner").post(async (req, res) => {
@@ -40,8 +40,10 @@ router.route("/signup/createlearner").post(async (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
   //const data = await match("English", "Morning", ["HIN7", "SCI7"]);
   //console.log("Printing the data", data);
-
 });
+
+/*
+previous version of update route
 
 router.route("/assign/update/:phone").post((req, res) => {
   //console.log(req)
@@ -56,8 +58,8 @@ router.route("/assign/update/:phone").post((req, res) => {
       }
       let learner = learners[0];
       //learner.name = "HAPPY"
-      learner.subjects = req.body.subjects
-      console.log(learner.subjects)
+      learner.subjects = req.body.subjects;
+      console.log(learner.subjects);
       //assign values here
       //console.log("User", user)
       learner
@@ -66,6 +68,16 @@ router.route("/assign/update/:phone").post((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
+}); */
+
+//new version for update route
+
+router.route("/assign/update/:phone").post(async (req, res) => {
+  let phone = req.params.phone;
+  let data = req.body;
+  console.log(phone, data);
+  await Learner.findOneAndUpdate({ phone }, { $set: data });
+  res.json("ok");
 });
 
 /* router.route('/update/:id').post((req, res) => {
@@ -77,5 +89,13 @@ router.route("/assign/update/:phone").post((req, res) => {
     user.save().then(() => res.json('Password updated!')).catch(err => res.status(400).json('Error: ' + err));
     }).catch(err => res.status(400).json('Error: ' + err));
 }); */
+
+router.route("/get-data/:phone").get(async (req, res) => {
+  let phone = req.params.phone;
+  console.log(phone);
+  let data = await Learner.findOne({ phone }).exec();
+  console.log(data._id.toString());
+  res.json(data);
+});
 
 module.exports = router;

@@ -103,19 +103,19 @@ const LearnerSignup = () => {
  */
       const subjects_list = [];
       console.log(state.subs);
-      let subjects = state.subs
+      let subjects = state.subs;
       subjects.forEach((subject) => {
-        console.log(state.Class, subject)
-        let code = data.codes[subject]+state.Class
-        console.log(code)
+        console.log(state.Class, subject);
+        let code = data.codes[subject] + state.Class;
+        console.log(code);
         const item = {
           code: code,
           mentor_id: -1,
           chapters: data.default.chapters,
         };
-        subjects_list.push(item)
-      })
-      console.log(subjects_list)
+        subjects_list.push(item);
+      });
+      console.log(subjects_list);
 
       const learner = {
         /* phone: LearnerSignup.phone, */ //pass as props
@@ -133,13 +133,18 @@ const LearnerSignup = () => {
         valid_signup: true,
       };
       console.log("Printing learner before pushing:", learner); //remember to uncomment
-      /* await axios
+
+      /*
+      await axios
         .post(`/api/learner/signup/createlearner`, learner)
-        .then((res) => console.log("Pushing Sign up data")); */
+        .then((res) => console.log("Pushing Sign up data"));
+        */
+
       /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
             window.name=this.state.username;
             window.location='/browse'; */
       //update valid user
+      // related to firebase
       await axios
         .post(`/api/user/update/` + phone, user)
         .then((res) => console.log("User table has been updated", res));
@@ -153,35 +158,61 @@ const LearnerSignup = () => {
       learner.codes = codes */
 
       //console.log(learner)
-      let mentors = {};
-      await axios 
-        .post(`api/mentor/signup/findmatches/`+phone, learner)
-        .then((res) => {
-          console.log("res", res.data);
-          mentors = res.data})
+      //let mentors = {};
+      //await axios
+      //.post(`api/mentor/signup/findmatches/`, learner)
+      //.then((res) => {
+      //console.log("res", res.data);
+      //mentors = res.data;
+      //});
+      let res = await axios.post(`api/mentor/signup/findmatches/`, learner);
+      let mentors = res.data;
       //const mentors = await match_learner(language, time, codes)
-      console.log(mentors)
+      console.log(mentors);
       //now update learner
-      
-      for(let i=0; i<learner.subjects.length; i++)
-      {
+
+      for (let i = 0; i < learner.subjects.length; i++) {
         //console.log(learner.subjects[i].mentor_id)
-        learner.subjects[i].mentor_id = mentors[i]
+        learner.subjects[i].mentor_id = mentors[i];
       }
       //console.log(learner.subjects)
       //updating the learner database with the assigned mentors
-      console.log(learner)
-      await axios
-        .post(`/api/learner/assign/update/` + phone, learner)
-        .then((res) => console.log("Learner table has been updated", res));
+      console.log(learner);
+
+      let res2 = await axios.post(
+        `/api/learner/assign/update/` + phone,
+        learner
+      );
+
+      console.log("Learner table has been updated ", res2);
+      //.then((res) => console.log("Learner table has been updated", res));
 
       //updating the mentors database with the assigned students
       //get the current learners id
       //loop through each of the mentors in the mentors list and add the learner id to the correct class code
-      const mentor = {
+      const mentor = {};
+      let id = mentors[0];
 
+      let codes = [];
+      learner.subjects.forEach((subject) => {
+        codes.push(subject.code);
+      });
+
+      let learner_data = await axios.get(`/api/learner/get-data/${phone}`);
+      console.log(learner_data.data);
+      let learner_id = learner_data.data._id.toString();
+      console.log(learner_id);
+
+      for (let i = 0; i < codes.length; i++) {
+        let cur_code = codes[i];
+        let cur_mentor_id = mentors[i];
+
+        await axios.post(`/api/mentor/assign/update-by-id/${cur_mentor_id}`, {
+          class_code: cur_code,
+          learner_id,
+        });
       }
-      let id = mentors[0]
+
       /* await axios
         .post(`/api/mentor/updateId/` + id, mentor)
         .then((res) => console.log("Learner table has been updated", res)); */

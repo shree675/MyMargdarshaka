@@ -32,6 +32,7 @@ router.route("/update/:phone").post((req, res) => {
       }
       let user = users[0];
       user.valid_signup = req.body.valid_signup; //the error is here
+      console.log(req.body.valid_signup);
       //console.log("User", user)
       user
         .save()
