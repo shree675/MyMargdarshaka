@@ -8,6 +8,7 @@ import Authentication from "./components/AuthenticationPage/authentication.js";
 import LearnerSignup from "./components/LearnerSignupPage/learner-signup.js";
 import MentorSignup from "./components/MentorSignupPage/mentor-signup.js";
 import Feedback from "./components/FeedbackPage/feedback.js";
+import Error from "./components/ErrorPage/error.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
 import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
@@ -59,7 +60,7 @@ class App extends Component {
                     <Route exact path='/test' component={TestPage} />
                     <Route exact path='/admin-applications' component={AdminApplications} />
                     <Route exact path='/admin-home' component={AdminHomePage} />
-                    <Route path='/' component={Feedback} /> // 404 page
+                    <Route path='/' component={Error} /> {/* // 404 page */}
                 </Switch>
             </Router>
         );

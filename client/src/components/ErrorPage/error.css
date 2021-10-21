@@ -1,0 +1,104 @@
+.error-content {
+    margin-top: -35px;
+    border-radius: 20px 20px 0 0;
+    background-color: white;
+    padding: 1vw;
+    padding-top: 0vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.error-img {
+    width: 80%;
+}
+
+.error-content-left {
+    text-align: center;
+    padding-top: 1vw;
+    flex: 1.8;
+}
+
+.error-content-right {
+    text-align: left;
+    flex: 1;
+    padding: 1.5vw;
+    padding-top: 2.5vw;
+}
+
+.error-height {
+    height: 35px;
+}
+.error-404-code {
+    font-size: 3vw;
+    color:#4e0d3a;
+}
+
+.error-error {
+    font-size: 5vw;
+    color:#e30425;
+    font-weight: bold;
+}
+
+.error-message {
+    font-size: 1.5vw;
+    color:black;
+}
+
+.error-button {
+    font-size: 1.2vw;
+    padding: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: white;
+    background-color: #5d1049;
+    border: none;
+    height: 2.5vw;
+    border-radius: 1.25vw;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.error-button:hover {
+    background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #5d1049, #720d5d, #720d5d);
+    background-size: 400%;
+    animation: glowing 15s linear infinite;
+    transition: 0.3s;
+}
+
+#issue-type {
+    text-align: left;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .error-content {
+        margin-top: -35px;
+        border-radius: 20px 20px 0 0;
+        background-color: white;
+        padding: 1vw;
+        padding-top: 0vw;
+        display: block;
+    }
+
+    .error-height {
+        height: 25px;
+    }
+
+    .error-button {
+        height: 7.5vw;
+        border-radius: 3.75vw;
+        font-size: 3.5vw;
+        margin-bottom: 1vw;
+    }
+}
