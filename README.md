@@ -12,7 +12,7 @@
 <i>Effective digital tutelage in the Indian context: Making the right connections</i>
 
 ## Abstract
-The My Margdarshaka Android app based on the novel concept of connecting Indian school students who are unable to attend traditional school due to financial or logistic constraints with mentors who want to give back to society by teaching them. The idea is to mentor these students with the goal of taking the class 10 and 12 certification exams conducted by the National Institute of Open Schooling (NIOS) which is the Government of India’s official examination body. The app focuses on the UN SDG 4 - Quality Education.
+The MyMargdarshaka platform is based on the novel concept of connecting Indian school students who are unable to attend traditional school due to financial or logistic constraints with mentors who want to give back to society by teaching them. The idea is to mentor these students with the goal of taking the class 10 and 12 certification exams conducted by the National Institute of Open Schooling (NIOS) which is the Government of India’s official examination body. The app focuses on the UN SDG 4 - Quality Education.
 
 ## Idea
 According to a survey conducted in 2017-18, there were over 30 million Indian children not enrolled in schools. This number has only been increasing because of the Covid-19 pandemic. There are millions of students who are not able to attend school due to financial or logistical reasons. The longer the gap in learning, the more disinterested students get and eventually exit the education system.
