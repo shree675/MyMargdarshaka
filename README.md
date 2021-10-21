@@ -42,10 +42,10 @@ $ npm run dev
 
 ## User Guide and Features
 To use this platform as a student/learner:
-* Click on 'GET STARTED' and then 'SIGNIN AS A STUDENT'.
+* Click on 'GET STARTED' and then 'SIGN IN AS A STUDENT'.
 * Provide your phone number and verify your OTP. 
 * Enter your details - name, preferred language of instruction, interested subjects that you want to learn and time slots as per your convenience.
-* Click on 'ASSIGN MENTORS'. You will be assigned mentors for the subjects you chose in the previous step as per availability.
+* Click on 'ASSIGN MENTORS'. You will be assigned mentors for the subjects you choose in the previous step as per availability.
 * Get started on the subjects and have a happy learning experience!
 * You can view your progress on the right panel and you can change your details or request for a change in mentor in the dashboard page.
 * You can provide regular feedback about the platform or experience in the feedback page.
@@ -55,7 +55,7 @@ To use this platform as a student/learner:
 [INSERT_IMAGE_AFTER_COMPLETION]
 
 To use this platform as a mentor:
-* Click on 'GET STARTED' and then 'SIGNIN AS A MENTOR'.
+* Click on 'GET STARTED' and then 'SIGN IN AS A MENTOR'.
 * Provide your phone number and verify your OTP. 
 * Enter your details - name, email, preferred language of instruction, subjects that you want to teach and time slots of your convenience.
 * Wait for the administrators to assess and approve your application.
