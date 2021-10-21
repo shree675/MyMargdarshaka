@@ -12,14 +12,14 @@
 <i>Effective digital tutelage in the Indian context: Making the right connections</i>
 
 ## Abstract
-The My Margdarshaka Android app based on the novel concept of connecting Indian school students who are unable to attend traditional school due to financial or logistic constraints with mentors who want to give back to society by teaching them. The idea is to mentor these students with the goal of taking the class 10 and 12 certification exams conducted by the National Institute of Open Schooling (NIOS) which is the Government of India’s official examination body. The app focuses on the UN SDG 4 - Quality Education.
+The MyMargdarshaka platform is based on the novel concept of connecting Indian school students who are unable to attend traditional school due to financial or logistic constraints with mentors who want to give back to society by teaching them. The idea is to mentor these students with the goal of taking the class 10 and 12 certification exams conducted by the National Institute of Open Schooling (NIOS) which is the Government of India’s official examination body. The app focuses on the UN SDG 4 - Quality Education.
 
 ## Idea
 According to a survey conducted in 2017-18, there were over 30 million Indian children not enrolled in schools. This number has only been increasing because of the Covid-19 pandemic. There are millions of students who are not able to attend school due to financial or logistical reasons. The longer the gap in learning, the more disinterested students get and eventually exit the education system.
 
 On the other hand, there are many well-educated people in India who want to give back to society by teaching underprivileged children, but are unable to do so through the traditional schooling system because of other commitments. They can however devote a few hours a week to teach disadvantaged children, the above mentioned students as an example, from home. 
 
-The My Margdarshaka App is aimed at connecting these two types of people so that more children have the opportunity to complete their school level education and hope for a better life. The app keeps in mind the National Institute of Open schooling (NIOS) which is the Government of India’s official portal for class 10 and class 12 examination and certification. Hence, students and mentors can enrol on MyMargdarshaka, get connected based on compatibility criteria and start a great learning to get certified by NIOS.
+This platform is aimed at connecting these two types of people so that more children have the opportunity to complete their school level education and hope for a better life. This platform keeps in mind the National Institute of Open schooling (NIOS) which is the Government of India’s official portal for class 10 and class 12 examination and certification. Hence, students and mentors can enrol on MyMargdarshaka, get connected based on compatibility criteria and start a great learning to get certified by NIOS.
 
 There are similar existing solutions but they provide limitations like absence of personal guidance, lack of direction in passive resources, unaffordable and not easy to use with certification, to name a few. MyMargdarshaka is unique in the way that it aims at addressing such limitations and providing the best features of the existing solutions, keeping in mind that the students may not be well versed in technology.
 
@@ -42,10 +42,10 @@ $ npm run dev
 
 ## User Guide and Features
 To use this platform as a student/learner:
-* Click on 'GET STARTED' and then 'SIGNIN AS A STUDENT'.
+* Click on 'GET STARTED' and then 'SIGN IN AS A STUDENT'.
 * Provide your phone number and verify your OTP. 
 * Enter your details - name, preferred language of instruction, interested subjects that you want to learn and time slots as per your convenience.
-* Click on 'ASSIGN MENTORS'. You will be assigned mentors for the subjects you chose in the previous step as per availability.
+* Click on 'ASSIGN MENTORS'. You will be assigned mentors for the subjects you choose in the previous step as per availability.
 * Get started on the subjects and have a happy learning experience!
 * You can view your progress on the right panel and you can change your details or request for a change in mentor in the dashboard page.
 * You can provide regular feedback about the platform or experience in the feedback page.
@@ -55,7 +55,7 @@ To use this platform as a student/learner:
 [INSERT_IMAGE_AFTER_COMPLETION]
 
 To use this platform as a mentor:
-* Click on 'GET STARTED' and then 'SIGNIN AS A MENTOR'.
+* Click on 'GET STARTED' and then 'SIGN IN AS A MENTOR'.
 * Provide your phone number and verify your OTP. 
 * Enter your details - name, email, preferred language of instruction, subjects that you want to teach and time slots of your convenience.
 * Wait for the administrators to assess and approve your application.
