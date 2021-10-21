@@ -79,5 +79,6 @@ To use this platform as an admin:
 
 [INSERT_IMAGE_AFTER_COMPLETION]
 
-## Technologies Used
-MERN stack with Firebase
+## Tools and Technologies Used
+* MERN stack with Firebase for the app
+* Figma for the design and wireframing
