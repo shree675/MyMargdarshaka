@@ -53,7 +53,7 @@ let Learner = new Schema({
     type: [
       {
         code: { type: String, required: true },
-        mentor_id: { type: Number, default: -1 },
+        mentor_id: { type: String, default: "-1" },
         consent: { type: Boolean, default: false },
         chapters: {
           type: [chapter],
@@ -65,8 +65,13 @@ let Learner = new Schema({
 
   NIOS_status: {
     type: String,
-    default: 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM',
-    enum: ['I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM', 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM', 'I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM', 'I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM']
+    default: "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
+    enum: [
+      "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM",
+      "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
+      "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM",
+      "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
+    ],
   },
   //1: I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
   //2: I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM

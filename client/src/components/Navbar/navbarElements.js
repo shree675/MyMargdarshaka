@@ -101,3 +101,26 @@ export const NavBtnLink = styled(Link)`
     color: #808080;
   }
 `;
+
+export const MobileNavLink = styled(Link)`
+  color: #dbc0c0;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: raleway;
+  margin-bottom: 5vh;
+  margin-left: 25vw;
+
+  &.active {
+    color: white;
+    font-weight: 550;
+    border: 2px solid white;
+    border-radius: 25px;
+  }
+  &:hover {
+    color: white;
+  }
+`;
