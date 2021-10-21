@@ -1,5 +1,4 @@
 //@ts-check
-
 import React from "react";
 import AdminNavbar from "../Navbar/admin-navbar";
 import "./admin-applications.css";
