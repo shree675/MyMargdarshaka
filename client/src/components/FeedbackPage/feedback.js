@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import LearnerNavbar from "../Navbar/learner-navbar";
-import AdminNavbar from "../Navbar/mentor-navbar";
+import MentorNavbar from "../Navbar/mentor-navbar";
 import TextField from "@mui/material/TextField";
 import "./feedback.css";
 import feedbackcomp from "../../assets/feedback-comp.svg";
@@ -74,12 +74,8 @@ const Feedback = () => {
                 await axios
                     .get("/api/mentor/login/submitmentor")
                     .then((e) => {
-                        console.log("height");
-
                         e.data.map((data) => {
                             if (data.phone === user.phoneNumber) {
-                                console.log("next height");
-
                                 setName(data.name);
                                 console.log(data.name);
                                 setUserType("mentor");
@@ -98,7 +94,7 @@ const Feedback = () => {
 
     return (
         <div>
-            {userType === null ? null : userType === "learner" ? <LearnerNavbar /> : <AdminNavbar />}
+            {userType === null ? null : userType === "learner" ? <LearnerNavbar /> : <MentorNavbar />}
             <div style={{ height: "35px", backgroundColor: "#720d5d" }}></div>
             <div className='feedback-content'>
                 <div className='feedback-content-left'>
