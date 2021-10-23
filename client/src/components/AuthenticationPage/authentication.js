@@ -278,6 +278,7 @@ const Authentication = () => {
                         <br></br>
                         <div className='auth-text'>
                             <CssTextField
+                                type = 'password'
                                 fullWidth
                                 onChange={(e) => {
                                     setOtp(e.target.value);
