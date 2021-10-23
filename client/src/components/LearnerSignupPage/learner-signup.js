@@ -132,8 +132,10 @@ const LearnerSignup = () => {
         user_type: "learner",
         valid_signup: true,
       };
+      //TODO - call user table and check if sign up is unsuccessful or not (in case someon tries to break the system with multiple sign ups with same phone number)
       console.log("Printing learner before pushing:", learner); //remember to uncomment
 
+      //remember to uncomment
       /*
       await axios
         .post(`/api/learner/signup/createlearner`, learner)

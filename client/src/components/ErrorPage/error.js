@@ -1,7 +1,8 @@
 //@ts-check
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../Navbar/learner-navbar";
+import LearnerNavbar from "../Navbar/learner-navbar";
+import MentorNavbar from "../Navbar/mentor-navbar";
 import TextField from "@mui/material/TextField";
 import "./error.css";
 import errorcomp from "../../assets/error.svg";
@@ -39,24 +40,27 @@ const Error = () => {
     const [curuser, setCuruser] = useState(null);
     const [phone, setPhone] = useState(null);
     const [name, setName] = useState(null);
-    const [user_type, setUserType] = useState("unknown");
+    const [userType, setUserType] = useState("unknown");
+
 
     useEffect(() => {
         verify();
-    }, []);
+    }, [phone]);
 
     const verify = async () => {
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 setCuruser(user.uid);
                 setPhone(user.phoneNumber);
-                await axios
+                /* await axios
                     .get("/api/learner/login/submitlearner")
                     .then((e) => {
                         e.data.map((data) => {
                             if (data.phone === user.phoneNumber) {
                                 setName(data.name);
                                 console.log(data.name);
+                                setUserType("learner");
+                                console.log(userType);
                             }
                         });
                     })
@@ -70,40 +74,43 @@ const Error = () => {
                             if (data.phone === user.phoneNumber) {
                                 setName(data.name);
                                 console.log(data.name);
+                                setUserType("mentor");
+                                console.log(userType);
                             }
                         });
                     })
                     .catch((err) => {
                         alert(err.message);
-                    });
+                    }); */
 
                 await axios.get("/api/user/login/getUser").then((e) => {
                     //console.log("*****************")
                     console.log(phone);
         
-                    e.data.map((user) => {
-                        let p = user.phone;
+                    e.data.map((userData) => {
+                        let p = userData.phone;
                         if (p[0] != "+") p = "+91" + p;
                         //if (phone[0] != "+") setPhone("+91"+phone)
-                        console.log("*****", user.phone, p);
+                        console.log("*****", phone, p);
         
-                        if (user.phone === p) {
+                        if (phone === p) {
                             console.log("Valid phone number matched: ", p);
-                            if (user.user_type == "mentor") {
-                                console.log("mentor")
+                            if (userData.user_type == "mentor") {
+                                console.log("mentor found")
                                 setUserType("mentor")
-                            } else if (user.user_type == "learner") {
+                            } else if (userData.user_type == "learner") {
                                 setUserType('learner')
                                 console.log("learner found")
                             }
-                            console.log("Phone number found ", p, user_type);
+                            console.log("Phone number found ", p, userType);
                         } else {
                             setUserType("unknown")
                         }
                     });
                 });
             } else {
-                window.location = "/init-signin";
+
+                //window.location = "/init-signin";
             }
         });
     };
@@ -117,10 +124,10 @@ const Error = () => {
 
     return (
         <div>
-            <Navbar />
+            {userType === "unknown" ? null : userType === "learner" ? <LearnerNavbar /> : <MentorNavbar />}
             <div style={{ height: "35px", backgroundColor: "#720d5d" }}></div>
-            <div className='error-content'>
-                <div className='error-content-left'>
+            <div className='error-content' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+                <div className='error-content-left' >
                 <animated.div style={{ transform: props.xy.to(trans1) }}>
                         {/* <img src={left} width='80%'></img> */}
                         <img src={errorcomp} className='error-img'></img>
@@ -138,11 +145,11 @@ const Error = () => {
                         className='error-button'
                         onClick={() => {
                             console.log("clicked")
-                            if(user_type=='unknown')
+                            if(userType=='unknown')
                                 window.location = "/init-signin";
-                            else if(user_type=='learner')
+                            else if(userType=='learner')
                                 window.location = "/my-mentors";
-                            else if(user_type == 'mentor')
+                            else if(userType == 'mentor')
                                 window.location = "/my-students";
                         }}
                     >
