@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function validate() {
   "use strict";
@@ -22,7 +22,20 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = () => {
+const LearnerDashboardChangeDetails = ({ details }) => {
+  const [state, setState] = useState(details);
+
+  useEffect(() => {
+    console.log("state : ", state);
+    setState(details);
+  }, [details]);
+
+  const handleChange = (e) => {
+    const name = e.target.id;
+    const value = e.target.value;
+    setState({ ...state, [name]: value });
+  };
+
   return (
     <div className="learner-dashboard-change-details">
       <div
@@ -52,6 +65,8 @@ const LearnerDashboardChangeDetails = () => {
               id="name"
               type="text"
               class="form-control"
+              value={state.name}
+              onChange={handleChange}
               placeholder="First Last"
               required
             />
@@ -67,6 +82,8 @@ const LearnerDashboardChangeDetails = () => {
               id="phone"
               type="text"
               class="form-control"
+              value={state.phone}
+              onChange={handleChange}
               placeholder="9876543210"
               required
             />
@@ -84,6 +101,8 @@ const LearnerDashboardChangeDetails = () => {
               id="email"
               type="email"
               class="form-control"
+              value={state.email}
+              onChange={handleChange}
               placeholder="someone@example.com"
             />
           </div>

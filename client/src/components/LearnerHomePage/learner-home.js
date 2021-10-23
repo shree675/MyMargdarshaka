@@ -69,6 +69,7 @@ const LearnerHome = (props) => {
   };
   */
 
+  /*
   const num_mentors = 6;
 
   var cards = [];
@@ -79,6 +80,7 @@ const LearnerHome = (props) => {
       </div>
     );
   }
+  */
 
   return (
     <div className="learner-home">
