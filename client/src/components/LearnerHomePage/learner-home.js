@@ -1,9 +1,12 @@
 // @ts-check
 
 import React from "react";
+import axios from "axios";
+
 import Card from "./card";
 import ProgressChart from "./progress-chart";
 import Navbar from "../Navbar/learner-navbar";
+import data from "../../data";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
@@ -14,6 +17,47 @@ const LearnerHome = (props) => {
 
   // TODO: Update with mentorDetails
 
+  // this is temp, get this id from props
+  let id = "61716f548c649b63a6a06856";
+
+  const [mentorData, setMentorData] = React.useState([]);
+
+  const getData = async () => {
+    const res = await axios.get(`/api/learner/get-data/${id}`);
+    const subjects = res.data.subjects;
+
+    let mentor_data = [];
+
+    for (let i = 0; i < subjects.length; i++) {
+      const sub = subjects[i];
+      const res = await axios(`/api/mentor/get-data/${sub.mentor_id}`);
+      const mentor = res.data;
+      let temp = {};
+      const code = sub.code;
+      temp.subject = data.codeToSubName[code.substring(0, code.length - 1)];
+      temp.name = mentor.name;
+      temp.class = Number(code[code.length - 1]);
+      temp.email = mentor.email;
+      temp.phone = mentor.phone;
+      temp.hasPendingTests = false;
+      temp.hasConsented = true;
+
+      mentor_data.push(temp);
+    }
+
+    console.log(mentor_data);
+    setMentorData(mentor_data);
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  React.useEffect(() => {
+    console.log(mentorData);
+  }, [mentorData]);
+
+  /*
   const details = {
     subject: "MATHEMATICS",
     name: "Inderpal Ankur",
@@ -23,17 +67,20 @@ const LearnerHome = (props) => {
     hasPendingTests: false,
     hasConsented: true,
   };
+  */
 
+  /*
   const num_mentors = 6;
 
   var cards = [];
   for (let i = 0; i < num_mentors; i++) {
     cards.push(
-      <div className="col-8 mx-auto col-sm-6 mx-md-0">
-        <Card details={details} />
+      <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
+        <Card details={mentorData[i]} />
       </div>
     );
   }
+  */
 
   return (
     <div className="learner-home">
@@ -47,7 +94,15 @@ const LearnerHome = (props) => {
             <h1>
               <strong>MENTORS</strong>
             </h1>
-            <div className="row">{cards}</div>
+            <div className="row">
+              {mentorData.map((mentorDetails, i) => {
+                return (
+                  <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
+                    <Card details={mentorDetails} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="col-md card p-3" style={borderStyle}>
             <h1 className="mb-3">

@@ -260,6 +260,7 @@ router.route("/updateId/:id").post((req, res) => {
 
 module.exports = router;
 
+// normal update by phone
 router.route("/assign/update-by-phone/:phone").post(async (req, res) => {
   let phone = req.params.phone;
   let data = req.body;
@@ -268,6 +269,7 @@ router.route("/assign/update-by-phone/:phone").post(async (req, res) => {
   res.json("ok");
 });
 
+// normal update by id
 router.route("/update-by-id/:id").post(async (req, res) => {
   let id = req.params.id;
   let data = req.body;
@@ -276,6 +278,7 @@ router.route("/update-by-id/:id").post(async (req, res) => {
   res.json("ok");
 });
 
+// push students ID to mentor used after matching
 router.route("/assign/update-by-id/:id").post(async (req, res) => {
   let mentor_id = req.params.id;
   let class_code = req.body.class_code;
@@ -299,4 +302,10 @@ router.route("/assign/update-by-id/:id").post(async (req, res) => {
   //console.log(id, data);
   //await Mentor.findByIdAndUpdate(id, { $set: data });
   //res.json("ok");
+});
+
+router.route("/get-data/:id").get(async (req, res) => {
+  let id = req.params.id;
+  let data = await Mentor.findById(id).exec();
+  res.json(data);
 });

@@ -14,6 +14,16 @@ const data = {
     Chemistry: "CHEM",
     Biology: "BIO",
   },
+  codeToSubName: {
+    HIN: "Hindi",
+    TEL: "Telugu",
+    MAT: "Maths",
+    SCI: "Science",
+    SOC: "Social",
+    PHY: "Physics",
+    CHEM: "Chemistry",
+    BIO: "Biology",
+  },
 
   //some example data pf subtopics for one or 2 class codes
   ENG9: ["Punctuation", "grammar", "Reading", "Writing"],
