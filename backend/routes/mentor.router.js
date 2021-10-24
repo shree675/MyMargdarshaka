@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 var Mentor = require("../models/mentor.model");
 var { mentorSchema } = require("../utils/joiSchemas");
+const { ObjectId } = require("mongodb");
 
 router.route("/login/submitmentor").get((req, res) => {
   Mentor.find()
@@ -187,9 +188,12 @@ router.route("/signup/findmatches/").post(async (req, res) => {
   //console.log("TEST")
 });
 
-router.route("/findmatches").post(async (req, res) => {
+/*
+router.route("/findmatches/addedsubjects").post(async (req, res) => {
+
   const language = req.body.language;
   const times = req.body.times;
+  const subName = 
   let codes = [];
   const subjects = req.body.subjects;
   subjects.forEach((subject) => {
@@ -204,7 +208,7 @@ router.route("/findmatches").post(async (req, res) => {
     try {
       var response = await getMentors(language, times, code);
       /* .then(() => res.json("LALALAALALALAL"))
-            .catch((err) => res.status(400).json("Error: " + err));; */
+            .catch((err) => res.status(400).json("Error: " + err));;
       //console.log("response", response);
       //choose 1 among many responses and append to mentors
       var theChosenMentor = -1;
@@ -224,7 +228,7 @@ router.route("/findmatches").post(async (req, res) => {
         /* if(Class.code == code)
                 {
                     console.log("Mentor match name", Class.students)
-                } */
+                } 
       }
       // mentors ordered accordong to class codes order
       mentors.push(theChosenMentor);
@@ -242,6 +246,7 @@ router.route("/findmatches").post(async (req, res) => {
   //return "If youre happy and you know it"
   //console.log("TEST")
 });
+*/
 
 //Attempt 3 - bring all that match (language, times, codes) - then process
 /* router.route("/signup/findmatches/:phone").post(async (req, res) => {
@@ -347,6 +352,37 @@ router.route("/assign/update-by-id/:id").post(async (req, res) => {
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
       mentor.Classes[i].students.push(learner_id);
+    }
+  }
+
+  mentor
+    .save()
+    .then(() => res.json("Mentor status updated!"))
+    .catch((err) => res.status(400).json("Error: " + err));
+
+  //console.log(id, data);
+  //await Mentor.findByIdAndUpdate(id, { $set: data });
+  //res.json("ok");
+});
+
+router.route("/remove-learner/:id").post(async (req, res) => {
+  let mentor_id = req.params.id;
+  let class_code = req.body.class_code;
+  let learner_id = req.body.learner_id;
+
+  console.log("HELLLLOOO2 : ", mentor_id, class_code, learner_id);
+
+  let mentor = await Mentor.findById(mentor_id);
+
+  let classes = mentor.Classes;
+
+  for (let i = 0; i < classes.length; i++) {
+    if (classes[i].code === class_code) {
+      const stu_tmp = mentor.Classes[i].students.filter(
+        (stu) => stu._id != learner_id
+      );
+      console.log("HELLOO : ", stu_tmp);
+      mentor.Classes[i].students = stu_tmp;
     }
   }
 
