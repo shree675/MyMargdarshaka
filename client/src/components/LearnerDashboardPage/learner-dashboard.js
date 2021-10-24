@@ -9,7 +9,7 @@ import LearnerRequestChangeOfMentor from "./learner-change-mentor";
 
 const LearnerDashboard = () => {
   // this id should be passed through props
-  let learner_id = "61716f548c649b63a6a06856";
+  let learner_id = "6174edaeb2244a7f509c8a25";
 
   const [learnerData, setLearnerData] = useState({});
 
@@ -24,10 +24,6 @@ const LearnerDashboard = () => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(learnerData.phone);
-  }, [learnerData]);
-
   return (
     <div className="mb-3">
       <LearnerNavbar />
@@ -35,12 +31,15 @@ const LearnerDashboard = () => {
         <div className="row align-items-end">
           <div className="col-lg-3 col-12">
             <LearnerDashboardChangeDetails
-              learnerData={{ learnerData }}
-              setLearnerData={{ setLearnerData }}
+              details={learnerData}
+              learner_id={learner_id}
             />
           </div>
           <div className="col-lg-9 col-12">
-            <LearnerDashboardEditAttributes />
+            <LearnerDashboardEditAttributes
+              details={learnerData}
+              learner_id={learner_id}
+            />
           </div>
         </div>
         <NIOSStatus />

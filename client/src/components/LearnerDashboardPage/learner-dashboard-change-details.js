@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function validate() {
   "use strict";
@@ -19,16 +20,27 @@ function validate() {
       false
     );
   });
-
-  // DB update
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
+const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
+  const [state, setState] = useState(details);
+
+  useEffect(() => {
+    console.log("state : ", state);
+    setState(details);
+  }, [details]);
+
   const handleChange = (e) => {
-    const field_name = e.target.id;
-    const field_value = e.target.value;
-    setLearnerData({ ...learnerData, [field_name]: field_value });
+    const name = e.target.id;
+    const value = e.target.value;
+    setState({ ...state, [name]: value });
+  };
+
+  const handleClick = async () => {
+    validate();
+    // update DB
+    await axios.post(`/api/learner/update/id/${learner_id}`, state);
   };
 
   return (
@@ -60,7 +72,7 @@ const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
               id="name"
               type="text"
               class="form-control"
-              value={learnerData.name}
+              value={state.name}
               onChange={handleChange}
               placeholder="First Last"
               required
@@ -77,7 +89,7 @@ const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
               id="phone"
               type="text"
               class="form-control"
-              value={learnerData.phone}
+              value={state.phone}
               onChange={handleChange}
               placeholder="9876543210"
               required
@@ -96,7 +108,7 @@ const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
               id="email"
               type="email"
               class="form-control"
-              value={learnerData.email}
+              value={state.email}
               onChange={handleChange}
               placeholder="someone@example.com"
             />
@@ -111,7 +123,7 @@ const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
                 border: "none",
               }}
               type="submit"
-              onClick={validate}
+              onClick={handleClick}
             >
               SAVE
             </button>

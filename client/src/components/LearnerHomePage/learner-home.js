@@ -18,19 +18,19 @@ const LearnerHome = (props) => {
   // TODO: Update with mentorDetails
 
   // this is temp, get this id from props
-  let id = "61716f548c649b63a6a06856";
+  let id = "6174edaeb2244a7f509c8a25";
 
   const [mentorData, setMentorData] = React.useState([]);
 
   const getData = async () => {
-    const res = await axios.get(`/api/learner/get-data/${id}`);
+    const res = await axios.get(`/api/learner/get-data/id/${id}`);
     const subjects = res.data.subjects;
 
     let mentor_data = [];
 
     for (let i = 0; i < subjects.length; i++) {
       const sub = subjects[i];
-      const res = await axios(`/api/mentor/get-data/${sub.mentor_id}`);
+      const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`);
       const mentor = res.data;
       let temp = {};
       const code = sub.code;

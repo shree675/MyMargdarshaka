@@ -80,6 +80,14 @@ router.route("/assign/update/:phone").post(async (req, res) => {
   res.json("ok");
 });
 
+router.route("/update/id/:id").post(async (req, res) => {
+  let id = req.params.id;
+  let data = req.body;
+  console.log(id, data);
+  await Learner.findByIdAndUpdate(id, { $set: data });
+  res.json("ok");
+});
+
 /* router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id).then(user => {
 
@@ -96,7 +104,7 @@ router.route("/get-data/id/:id").get(async (req, res) => {
   res.json(data);
 });
 
-router.route("/get-data/:phone").get(async (req, res) => {
+router.route("/get-data/phone/:phone").get(async (req, res) => {
   let phone = req.params.phone;
   let data = await Learner.findOne({ phone }).exec();
   res.json(data);
