@@ -61,16 +61,13 @@ const Navbar = (props) => {
         <Link className="nav-link-mobile" to="/mentor-dashboard">
           DASHBOARD
         </Link>
-        <Link className="nav-link-mobile" to="/mentor-feedback">
+        <Link className="nav-link-mobile" to="/feedback">
           FEEDBACK
         </Link>
-        {/* <Link className="nav-link-mobile" to="/logout">
-          LOGOUT
-        </Link> */}
         <button
           onClick={() => {
             firebase.auth().signOut();
-            // window.location='/init-signin';
+            window.location = "/init-signin";
           }}
           className="nav-logout-phone"
         >
@@ -93,11 +90,10 @@ const Navbar = (props) => {
           <NavLink to="/my-students">MY STUDENTS</NavLink>
           <NavLink to="/mentor-dashboard">DASHBOARD</NavLink>
           <NavLink to="/mentor-feedback">FEEDBACK</NavLink>
-          {/* <NavLink to="/logout">LOGOUT</NavLink> */}
           <button
             onClick={() => {
               firebase.auth().signOut();
-              // window.location='/init-signin';
+              window.location = "/init-signin";
             }}
             className="nav-logout-pc"
           >

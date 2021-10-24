@@ -61,11 +61,10 @@ const AdminNavbar = (props) => {
         <Link className="nav-link-mobile" to="/admin-stats">
           STATS
         </Link>
-        {/* <Link className='nav-link-mobile'>LOGOUT</Link> */}
         <button
           onClick={() => {
             localStorage.setItem("isloggedin", "false");
-            // window.location='/admin-auth';
+            window.location = "/admin-auth";
           }}
           className="nav-logout-phone"
         >
@@ -87,11 +86,10 @@ const AdminNavbar = (props) => {
           <NavLink to="/admin-applications">APPLICATIONS</NavLink>
           <NavLink to="/admin-issues">ISSUES</NavLink>
           <NavLink to="/admin-stats">STATS</NavLink>
-          {/* <NavLink to='/logout'>LOGOUT</NavLink> */}
           <button
             onClick={() => {
               localStorage.setItem("isloggedin", "false");
-              // window.location='/admin-auth';
+              window.location = "/admin-auth";
             }}
             className="nav-logout-pc"
           >

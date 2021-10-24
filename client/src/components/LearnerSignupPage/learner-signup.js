@@ -7,6 +7,7 @@ import firebase from "../../firebase";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { verify } from "../../verifyUser";
 //import match_learner from "../../../../backend/routes/matching.learner"
 
 const { classes, primSubs, secSubs, langs, times } = data;
@@ -29,23 +30,8 @@ const LearnerSignup = () => {
   const [phone, setPhone] = useState("Null phone");
 
   useEffect(() => {
-    verify();
+    verify(setCuruser, setPhone);
   }, []);
-
-  // checks if a user is already logged in
-  const verify = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCuruser(user.uid); // user.uid is the unique identifier of the user
-        // alert("You are logged in as " + user.uid);
-        console.log(user.phoneNumber);
-        setPhone(user.phoneNumber);
-      } else {
-        setCuruser("No user found");
-      }
-    });
-    console.log(curuser);
-  };
 
   const handleChange = (e) => {
     if (e.target.name == "class") {
@@ -225,15 +211,6 @@ const LearnerSignup = () => {
   return (
     <div className="learner-signup-main">
       <div style={{ width: "800px" }}>
-        {/* Temporary logout button: */}
-        <button
-          onClick={() => {
-            firebase.auth().signOut();
-            window.location = "/init-signin";
-          }}
-        >
-          Logout (temporary button here)
-        </button>
         <div className="learner-signup-title">Sign Up</div>
         <div className="learner-signup-img-div-phone">
           <img

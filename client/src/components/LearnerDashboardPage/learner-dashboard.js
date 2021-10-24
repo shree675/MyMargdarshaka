@@ -1,16 +1,19 @@
+//@ts-check
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import LearnerDashboardEditAttributes from "./learner-edit-attributes";
 import LearnerDashboardChangeDetails from "./learner-dashboard-change-details";
 import NIOSStatus from "./nios-status";
 import LearnerNavbar from "../Navbar/learner-navbar";
 import LearnerRequestChangeOfMentor from "./learner-change-mentor";
+import { verify } from "../../verifyUser";
 
 const LearnerDashboard = () => {
   // this id should be passed through props
   let learner_id = "6174edaeb2244a7f509c8a25";
-
+  const [curuser, setCuruser] = useState("No user is logged in");
+  const [phone, setPhone] = useState("");
   const [learnerData, setLearnerData] = useState({});
 
   const getData = async () => {
@@ -21,6 +24,7 @@ const LearnerDashboard = () => {
   };
 
   useEffect(() => {
+    verify(setCuruser, setPhone);
     getData();
   }, []);
 

@@ -7,6 +7,7 @@ import Card from "./card";
 import ProgressChart from "./progress-chart";
 import Navbar from "../Navbar/learner-navbar";
 import data from "../../data";
+import { verify } from "../../verifyUser";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 

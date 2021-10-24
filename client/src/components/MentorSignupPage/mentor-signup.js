@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import data from "../../data";
+import { verify } from "../../verifyUser";
 
 /* let classes = [6, 7, 8, 9, 10, 11, 12];
 let primSubs = ["Hindi", "Telugu", "Maths", "Science", "Social"];
@@ -39,23 +40,8 @@ const MentorSignup = () => {
   const [phone, setPhone] = useState("Null phone");
 
   useEffect(() => {
-    verify();
+    verify(setCuruser, setPhone);
   }, []);
-
-  // checks if a user is already logged in
-  const verify = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCuruser(user.uid); // user.uid is the unique identifier of the user
-        // alert("You are logged in as " + user.uid);
-        console.log(user.phoneNumber);
-        setPhone(user.phoneNumber);
-      } else {
-        setCuruser("No user found");
-      }
-    });
-    console.log(curuser);
-  };
 
   const handleChange = (e) => {
     if (e.target.name == "clsAndSub") {
@@ -161,7 +147,9 @@ const MentorSignup = () => {
           console.log("Pushing Sign up data", phone);
         });
       //update valid user
-      await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
+      await axios
+        .post(`/api/user/update/` + phone, user)
+        .then((res) => console.log("User table has been updated"));
     }
   };
 
