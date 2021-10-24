@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path='/test' component={TestPage} />
           <Route exact path='/admin-applications' component={AdminApplications} />
           <Route exact path='/admin-home' component={AdminHomePage} />
-          <Route path='/' component={Error} /> {/* // 404 page */}
+          <Route path='/' component={Error} />
         </Switch>
       </Router>
     );

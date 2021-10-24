@@ -67,27 +67,26 @@ const Error = () => {
           e.data.map((userData) => {
             let p = userData.phone;
             if (p[0] != "+") p = "+91" + p;
-            //if (phone[0] != "+") setPhone("+91"+phone)
             console.log("*****", phone, p);
 
             if (phone === p) {
               console.log("Valid phone number matched: ", p);
-              if (userData.user_type == "mentor") {
+              if (userData.user_type === "mentor") {
                 console.log("mentor found");
                 setUserType("mentor");
                 tempuserType = "mentor";
-              } else if (userData.user_type == "learner") {
+                console.log(tempuserType);
+              } else if (userData.user_type === "learner") {
                 setUserType("learner");
                 tempuserType = "learner";
                 console.log("learner found");
               }
               console.log("Phone number found ", p, userType);
             } else {
-              setUserType("unknown");
-              tempuserType = "unknown";
             }
           });
         });
+        console.log(tempuserType);
         setUserType(tempuserType);
       } else {
       }
