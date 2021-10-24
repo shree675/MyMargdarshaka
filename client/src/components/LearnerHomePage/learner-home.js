@@ -1,12 +1,14 @@
 // @ts-check
 
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import firebase from "../../firebase";
 
 import Card from "./card";
 import ProgressChart from "./progress-chart";
 import Navbar from "../Navbar/learner-navbar";
 import data from "../../data";
+import { verify } from "../AuthenticationPage/authentication";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
@@ -18,12 +20,30 @@ const LearnerHome = (props) => {
   // TODO: Update with mentorDetails
 
   // this is temp, get this id from props
-  let id = "61716f548c649b63a6a06856";
+  let id = "6174edaeb2244a7f509c8a25";
 
+  const [curuser, setCuruser] = useState("No user is logged in");
+  const [phone, setPhone] = useState("");
   const [mentorData, setMentorData] = React.useState([]);
 
+  /*
+  const verify = async () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCuruser(user.uid); // user.uid is the unique identifier of the user
+        // alert("You are logged in as " + user.uid);
+        setPhone(user.phoneNumber);
+        //console.log(user.phoneNumber);
+      } else {
+        setCuruser("No user found");
+      }
+    });
+    console.log(curuser);
+  };
+  */
+
   const getData = async () => {
-    const res = await axios.get(`/api/learner/get-data/${id}`);
+    const res = await axios.get(`/api/learner/get-data/id/${id}`);
     const subjects = res.data.subjects;
 
     let mentor_data = [];
@@ -50,6 +70,7 @@ const LearnerHome = (props) => {
   };
 
   React.useEffect(() => {
+    verify(setCuruser, setPhone);
     getData();
   }, []);
 
