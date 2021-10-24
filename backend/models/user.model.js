@@ -5,6 +5,7 @@ let User = new Schema({
   phone: {
     type: String,
     required: true,
+    unique: true,
   },
   user_type: {
     type: String,
