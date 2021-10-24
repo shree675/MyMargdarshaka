@@ -52,7 +52,7 @@ const AdminAuthentication = () => {
 
   useEffect(() => {
     if (localStorage.getItem("isloggedin") == "true") {
-      // window.location='/admin-home'
+      window.location = "/admin-home";
     }
   }, []);
 
@@ -84,7 +84,7 @@ const AdminAuthentication = () => {
           localStorage.setItem("isloggedin", "true");
           // alert("Successfully logged in");
           successfulLogin = true;
-          window.location = "/admin-issues";
+          window.location = "/admin-home";
         }
       });
     });

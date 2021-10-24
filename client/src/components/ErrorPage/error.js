@@ -38,21 +38,27 @@ const CssTextField = styled(TextField)({
 
 const Error = () => {
   const [curuser, setCuruser] = useState(null);
-  const [phone, setPhone] = useState(null);
-  var userType = null;
+  //   const [phone, setPhone] = useState(null);
+  var phone = null;
+  var tempuserType = "unknown";
   const [name, setName] = useState(null);
-  //   const [userType, setUserType] = useState("unknown");
+  const [userType, setUserType] = useState("unknown");
 
   useEffect(() => {
     verify();
   }, []);
 
+  useEffect(() => {
+    console.log(tempuserType);
+    setUserType(tempuserType);
+  }, [tempuserType, phone]);
+
   const verify = async () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         setCuruser(user.uid);
-        setPhone(user.phoneNumber);
-        // phone = user.phoneNumber;
+        // setPhone(user.phoneNumber);
+        phone = user.phoneNumber;
 
         await axios.get("/api/user/login/getUser").then((e) => {
           //console.log("*****************")
@@ -68,20 +74,21 @@ const Error = () => {
               console.log("Valid phone number matched: ", p);
               if (userData.user_type == "mentor") {
                 console.log("mentor found");
-                // setUserType("mentor");
-                userType = "mentor";
+                setUserType("mentor");
+                tempuserType = "mentor";
               } else if (userData.user_type == "learner") {
-                // setUserType("learner");
-                userType = "learner";
+                setUserType("learner");
+                tempuserType = "learner";
                 console.log("learner found");
               }
               console.log("Phone number found ", p, userType);
             } else {
-              //   setUserType("unknown");
-              userType = "unknown";
+              setUserType("unknown");
+              tempuserType = "unknown";
             }
           });
         });
+        setUserType(tempuserType);
       } else {
       }
     });
