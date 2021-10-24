@@ -89,7 +89,7 @@ const LearnerNavbar = (props) => {
           <Bars />
         </div>
 
-        <NavLogo to="/">
+        <NavLogo to="#">
           <img src={mainLogo} style={{ height: "80px" }} />
         </NavLogo>
 

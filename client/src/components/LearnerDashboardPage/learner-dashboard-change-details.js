@@ -19,21 +19,16 @@ function validate() {
       false
     );
   });
+
+  // DB update
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ details }) => {
-  const [state, setState] = useState(details);
-
-  useEffect(() => {
-    console.log("state : ", state);
-    setState(details);
-  }, [details]);
-
+const LearnerDashboardChangeDetails = ({ learnerData, setLearnerData }) => {
   const handleChange = (e) => {
-    const name = e.target.id;
-    const value = e.target.value;
-    setState({ ...state, [name]: value });
+    const field_name = e.target.id;
+    const field_value = e.target.value;
+    setLearnerData({ ...learnerData, [field_name]: field_value });
   };
 
   return (
@@ -65,7 +60,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="name"
               type="text"
               class="form-control"
-              value={state.name}
+              value={learnerData.name}
               onChange={handleChange}
               placeholder="First Last"
               required
@@ -82,7 +77,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="phone"
               type="text"
               class="form-control"
-              value={state.phone}
+              value={learnerData.phone}
               onChange={handleChange}
               placeholder="9876543210"
               required
@@ -101,7 +96,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="email"
               type="email"
               class="form-control"
-              value={state.email}
+              value={learnerData.email}
               onChange={handleChange}
               placeholder="someone@example.com"
             />

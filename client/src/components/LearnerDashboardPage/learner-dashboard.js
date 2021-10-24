@@ -24,6 +24,10 @@ const LearnerDashboard = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    console.log(learnerData.phone);
+  }, [learnerData]);
+
   return (
     <div className="mb-3">
       <LearnerNavbar />
@@ -31,11 +35,8 @@ const LearnerDashboard = () => {
         <div className="row align-items-end">
           <div className="col-lg-3 col-12">
             <LearnerDashboardChangeDetails
-              details={{
-                name: learnerData.name,
-                email: learnerData.email,
-                phone: learnerData.phone,
-              }}
+              learnerData={{ learnerData }}
+              setLearnerData={{ setLearnerData }}
             />
           </div>
           <div className="col-lg-9 col-12">
