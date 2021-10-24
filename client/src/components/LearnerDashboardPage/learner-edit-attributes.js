@@ -3,7 +3,9 @@ import axios from "axios";
 
 import data from "../../data";
 
-const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
+const LearnerDashboardEditAttributes = ({ details }) => {
+  let copyOfSubjects = {};
+
   const [subjects, setSubjects] = useState({});
   const [times, setTimes] = useState({});
   const [language, setLanguage] = useState("");
@@ -25,9 +27,20 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
   const handleClick = async () => {
     console.log("clicked");
 
+    //if (JSON.stringify(copyOfSubjects) != JSON.stringify(subjects)) {
+    //}
+
+    Object.keys(subjects).forEach((subName) => {
+      if (subjects[subName] && !copyOfSubjects[subName]) {
+        // added a subject
+      } else if (!subjects[subName] && copyOfSubjects[subName]) {
+        // removed a subject
+      }
+    });
+
     const times_array = Object.keys(times).filter((key) => times[key]);
 
-    await axios.post(url, {
+    await axios.post(`/api/learner/update/id/${details._id}`, {
       ...details,
       times: times_array,
       language,
@@ -44,6 +57,8 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
         tmp[subName] = true;
       });
       setSubjects(tmp);
+      // maintaing a copy of subjects, if new subjects added then run matching algo
+      copyOfSubjects = tmp;
 
       tmp = {};
       details.times.map((timeSlot) => {

@@ -33,6 +33,7 @@ const LearnerHome = (props) => {
 
     for (let i = 0; i < subjects.length; i++) {
       const sub = subjects[i];
+      if (sub.mentor_id === "-1") continue;
       const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`);
       const mentor = res.data;
       let temp = {};
@@ -62,10 +63,8 @@ const LearnerHome = (props) => {
     temp();
     */
     verify(setCuruser, setPhone);
-    const learner_phone = localStorage.getItem("user_phone");
-    console.log(learner_phone);
-    getData(learner_phone);
-  }, []);
+    getData(phone);
+  }, [phone]);
 
   React.useEffect(() => {
     console.log(mentorData);
