@@ -23,7 +23,7 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
+const LearnerDashboardChangeDetails = ({ details, learner_id, url }) => {
   const [state, setState] = useState(details);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
   const handleClick = async () => {
     validate();
     // update DB
-    await axios.post(`/api/learner/update/id/${learner_id}`, state);
+    await axios.post(url, state);
   };
 
   return (
@@ -90,7 +90,6 @@ const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
               type="text"
               class="form-control"
               value={state.phone}
-              onChange={handleChange}
               placeholder="9876543210"
               required
             />

@@ -11,13 +11,13 @@ import { verify } from "../../verifyUser";
 
 const LearnerDashboard = () => {
   // this id should be passed through props
-  let learner_id = "6174edaeb2244a7f509c8a25";
+  //let learner_id = "6174edaeb2244a7f509c8a25";
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
   const [learnerData, setLearnerData] = useState({});
 
-  const getData = async () => {
-    const res = await axios.get(`/api/learner/get-data/id/${learner_id}`);
+  const getData = async (learner_phone) => {
+    const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
     const data = res.data;
     console.log(data);
     setLearnerData(data);
@@ -25,7 +25,8 @@ const LearnerDashboard = () => {
 
   useEffect(() => {
     verify(setCuruser, setPhone);
-    getData();
+    const learner_phone = localStorage.getItem("user_phone");
+    getData(learner_phone);
   }, []);
 
   return (
@@ -36,13 +37,15 @@ const LearnerDashboard = () => {
           <div className="col-lg-3 col-12">
             <LearnerDashboardChangeDetails
               details={learnerData}
-              learner_id={learner_id}
+              learner_id={learnerData._id}
+              url={`/api/learner/update/id/${learnerData._id}`}
             />
           </div>
           <div className="col-lg-9 col-12">
             <LearnerDashboardEditAttributes
               details={learnerData}
-              learner_id={learner_id}
+              learner_id={learnerData._id}
+              url={`/api/learner/update/id/${learnerData._id}`}
             />
           </div>
         </div>

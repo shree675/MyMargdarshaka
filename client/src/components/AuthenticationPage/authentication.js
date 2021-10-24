@@ -213,6 +213,8 @@ const Authentication = () => {
             .then((res) => console.log("Pushing user Sign up data"));
         }
 
+        localStorage.setItem("user_phone", phone);
+
         if (userType == "mentor") {
           if (valid_mentor) window.location = "/my-students";
           else window.location = "/mentor-signup";
