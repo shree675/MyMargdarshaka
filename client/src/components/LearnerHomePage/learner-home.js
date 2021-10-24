@@ -1,7 +1,8 @@
 // @ts-check
 
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
+
 import Card from "./card";
 import ProgressChart from "./progress-chart";
 import Navbar from "../Navbar/learner-navbar";
@@ -20,25 +21,7 @@ const LearnerHome = (props) => {
   // this is temp, get this id from props
   let id = "6174edaeb2244a7f509c8a25";
 
-  const [curuser, setCuruser] = useState("No user is logged in");
-  const [phone, setPhone] = useState("");
   const [mentorData, setMentorData] = React.useState([]);
-
-  /*
-  const verify = async () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCuruser(user.uid); // user.uid is the unique identifier of the user
-        // alert("You are logged in as " + user.uid);
-        setPhone(user.phoneNumber);
-        //console.log(user.phoneNumber);
-      } else {
-        setCuruser("No user found");
-      }
-    });
-    console.log(curuser);
-  };
-  */
 
   const getData = async () => {
     const res = await axios.get(`/api/learner/get-data/id/${id}`);
@@ -48,7 +31,7 @@ const LearnerHome = (props) => {
 
     for (let i = 0; i < subjects.length; i++) {
       const sub = subjects[i];
-      const res = await axios(`/api/mentor/get-data/${sub.mentor_id}`);
+      const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`);
       const mentor = res.data;
       let temp = {};
       const code = sub.code;
@@ -68,7 +51,6 @@ const LearnerHome = (props) => {
   };
 
   React.useEffect(() => {
-    verify(setCuruser, setPhone);
     getData();
   }, []);
 
@@ -102,47 +84,50 @@ const LearnerHome = (props) => {
   */
 
   return (
-    <div className='learner-home'>
+    <div className="learner-home">
       <Navbar />
-      <div className='container-fluid p-0'>
-        <div className='row m-3' style={borderStyle}>
-          <div className='col-md card p-3 me-md-2 mb-3 mb-md-0' style={borderStyle}>
+      <div className="container-fluid p-0">
+        <div className="row m-3" style={borderStyle}>
+          <div
+            className="col-md card p-3 me-md-2 mb-3 mb-md-0"
+            style={borderStyle}
+          >
             <h1>
               <strong>MENTORS</strong>
             </h1>
-            <div className='row'>
+            <div className="row">
               {mentorData.map((mentorDetails, i) => {
                 return (
-                  <div key={i} className='col-8 mx-auto col-sm-6 mx-md-0'>
+                  <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
                     <Card details={mentorDetails} />
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className='col-md card p-3' style={borderStyle}>
-            <h1 className='mb-3'>
+          <div className="col-md card p-3" style={borderStyle}>
+            <h1 className="mb-3">
               <strong>YOUR PROGRESS</strong>
             </h1>
-            <div className='row mb-3'>
-              <div className='col'>
+            <div className="row mb-3">
+              <div className="col">
                 <ProgressChart />
               </div>
-              <div className='col'>
+              <div className="col">
                 <ProgressChart />
               </div>
-              <div className='col'>
+              <div className="col">
                 <ProgressChart />
               </div>
             </div>
-            <div className='row'>
-              <div className='col'>
+            <div className="row">
+              <div className="col">
                 <ProgressChart />
               </div>
-              <div className='col'>
+              <div className="col">
                 <ProgressChart />
               </div>
-              <div className='col'>
+              <div className="col">
                 <ProgressChart />
               </div>
             </div>

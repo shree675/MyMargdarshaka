@@ -4,7 +4,15 @@ import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
 import firebase from "../../firebase";
 
-import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
+import {
+  Nav,
+  NavLogo,
+  NavMenu,
+  Bars,
+  NavLink,
+  NavBtn,
+  NavBtnLink,
+} from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
@@ -42,18 +50,20 @@ const LearnerNavbar = (props) => {
           }}
         >
           <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
-          <CloseIcon style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }} />
+          <CloseIcon
+            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
+          />
         </div>
-        <Link className='nav-link-mobile' to='/learner-guidelines'>
+        <Link className="nav-link-mobile" to="/learner-guidelines">
           GUIDELINES
         </Link>
-        <Link className='nav-link-mobile' to='/my-mentors'>
+        <Link className="nav-link-mobile" to="/my-mentors">
           MY MENTORS
         </Link>
-        <Link className='nav-link-mobile' to='/learner-dashboard'>
+        <Link className="nav-link-mobile" to="/learner-dashboard">
           DASHBOARD
         </Link>
-        <Link className='nav-link-mobile' to='/feedback'>
+        <Link className="nav-link-mobile" to="/feedback">
           FEEDBACK
         </Link>
         <button
@@ -61,7 +71,7 @@ const LearnerNavbar = (props) => {
             firebase.auth().signOut();
             window.location = "/init-signin";
           }}
-          className='nav-logout-phone'
+          className="nav-logout-phone"
         >
           LOGOUT
         </button>
@@ -76,27 +86,31 @@ const LearnerNavbar = (props) => {
           <Bars />
         </div>
 
-        <NavLogo to='/'>
+        <NavLogo to="#">
           <img src={mainLogo} style={{ height: "80px" }} />
         </NavLogo>
 
         <NavMenu>
-          <NavLink to='/learner-guidelines'>GUIDELINES</NavLink>
-          <NavLink to='/my-mentors'>MY MENTORS</NavLink>
-          <NavLink to='/learner-dashboard'>DASHBOARD</NavLink>
-          <NavLink to='/learner-feedback'>FEEDBACK</NavLink>
+          <NavLink to="/learner-guidelines">GUIDELINES</NavLink>
+          <NavLink to="/my-mentors">MY MENTORS</NavLink>
+          <NavLink to="/learner-dashboard">DASHBOARD</NavLink>
+          <NavLink to="/learner-feedback">FEEDBACK</NavLink>
           <button
             onClick={() => {
               firebase.auth().signOut();
               window.location = "/init-signin";
             }}
-            className='nav-logout-pc'
+            className="nav-logout-pc"
           >
             LOGOUT
           </button>
         </NavMenu>
 
-        <img src='https://randomuser.me/api/portraits/thumb/men/40.jpg' style={{ borderRadius: "20px" }} className='profile-photo' />
+        <img
+          src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
+          style={{ borderRadius: "20px" }}
+          className="profile-photo"
+        />
       </Nav>
     </div>
   );

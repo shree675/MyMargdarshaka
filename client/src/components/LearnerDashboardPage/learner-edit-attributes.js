@@ -1,6 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const LearnerDashboardEditAttributes = () => {
+import data from "../../data";
+
+const LearnerDashboardEditAttributes = ({ details, learner_id }) => {
+  const [subjects, setSubjects] = useState({});
+  const [times, setTimes] = useState({});
+  const [language, setLanguage] = useState("");
+
+  const handleChange = (e) => {
+    if (e.target.name == "language") {
+      console.log(e.target.value);
+      setLanguage(e.target.value);
+    } else {
+      let [name, attr] = e.target.name.split("-");
+      if (name == "subjects") {
+        setSubjects({ ...subjects, [attr]: e.target.checked });
+      } else if (name == "timeslots") {
+        setTimes({ ...times, [attr]: e.target.checked });
+      }
+    }
+  };
+
+  const handleClick = async () => {
+    console.log("clicked");
+
+    const times_array = Object.keys(times).filter((key) => times[key]);
+
+    await axios.post(`/api/learner/update/id/${learner_id}`, {
+      ...details,
+      times: times_array,
+      language,
+    });
+  };
+
+  useEffect(() => {
+    if (Object.keys(details).length > 0) {
+      console.log(details);
+      let tmp = {};
+      details.subjects.forEach((sub) => {
+        const code = sub.code;
+        const subName = data.codeToSubName[code.substr(0, code.length - 1)];
+        tmp[subName] = true;
+      });
+      setSubjects(tmp);
+
+      tmp = {};
+      details.times.map((timeSlot) => {
+        tmp[timeSlot] = true;
+      });
+
+      setTimes(tmp);
+      setLanguage(details.language);
+    }
+  }, [details]);
+
   return (
     <div
       className="container p-xl-0 card mx-auto mt-3 mx-xl-0"
@@ -10,44 +64,49 @@ const LearnerDashboardEditAttributes = () => {
         <div className="col-md-4 my-md-3" style={{ color: "#5D1049" }}>
           <strong>ADD OR REMOVE SUBJECTS</strong>
           <ul className="list-group" id="preferred-subjects">
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              First checkbox
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              Second checkbox
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              Third checkbox
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              Fourth checkbox
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              Fifth checkbox
-            </li>
+            {details.Class <= 10
+              ? data.primSubs.map((sub) => (
+                  <li className="list-group-item">
+                    <input
+                      className="form-check-input me-1"
+                      type="checkbox"
+                      name={`subjects-${sub}`}
+                      checked={subjects[sub]}
+                      onChange={handleChange}
+                    />
+                    {sub}
+                  </li>
+                ))
+              : data.secSubs.map((sub) => (
+                  <li className="list-group-item">
+                    <input
+                      className="form-check-input me-1"
+                      type="checkbox"
+                      name={`subjects-${sub}`}
+                      checked={subjects[sub]}
+                      onChange={handleChange}
+                    />
+                    {sub}
+                  </li>
+                ))}
           </ul>
         </div>
 
         <div className="col-md-4 my-3" style={{ color: "#5D1049" }}>
           <strong>PREFERRED TIMES</strong>
           <ul className="list-group" id="preferred-subjects">
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              MORNING
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              AFTERNOON
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              EVENING
-            </li>
+            {data.times.map((timeSlot) => (
+              <li className="list-group-item">
+                <input
+                  className="form-check-input me-1"
+                  type="checkbox"
+                  name={`timeslots-${timeSlot}`}
+                  checked={times[timeSlot]}
+                  onChange={handleChange}
+                />
+                {timeSlot}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -56,22 +115,19 @@ const LearnerDashboardEditAttributes = () => {
         <div className="col-md-4 col-12 my-3" style={{ color: "#5D1049" }}>
           <strong>PREFERRED LANGUAGES</strong>
           <ul className="list-group" id="preferred-subjects">
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              ENGLISH
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              HINDI
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              TELUGU
-            </li>
-            <li className="list-group-item">
-              <input className="form-check-input me-1" type="checkbox" />
-              KANNADA
-            </li>
+            {data.langs.map((lang) => (
+              <li className="list-group-item">
+                <input
+                  className="form-check-input me-1"
+                  type="radio"
+                  name="language"
+                  value={lang}
+                  checked={language === lang}
+                  onChange={handleChange}
+                />
+                {lang}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -80,6 +136,7 @@ const LearnerDashboardEditAttributes = () => {
         <a
           className="rounded-pill btn px-3 mb-3"
           style={{ border: "none", backgroundColor: "#5D1049", color: "white" }}
+          onClick={handleClick}
         >
           SAVE
         </a>

@@ -29,21 +29,21 @@ const LearnerDashboard = () => {
   }, []);
 
   return (
-    <div className='mb-3'>
+    <div className="mb-3">
       <LearnerNavbar />
-      <div className='container-fluid'>
-        <div className='row align-items-end'>
-          <div className='col-lg-3 col-12'>
+      <div className="container-fluid">
+        <div className="row align-items-end">
+          <div className="col-lg-3 col-12">
             <LearnerDashboardChangeDetails
-              details={{
-                name: learnerData.name,
-                email: learnerData.email,
-                phone: learnerData.phone,
-              }}
+              details={learnerData}
+              learner_id={learner_id}
             />
           </div>
-          <div className='col-lg-9 col-12'>
-            <LearnerDashboardEditAttributes />
+          <div className="col-lg-9 col-12">
+            <LearnerDashboardEditAttributes
+              details={learnerData}
+              learner_id={learner_id}
+            />
           </div>
         </div>
         <NIOSStatus />

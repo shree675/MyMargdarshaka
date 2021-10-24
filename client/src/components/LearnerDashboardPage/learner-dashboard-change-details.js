@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function validate() {
   "use strict";
@@ -22,7 +23,7 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ details }) => {
+const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
   const [state, setState] = useState(details);
 
   useEffect(() => {
@@ -34,6 +35,12 @@ const LearnerDashboardChangeDetails = ({ details }) => {
     const name = e.target.id;
     const value = e.target.value;
     setState({ ...state, [name]: value });
+  };
+
+  const handleClick = async () => {
+    validate();
+    // update DB
+    await axios.post(`/api/learner/update/id/${learner_id}`, state);
   };
 
   return (
@@ -116,7 +123,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
                 border: "none",
               }}
               type="submit"
-              onClick={validate}
+              onClick={handleClick}
             >
               SAVE
             </button>

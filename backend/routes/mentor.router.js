@@ -304,8 +304,14 @@ router.route("/assign/update-by-id/:id").post(async (req, res) => {
   //res.json("ok");
 });
 
-router.route("/get-data/:id").get(async (req, res) => {
+router.route("/get-data/id/:id").get(async (req, res) => {
   let id = req.params.id;
   let data = await Mentor.findById(id).exec();
+  res.json(data);
+});
+
+router.route("/get-data/phone/:phone").get(async (req, res) => {
+  let phone = req.params.phone;
+  let data = await Mentor.findOne({ phone }).exec();
   res.json(data);
 });
