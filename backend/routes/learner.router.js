@@ -90,14 +90,12 @@ router.route("/assign/update/:phone").post(async (req, res) => {
     }).catch(err => res.status(400).json('Error: ' + err));
 }); */
 
-// get data by id
 router.route("/get-data/id/:id").get(async (req, res) => {
   let id = req.params.id;
   let data = await Learner.findById(id).exec();
   res.json(data);
 });
 
-// get data by phone
 router.route("/get-data/:phone").get(async (req, res) => {
   let phone = req.params.phone;
   let data = await Learner.findOne({ phone }).exec();
