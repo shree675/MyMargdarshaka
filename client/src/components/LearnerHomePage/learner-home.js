@@ -1,6 +1,6 @@
 // @ts-check
 
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import Card from "./card";
@@ -22,9 +22,11 @@ const LearnerHome = (props) => {
   let id = "6174edaeb2244a7f509c8a25";
 
   const [mentorData, setMentorData] = React.useState([]);
+  const [curuser, setCuruser] = useState("No user is logged in");
+  const [phone, setPhone] = useState("");
 
-  const getData = async () => {
-    const res = await axios.get(`/api/learner/get-data/id/${id}`);
+  const getData = async (learner_phone) => {
+    const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
     const subjects = res.data.subjects;
 
     let mentor_data = [];
@@ -51,7 +53,18 @@ const LearnerHome = (props) => {
   };
 
   React.useEffect(() => {
-    getData();
+    /*
+    let temp = async () => {
+      await verify(setCuruser, setPhone);
+      console.log(phone);
+      getData(phone);
+    };
+    temp();
+    */
+    verify(setCuruser, setPhone);
+    const learner_phone = localStorage.getItem("user_phone");
+    console.log(learner_phone);
+    getData(learner_phone);
   }, []);
 
   React.useEffect(() => {

@@ -90,7 +90,6 @@ const LearnerDashboardChangeDetails = ({ details, learner_id }) => {
               type="text"
               class="form-control"
               value={state.phone}
-              onChange={handleChange}
               placeholder="9876543210"
               required
             />
