@@ -3,7 +3,7 @@ import axios from "axios";
 
 import data from "../../data";
 
-const LearnerDashboardEditAttributes = ({ details, learner_id }) => {
+const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
   const [subjects, setSubjects] = useState({});
   const [times, setTimes] = useState({});
   const [language, setLanguage] = useState("");
@@ -27,7 +27,7 @@ const LearnerDashboardEditAttributes = ({ details, learner_id }) => {
 
     const times_array = Object.keys(times).filter((key) => times[key]);
 
-    await axios.post(`/api/learner/update/id/${learner_id}`, {
+    await axios.post(url, {
       ...details,
       times: times_array,
       language,

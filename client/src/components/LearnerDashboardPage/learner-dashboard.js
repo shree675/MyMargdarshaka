@@ -38,12 +38,14 @@ const LearnerDashboard = () => {
             <LearnerDashboardChangeDetails
               details={learnerData}
               learner_id={learnerData._id}
+              url={`/api/learner/update/id/${learnerData._id}`}
             />
           </div>
           <div className="col-lg-9 col-12">
             <LearnerDashboardEditAttributes
               details={learnerData}
               learner_id={learnerData._id}
+              url={`/api/learner/update/id/${learnerData._id}`}
             />
           </div>
         </div>
