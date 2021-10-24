@@ -187,6 +187,62 @@ router.route("/signup/findmatches/").post(async (req, res) => {
   //console.log("TEST")
 });
 
+router.route("/findmatches").post(async (req, res) => {
+  const language = req.body.language;
+  const times = req.body.times;
+  let codes = [];
+  const subjects = req.body.subjects;
+  subjects.forEach((subject) => {
+    codes.push(subject.code);
+  });
+
+  console.log(language, times, codes);
+  let mentors = [];
+  let counter = 0;
+  for (let code of codes) {
+    //console.log(counter++)
+    try {
+      var response = await getMentors(language, times, code);
+      /* .then(() => res.json("LALALAALALALAL"))
+            .catch((err) => res.status(400).json("Error: " + err));; */
+      //console.log("response", response);
+      //choose 1 among many responses and append to mentors
+      var theChosenMentor = -1;
+      let min = 1000; //maximum number of students is assumed to be 1000 (realistic assumption)
+      for (let x of response) {
+        let all_Classes = x.Classes;
+        for (let Class of all_Classes) {
+          //console.log(Class)
+          if (Class.code == code) {
+            //console.log(code, Class.students.length)
+            if (Class.students.length <= min)
+              theChosenMentor = x._id.toString();
+          }
+        }
+        //console.log("The chosen mentor", theChosenMentor)
+        //console.log(x.Classes)
+        /* if(Class.code == code)
+                {
+                    console.log("Mentor match name", Class.students)
+                } */
+      }
+      // mentors ordered accordong to class codes order
+      mentors.push(theChosenMentor);
+
+      console.log(mentors);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  res.json(mentors);
+
+  //var matched_list = await Mentor.find({ name: "Elon Musk" })
+  //let myVar = setTimeout(function(){ alert("Hello");}, 1000)
+  //.then(() => res.json(mentors));
+  //return "If youre happy and you know it"
+  //console.log("TEST")
+});
+
 //Attempt 3 - bring all that match (language, times, codes) - then process
 /* router.route("/signup/findmatches/:phone").post(async (req, res) => {
         //const learner_id = req.body._id
