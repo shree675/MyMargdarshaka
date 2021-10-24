@@ -2,13 +2,11 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import firebase from "../../firebase";
-
 import Card from "./card";
 import ProgressChart from "./progress-chart";
 import Navbar from "../Navbar/learner-navbar";
 import data from "../../data";
-import { verify } from "../AuthenticationPage/authentication";
+import { verify } from "../../verifyUser";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
@@ -104,50 +102,47 @@ const LearnerHome = (props) => {
   */
 
   return (
-    <div className="learner-home">
+    <div className='learner-home'>
       <Navbar />
-      <div className="container-fluid p-0">
-        <div className="row m-3" style={borderStyle}>
-          <div
-            className="col-md card p-3 me-md-2 mb-3 mb-md-0"
-            style={borderStyle}
-          >
+      <div className='container-fluid p-0'>
+        <div className='row m-3' style={borderStyle}>
+          <div className='col-md card p-3 me-md-2 mb-3 mb-md-0' style={borderStyle}>
             <h1>
               <strong>MENTORS</strong>
             </h1>
-            <div className="row">
+            <div className='row'>
               {mentorData.map((mentorDetails, i) => {
                 return (
-                  <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
+                  <div key={i} className='col-8 mx-auto col-sm-6 mx-md-0'>
                     <Card details={mentorDetails} />
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="col-md card p-3" style={borderStyle}>
-            <h1 className="mb-3">
+          <div className='col-md card p-3' style={borderStyle}>
+            <h1 className='mb-3'>
               <strong>YOUR PROGRESS</strong>
             </h1>
-            <div className="row mb-3">
-              <div className="col">
+            <div className='row mb-3'>
+              <div className='col'>
                 <ProgressChart />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart />
               </div>
             </div>
-            <div className="row">
-              <div className="col">
+            <div className='row'>
+              <div className='col'>
                 <ProgressChart />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart />
               </div>
             </div>

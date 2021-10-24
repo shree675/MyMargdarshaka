@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import data from "../../data";
+import { verify } from "../../verifyUser";
 
 /* let classes = [6, 7, 8, 9, 10, 11, 12];
 let primSubs = ["Hindi", "Telugu", "Maths", "Science", "Social"];
@@ -39,23 +40,8 @@ const MentorSignup = () => {
   const [phone, setPhone] = useState("Null phone");
 
   useEffect(() => {
-    verify();
+    verify(setCuruser, setPhone);
   }, []);
-
-  // checks if a user is already logged in
-  const verify = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCuruser(user.uid); // user.uid is the unique identifier of the user
-        // alert("You are logged in as " + user.uid);
-        console.log(user.phoneNumber);
-        setPhone(user.phoneNumber);
-      } else {
-        setCuruser("No user found");
-      }
-    });
-    console.log(curuser);
-  };
 
   const handleChange = (e) => {
     if (e.target.name == "clsAndSub") {
@@ -155,59 +141,29 @@ const MentorSignup = () => {
         valid_signup: true,
       };
       console.log("Printing mentor before pushing:", mentor.Classes);
-      await axios
-        .post(`/api/mentor/signup/creatementor`, mentor)
-        .then(async (res) => {
-          console.log("Pushing Sign up data", phone);
-        });
+      await axios.post(`/api/mentor/signup/creatementor`, mentor).then(async (res) => {
+        console.log("Pushing Sign up data", phone);
+      });
       //update valid user
-      await axios.post(`/api/user/update/`+ phone, user).then((res) => console.log("User table has been updated"));
+      await axios.post(`/api/user/update/` + phone, user).then((res) => console.log("User table has been updated"));
     }
   };
 
   return (
-    <div className="mentor-main">
-      <div className="mentor-row-1">
+    <div className='mentor-main'>
+      <div className='mentor-row-1'>
         <div>
-          <div className="title">Sign Up</div>
-          <div className="mentor-signup-img-div-phone">
-            <img
-              src={imgSrc}
-              style={{ width: "80%", margin: "0", padding: "0" }}
-            />
+          <div className='title'>Sign Up</div>
+          <div className='mentor-signup-img-div-phone'>
+            <img src={imgSrc} style={{ width: "80%", margin: "0", padding: "0" }} />
           </div>
-          <div className="valid-div">
-            {state.nameCheck ? "" : "*this field is required"}
-          </div>
-          <input
-            className="input-field"
-            name="name"
-            onChange={handleChange}
-            placeholder="Name"
-          />{" "}
-          <br />
-          <input
-            className="input-field"
-            name="email"
-            onChange={handleChange}
-            placeholder="Email (optional)"
-          />
+          <div className='valid-div'>{state.nameCheck ? "" : "*this field is required"}</div>
+          <input className='input-field' name='name' onChange={handleChange} placeholder='Name' /> <br />
+          <input className='input-field' name='email' onChange={handleChange} placeholder='Email (optional)' />
           <div>
-            <div className="valid-div">
-              {state.prefTimeCheck ? "" : "*this field is required"}
-            </div>
-            <select
-              className="input-field"
-              name="prefTime"
-              onChange={handleChange}
-              value={state.prefTime}
-            >
-              <option
-                value=""
-                className="mentor-signup-dropdown"
-                disabled
-                selected
-              >
+            <div className='valid-div'>{state.prefTimeCheck ? "" : "*this field is required"}</div>
+            <select className='input-field' name='prefTime' onChange={handleChange} value={state.prefTime}>
+              <option value='' className='mentor-signup-dropdown' disabled selected>
                 Preferred Timeslot
               </option>
               {times.map((time) => (
@@ -216,21 +172,9 @@ const MentorSignup = () => {
             </select>
           </div>
           <div>
-            <div className="valid-div">
-              {state.prefLangCheck ? "" : "*this field is required"}
-            </div>
-            <select
-              className="input-field"
-              name="prefLang"
-              onChange={handleChange}
-              value={state.prefLang}
-            >
-              <option
-                value=""
-                className="mentor-signup-dropdown"
-                disabled
-                selected
-              >
+            <div className='valid-div'>{state.prefLangCheck ? "" : "*this field is required"}</div>
+            <select className='input-field' name='prefLang' onChange={handleChange} value={state.prefLang}>
+              <option value='' className='mentor-signup-dropdown' disabled selected>
                 Preferred Language
               </option>
               {langs.map((lang) => (
@@ -239,7 +183,7 @@ const MentorSignup = () => {
             </select>
           </div>
         </div>
-        <div className="img-div">
+        <div className='img-div'>
           <img src={imgSrc} />
         </div>
       </div>
@@ -250,17 +194,17 @@ const MentorSignup = () => {
           alignItems: "center",
         }}
       >
-        <div className="class-and-sub">
+        <div className='class-and-sub'>
           {classes.map((cls) => (
             <div>
-              <div className="class-name">Class {cls}</div>
+              <div className='class-name'>Class {cls}</div>
               {cls <= 10 && (
-                <div className="subs-box">
+                <div className='subs-box'>
                   {primSubs.map((sub) => (
                     <div style={{ marginBottom: "10px" }}>
                       <input
-                        type="Checkbox"
-                        name="clsAndSub"
+                        type='Checkbox'
+                        name='clsAndSub'
                         value={`${sub} ${cls}`}
                         onChange={handleChange}
                         style={{ marginLeft: "20px" }}
@@ -271,12 +215,12 @@ const MentorSignup = () => {
                 </div>
               )}
               {cls > 10 && (
-                <div className="subs-box">
+                <div className='subs-box'>
                   {secSubs.map((sub) => (
                     <div style={{ marginBottom: "10px" }}>
                       <input
-                        type="Checkbox"
-                        name="clsAndSub"
+                        type='Checkbox'
+                        name='clsAndSub'
                         value={`${sub} ${cls}`}
                         onChange={handleChange}
                         style={{ marginLeft: "20px" }}
@@ -289,11 +233,11 @@ const MentorSignup = () => {
             </div>
           ))}
         </div>
-        <div className="valid-div" style={{ marginLeft: "-140px" }}>
+        <div className='valid-div' style={{ marginLeft: "-140px" }}>
           {state.subCheck ? "" : "*select atleast one subject"}
         </div>
       </div>
-      <div className="submit-button" onClick={handleClick}>
+      <div className='submit-button' onClick={handleClick}>
         ASSIGN STUDENTS
       </div>
     </div>
