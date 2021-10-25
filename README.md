@@ -15,6 +15,8 @@
 The MyMargdarshaka platform is based on the novel concept of connecting Indian school students who are unable to attend traditional school due to financial or logistic constraints with mentors who want to give back to society by teaching them. The idea is to mentor these students with the goal of taking the class 10 and 12 certification exams conducted by the National Institute of Open Schooling (NIOS) which is the Government of India’s official examination body. The app focuses on the UN SDG 4 - Quality Education.
 
 ## Idea
+Checkout the Release 1 [Demo video](https://www.youtube.com/watch?v=iYpwh7IrSR8)
+
 According to a survey conducted in 2017-18, there were over 30 million Indian children not enrolled in schools. This number has only been increasing because of the Covid-19 pandemic. There are millions of students who are not able to attend school due to financial or logistical reasons. The longer the gap in learning, the more disinterested students get and eventually exit the education system.
 
 On the other hand, there are many well-educated people in India who want to give back to society by teaching underprivileged children, but are unable to do so through the traditional schooling system because of other commitments. They can however devote a few hours a week to teach disadvantaged children, the above mentioned students as an example, from home. 
@@ -53,10 +55,9 @@ To use this platform as a student/learner:
 * Get started on the subjects and have a happy learning experience!
 * You can view your progress on the right panel and you can change your details or request for a change in mentor in the dashboard page.
 * You can provide regular feedback about the platform or experience in the feedback page.
-* Take regular tests on the subject details page by clicking on 'TAKE TEST'.
 * Click on 'LOGOUT' on the navbar to logout.
 
-[INSERT_IMAGE_AFTER_COMPLETION]
+<img src="./screenshots/Screenshot-Init-Signin.png"><img/>
 
 To use this platform as a mentor:
 * Click on 'GET STARTED' and then 'SIGN IN AS A MENTOR'.
@@ -69,7 +70,7 @@ To use this platform as a mentor:
 * You can provide regular feedback about the platform or experience in the feedback page.
 * Click on 'LOGOUT' on the navbar to logout.
 
-[INSERT_IMAGE_AFTER_COMPLETION]
+<img src="./screenshots/Screenshot-Mentor-Dashboard.png"><img/>
 
 To use this platform as an admin:
 * Click on 'GET STARTED' and then 'Sign in as an admin'.
@@ -81,7 +82,7 @@ To use this platform as an admin:
 * View the statistics of the platform and help maintain a good progress on the stats page.
 * Click on 'LOGOUT' on the navbar to logout.
 
-[INSERT_IMAGE_AFTER_COMPLETION]
+<img src="./screenshots/Screenshot-Feedback.png"><img/>
 
 ## Tools and Technologies Used
 * MERN stack with Firebase for the user authentication
@@ -89,3 +90,6 @@ To use this platform as an admin:
 
 ## Modules overview
 <img src="./arch.png"><img/>
+
+## Contributing 
+Contributions and pull requests are welcome. For more information on structure and modules, please refer to this [contributing.md file](contributing.md)
