@@ -148,7 +148,23 @@ const AdminAuthentication = () => {
             <br></br>
             <br></br>
             <div className=''>
-              <button className='auth-button' onClick={submit}>
+              <button
+                className='auth-button'
+                onClick={() => {
+                  if (
+                    username != "" &&
+                    username != null &&
+                    username != undefined &&
+                    password != null &&
+                    password != "" &&
+                    password != undefined
+                  ) {
+                    submit();
+                  } else {
+                    alert("Please enter both username and password");
+                  }
+                }}
+              >
                 LOGIN
               </button>
             </div>
