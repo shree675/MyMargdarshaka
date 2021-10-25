@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../Common/button";
 import axios from "axios";
 
 function validate() {
@@ -24,26 +23,7 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ details }) => {
-  const [state, setState] = useState(details);
-
-  useEffect(() => {
-    console.log("state : ", state);
-    setState(details);
-  }, [details]);
-
-  const handleChange = (e) => {
-    const name = e.target.id;
-    const value = e.target.value;
-    setState({ ...state, [name]: value });
-  };
-
-  const handleClick = async () => {
-    validate();
-    // update DB
-    await axios.post(`/api/learner/update/id/${details._id}`, state);
-  };
-
+const LearnerDashboardChangeDetails = () => {
   return (
     <div className="learner-dashboard-change-details">
       <div
@@ -51,12 +31,10 @@ const LearnerDashboardChangeDetails = ({ details }) => {
         style={{ borderRadius: "20px", borderColor: "#FF0000" }}
       >
         <div className="d-flex justify-content-center">
-          <div className="rounded-circle mb-3">
-            <img
-              className="img-fluid rounded-circle"
-              src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
-            />
-          </div>
+          <div
+            className="rounded-circle mb-3"
+            style={{ backgroundColor: "red", height: "100px", width: "100px" }}
+          ></div>
         </div>
 
         <div
@@ -75,9 +53,8 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="name"
               type="text"
               class="form-control"
-              value={state.name}
-              onChange={handleChange}
               placeholder="First Last"
+              value="Aashrith"
               required
             />
             <div className="valid-feedback">Looks good!</div>
@@ -92,8 +69,8 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="phone"
               type="text"
               class="form-control"
-              value={state.phone}
               placeholder="9876543210"
+              value="9876543210"
               required
             />
             <div className="valid-feedback">Looks good!</div>
@@ -110,14 +87,23 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               id="email"
               type="email"
               class="form-control"
-              value={state.email}
-              onChange={handleChange}
               placeholder="someone@example.com"
+              value="aashrith@gmail.com"
             />
           </div>
 
           <div className="d-flex justify-content-center">
-            <Button text="SAVE" />
+            <button
+              className="save-details-button rounded-pill px-5 py-3 mt-3"
+              style={{
+                backgroundColor: "#5D1049",
+                color: "white",
+                border: "none",
+              }}
+              type="submit"
+            >
+              SAVE
+            </button>
           </div>
         </form>
       </div>

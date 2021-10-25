@@ -1,0 +1,19 @@
+.custom-button {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  height: 2.5vw;
+  border-radius: 1.25vw;
+  background-color: #5d1049;
+  color: white;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  padding: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+  cursor: pointer;
+  font-size: 1.2vw;
+  position: relative;
+  transition: all 0.3s;
+}
