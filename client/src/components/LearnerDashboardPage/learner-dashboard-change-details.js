@@ -23,7 +23,7 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = ({ details, learner_id, url }) => {
+const LearnerDashboardChangeDetails = ({ details }) => {
   const [state, setState] = useState(details);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const LearnerDashboardChangeDetails = ({ details, learner_id, url }) => {
   const handleClick = async () => {
     validate();
     // update DB
-    await axios.post(url, state);
+    await axios.post(`/api/learner/update/id/${details._id}`, state);
   };
 
   return (

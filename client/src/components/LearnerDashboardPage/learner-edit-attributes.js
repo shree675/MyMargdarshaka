@@ -3,10 +3,18 @@ import axios from "axios";
 
 import data from "../../data";
 
-const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
+function getSubjectName(code) {
+  code = code.substr(0, code.length - 1);
+  const subName = data.codeToSubName[code];
+  return subName;
+}
+
+const LearnerDashboardEditAttributes = ({ details }) => {
+  const [copyOfSubjects, setCopyOfSubjects] = useState({});
   const [subjects, setSubjects] = useState({});
   const [times, setTimes] = useState({});
   const [language, setLanguage] = useState("");
+  const [mentorsNotFoundFor, setMentorsNotFoundFor] = useState([]);
 
   const handleChange = (e) => {
     if (e.target.name == "language") {
@@ -16,10 +24,16 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
       let [name, attr] = e.target.name.split("-");
       if (name == "subjects") {
         setSubjects({ ...subjects, [attr]: e.target.checked });
+        if (e.target.checked)
+          setMentorsNotFoundFor(
+            mentorsNotFoundFor.filter((sub) => sub != attr)
+          );
       } else if (name == "timeslots") {
         setTimes({ ...times, [attr]: e.target.checked });
       }
     }
+
+    console.log(copyOfSubjects);
   };
 
   const handleClick = async () => {
@@ -27,11 +41,96 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
 
     const times_array = Object.keys(times).filter((key) => times[key]);
 
-    await axios.post(url, {
+    let added_subjects = [];
+
+    Object.keys(subjects).forEach((subName) => {
+      if (subjects[subName] && !copyOfSubjects[subName]) {
+        added_subjects.push({ code: data.codes[subName] + details.Class });
+      }
+    });
+
+    console.log("newly added subjects : ", added_subjects);
+
+    let removed_subjects = [];
+
+    let new_subjects_array = details.subjects.filter((sub) => {
+      const subName = getSubjectName(sub.code);
+      if (!subjects[subName] && copyOfSubjects[subName]) {
+        // removed a subject
+        removed_subjects.push(sub);
+        return false;
+      }
+      return true;
+    });
+
+    console.log(
+      "new_subjects_array after removing subjects : ",
+      new_subjects_array
+    );
+
+    // finding matches for newly added subjects
+    const res = await axios.post(`/api/mentor/signup/findmatches/`, {
       ...details,
       times: times_array,
       language,
+      subjects: added_subjects,
     });
+
+    const mentor_ids = res.data;
+    console.log(mentor_ids);
+
+    // contains all the subjects for which mentor is not found
+    let mentors_not_found_for = [];
+
+    for (let i = 0; i < mentor_ids.length; i++) {
+      if (mentor_ids[i] != -1) {
+        new_subjects_array.push({
+          code: added_subjects[i].code,
+          mentor_id: mentor_ids[i],
+          consent: false,
+          chapters: data.default.chapters,
+        });
+      } else {
+        console.log("mentor not found for ", added_subjects[i].code);
+        mentors_not_found_for.push(getSubjectName(added_subjects[i].code));
+      }
+    }
+
+    setMentorsNotFoundFor(mentors_not_found_for);
+
+    console.log(
+      "new_subjects_array after adding subjects : ",
+      new_subjects_array
+    );
+
+    // updating learner table
+    await axios.post(`/api/learner/update/id/${details._id}`, {
+      ...details,
+      times: times_array,
+      language,
+      subjects: new_subjects_array,
+    });
+
+    // updating mentors table
+    for (let i = 0; i < mentor_ids.length; i++) {
+      if (mentor_ids[i] != -1) {
+        await axios.post(`/api/mentor/assign/update-by-id/${mentor_ids[i]}`, {
+          class_code: added_subjects[i].code,
+          learner_id: details._id,
+        });
+      }
+    }
+
+    // for all the removed subjects, removing learnerid from the corresponding mentors
+    for (let i = 0; i < removed_subjects.length; i++) {
+      await axios.post(
+        `/api/mentor/remove-learner/${removed_subjects[i].mentor_id}`,
+        {
+          class_code: removed_subjects[i].code,
+          learner_id: details._id,
+        }
+      );
+    }
   };
 
   useEffect(() => {
@@ -44,6 +143,8 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
         tmp[subName] = true;
       });
       setSubjects(tmp);
+      // maintaing a copy of subjects, if new subjects added then run matching algo
+      setCopyOfSubjects(tmp);
 
       tmp = {};
       details.times.map((timeSlot) => {
@@ -71,10 +172,22 @@ const LearnerDashboardEditAttributes = ({ details, learner_id, url }) => {
                       className="form-check-input me-1"
                       type="checkbox"
                       name={`subjects-${sub}`}
-                      checked={subjects[sub]}
+                      checked={
+                        subjects[sub] && !mentorsNotFoundFor.includes(sub)
+                      }
                       onChange={handleChange}
                     />
                     {sub}
+                    <br />
+                    <span
+                      style={
+                        mentorsNotFoundFor.includes(sub)
+                          ? { color: "red" }
+                          : { display: "none" }
+                      }
+                    >
+                      *mentor not found
+                    </span>
                   </li>
                 ))
               : data.secSubs.map((sub) => (

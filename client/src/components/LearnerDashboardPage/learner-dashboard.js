@@ -25,9 +25,9 @@ const LearnerDashboard = () => {
 
   useEffect(() => {
     verify(setCuruser, setPhone);
-    const learner_phone = localStorage.getItem("user_phone");
-    getData(learner_phone);
-  }, []);
+    //const learner_phone = localStorage.getItem("user_phone");
+    getData(phone);
+  }, [phone]);
 
   return (
     <div className="mb-3">
@@ -35,18 +35,10 @@ const LearnerDashboard = () => {
       <div className="container-fluid">
         <div className="row align-items-end">
           <div className="col-lg-3 col-12">
-            <LearnerDashboardChangeDetails
-              details={learnerData}
-              learner_id={learnerData._id}
-              url={`/api/learner/update/id/${learnerData._id}`}
-            />
+            <LearnerDashboardChangeDetails details={learnerData} />
           </div>
           <div className="col-lg-9 col-12">
-            <LearnerDashboardEditAttributes
-              details={learnerData}
-              learner_id={learnerData._id}
-              url={`/api/learner/update/id/${learnerData._id}`}
-            />
+            <LearnerDashboardEditAttributes details={learnerData} />
           </div>
         </div>
         <NIOSStatus />

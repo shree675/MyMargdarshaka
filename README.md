@@ -87,3 +87,5 @@ To use this platform as an admin:
 * MERN stack with Firebase for the user authentication
 * Figma for the design and wireframing
 
+## Modules overview
+<img src="./arch.png"><img/>
