@@ -38,38 +38,6 @@ router.route("/signup/creatementor").post((req, res) => {
     .then(() => res.json("Added new mentor!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-/* router.route("/signup/findmatches/:phone").post((req, res) => {
-    const phone = req.body.phone;
-    const language = req.body.language;
-    const times = req.body.times;
-    const codes = [];
-    console.log(req.body)
-    const subjects = req.body.subjects;
-    subjects.forEach((subject) => {
-        codes.push(subject.code)
-      })
-    console.log(language, times, codes); 
-    let mentors = [];
-    let counter =0
-    for (let code of codes) {
-     
-      console.log(counter++)
-      const matched_mentors = Mentor.find({
-        language: language,
-        time: { $in: [...times] },
-        code: code,
-        approved: true
-      })
-      .then((res)=> {
-        //console.log(matched_mentors))
-        mentors = [...mentors, ...res]
-        console.log(print, mentors)
-      })
-      .catch((err) => res.status(400).json("Error: " + err)) 
-    }
-    console.log("After", mentors)
-    
-  }); */
 
 async function getMentors(language, times, code) {
   let mentors = [];
@@ -122,139 +90,19 @@ router.route("/signup/findmatches/").post(async (req, res) => {
   res.json(mentors);
 });
 
-/*
-router.route("/findmatches/addedsubjects").post(async (req, res) => {
-
-  const language = req.body.language;
-  const times = req.body.times;
-  const subName = 
-  let codes = [];
-  const subjects = req.body.subjects;
-  subjects.forEach((subject) => {
-    codes.push(subject.code);
-  });
-
-  console.log(language, times, codes);
-  let mentors = [];
-  let counter = 0;
-  for (let code of codes) {
-    //console.log(counter++)
-    try {
-      var response = await getMentors(language, times, code);
-      /* .then(() => res.json("LALALAALALALAL"))
-            .catch((err) => res.status(400).json("Error: " + err));;
-      //console.log("response", response);
-      //choose 1 among many responses and append to mentors
-      var theChosenMentor = -1;
-      let min = 1000; //maximum number of students is assumed to be 1000 (realistic assumption)
-      for (let x of response) {
-        let all_Classes = x.Classes;
-        for (let Class of all_Classes) {
-          //console.log(Class)
-          if (Class.code == code) {
-            //console.log(code, Class.students.length)
-            if (Class.students.length <= min)
-              theChosenMentor = x._id.toString();
-          }
-        }
-        //console.log("The chosen mentor", theChosenMentor)
-        //console.log(x.Classes)
-        /* if(Class.code == code)
-                {
-                    console.log("Mentor match name", Class.students)
-                } 
-      }
-      // mentors ordered accordong to class codes order
-      mentors.push(theChosenMentor);
-
-      console.log(mentors);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  res.json(mentors);
-
-  //var matched_list = await Mentor.find({ name: "Elon Musk" })
-  //let myVar = setTimeout(function(){ alert("Hello");}, 1000)
-  //.then(() => res.json(mentors));
-  //return "If youre happy and you know it"
-  //console.log("TEST")
-});
-*/
-
-//Attempt 3 - bring all that match (language, times, codes) - then process
-/* router.route("/signup/findmatches/:phone").post(async (req, res) => {
-        //const learner_id = req.body._id
-        const phone = req.body.phone;
-        const language = req.body.language;
-        const times = req.body.times;
-        let codes = [];
-        console.log("Passed learner", req.body)
-        const subjects = req.body.subjects;
-        subjects.forEach((subject) => {
-            codes.push(subject.code)
-          })
-    
-        codes = ['HIN6', 'MAT10'] //temp
-        console.log(language, times, codes); 
-        let mentors = [];
-        let counter =0
-        Mentor.find({ 
-            language: language,
-            time: { $in: [...times] },
-            'Classes.code': {$in: [...codes]},
-            approved: true
-        })
-        .then((res)=> {
-        console.log(res)
-        //mentors = [...mentors, ...res]
-        //console.log(mentors)
-      })
-      .catch((err) => res.status(400).json("Error: " + err));
-    }); */
-
-/*
-router.route("/assign/update/:phone").post((req, res) => {
-  //console.log(req)
-  //console.log("req.body", req.body)
-  Mentor.find({ phone: req.body.phone })
-    .then((mentors) => {
-      //console.log("Learners", learners)
-      //console.log(users.length)
-      if (mentors.length == 0) {
-        console.log("mentor not found");
-        return;
-      }
-      let mentor = mentors[0];
-      mentor.name = "HAPPYIER";
-      //learner.subjects = req.body.subjects
-      //console.log(learner.subjects)
-      //assign values here
-      //console.log("User", user)
-       mentor
-              .save()
-              .then(() => res.json("Mentor status updated!"))
-              .catch((err) => res.status(400).json("Error: " + err)); 
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-*/
-
-router.route("/updateId/:id").post((req, res) => {
+/* router.route("/updateId/:id").post((req, res) => {
   Mentor.findById(req.params.id)
     .then((mentor) => {
       mentor.name = req.body.name;
-
       name
         .save()
         .then(() => res.json("mentor updated!"))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
-});
+}); */
 
 module.exports = router;
-
 // normal update by phone
 router.route("/assign/update-by-phone/:phone").post(async (req, res) => {
   let phone = req.params.phone;
@@ -293,10 +141,6 @@ router.route("/assign/update-by-id/:id").post(async (req, res) => {
     .save()
     .then(() => res.json("Mentor status updated!"))
     .catch((err) => res.status(400).json("Error: " + err));
-
-  //console.log(id, data);
-  //await Mentor.findByIdAndUpdate(id, { $set: data });
-  //res.json("ok");
 });
 
 router.route("/remove-learner/:id").post(async (req, res) => {
@@ -304,7 +148,7 @@ router.route("/remove-learner/:id").post(async (req, res) => {
   let class_code = req.body.class_code;
   let learner_id = req.body.learner_id;
 
-  console.log("HELLLLOOO2 : ", mentor_id, class_code, learner_id);
+  //console.log("HELLLLOOO2 : ", mentor_id, class_code, learner_id);
 
   let mentor = await Mentor.findById(mentor_id);
 
@@ -315,7 +159,7 @@ router.route("/remove-learner/:id").post(async (req, res) => {
       const stu_tmp = mentor.Classes[i].students.filter(
         (stu) => stu._id != learner_id
       );
-      console.log("HELLOO : ", stu_tmp);
+      //console.log("HELLOO : ", stu_tmp);
       mentor.Classes[i].students = stu_tmp;
     }
   }
