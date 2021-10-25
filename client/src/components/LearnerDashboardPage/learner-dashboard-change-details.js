@@ -41,7 +41,9 @@ const LearnerDashboardChangeDetails = ({ details }) => {
   const handleClick = async () => {
     validate();
     // update DB
-    await axios.post(`/api/learner/update/id/${details._id}`, state);
+    await axios
+      .post(`/api/learner/update/id/${details._id}`, state)
+      .catch((e) => console.log("DANGEROUS ERROR"));
   };
 
   return (
@@ -117,7 +119,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
           </div>
 
           <div className="d-flex justify-content-center">
-            <Button onClick={handleClick} text="SAVE" />
+            <Button click={handleClick} text="SAVE" />
           </div>
         </form>
       </div>

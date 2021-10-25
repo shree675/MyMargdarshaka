@@ -20,13 +20,16 @@ const LearnerDashboard = () => {
     //const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
     //const data = res.data;
     console.log(learner_phone);
-    axios.get(`/api/learner/get-data/phone/${learner_phone}`).then((res) => {
-      const data = res.data;
-      console.log(data);
-      if (data.phone != null || data.phone != undefined) {
-        setLearnerData(data);
-      }
-    });
+    axios
+      .get(`/api/learner/get-data/phone/${learner_phone}`)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        if (data.phone != null || data.phone != undefined) {
+          setLearnerData(data);
+        }
+      })
+      .catch((e) => console.log("VERY BAD ERROR"));
   };
 
   useEffect(() => {
