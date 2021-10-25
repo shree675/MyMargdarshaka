@@ -24,8 +24,12 @@ This platform is aimed at connecting these two types of people so that more chil
 There are similar existing solutions but they provide limitations like absence of personal guidance, lack of direction in passive resources, unaffordable and not easy to use with certification, to name a few. MyMargdarshaka is unique in the way that it aims at addressing such limitations and providing the best features of the existing solutions, keeping in mind that the students may not be well versed in technology.
 
 ## Quick Start
-1. Fork and clone this repository.
-2. Open up a terminal in the `./` directory and run:
+1. The Web-App is deployed at https://mymargdarshaka.herokuapp.com/
+
+    OR
+2. To run locally using Node.js: 
+    * Fork and clone this repository.
+    * Open up a terminal in the `./` directory and run:
 
 ```bash
 # Install dependencies for server
@@ -80,7 +84,7 @@ To use this platform as an admin:
 [INSERT_IMAGE_AFTER_COMPLETION]
 
 ## Tools and Technologies Used
-* MERN stack with Firebase for the app
+* MERN stack with Firebase for the user authentication
 * Figma for the design and wireframing
 
 ## Modules overview

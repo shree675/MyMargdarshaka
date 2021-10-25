@@ -1,3 +1,8 @@
+//@ts-check
+/*
+ * The mentor collection stores all learners who have successfully sign up
+ * Complete information including their assigned students and a checklist of subtopic completed in each class code
+ */
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

@@ -1,7 +1,4 @@
 //@ts-check
-
-//@ts-check
-
 import React, { useState, useEffect } from "react";
 import auth_background from "../../assets/auth-background-comp.svg";
 import wavefront from "../../assets/wavefront.svg";
@@ -42,22 +39,7 @@ const CssTextField = styled(TextField)({
     },
   },
 });
-//we need to know which button was clicked
-
-// export const verify = async (setCuruser, setPhone) => {
-//   firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//       setCuruser(user.uid); // user.uid is the unique identifier of the user
-//       // alert("You are logged in as " + user.uid);
-//       setPhone(user.phoneNumber);
-//       //console.log(user.phoneNumber);
-//     } else {
-//       setCuruser("No user found");
-//     }
-//   });
-//   //console.log(curuser);
-// };
-
+//we need to know which button was clicked, learner or mentor, to redirect appropriately after authentication
 const Authentication = () => {
   let user = useParams();
   let userType = user.id.slice(1);
@@ -92,9 +74,9 @@ const Authentication = () => {
           e.data.map((data) => {
             if (user.phoneNumber === data.phone) {
               if (data.user_type === "learner") {
-                window.location = "/learner-home";
+                window.location = "/my-mentors";
               } else {
-                window.location = "/mentor-home";
+                window.location = "/my-students";
               }
             }
           });
@@ -123,20 +105,13 @@ const Authentication = () => {
   // sends otp
   const verifyPhone = async (e) => {
     //e.preventDefault();
-
-    /* if (phone[0] != "+") phoneNumber = "+91" + phoneNumber;
-        setPhone(phoneNumber)
-        console.log("Phone number was updated") */
-
     //query the mongodb users database -
     // 1. if number does not exist - continue with sign up process
     // 2. if number exists but sign up is not successful - continue with sign up
     // 3. successful sign up number exists - route accordingly to homepage
-
     //set variables - mentor or learner, valid signup or not and use them for routing
 
     await axios.get("/api/user/login/getUser").then((e) => {
-      //console.log("*****************")
       console.log(e);
       if (phone[0] != "+") setPhone("+91" + phone);
       console.log("Phone number was updated");
@@ -144,8 +119,7 @@ const Authentication = () => {
       e.data.map((user) => {
         let p = phone;
         if (p[0] != "+") p = "+91" + p;
-        //if (phone[0] != "+") setPhone("+91"+phone)
-        console.log("*****", user.phone, p);
+        //console.log("*****", user.phone, p);
 
         if (user.phone === p) {
           console.log("Valid phone number matched: ", p);
@@ -200,7 +174,6 @@ const Authentication = () => {
         // User signed in successfully.
         console.log("Successful log in");
         const user = {
-          /* phone: LearnerSignup.phone, */ //pass as props
           phone: phone,
           user_type: userType,
           valid_signup: false,
@@ -213,7 +186,7 @@ const Authentication = () => {
             .then((res) => console.log("Pushing user Sign up data"));
         }
 
-        localStorage.setItem("user_phone", phone);
+        //localStorage.setItem("user_phone", phone);
 
         if (userType == "mentor") {
           if (valid_mentor) window.location = "/my-students";
@@ -222,10 +195,6 @@ const Authentication = () => {
           if (valid_learner) window.location = "/my-mentors";
           else window.location = "/learner-signup";
         }
-
-        //here do the appropriate routing
-        //create a collection in mongodb - for all users - storing (phone number, mentor/learner, successful signup: true/false) {firebase UID ?}
-        //remember to update sign up successful at the end of sign up
       })
       .catch(function (error) {
         console.log(error);

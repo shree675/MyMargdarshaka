@@ -1,5 +1,0 @@
-
-criteria - 
-1. time slot
-2. preferred language
-3. class code - (class and subject)

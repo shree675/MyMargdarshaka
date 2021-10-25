@@ -1,3 +1,9 @@
+//@ts-check
+/*
+ * The admin collection is used to keep a list admins with their username and password
+ * Password is stored in the database using encryption aes-js encryption
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

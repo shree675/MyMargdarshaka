@@ -1,3 +1,6 @@
+//@ts-check
+//Joi Schemas help validate the format of the data before being pushed to the database
+//NOTE: They have only been setup, they are yet to be added everywhere in the project
 const Joi = require("joi");
 
 module.exports.feedbackSchema = Joi.object({
