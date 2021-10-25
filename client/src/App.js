@@ -32,10 +32,8 @@ class App extends Component {
           <Route exact path='/learner-signup' component={LearnerSignup} />
           <Route exact path='/mentor-signup' component={MentorSignup} />
           <Route exact path='/feedback' component={Feedback} />
-          {/* <Route exact path='/learner-home' component={LearnerHome} /> */}
           <Route exact path='/learner-dashboard' component={LearnerDashboard} />
-          <Route exact path='/admin-auth' component={AdminAuthentication} /> // this is repeated again
-          {/* <Route exact path='/mentor-home' component={MentorHome} /> */}
+          <Route exact path='/admin-auth' component={AdminAuthentication} /> 
           <Route exact path='/mentor-dashboard' component={MentorDashBoard} />
           <Route exact path='/learner-dashboard' component={LearnerDashboard} />
           <Route exact path='/my-mentors' component={LearnerHomepage} />

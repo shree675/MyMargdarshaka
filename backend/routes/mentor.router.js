@@ -1,5 +1,4 @@
-//import _ from "lodash"
-const lodash = require("lodash");
+//@ts-check
 const express = require("express");
 const router = express.Router();
 var Mentor = require("../models/mentor.model");
@@ -19,18 +18,7 @@ router.route("/signup/creatementor").post((req, res) => {
   const language = req.body.language;
   const time = req.body.time;
   const approved = req.body.approved;
-
-  //const deepCopyWithLodashCloneDeep = _.cloneDeep(nestedArray)
-  //const Classes = lodash.cloneDeep(req.body.Classes); //not required
   const Classes = req.body.Classes;
-  //console.log(req.body)
-  //console.log("--------------------------------------------------");
-  //console.log(req.body.Classes);
-  //console.log(Classes[0].chapters);
-  //console.log(Classes[0].chapters[0].subtopics);
-  //console.log(req.body.Classes[0].name)
-  //let t = req.body.Classes[0]
-  //console.log(t.chapters)
   const profile_picture_url = req.body.profile_picture_url;
 
   const mentor = new Mentor({
@@ -83,29 +71,7 @@ router.route("/signup/creatementor").post((req, res) => {
     
   }); */
 
-/* async function getTodos(learner_id, language, times, code) {
-    return new Promise(function(resolve, reject){
-        Mentor.updateOne({ 
-            language: langauge,
-            time: { $in: [...times] },
-            code: code,
-            approved: true
-        },{ 
-            $push: { name: "ABCD" } 
-        }, function(err,response){
-            if (err) {
-                reject(err);
-            } else if (response.nModified === 0){
-                reject("Id not found");
-            } else {
-                resolve(response.nModified + " items modified");
-            }
-        });
-    });
-} */
-
 async function getMentors(language, times, code) {
-  /* return new Promise(function(resolve, reject){ */
   let mentors = [];
   var matched_list = await Mentor.find({
     language: language,
@@ -115,44 +81,25 @@ async function getMentors(language, times, code) {
   });
   //console.log("matched list", matched_list)
   return matched_list;
-  /* .then((res)=> {
-        //console.log(res)
-        mentors = [...mentors, ...res]
-        //console.log(mentors)
-      }) */
-  //.catch((err) => res.status(400).json("Error: " + err));
-  /*  }) */
 }
 
 router.route("/signup/findmatches/").post(async (req, res) => {
-  //const learner_id = req.body._id
-  //const phone = req.body.phone;
-  //console.log("hii");
   const language = req.body.language;
   const times = req.body.times;
   //console.log(req.body)
   let codes = [];
   const subjects = req.body.subjects;
-  //console.log(subjects);
-  //codes = subjects;
   subjects.forEach((subject) => {
     codes.push(subject.code);
   });
 
-  //codes = ["HIN8"];
-
   console.log(language, times, codes);
   let mentors = [];
-  let counter = 0;
   for (let code of codes) {
-    //console.log(counter++)
     try {
       var response = await getMentors(language, times, code);
-      /* .then(() => res.json("LALALAALALALAL"))
-            .catch((err) => res.status(400).json("Error: " + err));; */
-      //console.log("response", response);
       //choose 1 among many responses and append to mentors
-      var theChosenMentor = -1;
+      var theChosenMentor = -1; //in case of multiple compatible mentors, assign the student to the mentor who has minimum students
       let min = 1000; //maximum number of students is assumed to be 1000 (realistic assumption)
       for (let x of response) {
         let all_Classes = x.Classes;
@@ -164,28 +111,15 @@ router.route("/signup/findmatches/").post(async (req, res) => {
               theChosenMentor = x._id.toString();
           }
         }
-        //console.log("The chosen mentor", theChosenMentor)
-        //console.log(x.Classes)
-        /* if(Class.code == code)
-                {
-                    console.log("Mentor match name", Class.students)
-                } */
       }
       // mentors ordered accordong to class codes order
       mentors.push(theChosenMentor);
-
-      console.log(mentors);
+      //console.log(mentors);
     } catch (err) {
       console.log(err);
     }
   }
   res.json(mentors);
-
-  //var matched_list = await Mentor.find({ name: "Elon Musk" })
-  //let myVar = setTimeout(function(){ alert("Hello");}, 1000)
-  //.then(() => res.json(mentors));
-  //return "If youre happy and you know it"
-  //console.log("TEST")
 });
 
 /*

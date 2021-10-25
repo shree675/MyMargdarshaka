@@ -41,7 +41,6 @@ const Error = () => {
   //   const [phone, setPhone] = useState(null);
   var phone = null;
   var tempuserType = "unknown";
-  const [name, setName] = useState(null);
   const [userType, setUserType] = useState("unknown");
 
   useEffect(() => {
@@ -93,7 +92,10 @@ const Error = () => {
     });
   };
 
-  const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
+  const calc = (x, y) => [
+    x - window.innerWidth / 2,
+    y - window.innerHeight / 2,
+  ];
   const trans1 = (x, y) => `translate3d(${-x / 16}px,${-y / 16}px,0)`;
   const [props, set] = useSpring(() => ({
     xy: [0, 0],
@@ -102,24 +104,33 @@ const Error = () => {
 
   return (
     <div>
-      {userType === "unknown" ? null : userType === "learner" ? <LearnerNavbar /> : <MentorNavbar />}
+      {userType === "unknown" ? null : userType === "learner" ? (
+        <LearnerNavbar />
+      ) : (
+        <MentorNavbar />
+      )}
       <div style={{ height: "35px", backgroundColor: "#720d5d" }}></div>
-      <div className='error-content' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-        <div className='error-content-left'>
+      <div
+        className="error-content"
+        onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}
+      >
+        <div className="error-content-left">
           <animated.div style={{ transform: props.xy.to(trans1) }}>
-            {/* <img src={left} width='80%'></img> */}
-            <img src={errorcomp} className='error-img'></img>
+            <img src={errorcomp} className="error-img"></img>
           </animated.div>
         </div>
-        <div className='error-content-right'>
-          <div className='error-404-code'>404 Page Not Found</div>
-          <div className='error-error'>ERROR</div>
+        <div className="error-content-right">
+          <div className="error-404-code">404 Page Not Found</div>
+          <div className="error-error">ERROR</div>
           <br></br>
           <br></br>
-          <div className='error-message'>Oops. Looks like we took the wrong turn. Let us guide you back to the right path.</div>
-          <div className='error-height'></div>
+          <div className="error-message">
+            Oops. Looks like we took the wrong turn. Let us guide you back to
+            the right path.
+          </div>
+          <div className="error-height"></div>
           <button
-            className='error-button'
+            className="error-button"
             onClick={() => {
               console.log("clicked");
               if (userType == "unknown") window.location = "/init-signin";
