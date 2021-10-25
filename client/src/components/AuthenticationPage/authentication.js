@@ -181,9 +181,11 @@ const Authentication = () => {
         //localStorage.setItem("user_phone", phone);
 
         if (userType == "mentor") {
+          localStorage.setItem("userType", "mentor");
           if (valid_mentor) window.location = "/my-students";
           else window.location = "/mentor-signup";
         } else if (userType == "learner") {
+          localStorage.setItem("userType", "learner");
           if (valid_learner) window.location = "/my-mentors";
           else window.location = "/learner-signup";
         }

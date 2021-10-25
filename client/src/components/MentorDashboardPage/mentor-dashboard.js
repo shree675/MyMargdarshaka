@@ -11,6 +11,19 @@ const MentorDashBoard = () => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
     verify(setCuruser, setPhone);
   }, []);
 
@@ -103,14 +116,14 @@ const MentorDashBoard = () => {
   };
 
   return (
-    <div className="mb-3">
+    <div className='mb-3'>
       <Navbar />
-      <div className="container">
-        <div className="row align-items-start">
-          <div className="col-xl-3 col-12">
+      <div className='container'>
+        <div className='row align-items-start'>
+          <div className='col-xl-3 col-12'>
             <MentorDashboardChangeDetails />
           </div>
-          <div className="col-xl-9 col-12">
+          <div className='col-xl-9 col-12'>
             <MentorDashboardEditAttributes />
           </div>
         </div>

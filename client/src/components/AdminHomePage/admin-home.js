@@ -149,6 +149,19 @@ class AdminHomePage extends React.Component {
     if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
       window.location = "/admin-auth";
     }
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    }
   }
 
   render() {
