@@ -1,3 +1,10 @@
+//@ts-check
+/*
+ * The user table is used to keep a list of all users, both learners and mentors
+ * Whether they have sign up successfully or not, helps route them correctly and prevent duplicate sign-ups
+ * Will be used in the later release for the ban user functionality
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

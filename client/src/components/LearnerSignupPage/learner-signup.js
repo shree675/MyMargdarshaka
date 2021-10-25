@@ -8,11 +8,9 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { verify } from "../../verifyUser";
-//import match_learner from "../../../../backend/routes/matching.learner"
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
-//need to pass phone number as props
 const LearnerSignup = () => {
   const [state, setState] = useState({
     name: "",
@@ -52,9 +50,8 @@ const LearnerSignup = () => {
   const handleClick = async () => {
     //assign mentors button clicked
     //on sign-up, we first push all sign up data to database
-    console.log("clicked");
 
-    let temp = {};
+    let temp = {}; //Checking for valid input
 
     if (state.name.length == 0) temp.nameValid = false;
     else temp.nameValid = true;
@@ -78,15 +75,28 @@ const LearnerSignup = () => {
       setState({ ...state, ...temp });
     } else {
       console.log(state);
+
+      await axios.get("/api/user/login/getUser").then((e) => {
+        console.log(e);
+        if (phone[0] != "+") setPhone("+91" + phone);
+        console.log("Phone number was updated");
+
+        //call user table and check if sign up is unsuccessful or not (in case someon tries to break the system with multiple sign ups with same phone number)
+        e.data.map((user) => {
+          let p = phone;
+          if (p[0] != "+") p = "+91" + p;
+          if (user.phone === p) {
+            console.log("Valid phone number matched: ", p);
+            if (user.valid_signup == true) {
+              alert("You have already signed up");
+              window.location = "/my-mentors";
+            }
+            console.log("Phone number found ", p);
+          } else {
+          }
+        });
+      });
       // push to DB
-      /* const SUBJECTS = [];
-      for (let subject in state.subs) {
-        const item = {
-          code: subject,
-        };
-        SUBJECTS.push(item);
-      }
- */
       const subjects_list = [];
       console.log(state.subs);
       let subjects = state.subs;
@@ -101,10 +111,9 @@ const LearnerSignup = () => {
         };
         subjects_list.push(item);
       });
-      console.log(subjects_list);
+      //console.log(subjects_list);
 
       const learner = {
-        /* phone: LearnerSignup.phone, */ //pass as props
         phone: phone,
         name: state.name,
         email: state.email,
@@ -118,61 +127,34 @@ const LearnerSignup = () => {
         user_type: "learner",
         valid_signup: true,
       };
-      //TODO - call user table and check if sign up is unsuccessful or not (in case someon tries to break the system with multiple sign ups with same phone number)
-      console.log("Printing learner before pushing:", learner); //remember to uncomment
 
-      //remember to uncomment
-
+      console.log("Printing learner before pushing:", learner);
       await axios
         .post(`/api/learner/signup/createlearner`, learner)
         .then((res) => console.log("Pushing Sign up data"));
 
-      /* await axios.post(`/pref/createpreference`,pref).then(res=>console.log(''));
-            window.name=this.state.username;
-            window.location='/browse'; */
-      //update valid user
-      // related to firebase
       await axios
         .post(`/api/user/update/` + phone, user)
         .then((res) => console.log("User table has been updated", res));
-      //Matching algorithm - we request the database using find() passing the
-      //call match here
-      /* let language = 'English'
-      let times = ['Morning']
-      let codes = ['HIN8']
-      learner.language = language
-      learner.times = times
-      learner.codes = codes */
 
-      //console.log(learner)
-      //let mentors = {};
-      //await axios
-      //.post(`api/mentor/signup/findmatches/`, learner)
-      //.then((res) => {
-      //console.log("res", res.data);
-      //mentors = res.data;
-      //});
+      //Matching algorithm
       let res = await axios.post(`api/mentor/signup/findmatches/`, learner);
       let mentors = res.data;
       //const mentors = await match_learner(language, time, codes)
       console.log(mentors);
       //now update learner
-
       for (let i = 0; i < learner.subjects.length; i++) {
         //console.log(learner.subjects[i].mentor_id)
         learner.subjects[i].mentor_id = mentors[i];
       }
-      //console.log(learner.subjects)
+
       //updating the learner database with the assigned mentors
       console.log(learner);
-
       let res2 = await axios.post(
         `/api/learner/assign/update/` + phone,
         learner
       );
-
       console.log("Learner table has been updated ", res2);
-      //.then((res) => console.log("Learner table has been updated", res));
 
       //updating the mentors database with the assigned students
       //get the current learners id
@@ -202,9 +184,8 @@ const LearnerSignup = () => {
         });
       }
 
-      /* await axios
-        .post(`/api/mentor/updateId/` + id, mentor)
-        .then((res) => console.log("Learner table has been updated", res)); */
+      alert("Sign up Successful!");
+      window.location = "/my-mentors";
     }
   };
 

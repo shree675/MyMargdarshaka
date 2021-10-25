@@ -6,6 +6,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 
+//IMPORTANT NOTE: The connection string is available in the config.env file which is not included in the
+//GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
 const connectionString = process.env.MONGO_URI;
 
 const app = express();
@@ -31,9 +33,6 @@ const mentorRouter = require("./backend/routes/mentor.router");
 const userRouter = require("./backend/routes/user.router");
 const feedbackRouter = require("./backend/routes/feedback.router");
 const adminRouter = require("./backend/routes/admin.router");
-/* const prefRouter=require('./backend/routes/preference');
-const apiRouter=require('./backend/routes/api');
- */
 
 app.use("/api/learner", learnerRouter);
 app.use("/api/mentor", mentorRouter);

@@ -1,3 +1,4 @@
+//@ts-check
 const express = require("express");
 const router = express.Router();
 var User = require("../models/user.model");
@@ -31,7 +32,7 @@ router.route("/update/:phone").post((req, res) => {
         return;
       }
       let user = users[0];
-      user.valid_signup = req.body.valid_signup; //the error is here
+      user.valid_signup = req.body.valid_signup;
       console.log(req.body.valid_signup);
       //console.log("User", user)
       user
@@ -41,15 +42,4 @@ router.route("/update/:phone").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
-/* router.route('/update/:id').post((req, res) => {
-    User.findById(req.params.id).then(user => {
-
-    user.username=req.body.username;
-    user.password=req.body.password;
-
-    user.save().then(() => res.json('Password updated!')).catch(err => res.status(400).json('Error: ' + err));
-    }).catch(err => res.status(400).json('Error: ' + err));
-}); */
-
 module.exports = router;

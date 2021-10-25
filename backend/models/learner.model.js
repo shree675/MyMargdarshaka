@@ -1,7 +1,11 @@
+//@ts-check
+/*
+ * The learner collection stores all learners who have successfully sign up
+ * Complete information including their assigned mentors and progress in each class code assigned to them is stored here
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//const data = require("../../client/src/data")
-//import data from '../../client/src/data'
 
 let chapter = new Schema({
   name: {
@@ -73,10 +77,6 @@ let Learner = new Schema({
       "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
     ],
   },
-  //1: I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
-  //2: I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
-  //3: I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
-  //4: I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
 });
 
 module.exports = mongoose.model("Learner", Learner);

@@ -9,12 +9,6 @@ import { useState } from "react";
 import data from "../../data";
 import { verify } from "../../verifyUser";
 
-/* let classes = [6, 7, 8, 9, 10, 11, 12];
-let primSubs = ["Hindi", "Telugu", "Maths", "Science", "Social"];
-let secSubs = ["Physics", "Chemistry", "Biology"];
-let langs = ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"];
-let times = ["Morning", "Afternoon", "Evening"]; */
-
 let classes = data.classes;
 let primSubs = data.primSubs;
 let secSubs = data.secSubs;
@@ -33,8 +27,6 @@ const MentorSignup = () => {
     prefTimeCheck: true,
     subCheck: true,
   });
-
-  //{6:['English', 'Science']} -> [ENG6, SCI6]
 
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
@@ -109,6 +101,32 @@ const MentorSignup = () => {
     } else {
       // push to DB
       console.log("ok");
+
+      await axios.get("/api/user/login/getUser").then((e) => {
+        //console.log("*****************")
+        console.log(e);
+        if (phone[0] != "+") setPhone("+91" + phone);
+        console.log("Phone number was updated");
+
+        //call user table and check if sign up is unsuccessful or not (in case someon tries to break the system with multiple sign ups with same phone number)
+        e.data.map((user) => {
+          let p = phone;
+          if (p[0] != "+") p = "+91" + p;
+          //if (phone[0] != "+") setPhone("+91"+phone)
+          console.log("*****", user.phone, p);
+
+          if (user.phone === p) {
+            console.log("Valid phone number matched: ", p);
+            if (user.valid_signup == true) {
+              alert("You have already signed up");
+              window.location = "/my-students";
+            }
+            console.log("Phone number found ", p);
+          } else {
+          }
+        });
+      });
+
       const classes_list = [];
       console.log(state.clsAndSub);
       for (let i = 6; i <= 12; i++) {
@@ -150,6 +168,9 @@ const MentorSignup = () => {
       await axios
         .post(`/api/user/update/` + phone, user)
         .then((res) => console.log("User table has been updated"));
+
+      alert("Sign up Successful!");
+      window.location = "/my-mentors";
     }
   };
 
