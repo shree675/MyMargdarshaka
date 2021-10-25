@@ -87,6 +87,7 @@ To use this platform as an admin:
 ## Tools and Technologies Used
 * MERN stack with Firebase for the user authentication
 * Figma for the design and wireframing
+* ZenHub for issue tracking
 
 ## Modules overview
 <img src="./arch.png"><img/>
