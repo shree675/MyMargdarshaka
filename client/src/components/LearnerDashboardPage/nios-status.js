@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Common/button";
 
 // TODO (Kranthi): Add animations to the buttons
 const NIOSStatus = () => {
@@ -47,6 +48,9 @@ const NIOSStatus = () => {
               I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
             </button>
           </div>
+        </div>
+        <div className="mx-auto mb-3">
+          <Button text="SAVE" />
         </div>
       </div>
     </div>

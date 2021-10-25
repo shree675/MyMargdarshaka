@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button from "../Common/button";
 import axios from "axios";
 
 function validate() {
@@ -50,10 +51,12 @@ const LearnerDashboardChangeDetails = ({ details }) => {
         style={{ borderRadius: "20px", borderColor: "#FF0000" }}
       >
         <div className="d-flex justify-content-center">
-          <div
-            className="rounded-circle mb-3"
-            style={{ backgroundColor: "red", height: "100px", width: "100px" }}
-          ></div>
+          <div className="rounded-circle mb-3">
+            <img
+              className="img-fluid rounded-circle"
+              src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
+            />
+          </div>
         </div>
 
         <div
@@ -114,18 +117,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
           </div>
 
           <div className="d-flex justify-content-center">
-            <button
-              className="save-details-button rounded-pill px-5 py-3 mt-3"
-              style={{
-                backgroundColor: "#5D1049",
-                color: "white",
-                border: "none",
-              }}
-              type="submit"
-              onClick={handleClick}
-            >
-              SAVE
-            </button>
+            <Button text="SAVE" />
           </div>
         </form>
       </div>

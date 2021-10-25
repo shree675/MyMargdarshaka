@@ -11,15 +11,27 @@ const LearnerRequestChangeOfMentor = () => {
     borderRadius: "20px",
   };
 
-  const details = {
-    subject: "MATHEMATICS",
-    name: "Inderpal Ankur",
-    class: 9,
-    email: "abc@example.com",
-    phone: "9876543210",
-    hasPendingTests: false,
-    hasConsented: true,
-  };
+  const subjects = ["MATHEMATICS", "SCIENCE", "ENGLISH"];
+  const names = [
+    "Zephoid Beeblebrox",
+    "Arthur Dent",
+    "Ford Prefect",
+    "Trillian",
+    "Prostetnic Volgon Jeltz",
+  ];
+  const details = [];
+
+  for (var subject in subjects) {
+    details.push({
+      subject: subjects[subject],
+      name: names[subject],
+      class: 9,
+      email: "abc@example.com",
+      phone: "9876543210",
+      hasPendingTests: false,
+      hasConsented: true,
+    });
+  }
 
   return (
     <div
@@ -34,13 +46,13 @@ const LearnerRequestChangeOfMentor = () => {
 
       <div className="row justify-content-center">
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[0]} />
         </div>
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[0]} />
         </div>
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[0]} />
         </div>
       </div>
 
@@ -48,13 +60,13 @@ const LearnerRequestChangeOfMentor = () => {
 
       <div className="row justify-content-center">
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[1]} />
         </div>
         {/* <div className="col-lg-3 col-6">
           <Card details={details} />
         </div> */}
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[1]} />
         </div>
       </div>
 
@@ -62,13 +74,13 @@ const LearnerRequestChangeOfMentor = () => {
 
       <div className="row justify-content-center">
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[2]} />
         </div>
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[2]} />
         </div>
         <div className="col-lg-3 col-6">
-          <Card details={details} />
+          <Card details={details[2]} />
         </div>
       </div>
     </div>
