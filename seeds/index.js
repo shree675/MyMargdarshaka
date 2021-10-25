@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Mentor = require("../backend/models/mentor.model");
+const { mentorSchema } = require("../backend/utils/joiSchemas");
 const mentors = require("./dummy_data.json");
 
 const url = "mongodb://localhost:27017/my-margdarshaka";
@@ -20,6 +21,7 @@ const seedDB = async () => {
   console.log("before");
   for (let mentor of mentors) {
     // console.log(mentor);
+    const valid = mentorSchema.validate(mentor, { allowUnknown: true });
     const m = new Mentor(mentor);
     await m.save().catch((e) => console.log(e));
   }

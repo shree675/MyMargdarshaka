@@ -12,17 +12,8 @@ import { verify } from "../../verifyUser";
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
 const LearnerHome = (props) => {
-  // const mentorDetails = props.mentorDetails
-  // mentorDetails is an array that contains information
-  // about each mentor in the following format
-
-  // TODO: Update with mentorDetails
-
-  // this is temp, get this id from props
-  let id = "6174edaeb2244a7f509c8a25";
-
   const [mentorData, setMentorData] = React.useState([]);
-  const [curuser, setCuruser] = useState("No user is logged in");
+  const [_, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
 
   const getData = async (learner_phone) => {
@@ -54,14 +45,6 @@ const LearnerHome = (props) => {
   };
 
   React.useEffect(() => {
-    /*
-    let temp = async () => {
-      await verify(setCuruser, setPhone);
-      console.log(phone);
-      getData(phone);
-    };
-    temp();
-    */
     verify(setCuruser, setPhone);
     getData(phone);
   }, [phone]);
@@ -69,31 +52,6 @@ const LearnerHome = (props) => {
   React.useEffect(() => {
     console.log(mentorData);
   }, [mentorData]);
-
-  /*
-  const details = {
-    subject: "MATHEMATICS",
-    name: "Inderpal Ankur",
-    class: 9,
-    email: "abc@example.com",
-    phone: "9876543210",
-    hasPendingTests: false,
-    hasConsented: true,
-  };
-  */
-
-  /*
-  const num_mentors = 6;
-
-  var cards = [];
-  for (let i = 0; i < num_mentors; i++) {
-    cards.push(
-      <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
-        <Card details={mentorData[i]} />
-      </div>
-    );
-  }
-  */
 
   return (
     <div className="learner-home">
@@ -123,24 +81,24 @@ const LearnerHome = (props) => {
             </h1>
             <div className="row mb-3">
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={10} subject={"Mathematics"} />
               </div>
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={20} subject={"Social Studies"} />
               </div>
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={30} subject={"Science"} />
               </div>
             </div>
             <div className="row">
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={40} subject={"Biology"} />
               </div>
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={50} subject={"Chemistry"} />
               </div>
               <div className="col">
-                <ProgressChart />
+                <ProgressChart percent_complete={60} subject={"Physics"} />
               </div>
             </div>
           </div>

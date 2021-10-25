@@ -34,11 +34,22 @@ const adminRouter = require("./backend/routes/admin.router");
 /* const prefRouter=require('./backend/routes/preference');
 const apiRouter=require('./backend/routes/api');
  */
+
 app.use("/api/learner", learnerRouter);
 app.use("/api/mentor", mentorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
 app.use("/api/admin", adminRouter);
+
+// app.get("*", (req, res) => {
+//   throw new Error("Page Not Found");
+// });
+
+// app.use((err, req, res, next) => {
+//   console.log("BAD ERROR");
+//   // render the error page ... HOW?
+// });
+
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
 
