@@ -57,6 +57,7 @@ const Authentication = () => {
   const [valid_mentor, setValidMentor] = useState(false);
   const [valid_learner, setValidLearner] = useState(false);
   const [valid_user, setValidUser] = useState(false);
+  const [customUserType, setCusomUserType] = useState(userType);
 
   useEffect(() => {
     verify();
@@ -120,15 +121,19 @@ const Authentication = () => {
           setValidUser(true);
           if (user.user_type == "mentor") {
             userType = "mentor";
+            setCusomUserType("mentor");
             if (user.valid_signup) {
               console.log("Set to valid mentor");
               setValidMentor(true);
+              setValidLearner(false);
             }
           } else if (user.user_type == "learner") {
             userType = "learner";
+            setCusomUserType("learner");
             if (user.valid_signup) {
               console.log("Set to valid learner");
               setValidLearner(true);
+              setValidMentor(false);
             }
           }
           console.log("Phone number found ", p);
@@ -180,11 +185,11 @@ const Authentication = () => {
 
         //localStorage.setItem("user_phone", phone);
 
-        if (userType == "mentor") {
+        if (customUserType == "mentor") {
           localStorage.setItem("userType", "mentor");
           if (valid_mentor) window.location = "/my-students";
           else window.location = "/mentor-signup";
-        } else if (userType == "learner") {
+        } else if (customUserType == "learner") {
           localStorage.setItem("userType", "learner");
           if (valid_learner) window.location = "/my-mentors";
           else window.location = "/learner-signup";
