@@ -92,9 +92,9 @@ const Authentication = () => {
           e.data.map((data) => {
             if (user.phoneNumber === data.phone) {
               if (data.user_type === "learner") {
-                window.location = "/learner-home";
+                window.location = "/my-mentors";
               } else {
-                window.location = "/mentor-home";
+                window.location = "/my-students";
               }
             }
           });
