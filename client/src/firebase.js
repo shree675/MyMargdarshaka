@@ -1,7 +1,6 @@
 //@ts-check
 
 import firebase from "firebase";
-require("dotenv").config({ path: "./config.env" });
 
 console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
