@@ -45,6 +45,19 @@ const LearnerHome = (props) => {
   };
 
   React.useEffect(() => {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
     verify(setCuruser, setPhone);
     getData(phone);
   }, [phone]);
@@ -54,50 +67,47 @@ const LearnerHome = (props) => {
   }, [mentorData]);
 
   return (
-    <div className="learner-home">
+    <div className='learner-home'>
       <Navbar />
-      <div className="container-fluid p-0">
-        <div className="row m-3" style={borderStyle}>
-          <div
-            className="col-md card p-3 me-md-2 mb-3 mb-md-0"
-            style={borderStyle}
-          >
+      <div className='container-fluid p-0'>
+        <div className='row m-3' style={borderStyle}>
+          <div className='col-md card p-3 me-md-2 mb-3 mb-md-0' style={borderStyle}>
             <h1>
               <strong>MENTORS</strong>
             </h1>
-            <div className="row">
+            <div className='row'>
               {mentorData.map((mentorDetails, i) => {
                 return (
-                  <div key={i} className="col-8 mx-auto col-sm-6 mx-md-0">
+                  <div key={i} className='col-8 mx-auto col-sm-6 mx-md-0'>
                     <Card details={mentorDetails} />
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="col-md card p-3" style={borderStyle}>
-            <h1 className="mb-3">
+          <div className='col-md card p-3' style={borderStyle}>
+            <h1 className='mb-3'>
               <strong>YOUR PROGRESS</strong>
             </h1>
-            <div className="row mb-3">
-              <div className="col">
+            <div className='row mb-3'>
+              <div className='col'>
                 <ProgressChart percent_complete={10} subject={"Mathematics"} />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart percent_complete={20} subject={"Social Studies"} />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart percent_complete={30} subject={"Science"} />
               </div>
             </div>
-            <div className="row">
-              <div className="col">
+            <div className='row'>
+              <div className='col'>
                 <ProgressChart percent_complete={40} subject={"Biology"} />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart percent_complete={50} subject={"Chemistry"} />
               </div>
-              <div className="col">
+              <div className='col'>
                 <ProgressChart percent_complete={60} subject={"Physics"} />
               </div>
             </div>

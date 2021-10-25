@@ -84,6 +84,7 @@ const Navbar = (props) => {
           <button
             onClick={() => {
               firebase.auth().signOut();
+              localStorage.clear();
               window.location = "/init-signin";
             }}
             className='nav-logout-pc'

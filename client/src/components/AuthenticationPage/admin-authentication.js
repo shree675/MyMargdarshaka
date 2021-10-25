@@ -54,10 +54,23 @@ const AdminAuthentication = () => {
     if (localStorage.getItem("isloggedin") == "true") {
       window.location = "/admin-home";
     }
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    }
   }, []);
 
   const submit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (username == null || password == null) {
       alert("Please fill all the fields");
       return;
@@ -148,7 +161,23 @@ const AdminAuthentication = () => {
             <br></br>
             <br></br>
             <div className=''>
-              <button className='auth-button' onClick={submit}>
+              <button
+                className='auth-button'
+                onClick={() => {
+                  if (
+                    username != "" &&
+                    username != null &&
+                    username != undefined &&
+                    password != null &&
+                    password != "" &&
+                    password != undefined
+                  ) {
+                    submit();
+                  } else {
+                    alert("Please enter both username and password");
+                  }
+                }}
+              >
                 LOGIN
               </button>
             </div>
