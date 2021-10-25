@@ -19,13 +19,14 @@ const LearnerDashboard = () => {
   const getData = async (learner_phone) => {
     //const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
     //const data = res.data;
-    axios.get(`/api/learner/get-data/phone/${learner_phone}`)
-    .then((res) => {
-      const data = res.data
+    console.log(learner_phone);
+    axios.get(`/api/learner/get-data/phone/${learner_phone}`).then((res) => {
+      const data = res.data;
       console.log(data);
-      setLearnerData(data);
-    })
- 
+      if (data.phone != null || data.phone != undefined) {
+        setLearnerData(data);
+      }
+    });
   };
 
   useEffect(() => {
@@ -35,14 +36,14 @@ const LearnerDashboard = () => {
   }, [phone]);
 
   return (
-    <div className="mb-3">
+    <div className='mb-3'>
       <LearnerNavbar />
-      <div className="container-fluid">
-        <div className="row align-items-end">
-          <div className="col-lg-3 col-12">
+      <div className='container-fluid'>
+        <div className='row align-items-end'>
+          <div className='col-lg-3 col-12'>
             <LearnerDashboardChangeDetails details={learnerData} />
           </div>
-          <div className="col-lg-9 col-12">
+          <div className='col-lg-9 col-12'>
             <LearnerDashboardEditAttributes details={learnerData} />
           </div>
         </div>
