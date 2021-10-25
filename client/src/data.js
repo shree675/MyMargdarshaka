@@ -1,6 +1,6 @@
 const data = {
   classes: [6, 7, 8, 9, 10, 11, 12],
-  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social"], //English
+  primSubs: ["Hindi", "Telugu", "Maths", "Science", "Social", "English"], //English
   secSubs: ["Physics", "Chemistry", "Biology", "Maths"],
   langs: ["English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam"],
   times: ["Morning", "Afternoon", "Evening"],

@@ -1,8 +1,8 @@
 // @ts-check
 
 import React, { useState, useEffect } from "react";
-import LearnerDashboardEditAttributes from "../LearnerDashboardPage/learner-edit-attributes";
-import LearnerDashboardChangeDetails from "../LearnerDashboardPage/learner-dashboard-change-details";
+import MentorDashboardEditAttributes from "./mentor-edit-attributes";
+import MentorDashboardChangeDetails from "./mentor-dashboard-change-details";
 import Navbar from "../Navbar/mentor-navbar";
 import { verify } from "../../verifyUser";
 
@@ -106,12 +106,12 @@ const MentorDashBoard = () => {
     <div className="mb-3">
       <Navbar />
       <div className="container">
-        <div className="row align-items-end">
+        <div className="row align-items-start">
           <div className="col-xl-3 col-12">
-            <LearnerDashboardChangeDetails details={details} />
+            <MentorDashboardChangeDetails />
           </div>
           <div className="col-xl-9 col-12">
-            <LearnerDashboardEditAttributes details={details} />
+            <MentorDashboardEditAttributes />
           </div>
         </div>
       </div>
