@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../Common/button";
 
 import data from "../../data";
 
@@ -133,28 +134,28 @@ const LearnerDashboardEditAttributes = ({ details }) => {
     }
   };
 
-  useEffect(() => {
-    if (Object.keys(details).length > 0) {
-      console.log(details);
-      let tmp = {};
-      details.subjects.forEach((sub) => {
-        const code = sub.code;
-        const subName = data.codeToSubName[code.substr(0, code.length - 1)];
-        tmp[subName] = true;
-      });
-      setSubjects(tmp);
-      // maintaing a copy of subjects, if new subjects added then run matching algo
-      setCopyOfSubjects(tmp);
+  // useEffect(() => {
+  //   if (Object.keys(details).length > 0) {
+  //     console.log(details);
+  //     let tmp = {};
+  //     details.subjects.forEach((sub) => {
+  //       const code = sub.code;
+  //       const subName = data.codeToSubName[code.substr(0, code.length - 1)];
+  //       tmp[subName] = true;
+  //     });
+  //     setSubjects(tmp);
+  //     // maintaing a copy of subjects, if new subjects added then run matching algo
+  //     setCopyOfSubjects(tmp);
 
-      tmp = {};
-      details.times.map((timeSlot) => {
-        tmp[timeSlot] = true;
-      });
+  //     tmp = {};
+  //     details.times.map((timeSlot) => {
+  //       tmp[timeSlot] = true;
+  //     });
 
-      setTimes(tmp);
-      setLanguage(details.language);
-    }
-  }, [details]);
+  //     setTimes(tmp);
+  //     setLanguage(details.language);
+  //   }
+  // }, [details]);
 
   return (
     <div
@@ -245,14 +246,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         </div>
       </div>
 
-      <div className="text-center">
-        <a
-          className="rounded-pill btn px-3 mb-3"
-          style={{ border: "none", backgroundColor: "#5D1049", color: "white" }}
-          onClick={handleClick}
-        >
-          SAVE
-        </a>
+      <div className="d-flex justify-content-center mb-3">
+        <Button text="SAVE" />
       </div>
     </div>
   );
