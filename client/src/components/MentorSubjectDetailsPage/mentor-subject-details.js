@@ -17,6 +17,7 @@ const Chapters = ({ handleClickChapter }) => {
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
 
+  // reroute if a different user is logged in
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -155,6 +156,7 @@ const Tests = ({ pendingTests, completedTests }) => {
   );
 };
 
+// main component
 class MentorSubjectDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -163,6 +165,23 @@ class MentorSubjectDetails extends React.Component {
       curChapter: 0,
     };
     this.handleClickChapter = this.handleClickChapter.bind(this);
+  }
+
+  // reroute if a different user is logged in
+  componentDidMount() {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
   }
 
   handleClickChapter(ch) {

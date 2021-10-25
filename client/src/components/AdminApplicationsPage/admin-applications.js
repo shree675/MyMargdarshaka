@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import { IoBan } from "react-icons/io5";
 import { styled } from "@mui/material/styles";
 
+// custom css for materialui textfields
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#4e0d3a",
@@ -32,6 +33,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
+// dummy data with format
 const openApp = [
   {
     name: "Arvind",
@@ -51,6 +53,7 @@ const openApp = [
   },
 ];
 
+// dummy data with format
 const rejApp = [
   {
     name: "Aashrith",
@@ -70,6 +73,7 @@ const rejApp = [
   },
 ];
 
+// card component
 const ApplicationCard = (props) => {
   const handleApprove = (user) => {
     console.log("approve ", user.name);
@@ -106,7 +110,7 @@ const ApplicationCard = (props) => {
         <div
           className='admin-applications-card-button'
           onClick={() => {
-            handleApprove(props.app);
+            handleApprove(props.app); // approves a mentor application
           }}
           style={props.rej ? { display: "none" } : {}}
         >
@@ -126,6 +130,7 @@ const ApplicationCard = (props) => {
   );
 };
 
+// main page component
 class AdminApplications extends React.Component {
   constructor(props) {
     super(props);
@@ -139,10 +144,12 @@ class AdminApplications extends React.Component {
     this.handleBanUser = this.handleBanUser.bind(this);
   }
 
+  // method to search users in the database
   handleSearchTextChange(e) {
     this.setState({ searchText: e.target.value });
   }
 
+  // method to search users in the database
   handleSubmitText(e) {
     if (e.keyCode === 13) {
       console.log(this.state.searchText);
@@ -151,10 +158,12 @@ class AdminApplications extends React.Component {
     }
   }
 
+  // method to ban a user
   handleBanUser(user) {
     console.log("ban ", user.name);
   }
 
+  // verify if some user is already in session
   componentDidMount() {
     if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
       window.location = "/admin-auth";

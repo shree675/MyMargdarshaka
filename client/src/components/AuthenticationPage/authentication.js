@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { verify } from "../../verifyUser";
 
+// custom styles for materialui textfields
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#4e0d3a",
@@ -39,7 +40,9 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
 //we need to know which button was clicked, learner or mentor, to redirect appropriately after authentication
+// main page component
 const Authentication = () => {
   let user = useParams();
   let userType = user.id.slice(1);
@@ -48,16 +51,23 @@ const Authentication = () => {
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const slides = ["The average time that students spend on social networks has risen to an all-time high", "lorem ipsum"];
+  const slides = [
+    "The average time that students spend on social networks has risen to an all-time high",
+    "In developing, low-income countries, every additional year of education can increase a person’s future income by an average of 10%",
+    "In the sub-Saharan, 11.07 million children leave school before completing their primary education. In South and West Asia, that number reaches 13.54 million.",
+  ];
   const [time, setTime] = useState(0);
   const interval = setInterval(() => {
+    // interval for dynamic fact update
     setTime(time + 1);
     clearInterval(interval);
   }, 4000);
   const [valid_mentor, setValidMentor] = useState(false);
   const [valid_learner, setValidLearner] = useState(false);
   const [valid_user, setValidUser] = useState(false);
+  const [customUserType, setCusomUserType] = useState(userType);
 
+  // verify if a user is already logged in
   useEffect(() => {
     verify();
   }, []);
@@ -120,15 +130,19 @@ const Authentication = () => {
           setValidUser(true);
           if (user.user_type == "mentor") {
             userType = "mentor";
+            setCusomUserType("mentor");
             if (user.valid_signup) {
               console.log("Set to valid mentor");
               setValidMentor(true);
+              setValidLearner(false);
             }
           } else if (user.user_type == "learner") {
             userType = "learner";
+            setCusomUserType("learner");
             if (user.valid_signup) {
               console.log("Set to valid learner");
               setValidLearner(true);
+              setValidMentor(false);
             }
           }
           console.log("Phone number found ", p);
@@ -174,17 +188,17 @@ const Authentication = () => {
         };
         console.log("Printing user before pushing:", user);
 
+        // checks if the user is a first time user and routes appropriately
         if (!valid_user) {
           await axios.post(`/api/user/signup/createUser`, user).then((res) => console.log("Pushing user Sign up data"));
         }
 
-        //localStorage.setItem("user_phone", phone);
-
-        if (userType == "mentor") {
+        // signin successful
+        if (customUserType == "mentor") {
           localStorage.setItem("userType", "mentor");
           if (valid_mentor) window.location = "/my-students";
           else window.location = "/mentor-signup";
-        } else if (userType == "learner") {
+        } else if (customUserType == "learner") {
           localStorage.setItem("userType", "learner");
           if (valid_learner) window.location = "/my-mentors";
           else window.location = "/learner-signup";
@@ -197,6 +211,7 @@ const Authentication = () => {
     verify();
   };
 
+  // for react spring animations
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
   const trans1 = (x, y) => `translate3d(${x / 16}px,${y / 16}px,0)`;
   const trans2 = (x, y) => `translate3d(${x / 7.5}px,${y / 7.5}px,0)`;
@@ -220,7 +235,7 @@ const Authentication = () => {
             <img src={wavefront} className='auth-wave-front' />
           </animated.div>
         </div>
-        {toggle ? (
+        {toggle ? ( // switch between phone and OTP pages
           <div className='auth-content-body'>
             <div className='auth-91'>
               <span className='auth-num'>+91 </span>
@@ -254,7 +269,7 @@ const Authentication = () => {
                 onClick={(e) => {
                   if (phone != undefined && phone != null && phone != "") {
                     setToggle(false);
-                    verifyPhone(e);
+                    verifyPhone(e); // verify if all fields are filled
                     setPhone("");
                   } else {
                     alert("Please enter your phone number");
@@ -298,7 +313,7 @@ const Authentication = () => {
                 className='auth-button'
                 onClick={(e) => {
                   if (otp != null && otp != undefined && otp != "") {
-                    verifyOtp(e);
+                    verifyOtp(e); // verify if all fields are filled
                   } else {
                     alert("Please enter your OTP");
                   }

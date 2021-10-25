@@ -11,6 +11,7 @@ import { verify } from "../../verifyUser";
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
+// main component
 const LearnerSignup = () => {
   const [state, setState] = useState({
     name: "",
@@ -27,6 +28,7 @@ const LearnerSignup = () => {
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
 
+  // verify if a user is already logged in
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -44,6 +46,7 @@ const LearnerSignup = () => {
     verify(setCuruser, setPhone);
   }, []);
 
+  // method to populate the checkbox fields
   const handleChange = (e) => {
     if (e.target.name == "class") {
       setState({ ...state, Class: e.target.value, subs: [] });
@@ -94,7 +97,7 @@ const LearnerSignup = () => {
         if (phone[0] != "+") setPhone("+91" + phone);
         console.log("Phone number was updated");
 
-        //call user table and check if sign up is unsuccessful or not (in case someon tries to break the system with multiple sign ups with same phone number)
+        //call user table and check if sign up is unsuccessful or not (in case someone tries to break the system with multiple sign ups with same phone number)
         e.data.map((user) => {
           let p = phone;
           if (p[0] != "+") p = "+91" + p;

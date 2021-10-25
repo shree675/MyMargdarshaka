@@ -15,6 +15,7 @@ let secSubs = data.secSubs;
 let langs = data.langs;
 let times = data.times;
 
+// main component
 const MentorSignup = () => {
   const [state, setState] = React.useState({
     name: "",
@@ -31,6 +32,7 @@ const MentorSignup = () => {
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
 
+  // reroute if a different user is logged in
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -48,6 +50,7 @@ const MentorSignup = () => {
     verify(setCuruser, setPhone);
   }, []);
 
+  // fill the page with the appropriate checkboxes and fields
   const handleChange = (e) => {
     if (e.target.name == "clsAndSub") {
       console.log(e.target.value);

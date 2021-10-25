@@ -8,11 +8,13 @@ import MentorDashboardChangeDetails from "./mentor-dashboard-change-details";
 import Navbar from "../Navbar/mentor-navbar";
 import { verify } from "../../verifyUser";
 
+// main component
 const MentorDashBoard = () => {
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
 
   const [mentorData, setMentorData] = useState({});
+  // reroute if a different user is in session
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -30,6 +32,7 @@ const MentorDashBoard = () => {
     verify(setCuruser, setPhone);
   }, []);
 
+  // obtaining user's details from the database
   const getData = async (mentor_phone) => {
     console.log(mentor_phone);
     axios.get(`/api/mentor/get-data/phone/${mentor_phone}`).then((res) => {
@@ -43,19 +46,18 @@ const MentorDashBoard = () => {
 
   useEffect(() => {
     verify(setCuruser, setPhone);
-    //const learner_phone = localStorage.getItem("user_phone");
     getData(phone);
   }, [phone]);
 
   return (
-    <div className="mb-3">
+    <div className='mb-3'>
       <Navbar />
-      <div className="container">
-        <div className="row align-items-start">
-          <div className="col-xl-3 col-12">
+      <div className='container'>
+        <div className='row align-items-start'>
+          <div className='col-xl-3 col-12'>
             <MentorDashboardChangeDetails details={mentorData} />
           </div>
-          <div className="col-xl-9 col-12">
+          <div className='col-xl-9 col-12'>
             <MentorDashboardEditAttributes details={mentorData} />
           </div>
         </div>

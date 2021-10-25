@@ -8,6 +8,7 @@ import Card from "../LearnerHomePage/card";
 import SubjectTitle from "./subject-title";
 import { verify } from "../../verifyUser";
 
+// main component
 const MentorHome = () => {
   const style = {
     backgroundColor: "#5D1049",
@@ -62,6 +63,7 @@ const MentorHome = () => {
     setStudentsData(tmp);
   };
 
+  // reroute if a different user is logged in
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&

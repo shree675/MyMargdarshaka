@@ -21,6 +21,7 @@ import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
 import TestPage from "./components/TestPage/test.js";
 import AdminHomePage from "./components/AdminHomePage/admin-home.js";
 
+// all user routes
 class App extends Component {
   render() {
     return (
@@ -33,11 +34,11 @@ class App extends Component {
           <Route exact path='/mentor-signup' component={MentorSignup} />
           <Route exact path='/feedback' component={Feedback} />
           <Route exact path='/learner-dashboard' component={LearnerDashboard} />
-          <Route exact path='/admin-auth' component={AdminAuthentication} /> 
+          <Route exact path='/admin-auth' component={AdminAuthentication} />
           <Route exact path='/mentor-dashboard' component={MentorDashBoard} />
           <Route exact path='/learner-dashboard' component={LearnerDashboard} />
           <Route exact path='/my-mentors' component={LearnerHomepage} />
-          <Route exact path='/my-students' component={MentorHome} /> 
+          <Route exact path='/my-students' component={MentorHome} />
           <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} />
           <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} />
           <Route exact path='/test' component={TestPage} />
