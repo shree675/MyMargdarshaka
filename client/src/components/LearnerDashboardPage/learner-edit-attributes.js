@@ -247,7 +247,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
       </div>
 
       <div className="d-flex justify-content-center mb-3">
-        <Button text="SAVE" />
+        <Button onClick={handleClick} text="SAVE" />
       </div>
     </div>
   );
