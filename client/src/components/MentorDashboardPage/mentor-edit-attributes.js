@@ -4,7 +4,12 @@ import React, { useState, useEffect } from "react";
 import data from "../../data";
 
 function getSubjectName(code) {
-  code = code.substr(0, code.length - 1);
+  let classNumber = Number(code[code.length - 1]);
+  if (classNumber <= 2) {
+    code = code.substr(0, code.length - 2);
+  } else {
+    code = code.substr(0, code.length - 1);
+  }
   const subName = data.codeToSubName[code];
   return subName;
 }
@@ -26,14 +31,45 @@ const details = {
   },
 };
 
-const LearnerDashboardEditAttributes = () => {
+const LearnerDashboardEditAttributes = ({ details }) => {
+  const [state, setState] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(details).length > 0) {
+      let tmp = { 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [] };
+      details.Classes.forEach((cls) => {
+        const code = cls.code;
+
+        let classNumber = Number(code[code.length - 1]);
+        if (classNumber <= 2) {
+          classNumber = Number(code.substr(code.length - 2, 2));
+        }
+
+        const subName = getSubjectName(code);
+
+        if (tmp[classNumber] == undefined) {
+          tmp[classNumber] = [subName];
+        } else {
+          tmp[classNumber].push(subName);
+        }
+      });
+      tmp.time = details.time;
+      tmp.language = details.language;
+      setState(tmp);
+    }
+  }, [details]);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
     <div
       className="container p-xl-0 card mx-auto mt-3 mx-xl-0"
       style={{ border: "1px solid #ff0000", borderRadius: "20px" }}
     >
       <div className="row justify-content-center mt-4 px-5">
-        {Object.keys(details.classes).map((cls) => (
+        {[6, 7, 8, 9, 10, 11, 12].map((cls) => (
           <div className="col-md-4 my-md-3" style={{ color: "#5D1049" }}>
             <strong>CLASS {cls}</strong>
             <ul className="list-group" id="preferred-subjects">
@@ -43,7 +79,7 @@ const LearnerDashboardEditAttributes = () => {
                       <input
                         className="form-check-input me-1"
                         type="checkbox"
-                        checked={details.classes[cls].includes(sub)}
+                        checked={state[cls] ? state[cls].includes(sub) : false}
                       />
                       {sub}
                     </li>
@@ -53,7 +89,7 @@ const LearnerDashboardEditAttributes = () => {
                       <input
                         className="form-check-input me-1"
                         type="checkbox"
-                        checked={details.classes[cls].includes(sub)}
+                        checked={state[cls] ? state[cls].includes(sub) : false}
                       />
                       {sub}
                     </li>
@@ -71,7 +107,7 @@ const LearnerDashboardEditAttributes = () => {
                   className="form-check-input me-1"
                   type="radio"
                   name="time"
-                  checked={timeSlot === details.time}
+                  checked={timeSlot === state.time}
                 />
                 {timeSlot}
               </li>
@@ -90,7 +126,7 @@ const LearnerDashboardEditAttributes = () => {
                   className="form-check-input me-1"
                   type="radio"
                   name="language"
-                  checked={lang === details.language}
+                  checked={lang === state.language}
                 />
                 {lang}
               </li>

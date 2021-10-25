@@ -117,7 +117,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
           </div>
 
           <div className="d-flex justify-content-center">
-            <Button text="SAVE" />
+            <Button onClick={handleClick} text="SAVE" />
           </div>
         </form>
       </div>

@@ -23,7 +23,26 @@ function validate() {
 }
 
 // TODO: Replace the hardcoded colors
-const LearnerDashboardChangeDetails = () => {
+const LearnerDashboardChangeDetails = ({ details }) => {
+  const [state, setState] = useState(details);
+
+  useEffect(() => {
+    console.log("state : ", state);
+    setState(details);
+  }, [details]);
+
+  const handleChange = (e) => {
+    const name = e.target.id;
+    const value = e.target.value;
+    setState({ ...state, [name]: value });
+  };
+
+  const handleClick = async () => {
+    validate();
+    // update DB
+    await axios.post(`/api/mentor/update-by-id/${details._id}`, state);
+  };
+
   return (
     <div className="learner-dashboard-change-details">
       <div
@@ -53,8 +72,9 @@ const LearnerDashboardChangeDetails = () => {
               id="name"
               type="text"
               class="form-control"
+              value={state.name}
+              onChange={handleChange}
               placeholder="First Last"
-              value="Aashrith"
               required
             />
             <div className="valid-feedback">Looks good!</div>
@@ -70,7 +90,7 @@ const LearnerDashboardChangeDetails = () => {
               type="text"
               class="form-control"
               placeholder="9876543210"
-              value="9876543210"
+              value={state.phone}
               required
             />
             <div className="valid-feedback">Looks good!</div>
@@ -87,8 +107,9 @@ const LearnerDashboardChangeDetails = () => {
               id="email"
               type="email"
               class="form-control"
+              value={state.email}
+              onChange={handleChange}
               placeholder="someone@example.com"
-              value="aashrith@gmail.com"
             />
           </div>
 
@@ -101,6 +122,7 @@ const LearnerDashboardChangeDetails = () => {
                 border: "none",
               }}
               type="submit"
+              onClick={handleClick}
             >
               SAVE
             </button>
