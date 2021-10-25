@@ -206,7 +206,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         </div>
 
         <div className="col-md-4 my-3" style={{ color: "#5D1049" }}>
-          <strong>PREFERRED TIMES</strong>
+          <strong>PREFERRED TIME</strong>
           <ul className="list-group" id="preferred-subjects">
             {data.times.map((timeSlot) => (
               <li className="list-group-item">
