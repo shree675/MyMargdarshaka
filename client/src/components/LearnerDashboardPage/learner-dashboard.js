@@ -20,13 +20,16 @@ const LearnerDashboard = () => {
   // method to retrieve user's details from database
   const getData = async (learner_phone) => {
     console.log(learner_phone);
-    axios.get(`/api/learner/get-data/phone/${learner_phone}`).then((res) => {
-      const data = res.data;
-      console.log(data);
-      if (data.phone != null || data.phone != undefined) {
-        setLearnerData(data);
-      }
-    });
+    axios
+      .get(`/api/learner/get-data/phone/${learner_phone}`)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        if (data.phone != null || data.phone != undefined) {
+          setLearnerData(data);
+        }
+      })
+      .catch((e) => console.log("VERY BAD ERROR"));
   };
 
   // verify if a user has already logged in
