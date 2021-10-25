@@ -17,10 +17,15 @@ const LearnerDashboard = () => {
   const [learnerData, setLearnerData] = useState({});
 
   const getData = async (learner_phone) => {
-    const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
-    const data = res.data;
-    console.log(data);
-    setLearnerData(data);
+    //const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
+    //const data = res.data;
+    axios.get(`/api/learner/get-data/phone/${learner_phone}`)
+    .then((res) => {
+      const data = res.data
+      console.log(data);
+      setLearnerData(data);
+    })
+ 
   };
 
   useEffect(() => {
