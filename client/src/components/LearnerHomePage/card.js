@@ -39,7 +39,7 @@ const Card = (props) => {
             }}
           ></div>
           <h4 className="card-text mb-3">{props.details["name"]}</h4>
-          <p className="card-text">Class {props.details["class"]}</p>
+          <p className="card-text">Class {props.details["Class"]}</p>
           <p className="card-text">{props.details["subject"]}</p>
           <p className={"card-text  " + showDetails}>
             {props.details["email"]}
