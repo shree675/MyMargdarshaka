@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import firebase from "../../firebase";
 
+// custom styles for materialui textfields
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#4e0d3a",
@@ -37,6 +38,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
+// main page component
 const Feedback = () => {
   const [issueType, setIssueType] = useState(1);
   const [issue, setIssue] = useState(null);
@@ -47,6 +49,7 @@ const Feedback = () => {
   const [name, setName] = useState(null);
   const [userType, setUserType] = useState(null);
 
+  // verify if a user is already logged in and set approprite navbar, name and phone number
   useEffect(() => {
     verify();
   }, []);
@@ -94,24 +97,24 @@ const Feedback = () => {
 
   return (
     <div>
-      {userType === null ? null : userType === "learner" ? (
+      {userType === null ? null : userType === "learner" ? ( // setting the navbar appropriately
         <LearnerNavbar />
       ) : (
         <MentorNavbar />
       )}
       <div style={{ height: "35px", backgroundColor: "#720d5d" }}></div>
-      <div className="feedback-content">
-        <div className="feedback-content-left">
-          <img src={feedbackcomp} className="feedback-img"></img>
+      <div className='feedback-content'>
+        <div className='feedback-content-left'>
+          <img src={feedbackcomp} className='feedback-img'></img>
         </div>
-        <div className="feedback-content-right">
+        <div className='feedback-content-right'>
           <CssTextField
-            id="subject-input"
-            label="Subject"
-            variant="outlined"
+            id='subject-input'
+            label='Subject'
+            variant='outlined'
             fullWidth
-            size="small"
-            color="error"
+            size='small'
+            color='error'
             onChange={(e) => {
               setSubject(e.target.value);
             }}
@@ -119,9 +122,9 @@ const Feedback = () => {
           <br></br>
           <br></br>
           <Select
-            id="issue-type"
+            id='issue-type'
             value={issueType}
-            label="Issue Type"
+            label='Issue Type'
             onChange={(e) => {
               setIssueType(e.target.value);
               if (e.target.value == 10) {
@@ -137,7 +140,7 @@ const Feedback = () => {
               }
             }}
             fullWidth
-            size="small"
+            size='small'
           >
             <MenuItem value={1} style={{ color: "gray" }}>
               <span style={{ color: "gray" }}>Type of Issue</span>
@@ -150,21 +153,21 @@ const Feedback = () => {
           <br></br>
           <br></br>
           <CssTextField
-            id="issue-body"
-            label="Body of the issue"
-            variant="outlined"
+            id='issue-body'
+            label='Body of the issue'
+            variant='outlined'
             fullWidth
-            size="small"
-            color="error"
+            size='small'
+            color='error'
             multiline
             rows={12}
             onChange={(e) => {
               setBody(e.target.value);
             }}
           />
-          <div className="feedback-height"></div>
+          <div className='feedback-height'></div>
           <button
-            className="feedback-button"
+            className='feedback-button'
             onClick={() => {
               var err = 0;
               if (subject == null || issue == null || body == null) {
@@ -179,6 +182,7 @@ const Feedback = () => {
                 username: name,
                 timestamp: new Date().toString(),
               };
+              // uploading the feedback to the database
               if (!err) {
                 axios
                   .post("/api/feedback/api/submitfeedback", feedback)
@@ -188,9 +192,7 @@ const Feedback = () => {
                   })
                   .catch((err) => {
                     console.error(err);
-                    alert(
-                      "Feedback submission failed. Check console for further details"
-                    );
+                    alert("Feedback submission failed. Check console for further details");
                   });
               }
             }}

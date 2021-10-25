@@ -21,7 +21,8 @@ const Chapters = ({ handleClickChapter }) => {
     handleClickChapter(ch);
   }, [ch]);
 
-  React.useEffect(() => {
+  // verify if a user has been logged in and route appropriately
+  React.useState(() => {
     if (
       localStorage.getItem("userType") !== null &&
       localStorage.getItem("userType") !== undefined &&
@@ -36,7 +37,7 @@ const Chapters = ({ handleClickChapter }) => {
       window.location = "/admin-home";
     }
     verify(setCuruser, setPhone);
-  }, []);
+  });
 
   return (
     <div className='learner-subject-details-chapters'>
@@ -119,6 +120,23 @@ class SubjectDetails extends React.Component {
   handleClickChapter(ch) {
     console.log(ch);
     this.setState({ curChapter: ch });
+  }
+
+  // verify if a user is already logged in and route appropriately
+  componentDidMount() {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
   }
 
   render() {

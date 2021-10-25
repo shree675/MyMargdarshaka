@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import { IoBan } from "react-icons/io5";
 
+// custom css for materialui textfields
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#4e0d3a",
@@ -32,6 +33,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
+// dummy data with format
 const newIssues = [
   {
     type: "Platform issue",
@@ -60,6 +62,7 @@ const newIssues = [
   },
 ];
 
+// dummy data with format
 const manage = [
   {
     type: "Platform issue",
@@ -71,6 +74,7 @@ const manage = [
   },
 ];
 
+// dummy data with format
 const resolvedIssues = [
   {
     type: "Other",
@@ -91,6 +95,7 @@ const resolvedIssues = [
   },
 ];
 
+// card component
 const ApplicationCard = (props) => {
   return (
     <div className='admin-applications-card'>
@@ -121,6 +126,7 @@ const ApplicationCard = (props) => {
   );
 };
 
+// main page component
 class AdminHomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -133,10 +139,12 @@ class AdminHomePage extends React.Component {
     this.handleSubmitText = this.handleSubmitText.bind(this);
   }
 
+  // method to search users
   handleSearchTextChange(e) {
     this.setState({ searchText: e.target.value });
   }
 
+  // method to submit search
   handleSubmitText(e) {
     if (e.keyCode === 13) {
       console.log(this.state.searchText);
@@ -145,6 +153,7 @@ class AdminHomePage extends React.Component {
     }
   }
 
+  // mehtod to verify if a user is already logged in
   componentDidMount() {
     if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
       window.location = "/admin-auth";
@@ -175,7 +184,7 @@ class AdminHomePage extends React.Component {
                 className='admin-applications-tab-button'
                 style={this.state.tab === 0 ? { border: "solid 3px red", opacity: 1 } : {}}
                 onClick={() => {
-                  this.setState({ tab: 0 });
+                  this.setState({ tab: 0 }); // new issues tab
                 }}
               >
                 NEW ISSUES
@@ -184,7 +193,7 @@ class AdminHomePage extends React.Component {
                 className='admin-applications-tab-button'
                 style={this.state.tab === 1 ? { border: "solid 3px red", opacity: 1 } : {}}
                 onClick={() => {
-                  this.setState({ tab: 1 });
+                  this.setState({ tab: 1 }); // manage issues tab
                 }}
               >
                 MANAGING
@@ -193,7 +202,7 @@ class AdminHomePage extends React.Component {
                 className='admin-applications-tab-button'
                 style={this.state.tab === 2 ? { border: "solid 3px red", opacity: 1 } : {}}
                 onClick={() => {
-                  this.setState({ tab: 2 });
+                  this.setState({ tab: 2 }); // resolved issues tab
                 }}
               >
                 RESOLVED ISSUES

@@ -5,7 +5,9 @@ import main_logo from "../../assets/main-logo.svg";
 import "@lottiefiles/lottie-player";
 import "./landing.css";
 
+// main page component
 const LandingPage = () => {
+  // when arrow is clicked
   const scrollDown = () => {
     window.scrollTo(0, window.innerHeight + window.scrollY);
   };

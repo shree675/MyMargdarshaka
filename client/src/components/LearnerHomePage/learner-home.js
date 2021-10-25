@@ -11,11 +11,13 @@ import { verify } from "../../verifyUser";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
+// main page component
 const LearnerHome = (props) => {
   const [mentorData, setMentorData] = React.useState([]);
   const [_, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
 
+  // obtaining the user's assigned mentors from the database
   const getData = async (learner_phone) => {
     const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
     const subjects = res.data.subjects;
@@ -44,6 +46,7 @@ const LearnerHome = (props) => {
     setMentorData(mentor_data);
   };
 
+  // verify that no user is currently logged in
   React.useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -66,6 +69,7 @@ const LearnerHome = (props) => {
     console.log(mentorData);
   }, [mentorData]);
 
+  // displaying the data
   return (
     <div className='learner-home'>
       <Navbar />

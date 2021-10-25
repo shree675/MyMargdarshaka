@@ -9,6 +9,7 @@ import mainLogo from "../../assets/main-logo.svg";
 import profileLogo from "../../assets/profile.svg";
 import firebase from "../../firebase";
 
+// main component
 const Navbar = (props) => {
   const [open, setOpen] = React.useState(false);
   return (
@@ -56,6 +57,7 @@ const Navbar = (props) => {
         </Link>
         <button
           onClick={() => {
+            // logout
             firebase.auth().signOut();
             localStorage.clear();
             window.location = "/init-signin";
@@ -83,6 +85,7 @@ const Navbar = (props) => {
           <NavLink to='/feedback'>FEEDBACK</NavLink>
           <button
             onClick={() => {
+              // logout
               firebase.auth().signOut();
               localStorage.clear();
               window.location = "/init-signin";
