@@ -1,10 +1,10 @@
 //@ts-check
 
 import firebase from "firebase";
-
+console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 // firebase credentials
 const firebaseConfig = {
-  apiKey: "AIzaSyDVI09hwundggfP9IrC4iChlVf2xlG4bTc",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "mymargdarshakaweb.firebaseapp.com",
   projectId: "mymargdarshakaweb",
   storageBucket: "mymargdarshakaweb.appspot.com",
