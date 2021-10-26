@@ -1,7 +1,7 @@
 //@ts-check
 
 import firebase from "firebase";
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
+
 // firebase credentials
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
