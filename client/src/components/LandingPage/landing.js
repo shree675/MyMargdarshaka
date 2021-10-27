@@ -48,7 +48,7 @@ const LandingPage = () => {
               src='https://assets4.lottiefiles.com/private_files/lf30_04wi8isl.json'
               background='transparent'
               speed='1'
-              style={{ width: "50px", height: "50px", textAlign: `center` }}
+              style={{ width: "50px"/* , height: "50px" */, textAlign: `center` }}
               loop
               autoplay
             ></lottie-player>
