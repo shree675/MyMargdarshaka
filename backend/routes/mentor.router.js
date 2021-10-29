@@ -61,7 +61,7 @@ router.route("/signup/findmatches/").post(async (req, res) => {
     codes.push(subject.code);
   });
 
-  console.log(language, times, codes);
+  //console.log(language, times, codes);
   let mentors = [];
   for (let code of codes) {
     try {
@@ -123,17 +123,28 @@ router.route("/update-by-id/:id").post(async (req, res) => {
 
 // push students ID to mentor used after matching
 router.route("/assign/update-by-id/:id").post(async (req, res) => {
+  console.log("update route");
+
   let mentor_id = req.params.id;
   let class_code = req.body.class_code;
   let learner_id = req.body.learner_id;
 
+  console.log("to be added : ", mentor_id, class_code, learner_id);
+
   let mentor = await Mentor.findById(mentor_id);
+
+  //await Mentor.findByIdAndUpdate(mentor_id, {$addToSet : {}})
 
   let classes = mentor.Classes;
 
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
-      mentor.Classes[i].students.push(learner_id);
+      mentor.Classes[i].students.push({ id: learner_id, consent: false });
+      console.log("students after pushing : ", mentor.Classes[i].students);
+      //const field = "Classes." + i + ".students";
+      //await Mentor.findByIdAndUpdate(mentor_id, {
+      //$addToSet: { field: [{ _id: learner_id }] },
+      //});
     }
   }
 
@@ -148,7 +159,12 @@ router.route("/remove-learner/:id").post(async (req, res) => {
   let class_code = req.body.class_code;
   let learner_id = req.body.learner_id;
 
-  //console.log("HELLLLOOO2 : ", mentor_id, class_code, learner_id);
+  console.log(
+    "data recieved in remove route : ",
+    mentor_id,
+    class_code,
+    learner_id
+  );
 
   let mentor = await Mentor.findById(mentor_id);
 
@@ -157,10 +173,11 @@ router.route("/remove-learner/:id").post(async (req, res) => {
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
       const stu_tmp = mentor.Classes[i].students.filter(
-        (stu) => stu._id != learner_id
+        (stu) => stu.id != learner_id
       );
-      //console.log("HELLOO : ", stu_tmp);
+      console.log("students array after removing : ", stu_tmp);
       mentor.Classes[i].students = stu_tmp;
+      break;
     }
   }
 

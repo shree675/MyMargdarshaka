@@ -5,7 +5,8 @@ import Button from "../Common/button";
 import data from "../../data";
 
 function getSubjectName(code) {
-  code = code.substr(0, code.length - 1);
+  //console.log(code);
+  code = code.substring(0, code.length - 1);
   const subName = data.codeToSubName[code];
   return subName;
 }
@@ -37,11 +38,13 @@ const LearnerDashboardEditAttributes = ({ details }) => {
     console.log(copyOfSubjects);
   };
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
     console.log("clicked");
 
+    // converting the times object to times array
     const times_array = Object.keys(times).filter((key) => times[key]);
 
+    // array of newly added subject objects [{code : "HIN6"}, ....]
     let added_subjects = [];
 
     Object.keys(subjects).forEach((subName) => {
@@ -52,8 +55,10 @@ const LearnerDashboardEditAttributes = ({ details }) => {
 
     console.log("newly added subjects : ", added_subjects);
 
+    // array of removed subject objects [{code : "HIN6", mentor_id : "9876363"}, .....]
     let removed_subjects = [];
 
+    // remaining subjects array after removing some subjects
     let new_subjects_array = details.subjects.filter((sub) => {
       const subName = getSubjectName(sub.code);
       if (!subjects[subName] && copyOfSubjects[subName]) {
@@ -96,15 +101,14 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         mentors_not_found_for.push(getSubjectName(added_subjects[i].code));
       }
     }
-
     setMentorsNotFoundFor(mentors_not_found_for);
 
     console.log(
-      "new_subjects_array after adding subjects : ",
+      "new_subjects_array after adding new subjects : ",
       new_subjects_array
     );
 
-    // updating learner table
+    // updating learner table, both adding new subjects and removing removed subjects
     await axios.post(`/api/learner/update/id/${details._id}`, {
       ...details,
       times: times_array,
@@ -112,7 +116,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
       subjects: new_subjects_array,
     });
 
-    // updating mentors table
+    console.log("mentor ids : ", mentor_ids);
+    // updating mentors table, add learner_id for newly added mentors
     for (let i = 0; i < mentor_ids.length; i++) {
       if (mentor_ids[i] != -1) {
         await axios.post(`/api/mentor/assign/update-by-id/${mentor_ids[i]}`, {
@@ -122,7 +127,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
       }
     }
 
-    // for all the removed subjects, removing learnerid from the corresponding mentors
+    console.log("removed subjects : ", removed_subjects);
+    // for all the removed subjects, removing learner_id from the corresponding mentors
     for (let i = 0; i < removed_subjects.length; i++) {
       await axios.post(
         `/api/mentor/remove-learner/${removed_subjects[i].mentor_id}`,
@@ -132,6 +138,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         }
       );
     }
+
+    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -247,7 +255,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
       </div>
 
       <div className="d-flex justify-content-center mb-3">
-        <Button onClick={handleClick} text="SAVE" />
+        <Button click={handleClick} text="SAVE" />
       </div>
     </div>
   );

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Common/button";
 
 // TODO (Kranthi): Add animations to the buttons
-const NIOSStatus = () => {
+const NIOSStatus = ({ details }) => {
+  const [niosStatus, setNiosStatus] = useState(details.NIOS_status);
+
+  useEffect(() => {
+    setNiosStatus(details.NIOS_status);
+  }, [details]);
+
   return (
     <div className="nios-status mb-3">
       <div
@@ -16,7 +22,13 @@ const NIOSStatus = () => {
           <div className="col">
             <button
               className="btn rounded-pill m-3 p-3"
-              style={{ borderColor: "#5D1049" }}
+              style={{
+                borderColor: "#5D1049",
+                ...(niosStatus ===
+                "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM"
+                  ? { background: "#5D1049", color: "white" }
+                  : {}),
+              }}
             >
               I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
             </button>
@@ -24,7 +36,13 @@ const NIOSStatus = () => {
           <div className="col">
             <button
               className="btn rounded-pill m-3 p-3"
-              style={{ borderColor: "#5D1049" }}
+              style={{
+                borderColor: "#5D1049",
+                ...(niosStatus ===
+                "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM"
+                  ? { background: "#5D1049", color: "white" }
+                  : {}),
+              }}
             >
               I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
             </button>
@@ -35,7 +53,13 @@ const NIOSStatus = () => {
           <div className="col">
             <button
               className="btn rounded-pill m-3 p-3"
-              style={{ borderColor: "#5D1049" }}
+              style={{
+                borderColor: "#5D1049",
+                ...(niosStatus ===
+                "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM"
+                  ? { background: "#5D1049", color: "white" }
+                  : {}),
+              }}
             >
               I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
             </button>
@@ -43,7 +67,13 @@ const NIOSStatus = () => {
           <div className="col mb-3">
             <button
               className="btn rounded-pill m-3 p-3"
-              style={{ borderColor: "#5D1049" }}
+              style={{
+                borderColor: "#5D1049",
+                ...(niosStatus ===
+                "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM"
+                  ? { background: "#5D1049", color: "white" }
+                  : {}),
+              }}
             >
               I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
             </button>

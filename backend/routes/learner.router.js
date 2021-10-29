@@ -42,7 +42,6 @@ router.route("/signup/createlearner").post(async (req, res) => {
 router.route("/assign/update/:phone").post(async (req, res) => {
   let phone = req.params.phone;
   let data = req.body;
-  console.log(phone, data);
   await Learner.findOneAndUpdate({ phone }, { $set: data });
   res.json("ok");
 });
@@ -50,7 +49,6 @@ router.route("/assign/update/:phone").post(async (req, res) => {
 router.route("/update/id/:id").post(async (req, res) => {
   let id = req.params.id;
   let data = req.body;
-  console.log(id, data);
   await Learner.findByIdAndUpdate(id, { $set: data });
   res.json("ok");
 });
