@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./mentor-dashboard.css";
 import MentorDashboardEditAttributes from "./mentor-edit-attributes";
 import MentorDashboardChangeDetails from "./mentor-dashboard-change-details";
 import Navbar from "../Navbar/mentor-navbar";
@@ -52,6 +52,7 @@ const MentorDashBoard = () => {
   return (
     <div className='mb-3'>
       <Navbar />
+      <div className='mentor-curvature'></div>
       <div className='container'>
         <div className='row align-items-start'>
           <div className='col-xl-3 col-12'>

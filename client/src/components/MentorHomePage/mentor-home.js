@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./mentor-home.css";
 import Navbar from "../Navbar/mentor-navbar";
 import Card from "../LearnerHomePage/card";
 import SubjectTitle from "./subject-title";
@@ -51,9 +51,7 @@ const MentorHome = () => {
 
       // query data for each student of a class code and store
       for (let j = 0; j < students.length; j++) {
-        const res = await axios.get(
-          `/api/learner/get-data/id/${students[j]._id}`
-        );
+        const res = await axios.get(`/api/learner/get-data/id/${students[j]._id}`);
         const student_data = res.data;
         tmp[code].push(student_data);
       }
@@ -87,41 +85,41 @@ const MentorHome = () => {
   }, [studentsData]);
 
   return (
-    <div className="mentor-home">
-      <Navbar />
-      <div className="container-fluid">
-        <div className="row px-3">
-          <div className="d-none d-xl-flex col-md-3 mb-3">
-            {/* TODO: remove hardcoded color */}
-            <div className="card mt-3 p-5" style={style}>
-              <p style={{ fontSize: "34px" }}>
-                You will find your list of assigned students here for every
-                subject you have opted to teach.
-              </p>
-              <p style={{ fontSize: "34px" }}>
-                Click on the subject card to view the syllabus and the
-                students’s progress.
-              </p>
-            </div>
-          </div>
-
-          {/* TODO: Update these values dynamically */}
-          <div className="col">
-            {Object.keys(studentsData).map((classCode) => (
-              <div className="row p-3">
-                <SubjectTitle style={style} subject={classCode} />
-
-                {studentsData[classCode].map((details) => (
-                  <div className="col-6 col-md-3">
-                    <Card details={{ ...details, hasConsented: true }} />
-                  </div>
-                ))}
+    <>
+      <div className='mentor-home'>
+        <Navbar />
+        <div className='mentor-curvature'></div>
+        <div className='container-fluid'>
+          <div className='mentor-curvature'></div>
+          <div className='row px-3'>
+            <div className='d-none d-xl-flex col-md-3 mb-3'>
+              {/* TODO: remove hardcoded color */}
+              <div className='card mt-3 p-5' style={style}>
+                <p style={{ fontSize: "34px" }}>
+                  You will find your list of assigned students here for every subject you have opted to teach.
+                </p>
+                <p style={{ fontSize: "34px" }}>Click on the subject card to view the syllabus and the students’s progress.</p>
               </div>
-            ))}
+            </div>
+
+            {/* TODO: Update these values dynamically */}
+            <div className='col'>
+              {Object.keys(studentsData).map((classCode) => (
+                <div className='row p-3'>
+                  <SubjectTitle style={style} subject={classCode} />
+
+                  {studentsData[classCode].map((details) => (
+                    <div className='col-6 col-md-3'>
+                      <Card details={{ ...details, hasConsented: true }} />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

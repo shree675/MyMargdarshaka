@@ -12,7 +12,6 @@ import Error from "./components/ErrorPage/error.js";
 import AdminAuthentication from "./components/AuthenticationPage/admin-authentication.js";
 import MentorSubjectDetails from "./components/MentorSubjectDetailsPage/mentor-subject-details.js";
 import LearnerSubjectDetails from "./components/LearnerSubjectDetailsPage/learner-subject-details.js";
-import LearnerHome from "./components/LearnerHomePage/learner-home.js";
 import AdminApplications from "./components/AdminApplicationsPage/admin-applications";
 import LearnerDashboard from "./components/LearnerDashboardPage/learner-dashboard.js";
 import MentorHome from "./components/MentorHomePage/mentor-home.js";

@@ -46,7 +46,7 @@ const AdminNavbar = (props) => {
         <Link className='nav-link-mobile' to='/admin-applications'>
           APPLICATIONS
         </Link>
-        <Link className='nav-link-mobile' to='/admin-issues'>
+        <Link className='nav-link-mobile' to='/admin-home'>
           ISSUES
         </Link>
         <Link className='nav-link-mobile' to='/admin-stats'>
@@ -56,7 +56,7 @@ const AdminNavbar = (props) => {
           onClick={() => {
             // logout
             localStorage.setItem("isloggedin", "false");
-            window.location = "/admin-auth";
+            window.location = "/init-signin";
           }}
           className='nav-logout-phone'
         >
@@ -76,13 +76,13 @@ const AdminNavbar = (props) => {
         </NavLogo>
         <NavMenu>
           <NavLink to='/admin-applications'>APPLICATIONS</NavLink>
-          <NavLink to='/admin-issues'>ISSUES</NavLink>
+          <NavLink to='/admin-home'>ISSUES</NavLink>
           <NavLink to='/admin-stats'>STATS</NavLink>
           <button
             onClick={() => {
               // logout
               localStorage.setItem("isloggedin", "false");
-              window.location = "/admin-auth";
+              window.location = "/init-signin";
             }}
             className='nav-logout-pc'
           >
