@@ -189,6 +189,10 @@ const Feedback = () => {
                   .then((res) => {
                     console.log(res);
                     alert("Feedback submitted successfully");
+                      if(userType === "learner")
+                        window.location = "/my-mentors";
+                      else
+                        window.location = "/my-students";
                   })
                   .catch((err) => {
                     console.error(err);

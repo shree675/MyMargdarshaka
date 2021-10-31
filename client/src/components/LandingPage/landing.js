@@ -1,6 +1,6 @@
 //@ts-check
 
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import main_logo from "../../assets/main-logo.svg";
 import "@lottiefiles/lottie-player";
 import "./landing.css";
@@ -11,6 +11,10 @@ const LandingPage = () => {
   const scrollDown = () => {
     window.scrollTo(0, window.innerHeight + window.scrollY);
   };
+
+/*   useEffect(() => {
+    localStorage.clear();
+  },[]); */
 
   return (
     <div className='landing-body'>
