@@ -19,7 +19,7 @@ import MentorDashBoard from "./components/MentorDashboardPage/mentor-dashboard.j
 import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
 import TestPage from "./components/TestPage/test.js";
 import AdminHomePage from "./components/AdminHomePage/admin-home.js";
-import Chat from "./components/Chat/chat.js";
+import Chat from "./components/Chat/chat"
 
 // all user routes
 class App extends Component {

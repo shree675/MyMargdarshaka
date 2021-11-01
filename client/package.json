@@ -1,43 +1,46 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "dependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
-    "@lottiefiles/lottie-player": "^1.4.0",
-    "@mui/material": "^5.0.1",
-    "aes-js": "^3.1.2",
-    "bootstrap": "^5.1.1",
-    "chart.js": "^3.5.1",
-    "firebase": "^8.6.7",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.0.0-rc.0",
-    "react-chartjs-2": "^3.0.5",
-    "react-dom": "^16.2.0",
-    "react-icons": "^4.2.0",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "^2.0.0",
-    "react-spring": "^9.2.4",
-    "styled-components": "^5.3.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:5000/"
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "dependencies": {
+        "@emotion/react": "^11.4.1",
+        "@emotion/styled": "^11.3.0",
+        "@lottiefiles/lottie-player": "^1.4.0",
+        "@mui/material": "^5.0.1",
+        "aes-js": "^3.1.2",
+        "bootstrap": "^5.1.1",
+        "chart.js": "^3.5.1",
+        "firebase": "^8.6.7",
+        "react": "^17.0.2",
+        "react-bootstrap": "^2.0.0-rc.0",
+        "react-chartjs-2": "^3.0.5",
+        "react-chat-widget": "^3.0.1",
+        "react-chat-window": "^1.2.1",
+        "react-dom": "^16.2.0",
+        "react-firebase-hooks": "^3.0.4",
+        "react-icons": "^4.2.0",
+        "react-router-dom": "^5.3.0",
+        "react-scripts": "^2.0.0",
+        "react-spring": "^9.2.4",
+        "styled-components": "^5.3.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "proxy": "http://localhost:5000/"
 }
