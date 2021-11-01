@@ -1,13 +1,10 @@
 //@ts-check
+
 import React, { Component } from "react";
+// import { Launcher } from "react-chat-window-timestamp-fork";
+import "./chat.css";
 import { Launcher } from "react-chat-window";
-
-//import firebase from "firebase/compat/app"
-//import "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore";
-
-//import { firebaseApp } from '../../firebase';
-//import { getFirestore, collection, getDocs } from '/firebase/firestore';
 import firebase from "../../firebase";
 
 //const firebaseConfig = {
@@ -68,36 +65,43 @@ function Chat() {
   //});
   //};
 
-  const _sendMessage = (text) => {
-    if (text.length > 0) {
-      this.setState({
-        messageList: [
-          ...this.state.messageList,
-          {
-            author: "them",
-            type: "text",
-            data: { text },
-          },
-        ],
-      });
-    }
-  };
+  // const _sendMessage = (text) => {
+  //   if (text.length > 0) {
+  //     this.setState({
+  //       messageList: [
+  //         ...this.state.messageList,
+  //         {
+  //           author: "them",
+  //           type: "text",
+  //           data: { text },
+  //         },
+  //       ],
+  //     });
+  //   }
+  // };
 
   return (
-    <div>
+    <div className='chat-container'>
       <Launcher
         agentProfile={{
-          teamName: "react-chat-window",
-          imageUrl:
-            "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+          teamName: "Chat with <mentor name>",
+          imageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
         }}
         onMessageWasSent={(msg) => {
-          //console.log(text);
-          messagesRef.add({
-            author: "me",
-            timestamp: new Date(),
-            text: msg.data.text,
-          });
+          // console.log(msg);
+          if (msg.type === "text") {
+            messagesRef.add({
+              author: "me",
+              timestamp: new Date(),
+              text: msg.data.text,
+            });
+          } else if (msg.type === "emoji") {
+            messagesRef.add({
+              author: "me",
+              timestamp: new Date(),
+              text: msg.data.emoji,
+            });
+          }
         }}
         messageList={textMessages}
         showEmoji
