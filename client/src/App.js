@@ -19,6 +19,7 @@ import MentorDashBoard from "./components/MentorDashboardPage/mentor-dashboard.j
 import LearnerHomepage from "./components/LearnerHomePage/learner-home.js";
 import TestPage from "./components/TestPage/test.js";
 import AdminHomePage from "./components/AdminHomePage/admin-home.js";
+import Chat from "./components/Chat/chat"
 
 // all user routes
 class App extends Component {
@@ -43,6 +44,7 @@ class App extends Component {
           <Route exact path='/test' component={TestPage} />
           <Route exact path='/admin-applications' component={AdminApplications} />
           <Route exact path='/admin-home' component={AdminHomePage} />
+          <Route exact path='/chat' component={Chat} />
           <Route path='/' component={Error} />
         </Switch>
       </Router>
