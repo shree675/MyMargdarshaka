@@ -34,9 +34,14 @@ const MentorHome = () => {
 
   // gets the data from DB and updates the state "studentsData"
   const getData = async (mentor_phone) => {
+    if (!mentor_phone) {
+      setStudentsData({});
+      return;
+    }
     console.log("mentor phone : ", mentor_phone);
     const res = await axios.get(`/api/mentor/get-data/phone/${mentor_phone}`);
     console.log(res.data);
+    const mentor_id = res.data._id;
     const classes = res.data.Classes;
 
     // tmp object will store all the data and is used to update the state
@@ -50,9 +55,17 @@ const MentorHome = () => {
       tmp[code] = [];
 
       // query data for each student of a class code and store
+      console.log(code, students);
       for (let j = 0; j < students.length; j++) {
-        const res = await axios.get(`/api/learner/get-data/id/${students[j]._id}`);
-        const student_data = res.data;
+        const res = await axios.get(
+          `/api/learner/get-data/id/${students[j].id}`
+        );
+        let student_data = res.data;
+        console.log("students data", student_data);
+        if (student_data != null) {
+          student_data.learner_id = student_data._id;
+          student_data.mentor_id = mentor_id;
+        }
         tmp[code].push(student_data);
       }
     }
@@ -86,31 +99,46 @@ const MentorHome = () => {
 
   return (
     <>
-      <div className='mentor-home'>
+      <div className="mentor-home">
         <Navbar />
-        <div className='mentor-curvature'></div>
-        <div className='container-fluid'>
-          <div className='mentor-curvature'></div>
-          <div className='row px-3'>
-            <div className='d-none d-xl-flex col-md-3 mb-3'>
+        <div className="mentor-curvature"></div>
+        <div className="container-fluid">
+          <div className="mentor-curvature"></div>
+          <div className="row px-3">
+            <div className="d-none d-xl-flex col-md-3 mb-3">
               {/* TODO: remove hardcoded color */}
-              <div className='card mt-3 p-5' style={style}>
+              <div className="card mt-3 p-5" style={style}>
                 <p style={{ fontSize: "34px" }}>
-                  You will find your list of assigned students here for every subject you have opted to teach.
+                  You will find your list of assigned students here for every
+                  subject you have opted to teach.
                 </p>
-                <p style={{ fontSize: "34px" }}>Click on the subject card to view the syllabus and the students’s progress.</p>
+                <p style={{ fontSize: "34px" }}>
+                  Click on the subject card to view the syllabus and the
+                  students’s progress.
+                </p>
               </div>
             </div>
 
             {/* TODO: Update these values dynamically */}
-            <div className='col'>
+            {/* studentsData = {
+              HIN10 : [{
+                ...details
+              }]
+            } */}
+            <div className="col">
               {Object.keys(studentsData).map((classCode) => (
-                <div className='row p-3'>
+                <div className="row p-3">
                   <SubjectTitle style={style} subject={classCode} />
 
                   {studentsData[classCode].map((details) => (
-                    <div className='col-6 col-md-3'>
-                      <Card details={{ ...details, hasConsented: true }} />
+                    <div className="col-6 col-md-3">
+                      <Card
+                        details={{
+                          ...details,
+                          hasConsented: true,
+                          userType: "mentor",
+                        }}
+                      />
                     </div>
                   ))}
                 </div>

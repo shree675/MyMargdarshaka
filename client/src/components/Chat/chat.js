@@ -22,82 +22,68 @@ import firebase from "../../firebase";
 //}else{
 //firebase.app()
 //}
+function isNan(x) {
+  return x != x;
+}
 
-function Chat() {
+function Chat({ collection_name, userType }) {
   const firestore = firebase.firestore(firebase.app());
 
-  //const messagesRef = firestore.collection("messages")
-  const messagesRef = firestore.collection("messages");
+  console.log(collection_name);
+
+  const messagesRef = firestore.collection(
+    !collection_name ? "default" : collection_name
+  );
+  console.log(messagesRef);
+
   const query = messagesRef.orderBy("timestamp").limit(25);
-  //const [messages] = useCollectionData(query, {idField: 'id'})
-  //console.log("hello");
-  //messagesRef.get().then(querySnapshot => {
-  //if(querySnapshot.empty){
-  //console.log("empty");
-  //}else{
-  //querySnapshot.forEach(documentSnapshot => {
-  //console.log("hello : ", documentSnapshot.get("text") );
-  //})
-  //}
-  //})
+  console.log(query);
 
   const [messages] = useCollectionData(query, { idField: "id" });
 
   console.log(messages);
+
+  if (messages === undefined || messages === []) {
+    messagesRef.add({
+      author: userType,
+      timestamp: new Date(),
+      text: "Welcome to the chat!",
+    });
+  }
 
   const textMessages =
     messages === undefined
       ? []
       : messages.map((msg) => {
           console.log(msg);
-          return { author: msg.author, type: "text", data: { text: msg.text } };
+          return {
+            author: msg.author === userType ? "me" : "them",
+            type: "text",
+            data: { text: msg.text },
+          };
         });
 
   console.log(textMessages);
 
-  //this.state = {
-  //messageList: []
-  //};
-
-  //const _onMessageWasSent = (message) => {
-  //setState({
-  //messageList: [...this.state.messageList, message],
-  //});
-  //};
-
-  // const _sendMessage = (text) => {
-  //   if (text.length > 0) {
-  //     this.setState({
-  //       messageList: [
-  //         ...this.state.messageList,
-  //         {
-  //           author: "them",
-  //           type: "text",
-  //           data: { text },
-  //         },
-  //       ],
-  //     });
-  //   }
-  // };
-
   return (
-    <div className='chat-container'>
+    <div className="chat-container">
       <Launcher
         agentProfile={{
           teamName: "Chat with <mentor name>",
-          imageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+          imageUrl:
+            "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
         }}
         onMessageWasSent={(msg) => {
           // console.log(msg);
           if (msg.type === "text") {
             messagesRef.add({
-              author: "me",
+              author: userType,
               timestamp: new Date(),
               text: msg.data.text,
             });
           } else if (msg.type === "emoji") {
             messagesRef.add({
-              author: "me",
+              author: userType,
               timestamp: new Date(),
               text: msg.data.emoji,
             });
