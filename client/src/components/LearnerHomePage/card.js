@@ -2,6 +2,7 @@
 
 import React from "react";
 import Chat from "../Chat/chat";
+import "./learner-home.css";
 
 const Card = (props) => {
   var showPendingTests = "";
@@ -52,9 +53,9 @@ const Card = (props) => {
           <a href='#' className={"btn btn-warning text-white " + showConsentButton}>
             <b>CLICK HERE TO SHARE YOUR NUMBER</b>
           </a>
-          {/* <div style={{ position: "relative", top: "10px", left: "10px" }}>
+          <div className='card-chat'>
             <Chat />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

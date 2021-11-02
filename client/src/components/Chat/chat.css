@@ -4,20 +4,40 @@
   background-color: #ffa9e8;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
+  position: relative;
+  right: -85%;
+  bottom: 10px;
   border-radius: 50%;
   box-shadow: none;
   transition: box-shadow 0.2s ease-in-out;
 }
 
+.chat-container > div > div.sc-launcher.opened {
+  opacity: 0.8;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAfCAMAAACxiD++AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUxpcf///////////////////////////////////////////////////////3EAnbYAAAAOdFJOUwADZ66SoQjEhnS7/gsNGQL7+wAAAKtJREFUKM+F01sOhCAQRNESFV/I/pc70Og0YJfyJbmHhBAbGGYHstw8IPV4EOGOmERYIhGpxyUAJxHSz/xlC+1FxE64qB1yj1ZID7oXsel+63ovnj2JXUXue+hvrcLugL+EdG+9XBG8X+Kl34J3YM1g/egvIvdx5EK691RIz78YEXdnQrst6m6JqemXmNo+D/WJNAyVePZWWL0WdlfB+l+UAQQReaAc65DB/wGsZgzLN0IQWAAAAABJRU5ErkJggg==");
+  background-color: #ffa9e8;
+  padding: 10px;
+}
+
+.chat-container > div > div.sc-launcher.opened::before {
+  display: none;
+}
+
+.chat-container > div > div.sc-launcher.opened .sc-closed-icon {
+  opacity: 0;
+}
+
+.chat-container > div > div.sc-launcher.opened .sc-open-icon {
+  opacity: 1;
+  z-index: 10;
+}
+
 .chat-container > div > div > img.sc-closed-icon {
   width: 30px;
   height: 30px;
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
   opacity: 1;
 }
@@ -25,10 +45,11 @@
 .chat-container > div > div > img.sc-open-icon {
   width: 30px;
   height: 30px;
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
   transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
+  opacity: 1;
 }
 
 .chat-container > div > div > .sc-launcher.opened {
@@ -78,11 +99,16 @@
 
 .chat-container #sc-launcher > div:nth-of-type(2) div:nth-of-type(2).sc-message-list .sc-message--content.sent .sc-message--text {
   color: white;
+  text-align: right !important;
   background-color: #fc87dd;
   max-width: calc(100% - 120px);
   word-wrap: break-word;
   padding: 10px;
   max-width: 600px;
+}
+
+.chat-container #sc-launcher > div:nth-of-type(2) div:nth-of-type(2).sc-message-list .sc-message--content.received .sc-message--text {
+  text-align: left !important;
 }
 
 .chat-container #sc-launcher > div:nth-of-type(2) div:nth-of-type(2).sc-message-list .sc-message--content .sc-message--avatar {
