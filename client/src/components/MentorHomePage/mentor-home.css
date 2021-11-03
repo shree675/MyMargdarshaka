@@ -6,3 +6,11 @@
   border-radius: 20px 20px 0px 0px;
   margin-top: -20px;
 }
+
+@media screen and (max-width: 480px) {
+  #mentor-home-learners {
+    margin: 0px !important;
+    padding: 0px;
+    width: 100%;
+  }
+}

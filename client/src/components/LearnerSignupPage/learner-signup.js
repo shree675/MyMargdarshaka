@@ -3,7 +3,6 @@ import React from "react";
 import "./learner-signup.css";
 import imgSrc from "../../assets/learner-signup.svg";
 import data from "../../data";
-import firebase from "../../firebase";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -45,6 +44,23 @@ const LearnerSignup = () => {
     }
     verify(setCuruser, setPhone);
   }, []);
+
+  useEffect(() => {
+    axios.get("/api/user/login/getUser").then((e) => {
+      //call user table and check if sign up is unsuccessful or not (in case someone tries to break the system with multiple sign ups with same phone number)
+      e.data.map((user) => {
+        let p = phone;
+        if (p[0] != "+") p = "+91" + p;
+        if (user.phone === p) {
+          if (user.valid_signup == true) {
+            alert("You have already signed up");
+            window.location = "/my-mentors";
+          }
+        } else {
+        }
+      });
+    });
+  }, [phone]);
 
   // method to populate the checkbox fields
   const handleChange = (e) => {
@@ -92,6 +108,8 @@ const LearnerSignup = () => {
     } else {
       console.log(state);
 
+      console.log("click here 1");
+
       await axios.get("/api/user/login/getUser").then((e) => {
         console.log(e);
         if (phone[0] != "+") setPhone("+91" + phone);
@@ -112,6 +130,9 @@ const LearnerSignup = () => {
           }
         });
       });
+
+      console.log("click here 2");
+
       // push to DB
       const subjects_list = [];
       console.log(state.subs);
@@ -148,6 +169,7 @@ const LearnerSignup = () => {
       await axios.post(`/api/learner/signup/createlearner`, learner).then((res) => console.log("Pushing Sign up data"));
 
       await axios.post(`/api/user/update/` + phone, user).then((res) => console.log("User table has been updated", res));
+      console.log("click here 3");
 
       //Matching algorithm
       let res = await axios.post(`api/mentor/signup/findmatches/`, learner);
@@ -164,6 +186,7 @@ const LearnerSignup = () => {
       console.log(learner);
       let res2 = await axios.post(`/api/learner/assign/update/` + phone, learner);
       console.log("Learner table has been updated ", res2);
+      console.log("click here 4");
 
       //updating the mentors database with the assigned students
       //get the current learners id
@@ -181,6 +204,8 @@ const LearnerSignup = () => {
       let learner_id = learner_data.data._id.toString();
       console.log(learner_id);
 
+      console.log("click here 5");
+
       for (let i = 0; i < codes.length; i++) {
         let cur_code = codes[i];
         let cur_mentor_id = mentors[i];
@@ -190,6 +215,7 @@ const LearnerSignup = () => {
           learner_id,
         });
       }
+      console.log("click here 6");
 
       alert("Sign up Successful!");
       window.location = "/my-mentors";

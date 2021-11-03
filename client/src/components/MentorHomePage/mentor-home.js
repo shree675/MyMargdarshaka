@@ -57,9 +57,7 @@ const MentorHome = () => {
       // query data for each student of a class code and store
       console.log(code, students);
       for (let j = 0; j < students.length; j++) {
-        const res = await axios.get(
-          `/api/learner/get-data/id/${students[j].id}`
-        );
+        const res = await axios.get(`/api/learner/get-data/id/${students[j].id}`);
         let student_data = res.data;
         console.log("students data", student_data);
         if (student_data != null) {
@@ -99,23 +97,19 @@ const MentorHome = () => {
 
   return (
     <>
-      <div className="mentor-home">
+      <div className='mentor-home'>
         <Navbar />
-        <div className="mentor-curvature"></div>
-        <div className="container-fluid">
-          <div className="mentor-curvature"></div>
-          <div className="row px-3">
-            <div className="d-none d-xl-flex col-md-3 mb-3">
+        <div className='mentor-curvature'></div>
+        <div className='container-fluid'>
+          <div className='mentor-curvature'></div>
+          <div className='row px-3'>
+            <div className='d-none d-xl-flex col-md-3 mb-3'>
               {/* TODO: remove hardcoded color */}
-              <div className="card mt-3 p-5" style={style}>
+              <div className='card mt-3 p-5' style={style}>
                 <p style={{ fontSize: "34px" }}>
-                  You will find your list of assigned students here for every
-                  subject you have opted to teach.
+                  You will find your list of assigned students here for every subject you have opted to teach.
                 </p>
-                <p style={{ fontSize: "34px" }}>
-                  Click on the subject card to view the syllabus and the
-                  students’s progress.
-                </p>
+                <p style={{ fontSize: "34px" }}>Click on the subject card to view the syllabus and the students’s progress.</p>
               </div>
             </div>
 
@@ -125,13 +119,13 @@ const MentorHome = () => {
                 ...details
               }]
             } */}
-            <div className="col">
+            <div className='col'>
               {Object.keys(studentsData).map((classCode) => (
-                <div className="row p-3">
+                <div className='row p-3'>
                   <SubjectTitle style={style} subject={classCode} />
 
                   {studentsData[classCode].map((details) => (
-                    <div className="col-6 col-md-3">
+                    <div className='col-6 col-md-3' id='mentor-home-learners'>
                       <Card
                         details={{
                           ...details,

@@ -20,7 +20,7 @@ function Chat({ collection_name, userType, name }) {
   const messagesRef = firestore.collection(!collection_name ? "default" : collection_name);
   // console.log(messagesRef);
 
-  const query = messagesRef.orderBy("timestamp").limit(25);
+  const query = messagesRef.orderBy("timestamp").limit(50);
   // console.log(query);
 
   const [messages] = useCollectionData(query, { idField: "id" });
@@ -28,23 +28,6 @@ function Chat({ collection_name, userType, name }) {
   console.log(userType);
 
   console.log(messages);
-
-  // try {
-  //   if (messages === [] && messages !== undefined) {
-  //     messagesRef.add({
-  //       author: userType,
-  //       timestamp: new Date(),
-  //       text: "Welcome to the chat!",
-  //     });
-  //     console.log("messages is []");
-  //   }
-  // } catch (err) {
-  //   console.log(err);
-  // }
-
-  // useEffect(() => {
-
-  // }, [messages]);
 
   const textMessages =
     messages === undefined

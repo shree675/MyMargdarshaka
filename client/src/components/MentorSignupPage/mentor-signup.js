@@ -50,6 +50,23 @@ const MentorSignup = () => {
     verify(setCuruser, setPhone);
   }, []);
 
+  useEffect(() => {
+    axios.get("/api/user/login/getUser").then((e) => {
+      //call user table and check if sign up is unsuccessful or not (in case someone tries to break the system with multiple sign ups with same phone number)
+      e.data.map((user) => {
+        let p = phone;
+        if (p[0] != "+") p = "+91" + p;
+        if (user.phone === p) {
+          if (user.valid_signup == true) {
+            alert("You have already signed up");
+            window.location = "/my-mentors";
+          }
+        } else {
+        }
+      });
+    });
+  }, [phone]);
+
   // fill the page with the appropriate checkboxes and fields
   const handleChange = (e) => {
     if (e.target.name == "clsAndSub") {
