@@ -47,6 +47,13 @@ let Mentor = new Schema({
     default: true, // remember to change to false
   },
 
+  // open application means approved and rejected are false.
+  // after rejected by admin, this is set to true
+  rejected: {
+    type: Boolean,
+    default: false,
+  },
+
   Classes: {
     type: [
       {
