@@ -1,6 +1,6 @@
 //@ts-check
 
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import main_logo from "../../assets/main-logo.svg";
 import left from "../../assets/initiate-signin-left.svg";
 import right from "../../assets/initiate-signin-right.svg";
@@ -19,6 +19,28 @@ const InitiateSignin = () => {
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }));
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
+  }, []);
 
   return (
     <div className='init-signin-body'>

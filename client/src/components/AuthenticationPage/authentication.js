@@ -67,6 +67,28 @@ const Authentication = () => {
   const [valid_user, setValidUser] = useState(false);
   const [customUserType, setCusomUserType] = useState(userType);
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "mentor"
+    ) {
+      window.location = "/my-students";
+    } else if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/my-mentors";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
+  }, []);
+
   // verify if a user is already logged in
   useEffect(() => {
     verify();
