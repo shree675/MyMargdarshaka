@@ -6,6 +6,7 @@ import "./learner-home.css";
 
 const Card = (props) => {
   var showPendingTests = "";
+
   if (!props.details["hasPendingTests"]) {
     showPendingTests = "d-none";
   }
@@ -32,14 +33,15 @@ const Card = (props) => {
       >
         <div className='card-body'>
           <h5 className='card-title mb-3'>{props.details["subject"]}</h5>
-          <div
+          <img
             className='rounded-circle mx-auto mb-3'
             style={{
               width: "100px",
               height: "100px",
               backgroundColor: "#ff0000",
             }}
-          ></div>
+            src={props.details["profile_picture_url"]}
+          ></img>
           <h4 className='card-text mb-3'>{props.details["name"]}</h4>
           <p className='card-text'>Class {props.details["Class"]}</p>
           <p className='card-text'>{props.details["subject"]}</p>

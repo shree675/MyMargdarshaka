@@ -42,7 +42,7 @@ const LearnerHome = (props) => {
       temp.hasPendingTests = false;
       temp.hasConsented = true;
       temp.userType = "learner";
-
+      temp.profile_picture_url = mentor.profile_picture_url;
       mentor_data.push(temp);
     }
 
