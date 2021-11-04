@@ -6,6 +6,7 @@ import "./admin-home.css";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import { IoBan } from "react-icons/io5";
+import axios from "axios";
 
 // custom css for materialui textfields
 const CssTextField = styled(TextField)({
@@ -34,33 +35,33 @@ const CssTextField = styled(TextField)({
 });
 
 // dummy data with format
-const newIssues = [
-  {
-    type: "Platform issue",
-    subject: "lorem ipsum dolor sit amet, consectetur adipisicing el",
-    name: "Arvind",
-    phone: "9876543210",
-    timestamp: "Dec 2, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    type: "Other",
-    subject: "lorem ipsum dolor sit amet",
-    name: "Kenta Emilie",
-    phone: "1234567890",
-    timestamp: "Oct 12, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  },
-  {
-    type: "Platform issue issue issue issue issue issue issue",
-    subject:
-      "lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el",
-    name: "Sebastián Abdul",
-    phone: "1234567890",
-    timestamp: "Oct 12, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
+// const newIssues = [
+//   {
+//     type: "Platform issue",
+//     subject: "lorem ipsum dolor sit amet, consectetur adipisicing el",
+//     name: "Arvind",
+//     phone: "9876543210",
+//     timestamp: "Dec 2, 2015",
+//     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+//   },
+//   {
+//     type: "Other",
+//     subject: "lorem ipsum dolor sit amet",
+//     name: "Kenta Emilie",
+//     phone: "1234567890",
+//     timestamp: "Oct 12, 2015",
+//     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+//   },
+//   {
+//     type: "Platform issue issue issue issue issue issue issue",
+//     subject:
+//       "lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el",
+//     name: "Sebastián Abdul",
+//     phone: "1234567890",
+//     timestamp: "Oct 12, 2015",
+//     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+//   },
+// ];
 
 // dummy data with format
 const manage = [
@@ -100,16 +101,16 @@ const ApplicationCard = (props) => {
   return (
     <div className='admin-applications-card'>
       <div className='admin-applications-card-row1'>
-        <div style={{ padding: "10px", textAlign: "center" }}>{props.app.type}</div>
-        <div>{props.app.subject}</div>
+        <div style={{ padding: "10px", textAlign: "center" }}>{props.app.issueType}</div>
+        <div>{props.app.issueSubject}</div>
       </div>
       <div className='admin-applications-card-rowx'>
         <div style={{ fontWeight: 600 }}>
-          {props.app.name} | {props.app.phone} | {props.app.timestamp}
+          {props.app.username} | {props.app.phone} | {props.app.timestamp}
         </div>
       </div>
       <div className='admin-applications-card-rowx'>
-        <div>{props.app.body}</div>
+        <div>{props.app.issueBody}</div>
       </div>
       <div className='admin-applications-card-row3'>
         {props.pageNo === 1 ? (
@@ -134,6 +135,7 @@ class AdminHomePage extends React.Component {
       tab: 0,
       searchText: "",
       searchResultText: "",
+      newIssues: [],
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
@@ -171,6 +173,15 @@ class AdminHomePage extends React.Component {
     ) {
       window.location = "/my-mentors";
     }
+
+    axios
+      .get("/api/feedback/getfeedbacks")
+      .then((data) => {
+        this.setState({
+          newIssues: data.data,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -240,7 +251,7 @@ class AdminHomePage extends React.Component {
               style={this.state.tab === 1 || this.state.tab === 2 ? { display: "none" } : {}}
               className='admin-applications-applications'
             >
-              {newIssues.map((item) => (
+              {this.state.newIssues.map((item) => (
                 <ApplicationCard app={item} pageNo={1} />
               ))}
             </div>
