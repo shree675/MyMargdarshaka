@@ -180,6 +180,8 @@ const Feedback = () => {
                 issueType: issue,
                 issueBody: body,
                 username: name,
+                assignedTo: null,
+                status: 0, // 0 means not resolved yet, 1 means resolved
                 timestamp: new Date().toString(),
               };
               // uploading the feedback to the database
@@ -189,10 +191,8 @@ const Feedback = () => {
                   .then((res) => {
                     console.log(res);
                     alert("Feedback submitted successfully");
-                      if(userType === "learner")
-                        window.location = "/my-mentors";
-                      else
-                        window.location = "/my-students";
+                    if (userType === "learner") window.location = "/my-mentors";
+                    else window.location = "/my-students";
                   })
                   .catch((err) => {
                     console.error(err);

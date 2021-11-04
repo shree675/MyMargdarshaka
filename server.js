@@ -12,7 +12,7 @@ const connectionString = process.env.MONGO_URI;
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "3mb" }));
 /* app.use(express.json()); */
 
 mongoose.connect(connectionString);

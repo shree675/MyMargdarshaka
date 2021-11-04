@@ -17,3 +17,12 @@
   position: relative;
   transition: all 0.3s;
 }
+
+@media screen and (max-width: 480px) {
+  .custom-button {
+    height: 8vw;
+    border-radius: 4vw;
+    margin-bottom: 0px;
+    font-size: 4.5vw;
+  }
+}

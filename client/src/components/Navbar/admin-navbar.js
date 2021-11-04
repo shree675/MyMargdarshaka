@@ -89,7 +89,11 @@ const AdminNavbar = (props) => {
             LOGOUT
           </button>
         </NavMenu>
-        <img src='https://randomuser.me/api/portraits/thumb/men/40.jpg' style={{ borderRadius: "20px" }} className='profile-photo' />
+        <img
+          src='https://randomuser.me/api/portraits/thumb/men/40.jpg'
+          className='img-fluid rounded-circle'
+          style={{ width: "50px", height: "50px", marginRight: "10px" }}
+        />
       </Nav>
     </div>
   );

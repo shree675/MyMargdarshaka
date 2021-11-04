@@ -25,6 +25,12 @@ let Feedback = new Schema({
   username: {
     type: String,
   },
+  assignedTo: {
+    type: String,
+  },
+  status: {
+    type: Number,
+  },
   timestamp: {
     type: String,
   },
