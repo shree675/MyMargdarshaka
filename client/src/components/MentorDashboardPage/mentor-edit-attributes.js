@@ -14,6 +14,7 @@ function getSubjectName(code) {
   return subName;
 }
 
+// dummy data
 const details = {
   name: "Aashrith",
   phone: "9876543214",

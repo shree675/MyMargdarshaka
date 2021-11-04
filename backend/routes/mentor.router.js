@@ -5,6 +5,7 @@ var Mentor = require("../models/mentor.model");
 var { mentorSchema } = require("../utils/joiSchemas");
 const { ObjectId } = require("mongodb");
 
+// TODO : needs to discuss with shrretes the use of this route in feedback
 router.route("/login/submitmentor").get((req, res) => {
   Mentor.find()
     .then((e) => res.json(e))
@@ -201,4 +202,24 @@ router.route("/get-data/phone/:phone").get(async (req, res) => {
   let phone = req.params.phone;
   let data = await Mentor.findOne({ phone }).exec();
   res.json(data);
+});
+
+router.route("/get/mentors/:status").get(async (req, res) => {
+  let status = req.params.status;
+
+  if (status === "open") {
+    const data = await Mentor.find({ approved: false, rejected: false });
+    //console.log(data);
+    res.json(data);
+  } else if (status === "approved") {
+    const data = await Mentor.find({ approved: true, rejected: false });
+    //console.log(data);
+    res.json(data);
+  } else if (status === "rejected") {
+    const data = await Mentor.find({ approved: false, rejected: true });
+    //console.log(data);
+    res.json(data);
+  } else {
+    res.status(404).json("Status is not correct.");
+  }
 });
