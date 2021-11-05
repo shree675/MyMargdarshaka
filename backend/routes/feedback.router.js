@@ -34,4 +34,15 @@ router.route("/getfeedbacks").get((req, res) => {
     .catch((err) => res.status(400).json("notfound"));
 });
 
+router.route("/update/:id").post((req, res) => {
+  let id = req.params.id;
+  let data = req.body;
+  Feedback.findByIdAndUpdate(id, { $set: data }, { new: true }, function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.json("ok");
+});
+
 module.exports = router;

@@ -103,7 +103,7 @@ const AdminAuthentication = () => {
       res.data.map((data) => {
         if (data.username == username && data.password == encryptedPassword) {
           localStorage.setItem("isloggedin", "true");
-          // alert("Successfully logged in");
+          localStorage.setItem("username", username);
           successfulLogin = true;
           window.location = "/admin-home";
         }

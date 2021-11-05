@@ -180,7 +180,7 @@ const Feedback = () => {
                 issueType: issue,
                 issueBody: body,
                 username: name,
-                assignedTo: null,
+                assignedTo: "none",
                 status: 0, // 0 means not resolved yet, 1 means resolved
                 timestamp: new Date().toString(),
               };

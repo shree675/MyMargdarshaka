@@ -64,16 +64,16 @@ const CssTextField = styled(TextField)({
 // ];
 
 // dummy data with format
-const manage = [
-  {
-    type: "Platform issue",
-    subject: "lorem ipsum dolor sit amet, consectetur adipisicing el",
-    name: "Arvind",
-    phone: "9876543210",
-    timestamp: "Dec 2, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
+// const manage = [
+//   {
+//     type: "Platform issue",
+//     subject: "lorem ipsum dolor sit amet, consectetur adipisicing el",
+//     name: "Arvind",
+//     phone: "9876543210",
+//     timestamp: "Dec 2, 2015",
+//     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+//   },
+// ];
 
 // dummy data with format
 const resolvedIssues = [
@@ -98,6 +98,10 @@ const resolvedIssues = [
 
 // card component
 const ApplicationCard = (props) => {
+  // console.log(props);
+  if (props.app === undefined) {
+    return null;
+  }
   return (
     <div className='admin-applications-card'>
       <div className='admin-applications-card-row1'>
@@ -114,11 +118,37 @@ const ApplicationCard = (props) => {
       </div>
       <div className='admin-applications-card-row3'>
         {props.pageNo === 1 ? (
-          <div className='admin-applications-card-button' onClick={() => {}}>
+          <div
+            className='admin-applications-card-button'
+            onClick={(e) => {
+              let username = localStorage.getItem("username");
+              const data = {
+                status: 0,
+                assignedTo: username,
+              };
+              axios
+                .post("/api/feedback/update/" + props.app._id, data)
+                .then(() => props.updateIssues())
+                .catch((err) => console.log(err));
+            }}
+          >
             MANAGE ISSUE
           </div>
         ) : props.pageNo === 2 ? (
-          <div className='admin-applications-card-button' onClick={() => {}}>
+          <div
+            className='admin-applications-card-button'
+            onClick={() => {
+              let username = localStorage.getItem("username");
+              const data = {
+                status: 1,
+                assignedTo: username,
+              };
+              axios
+                .post("/api/feedback/update/" + props.app._id, data)
+                .then(() => props.updateIssues())
+                .catch((err) => console.log(err));
+            }}
+          >
             MARK RESOLVED
           </div>
         ) : null}
@@ -136,9 +166,12 @@ class AdminHomePage extends React.Component {
       searchText: "",
       searchResultText: "",
       newIssues: [],
+      manage: [],
+      resolvedIssues: [],
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
+    this.updateIssues = this.updateIssues.bind(this);
   }
 
   // method to search users
@@ -153,6 +186,31 @@ class AdminHomePage extends React.Component {
       this.setState({ searchResultText: this.state.searchText });
       // submit this search text to Backend for Query
     }
+  }
+
+  updateIssues() {
+    axios
+      .get("/api/feedback/getfeedbacks")
+      .then((data) => {
+        this.setState({
+          newIssues: data.data.map((e) => {
+            if (e.assignedTo === "none") {
+              return e;
+            }
+          }),
+          manage: data.data.map((e) => {
+            if (e.assignedTo === localStorage.getItem("username") && e.status === 0) {
+              return e;
+            }
+          }),
+          resolvedIssues: data.data.map((e) => {
+            if (e.assignedTo === localStorage.getItem("username") && e.status === 1) {
+              return e;
+            }
+          }),
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   // mehtod to verify if a user is already logged in
@@ -174,14 +232,7 @@ class AdminHomePage extends React.Component {
       window.location = "/my-mentors";
     }
 
-    axios
-      .get("/api/feedback/getfeedbacks")
-      .then((data) => {
-        this.setState({
-          newIssues: data.data,
-        });
-      })
-      .catch((err) => console.log(err));
+    this.updateIssues();
   }
 
   render() {
@@ -252,23 +303,23 @@ class AdminHomePage extends React.Component {
               className='admin-applications-applications'
             >
               {this.state.newIssues.map((item) => (
-                <ApplicationCard app={item} pageNo={1} />
+                <ApplicationCard app={item} pageNo={1} updateIssues={this.updateIssues} />
               ))}
             </div>
             <div
               style={this.state.tab === 0 || this.state.tab === 2 ? { display: "none" } : {}}
               className='admin-applications-applications'
             >
-              {manage.map((item) => (
-                <ApplicationCard app={item} pageNo={2} />
+              {this.state.manage.map((item) => (
+                <ApplicationCard app={item} pageNo={2} updateIssues={this.updateIssues} />
               ))}
             </div>
             <div
               style={this.state.tab === 0 || this.state.tab === 1 ? { display: "none" } : {}}
               className='admin-applications-applications'
             >
-              {resolvedIssues.map((item) => (
-                <ApplicationCard app={item} pageNo={3} />
+              {this.state.resolvedIssues.map((item) => (
+                <ApplicationCard app={item} pageNo={3} updateIssues={this.updateIssues} />
               ))}
             </div>
           </div>
