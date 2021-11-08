@@ -1,4 +1,4 @@
-const Admin = require("../models/admin");
+const Admin = require("../models/admin.model");
 
 module.exports.login = (req, res) => {
   Admin.find()

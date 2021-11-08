@@ -1,4 +1,4 @@
-const Learner = require("../models/learner");
+const Learner = require("../models/learner.model");
 
 module.exports.createLearner = async (req, res) => {
   const {

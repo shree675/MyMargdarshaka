@@ -10,7 +10,7 @@ router.route("/login/submitlearner").get((req, res) => {
     .catch((err) => res.status(400).json("notfound"));
 });
 
-router.route("/signup/createlearner").post(learners.signupLearner);
+router.route("/signup/createlearner").post(learners.createLearner);
 
 router.route("/assign/update/:phone").post(learners.updateLearnerByPhone);
 
