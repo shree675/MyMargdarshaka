@@ -1,7 +1,10 @@
 //@ts-check
 const express = require("express");
 const router = express.Router();
-const Mentor = require("../models/mentor.model");
+var Mentor = require("../models/mentor.model");
+var { mentorSchema } = require("../utils/joiSchemas");
+const { ObjectId } = require("mongodb");
+const mentorController = require("../controllers/mentor.controller");
 const mentors = require("../controllers/mentor");
 
 // TODO : needs to discuss with shrretes the use of this route in feedback
@@ -76,4 +79,25 @@ router.route("/get-data/phone/:phone").get(mentors.getMentorByPhone);
 
 router.route("/get/mentors/:status").get(mentors.getMentorStatus);
 
+router.route("/get/mentors/:status").get(async (req, res) => {
+  let status = req.params.status;
+
+  if (status === "open") {
+    const data = await Mentor.find({ approved: false, rejected: false });
+    //console.log(data);
+    res.json(data);
+  } else if (status === "approved") {
+    const data = await Mentor.find({ approved: true, rejected: false });
+    //console.log(data);
+    res.json(data);
+  } else if (status === "rejected") {
+    const data = await Mentor.find({ approved: false, rejected: true });
+    //console.log(data);
+    res.json(data);
+  } else {
+    res.status(404).json("Status is not correct.");
+  }
+});
+
+router.route("/findmatches/:id").get(mentors.find_matches);
 module.exports = router;
