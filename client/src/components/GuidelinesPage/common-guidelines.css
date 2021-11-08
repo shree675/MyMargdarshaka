@@ -28,3 +28,7 @@ body {
   left: 50%;
   margin-left: -20px;
 }
+.bubble:before {
+  /* background-color: none; */
+  opacity: 0;
+}
