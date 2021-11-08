@@ -1,0 +1,30 @@
+body {
+  background-image: url("../../assets/Medium quality background 2.gif");
+}
+
+.bubble {
+  position: relative;
+  background: #ff0000;
+  color: #000;
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 120px;
+  text-align: center;
+  width: 250px;
+  height: 120px;
+  border-radius: 10px;
+  padding: 0px;
+}
+.bubble:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-color: #ff0000 transparent;
+  border-width: 20px 20px 0;
+  bottom: -20px;
+  left: 50%;
+  margin-left: -20px;
+}
