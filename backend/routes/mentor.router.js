@@ -4,6 +4,7 @@ const router = express.Router();
 var Mentor = require("../models/mentor.model");
 var { mentorSchema } = require("../utils/joiSchemas");
 const { ObjectId } = require("mongodb");
+const mentorController = require("../controllers/mentor.controller");
 
 // TODO : needs to discuss with shrretes the use of this route in feedback
 router.route("/login/submitmentor").get((req, res) => {
@@ -223,3 +224,5 @@ router.route("/get/mentors/:status").get(async (req, res) => {
     res.status(404).json("Status is not correct.");
   }
 });
+
+router.route("/findmatches/:id").get(mentorController.find_matches);

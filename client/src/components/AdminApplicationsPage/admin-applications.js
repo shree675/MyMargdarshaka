@@ -83,6 +83,7 @@ const ApplicationCard = (props) => {
       approved: true,
     });
     props.setApproved(user._id);
+    await axios.get(`/api/mentor/findmatches/${user._id}`);
   };
   const handleReject = async (user) => {
     console.log("reject ", user.name);
