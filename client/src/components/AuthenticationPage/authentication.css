@@ -1,211 +1,214 @@
 .auth-body {
-    background-color: #e8dee5;
-    text-align: center;
-    overflow: hidden;
-    height: 100vh;
+  background-color: #e8dee5;
+  text-align: center;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .auth-heading {
-    font-size: 3.4vw;
-    font-weight: bold;
-    color: #720d5d;
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
+  font-size: 3.4vw;
+  font-weight: bold;
+  color: #720d5d;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
 }
 
 .auth-content {
-    background-color: white;
-    border-radius: 2vw 2vw 0 0;
-    position: relative;
-    height: 100vh;
+  background-color: white;
+  border-radius: 2vw 2vw 0 0;
+  position: relative;
+  height: 100vh;
 }
 
 .auth-background-img {
-    width: 38%;
-    position: absolute;
-    bottom: 10vh;
-    z-index: 0;
+  width: 38%;
+  position: absolute;
+  bottom: 10vh;
+  z-index: 0;
 }
 
 .auth-wave-back {
-    width: 115%;
-    position: absolute;
-    top: 64vh;
-    left: -12vh;
-    z-index: 1;
+  width: 115%;
+  position: absolute;
+  top: 64vh;
+  left: -12vh;
+  z-index: 1;
 }
 
 .auth-wave-front {
-    width: 115%;
-    position: absolute;
-    top: 68vh;
-    left: -12vh;
-    z-index: 2;
+  width: 115%;
+  position: absolute;
+  top: 68vh;
+  left: -12vh;
+  z-index: 2;
 }
 
 .auth-humans {
-    position: absolute;
-    top: 38vh;
-    width: 25%;
-    left: 12vh;
+  position: absolute;
+  top: 38vh;
+  width: 25%;
+  left: 12vh;
 }
 
 .auth-content-body {
-    position: relative;
-    z-index: 8;
-    text-align: center;
-    vertical-align: middle;
-    padding-top: 8vw;
+  position: relative;
+  z-index: 8;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 8vw;
 }
 
 .auth-text {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: "Raleway", sans-serif;
-    width: 20%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Raleway", sans-serif;
+  width: 20%;
 }
 
 #auth-textfield {
-    background-color: white;
+  background-color: white;
 }
 
 .auth-button {
-    border: none;
-    padding: 5px;
-    font-weight: bold;
-    font-size: 1vw;
-    color: white;
-    font-family: "Raleway", sans-serif;
-    background-color: #5d1049;
-    height: 2.5vw;
-    border-radius: 1.25vw;
-    padding-left: 45px;
-    padding-right: 45px;
-    cursor: pointer;
-    transition: 0.4s;
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 1vw;
+  color: white;
+  font-family: "Raleway", sans-serif;
+  background-color: #5d1049;
+  height: 2.5vw;
+  border-radius: 1.25vw;
+  padding-left: 45px;
+  padding-right: 45px;
+  cursor: pointer;
+  transition: 0.4s;
 }
 
 .auth-button:hover {
+  background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #720d5d, #4e0d3a, #720d5d);
+  background-size: 400%;
+  animation: glowing 15s linear infinite;
+  transition: 0.3s;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.bottom-fact {
+  font-size: 1.25vw;
+  font-weight: bold;
+  margin-top: calc(10%);
+  position: relative;
+  z-index: 15;
+}
+
+.auth-svg {
+  width: 3.5vw;
+  margin: 0.4vw;
+  margin-bottom: 0.5vw;
+}
+
+.auth-num {
+  font-size: 2vw;
+  margin-top: 10vw;
+}
+
+.auth-humans-phone {
+  display: none;
+}
+
+.auth-background-img-phone {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .auth-body {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .auth-heading {
+    font-size: 7.2vw;
+    padding: 20px;
+  }
+
+  .auth-content {
+    border-radius: 30px 30px 0 0;
+    overflow: hidden;
+  }
+
+  .auth-content-body {
+    padding: 8vw;
+    padding-top: 10vw;
+  }
+
+  .auth-svg {
+    width: 10vw;
+    margin: 4vw;
+    margin-bottom: 3.2vw;
+  }
+
+  .auth-num {
+    font-size: 6vw;
+  }
+
+  .auth-text {
+    width: 80%;
+  }
+
+  .auth-button {
+    height: 8vw;
+    border-radius: 4vw;
+    font-size: 4vw;
     background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #720d5d, #4e0d3a, #720d5d);
     background-size: 400%;
     animation: glowing 15s linear infinite;
     transition: 0.3s;
-}
+  }
 
-@keyframes glowing {
-    0% {
-        background-position: 0 0;
-    }
-    50% {
-        background-position: 400% 0;
-    }
-    100% {
-        background-position: 0 0;
-    }
-}
-
-.bottom-fact {
-    font-size: 1.25vw;
+  .bottom-fact {
+    font-size: 4vw;
     font-weight: bold;
-    margin-top: calc(10%);
     position: relative;
     z-index: 15;
-}
+  }
 
-.auth-svg {
-    width: 3.5vw;
-    margin: 0.4vw;
-    margin-bottom: 0.5vw;
-}
+  .auth-phone-svg {
+    display: none;
+  }
 
-.auth-num {
-    font-size: 2vw;
+  .auth-background-img-phone {
+    display: block;
+    position: relative;
+    width: 80%;
+    margin-top: -60%;
+    padding: 0;
+    margin-left: 6vw;
+    z-index: 5;
+  }
+
+  .auth-humans-phone {
+    display: block;
+    position: relative;
+    width: 60%;
+    margin: 0;
+    padding: 0;
+    margin-left: 10vw;
     margin-top: 10vw;
-}
-
-.auth-humans-phone {
-    display: none;
-}
-
-.auth-background-img-phone {
-    display: none;
-}
-
-@media screen and (max-width: 480px) {
-    .auth-body {
-        overflow: hidden;
-        height: 100%;
-    }
-
-    .auth-heading {
-        font-size: 7.2vw;
-        padding: 20px;
-    }
-
-    .auth-content {
-        border-radius: 30px 30px 0 0;
-        overflow: hidden;
-    }
-
-    .auth-content-body {
-        padding: 8vw;
-        padding-top: 10vw;
-    }
-
-    .auth-svg {
-        width: 10vw;
-        margin: 4vw;
-        margin-bottom: 3.2vw;
-    }
-
-    .auth-num {
-        font-size: 6vw;
-    }
-
-    .auth-text {
-        width: 80%;
-    }
-
-    .auth-button {
-        height: 8vw;
-        border-radius: 4vw;
-        font-size: 4vw;
-        background: linear-gradient(45deg, #720d5d, #4e0d3a, #720d5d, #e30425, #720d5d, #4e0d3a, #720d5d);
-        background-size: 400%;
-        animation: glowing 15s linear infinite;
-        transition: 0.3s;
-    }
-
-    .bottom-fact {
-        font-size: 4vw;
-        font-weight: bold;
-        position: relative;
-        z-index: 15;
-    }
-
-    .auth-phone-svg {
-        display: none;
-    }
-
-    .auth-background-img-phone {
-        display: block;
-        position: relative;
-        width: 80%;
-        margin-top: -60%;
-        padding: 0;
-        margin-left: 6vw;
-        z-index: 5;
-    }
-
-    .auth-humans-phone {
-        display: block;
-        position: relative;
-        width: 60%;
-        margin: 0;
-        padding: 0;
-        margin-left: 10vw;
-        margin-top: 10vw;
-        z-index: 7;
-    }
+    z-index: 7;
+  }
+  .bottom-fact {
+    padding: 10px;
+  }
 }

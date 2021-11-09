@@ -43,6 +43,13 @@
   width: 100vw;
 }
 
+.img-fluid-nav {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: -25px;
+}
+
 @media screen and (max-width: 480px) {
   .profile-photo {
     margin-right: 10vw;

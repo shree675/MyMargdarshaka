@@ -25,7 +25,6 @@ const LearnerNavbar = (props) => {
         axios
           .get("/api/learner/get-data/phone/" + user.phoneNumber)
           .then((data) => {
-            // console.log(data);
             setPic(data.data.profile_picture_url);
           })
           .catch((err) => {
@@ -122,7 +121,7 @@ const LearnerNavbar = (props) => {
           </button>
         </NavMenu>
 
-        <img className='img-fluid rounded-circle' style={{ width: "50px", height: "50px", marginRight: "10px" }} src={pic} />
+        <img className='img-fluid-nav rounded-circle' src={pic} />
       </Nav>
     </div>
   );

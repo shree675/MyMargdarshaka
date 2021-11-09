@@ -4,7 +4,7 @@ const router = express.Router();
 var Mentor = require("../models/mentor.model");
 var { mentorSchema } = require("../utils/joiSchemas");
 const { ObjectId } = require("mongodb");
-const mentorController = require("../controllers/mentor.controller");
+// const mentorController = require("../controllers/mentor.controller");
 const mentors = require("../controllers/mentor");
 
 // TODO : needs to discuss with shrretes the use of this route in feedback
@@ -31,9 +31,7 @@ router.route("/signup/findmatches/").post(mentors.findMatches);
 }); */
 
 // normal update by phone
-router
-  .route("/assign/update-by-phone/:phone")
-  .post(mentors.updateMentorByPhone);
+router.route("/assign/update-by-phone/:phone").post(mentors.updateMentorByPhone);
 
 // normal update by id
 router.route("/update-by-id/:id").post(mentors.updateMentorById);

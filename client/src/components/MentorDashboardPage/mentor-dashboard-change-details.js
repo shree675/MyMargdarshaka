@@ -121,7 +121,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
 
           <div className='d-flex justify-content-center'>
             <button
-              className='save-details-button rounded-pill px-5 py-3 mt-3'
+              className='save-details-button rounded-pill px-4 py-2 mt-3'
               style={{
                 backgroundColor: "#5D1049",
                 color: "white",

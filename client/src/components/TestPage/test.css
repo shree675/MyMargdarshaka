@@ -1,0 +1,56 @@
+.test-header {
+  color: #5d1049;
+  display: block;
+  text-align: center;
+  flex: none;
+  justify-content: none;
+  padding-left: 0px;
+  font-size: 3vw;
+  font-weight: bold;
+}
+
+.test-question {
+  background: #5d1049;
+  color: white;
+  height: 70px;
+  width: 95%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  margin: 10px 0px 10px 0px;
+}
+
+.test-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+
+.test-checkbox {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (max-width: 480px) {
+  .test-main {
+    width: 100vw;
+  }
+
+  .test-header {
+    display: block;
+    text-align: center;
+    flex: none;
+    justify-content: none;
+    padding-left: 0px;
+    font-size: 6vw;
+    margin-top: 10px;
+  }
+
+  .test-question {
+    width: 90%;
+  }
+}

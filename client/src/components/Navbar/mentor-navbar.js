@@ -118,7 +118,7 @@ const Navbar = (props) => {
             LOGOUT
           </button>
         </NavMenu>
-        <img className='img-fluid rounded-circle' style={{ width: "50px", height: "50px", marginRight: "10px" }} src={pic} />
+        <img className='img-fluid-nav rounded-circle' src={pic} />
       </Nav>
     </div>
   );

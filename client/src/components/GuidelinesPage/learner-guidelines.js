@@ -8,10 +8,10 @@ import "./common-guidelines.css";
 
 const LearnerGuidelines = () => {
   return (
-    <div>
-      <div className="container">
-        <div className="col">
-          <div className="row">
+    <div className='body'>
+      <div className='container'>
+        <div className='col'>
+          <div className='row'>
             <div className={"bubble"}>Hello there!</div>
             {/* <ChatBubble
               className={"bubble"}
@@ -23,12 +23,8 @@ const LearnerGuidelines = () => {
               ]}
             /> */}
           </div>
-          <div className="row">
-            <img
-              src={mentor}
-              style={{ width: "596px", height: "842px" }}
-              alt=""
-            />
+          <div className='row'>
+            <img src={mentor} style={{ width: "596px", height: "842px" }} alt='' />
           </div>
         </div>
       </div>

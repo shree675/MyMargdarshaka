@@ -155,15 +155,7 @@ class SubjectDetails extends React.Component {
 
           <div className='learner-subject-details-col3'>
             <div className='learner-subject-details-subjectname'>{this.state.subjectName}</div>
-            <div
-              style={{
-                marginTop: "20px",
-                marginLeft: "20px",
-                fontSize: "20px",
-              }}
-            >
-              PENDING TESTS!
-            </div>
+            <div>PENDING TESTS!</div>
 
             {/* temporarily pending tests are stored in data.js , these need to be queried from DB */}
 

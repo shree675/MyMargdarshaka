@@ -89,6 +89,7 @@
     padding: 1vw;
     padding-top: 0vw;
     display: block;
+    min-height: 100vh;
   }
 
   .error-height {

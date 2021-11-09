@@ -75,10 +75,10 @@ const LearnerHome = (props) => {
 
   // displaying the data
   return (
-    <div className='learner-home'>
+    <div className='learner-home learner-bg'>
       <Navbar />
       <div className='learner-curvature'></div>
-      <div className='container-fluid p-0'>
+      <div className='container-fluid p-0 learner-bg'>
         <div className='row m-3' style={borderStyle}>
           <div className='col-md card p-3 me-md-2 mb-3 mb-md-0' style={borderStyle}>
             <h1>

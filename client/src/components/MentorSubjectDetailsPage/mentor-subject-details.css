@@ -185,12 +185,13 @@
   }
   .mentor-tests-tab-inner {
     display: block;
-    width: 90vw;
+    width: 100vw;
     margin-right: 0px;
+    background-size: 100vw;
   }
   .mentor-subtopic-test-element {
     display: flex;
-    width: 90vw;
+    width: 95vw;
     margin-right: 0px;
   }
   .mentor-launch-test-button {
