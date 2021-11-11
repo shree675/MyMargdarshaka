@@ -7,9 +7,11 @@ import "./mentor-subject-details.css";
 import data from "../../data";
 import { verify } from "../../verifyUser";
 
-const Chapters = ({ handleClickChapter }) => {
+const defaultClassCode = "SCI10";
+
+const Chapters = ({ handleClickChapter, classCode }) => {
   const chapters = [];
-  data.chapters.Science.forEach((ch) => {
+  (data[classCode] || data[defaultClassCode]).chapters.forEach((ch) => {
     chapters.push(ch.name);
   });
 
@@ -40,7 +42,7 @@ const Chapters = ({ handleClickChapter }) => {
   }, [ch]);
 
   return (
-    <div className='mentor-subject-details-chapters'>
+    <div className="mentor-subject-details-chapters">
       <div
         style={{
           color: "white",
@@ -56,7 +58,7 @@ const Chapters = ({ handleClickChapter }) => {
       </div>
       {chapters.map((chName, i) => (
         <div
-          className='mentor-chapter-element'
+          className="mentor-chapter-element"
           onClick={() => {
             setCh(i);
           }}
@@ -69,11 +71,13 @@ const Chapters = ({ handleClickChapter }) => {
   );
 };
 
-const SubTopics = ({ curChapter }) => {
-  const subTopics = data.chapters.Science[curChapter].subtopics;
+const SubTopics = ({ curChapter, classCode }) => {
+  const subTopics = (data[classCode] || data[defaultClassCode]).chapters[
+    curChapter
+  ].subtopics;
 
   return (
-    <div className='mentor-subject-details-subtopics'>
+    <div className="mentor-subject-details-subtopics">
       <div
         style={{
           color: "white",
@@ -88,8 +92,11 @@ const SubTopics = ({ curChapter }) => {
         SubTopics
       </div>
       {subTopics.map((ch) => (
-        <div className='mentor-chapter-element' style={{ background: "white", color: "#5D1049" }}>
-          <input type='checkbox' />
+        <div
+          className="mentor-chapter-element"
+          style={{ background: "white", color: "#5D1049" }}
+        >
+          <input type="checkbox" />
           {ch}
         </div>
       ))}
@@ -99,11 +106,11 @@ const SubTopics = ({ curChapter }) => {
 
 const PendingTests = ({ pendingTests }) => {
   return (
-    <div className='mentor-tests-tab-inner'>
+    <div className="mentor-tests-tab-inner">
       {pendingTests.map((topic) => (
-        <div className='mentor-subtopic-test-element'>
+        <div className="mentor-subtopic-test-element">
           <div style={{ marginLeft: "10px" }}>{topic}</div>
-          <div className='mentor-launch-test-button'>LAUNCH TEST</div>
+          <div className="mentor-launch-test-button">LAUNCH TEST</div>
         </div>
       ))}
     </div>
@@ -112,11 +119,11 @@ const PendingTests = ({ pendingTests }) => {
 
 const CompletedTests = ({ completedTests }) => {
   return (
-    <div className='mentor-tests-tab-inner'>
+    <div className="mentor-tests-tab-inner">
       {completedTests.map((topic) => (
-        <div className='mentor-subtopic-test-element'>
+        <div className="mentor-subtopic-test-element">
           <div style={{ marginLeft: "10px" }}>{topic}</div>
-          <div className='mentor-launch-test-button'>VIEW DETAILS</div>
+          <div className="mentor-launch-test-button">VIEW DETAILS</div>
         </div>
       ))}
     </div>
@@ -127,12 +134,12 @@ const Tests = ({ pendingTests, completedTests }) => {
   const [tab, setTab] = React.useState(0);
 
   return (
-    <div className='mentor-subject-details-tests'>
+    <div className="mentor-subject-details-tests">
       <div style={{ display: "flex", padding: "10px" }}>
         <div
-          className='mentor-test-tab-button'
+          className="mentor-test-tab-button"
           style={tab == 0 ? { border: "solid 3px red", opacity: 1 } : {}}
-          name='pending'
+          name="pending"
           onClick={() => {
             setTab(0);
           }}
@@ -140,9 +147,9 @@ const Tests = ({ pendingTests, completedTests }) => {
           PENDING TESTS
         </div>
         <div
-          className='mentor-test-tab-button'
+          className="mentor-test-tab-button"
           style={tab == 1 ? { border: "solid 3px red", opacity: 1 } : {}}
-          name='completed'
+          name="completed"
           onClick={() => {
             setTab(1);
           }}
@@ -160,10 +167,15 @@ const Tests = ({ pendingTests, completedTests }) => {
 class MentorSubjectDetails extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      subjectName: props.subjectName || "Subject Name",
+      subjectName: props.subDetails["subject"] || "Subject Name",
+      classCode:
+        data.codes[props.subDetails["subject"].split()[0]] +
+        props.subDetails["Class"],
       curChapter: 0,
     };
+
     this.handleClickChapter = this.handleClickChapter.bind(this);
   }
 
@@ -193,24 +205,49 @@ class MentorSubjectDetails extends React.Component {
     return (
       <div>
         <MentorNavbar />
-        <div className='mentor-subject-details-main'>
-          <div style={{ width: "30%", display: "flex", flexDirection: "column" }}>
-            <Link to='/my-students' className='mentor-subject-details-back'>
+        <div className="mentor-subject-details-main">
+          <div
+            style={{ width: "30%", display: "flex", flexDirection: "column" }}
+          >
+            {/* <Link to='/my-students' className='mentor-subject-details-back'>
               BACK
-            </Link>
-            <div className='mentor-subject-details-subjectname-mobile'>{this.state.subjectName}</div>
-            <Chapters handleClickChapter={this.handleClickChapter} />
-          </div>
-          <SubTopics curChapter={this.state.curChapter} />
+            </Link> */}
 
-          <div className='mentor-subject-details-col3'>
-            <div className='mentor-subject-details-subjectname'>{this.state.subjectName}</div>
+            <div
+              className="mentor-subject-details-back"
+              onClick={() => {
+                this.props.setPageDetails({ pageName: "home" });
+              }}
+            >
+              BACK
+            </div>
+            <div className="mentor-subject-details-subjectname-mobile">
+              {this.state.subjectName}
+            </div>
+            <Chapters
+              handleClickChapter={this.handleClickChapter}
+              classCode={this.state.classCode}
+            />
+          </div>
+          <SubTopics
+            curChapter={this.state.curChapter}
+            classCode={this.state.classCode}
+          />
+
+          <div className="mentor-subject-details-col3">
+            <div className="mentor-subject-details-subjectname">
+              {this.state.subjectName}
+            </div>
 
             {/* temporarily pending and completed tests are stored in data.js , these need to be queried from DB */}
 
             <Tests
-              pendingTests={data.chapters.Science[this.state.curChapter].pendingTests}
-              completedTests={data.chapters.Science[this.state.curChapter].completedTests}
+              pendingTests={
+                data.chapters.Science[this.state.curChapter].pendingTests
+              }
+              completedTests={
+                data.chapters.Science[this.state.curChapter].completedTests
+              }
             />
           </div>
         </div>
