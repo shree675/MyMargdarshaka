@@ -145,6 +145,12 @@ const data = {
       },
     ],
   },
+  getSubjectName: (code) => {
+    //console.log(code);
+    code = code.substring(0, code.length - 1);
+    const subName = data.codeToSubName[code];
+    return subName;
+  },
   test: [
     {
       q: "Who is the PM?",
