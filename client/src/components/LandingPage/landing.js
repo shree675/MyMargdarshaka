@@ -12,7 +12,7 @@ const LandingPage = () => {
     window.scrollTo(0, window.innerHeight + window.scrollY);
   };
 
-/*   useEffect(() => {
+  /* useEffect(() => {
     localStorage.clear();
   },[]); */
 

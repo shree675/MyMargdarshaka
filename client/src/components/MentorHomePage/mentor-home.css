@@ -10,6 +10,22 @@
 .pull-right {
   padding-right: 20px;
 }
+.lola {
+  /* background-image:url("../../assets/lola_more_glow.gif"); */
+  background-image:url("../../assets/lola_basic_motion.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.lola-panel{
+  padding: -10px;
+  /* background-image:url("../../assets/lola_more_glow.gif");
+  background-repeat: no-repeat;
+  background-size: contain; */
+}
+.img {
+  opacity: 0;
+}
 
 @media screen and (max-width: 480px) {
   #mentor-home-learners {
@@ -17,4 +33,51 @@
     padding: 0px;
     width: 100%;
   }
+}
+.mentor-bubble {
+  position: relative;
+  background: #f0cce2;
+  color: rgb(8, 8, 8);
+  /* font-family: Arial; */
+  box-shadow: 1px 1px 10px white;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  /* margin: auto; */
+  width: 100%;
+  /* width: 240px; */
+  height: 260px;
+  border-radius: 30px;
+  padding: 20px;
+  padding-top: 30px;
+  margin-top: 10px;
+
+}
+.mentor-bubble:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-color: #f0cce2 transparent;
+  border-width: 20px 20px 0;
+  bottom: -20px;
+  
+  left: 70%;
+  /* margin-left: 10px; */
+  /* margin-right: -40px; */
+}
+.mentor-bubble:before {
+  /* background-color: none; */
+  opacity: 0;
+}
+.speech-bubble {
+  /* margin-left: -10px; */
+  margin-top: -40px;
+
+}
+.mentor-button-space {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

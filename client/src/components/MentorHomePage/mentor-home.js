@@ -8,6 +8,8 @@ import Card from "../LearnerHomePage/card";
 import MentorSubjectDetails from "../MentorSubjectDetailsPage/mentor-subject-details";
 import SubjectTitle from "./subject-title";
 import { verify } from "../../verifyUser";
+/* import lola from "../../assets/lola_more_glow.gif"; */
+import lola from "../../assets/lola_small_and_moves.gif";
 
 // main component
 const MentorHome = () => {
@@ -116,14 +118,40 @@ const MentorHome = () => {
               <div className="d-none d-xl-flex col-md-3 mb-3">
                 {/* TODO: remove hardcoded color */}
                 <div className="card mt-3 p-5" style={style}>
-                  <p style={{ fontSize: "34px" }}>
+                <div className="lola-panel"> 
+                <div className="speech-bubble">
+                <div className={"mentor-bubble"}>
+                    <div>Hello there! I'm Lola! You will find your list of assigned students here for every
+                    subject you have opted to teach. Click on the subject card to view the syllabus and the
+                    students’s progress.</div>
+                    <div className= 'mentor-button-space'>
+                    <button
+              className='init-signin-button'
+              onClick={() => {
+                window.location = "/mentor-guidelines";
+              }}
+            >
+              NEED HELP?
+            </button>
+                    </div>
+                </div>
+                {/* <p style={{ fontSize: "20px" }}>
                     You will find your list of assigned students here for every
                     subject you have opted to teach.
                   </p>
-                  <p style={{ fontSize: "34px" }}>
+                  <p style={{ fontSize: "20px" }}>
                     Click on the subject card to view the syllabus and the
                     students’s progress.
-                  </p>
+                  </p> */}
+                  </div>
+                  <div className="lola">
+                     {<p className= 'lola'>
+                    <img src={lola} style={{ opacity:"0"}} alt='' />
+                </p>}
+                    </div> 
+                
+                 
+                </div>
                 </div>
               </div>
 
