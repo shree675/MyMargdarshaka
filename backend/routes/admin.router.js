@@ -4,5 +4,5 @@ const router = express.Router();
 const admin = require("../controllers/admin");
 
 router.route("/login/submitadmin").get(admin.login);
-//admins just need sign in functionality for now. No need update functionality
+router.route("/search/:id").get(admin.search);
 module.exports = router;

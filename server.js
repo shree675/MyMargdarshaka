@@ -67,7 +67,8 @@ app.use("/api/learner", authMiddleware, learnerRouter);
 app.use("/api/mentor", authMiddleware, mentorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
-app.use("/api/admin", authMiddleware, adminRouter);
+app.use("/api/admin", adminRouter);
+// app.use("/api/admin", authMiddleware, adminRouter);
 
 // app.get("*", (req, res) => {
 //   throw new Error("Page Not Found");

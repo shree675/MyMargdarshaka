@@ -2,6 +2,7 @@
 
 import React, { Component, useEffect } from "react";
 import main_logo from "../../assets/main-logo.svg";
+import homepage from "../../assets/homepage.gif";
 import "@lottiefiles/lottie-player";
 import "./landing.css";
 
@@ -18,6 +19,9 @@ const LandingPage = () => {
 
   return (
     <div className='landing-body'>
+      <button className='landing-gif' onClick={() => (window.location = "/")}>
+        <img src={homepage} className='landing-gif-img' />
+      </button>
       <div className='landing-content1' style={{ height: window.innerHeight }}>
         <div className='landing-content1-body'>
           <div className='landing-content1-body-comp'>
@@ -52,7 +56,7 @@ const LandingPage = () => {
               src='https://assets4.lottiefiles.com/private_files/lf30_04wi8isl.json'
               background='transparent'
               speed='1'
-              style={{ width: "50px"/* , height: "50px" */, textAlign: `center` }}
+              style={{ width: "50px" /* , height: "50px" */, textAlign: `center` }}
               loop
               autoplay
             ></lottie-player>
@@ -66,7 +70,7 @@ const LandingPage = () => {
         financial and logistical reasons. Mentors and students associate with the National Institute of Open Schooling (NIOS) by the
         Government of India to complete class 10 and Class 12 certification. Get Started to be a part of My Margdarshaka as a learner
         or a mentor!
-        <div style={{ height: "35px" }}></div>
+        <div style={{ height: "110px" }}></div>
       </div>
     </div>
   );
