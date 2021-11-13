@@ -33,32 +33,37 @@ const MentorDashBoard = () => {
   }, []);
 
   // obtaining user's details from the database
-  const getData = async (mentor_phone) => {
-    console.log(mentor_phone);
-    axios.get(`/api/mentor/get-data/phone/${mentor_phone}`).then((res) => {
-      const data = res.data;
-      console.log(data);
-      if (data.phone != null || data.phone != undefined) {
-        setMentorData(data);
-      }
-    });
+  const getData = async () => {
+    if (!phone) return;
+    if (curuser === "No user is logged in") return;
+    axios
+      .get(`/api/mentor/get-data/phone/${phone}`, {
+        headers: { Authorization: `Bearer ${curuser}` },
+      })
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        if (data.phone != null || data.phone != undefined) {
+          setMentorData(data);
+        }
+      });
   };
 
   useEffect(() => {
     verify(setCuruser, setPhone);
-    getData(phone);
-  }, [phone]);
+    getData();
+  }, [phone, curuser]);
 
   return (
-    <div className='mb-3'>
+    <div className="mb-3">
       <Navbar />
-      <div className='mentor-curvature'></div>
-      <div className='container'>
-        <div className='row align-items-start'>
-          <div className='col-xl-3 col-12'>
+      <div className="mentor-curvature"></div>
+      <div className="container">
+        <div className="row align-items-start">
+          <div className="col-xl-3 col-12">
             <MentorDashboardChangeDetails details={mentorData} />
           </div>
-          <div className='col-xl-9 col-12'>
+          <div className="col-xl-9 col-12">
             <MentorDashboardEditAttributes details={mentorData} />
           </div>
         </div>

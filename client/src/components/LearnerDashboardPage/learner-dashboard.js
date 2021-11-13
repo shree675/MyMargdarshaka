@@ -19,10 +19,13 @@ const LearnerDashboard = () => {
   const [learnerData, setLearnerData] = useState({});
 
   // method to retrieve user's details from database
-  const getData = async (learner_phone) => {
-    console.log(learner_phone);
+  const getData = async () => {
+    if (!phone) return;
+    if (curuser === "No user is logged in") return;
     axios
-      .get(`/api/learner/get-data/phone/${learner_phone}`)
+      .get(`/api/learner/get-data/phone/${phone}`, {
+        headers: { Authorization: `Bearer ${curuser}` },
+      })
       .then((res) => {
         const data = res.data;
         console.log(data);
@@ -50,19 +53,19 @@ const LearnerDashboard = () => {
       window.location = "/admin-home";
     }
     verify(setCuruser, setPhone);
-    getData(phone);
-  }, [phone]);
+    getData();
+  }, [phone, curuser]);
 
   return (
-    <div className='mb-3 learner-bg'>
+    <div className="mb-3 learner-bg">
       <LearnerNavbar />
-      <div className='learner-curvature'></div>
-      <div className='container-fluid'>
-        <div className='row align-items-end'>
-          <div className='col-lg-3 col-12'>
+      <div className="learner-curvature"></div>
+      <div className="container-fluid">
+        <div className="row align-items-end">
+          <div className="col-lg-3 col-12">
             <LearnerDashboardChangeDetails details={learnerData} />
           </div>
-          <div className='col-lg-9 col-12'>
+          <div className="col-lg-9 col-12">
             <LearnerDashboardEditAttributes details={learnerData} />
           </div>
         </div>

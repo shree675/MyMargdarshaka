@@ -37,13 +37,12 @@ const MentorHome = () => {
   const [pageDetails, setPageDetails] = useState({ pageName: "home" });
 
   // gets the data from DB and updates the state "studentsData"
-  const getData = async (mentor_phone) => {
-    if (!mentor_phone) {
-      setStudentsData({});
-      return;
-    }
-    console.log("mentor phone : ", mentor_phone);
-    const res = await axios.get(`/api/mentor/get-data/phone/${mentor_phone}`);
+  const getData = async () => {
+    if (!phone) return;
+    if (curuser === "No user is logged in") return;
+    const res = await axios.get(`/api/mentor/get-data/phone/${phone}`, {
+      headers: { Authorization: `Bearer ${curuser}` },
+    });
     console.log(res.data);
     const mentor_id = res.data._id;
     const classes = res.data.Classes;
@@ -62,7 +61,10 @@ const MentorHome = () => {
       console.log(code, students);
       for (let j = 0; j < students.length; j++) {
         const res = await axios.get(
-          `/api/learner/get-data/id/${students[j].id}`
+          `/api/learner/get-data/id/${students[j].id}`,
+          {
+            headers: { Authorization: `Bearer ${curuser}` },
+          }
         );
         let student_data = res.data;
         console.log("students data", student_data);
@@ -94,8 +96,8 @@ const MentorHome = () => {
       window.location = "/admin-home";
     }
     verify(setCuruser, setPhone);
-    getData(phone);
-  }, [phone]);
+    getData();
+  }, [phone, curuser]);
 
   useEffect(() => {
     console.log(studentsData);
@@ -118,24 +120,27 @@ const MentorHome = () => {
               <div className="d-none d-xl-flex col-md-3 mb-3">
                 {/* TODO: remove hardcoded color */}
                 <div className="card mt-3 p-5" style={style}>
-                <div className="lola-panel"> 
-                <div className="speech-bubble">
-                <div className={"mentor-bubble"}>
-                    <div>Hello there! I'm Lola! You will find your list of assigned students here for every
-                    subject you have opted to teach. Click on the subject card to view the syllabus and the
-                    students’s progress.</div>
-                    <div className= 'mentor-button-space'>
-                    <button
-              className='init-signin-button'
-              onClick={() => {
-                window.location = "/mentor-guidelines";
-              }}
-            >
-              NEED HELP?
-            </button>
-                    </div>
-                </div>
-                {/* <p style={{ fontSize: "20px" }}>
+                  <div className="lola-panel">
+                    <div className="speech-bubble">
+                      <div className={"mentor-bubble"}>
+                        <div>
+                          Hello there! I'm Lola! You will find your list of
+                          assigned students here for every subject you have
+                          opted to teach. Click on the subject card to view the
+                          syllabus and the students’s progress.
+                        </div>
+                        <div className="mentor-button-space">
+                          <button
+                            className="init-signin-button"
+                            onClick={() => {
+                              window.location = "/mentor-guidelines";
+                            }}
+                          >
+                            NEED HELP?
+                          </button>
+                        </div>
+                      </div>
+                      {/* <p style={{ fontSize: "20px" }}>
                     You will find your list of assigned students here for every
                     subject you have opted to teach.
                   </p>
@@ -143,15 +148,15 @@ const MentorHome = () => {
                     Click on the subject card to view the syllabus and the
                     students’s progress.
                   </p> */}
+                    </div>
+                    <div className="lola">
+                      {
+                        <p className="lola">
+                          <img src={lola} style={{ opacity: "0" }} alt="" />
+                        </p>
+                      }
+                    </div>
                   </div>
-                  <div className="lola">
-                     {<p className= 'lola'>
-                    <img src={lola} style={{ opacity:"0"}} alt='' />
-                </p>}
-                    </div> 
-                
-                 
-                </div>
                 </div>
               </div>
 
