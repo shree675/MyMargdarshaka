@@ -1,4 +1,6 @@
+//@ts-check
 import { times } from "lodash";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import data from "../../data";
@@ -60,9 +62,20 @@ const LearnerDashboardEditAttributes = ({ details }) => {
     }
   }, [details]);
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  const handleChangeAttr = (e) => {
+    if (e.target.name === "time") {
+      setState({ ...state, time: e.target.value });
+    } else if (e.target.name === "language") {
+      setState({ ...state, language: e.target.value });
+    }
+  };
+
+  const handleClickSave = async (e) => {
+    await axios.post(`/api/mentor/update-by-id/${details._id}`, {
+      time: state.time,
+      language: state.language,
+    });
+  };
 
   return (
     <div
@@ -108,7 +121,9 @@ const LearnerDashboardEditAttributes = ({ details }) => {
                   className="form-check-input me-1"
                   type="radio"
                   name="time"
+                  value={timeSlot}
                   checked={timeSlot === state.time}
+                  onChange={handleChangeAttr}
                 />
                 {timeSlot}
               </li>
@@ -127,7 +142,9 @@ const LearnerDashboardEditAttributes = ({ details }) => {
                   className="form-check-input me-1"
                   type="radio"
                   name="language"
+                  value={lang}
                   checked={lang === state.language}
+                  onChange={handleChangeAttr}
                 />
                 {lang}
               </li>
@@ -140,6 +157,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         <a
           className="rounded-pill btn px-3 mb-3"
           style={{ border: "none", backgroundColor: "#5D1049", color: "white" }}
+          onClick={handleClickSave}
         >
           SAVE
         </a>
