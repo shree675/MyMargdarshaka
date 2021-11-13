@@ -3,7 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
 import firebase from "../../firebase";
-import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
+import { verify } from "../../verifyUser";
+import {
+  Nav,
+  NavLogo,
+  NavMenu,
+  Bars,
+  NavLink,
+  NavBtn,
+  NavBtnLink,
+} from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
@@ -17,13 +26,16 @@ const LearnerNavbar = (props) => {
     "https://media.istockphoto.com/vectors/user-profile-icon-flat-red-round-button-vector-illustration-vector-id1162440985?k=20&m=1162440985&s=170667a&w=0&h=cQJ5HDdUKK_8nNDd_6RBoeDQfILERZnd_EirHTi7acI="
   );
   const [phone, setPhone] = useState(null);
+  const [curuser, setCuruser] = useState("No user is logged in");
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setPhone(user.phoneNumber);
         axios
-          .get("/api/learner/get-data/phone/" + user.phoneNumber)
+          .get("/api/learner/get-data/phone/" + user.phoneNumber, {
+            headers: { Authorization: `Bearer ${curuser}` },
+          })
           .then((data) => {
             setPic(data.data.profile_picture_url);
           })
@@ -32,7 +44,8 @@ const LearnerNavbar = (props) => {
           });
       }
     });
-  }, []);
+    verify(setCuruser, setPhone);
+  }, [phone, curuser]);
 
   return (
     <div>
@@ -63,18 +76,20 @@ const LearnerNavbar = (props) => {
           }}
         >
           <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
-          <CloseIcon style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }} />
+          <CloseIcon
+            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
+          />
         </div>
-        <Link className='nav-link-mobile' to='/learner-guidelines'>
+        <Link className="nav-link-mobile" to="/learner-guidelines">
           GUIDELINES
         </Link>
-        <Link className='nav-link-mobile' to='/my-mentors'>
+        <Link className="nav-link-mobile" to="/my-mentors">
           MY MENTORS
         </Link>
-        <Link className='nav-link-mobile' to='/learner-dashboard'>
+        <Link className="nav-link-mobile" to="/learner-dashboard">
           DASHBOARD
         </Link>
-        <Link className='nav-link-mobile' to='/feedback'>
+        <Link className="nav-link-mobile" to="/feedback">
           FEEDBACK
         </Link>
         <button
@@ -84,7 +99,7 @@ const LearnerNavbar = (props) => {
             localStorage.clear();
             window.location = "/init-signin";
           }}
-          className='nav-logout-phone'
+          className="nav-logout-phone"
         >
           LOGOUT
         </button>
@@ -99,15 +114,15 @@ const LearnerNavbar = (props) => {
           <Bars />
         </div>
 
-        <NavLogo to='#'>
+        <NavLogo to="#">
           <img src={mainLogo} style={{ height: "80px" }} />
         </NavLogo>
 
         <NavMenu>
-          <NavLink to='/learner-guidelines'>GUIDELINES</NavLink>
-          <NavLink to='/my-mentors'>MY MENTORS</NavLink>
-          <NavLink to='/learner-dashboard'>DASHBOARD</NavLink>
-          <NavLink to='/feedback'>FEEDBACK</NavLink>
+          <NavLink to="/learner-guidelines">GUIDELINES</NavLink>
+          <NavLink to="/my-mentors">MY MENTORS</NavLink>
+          <NavLink to="/learner-dashboard">DASHBOARD</NavLink>
+          <NavLink to="/feedback">FEEDBACK</NavLink>
           <button
             onClick={() => {
               // logout
@@ -115,13 +130,13 @@ const LearnerNavbar = (props) => {
               localStorage.clear();
               window.location = "/init-signin";
             }}
-            className='nav-logout-pc'
+            className="nav-logout-pc"
           >
             LOGOUT
           </button>
         </NavMenu>
 
-        <img className='img-fluid-nav rounded-circle' src={pic} />
+        <img className="img-fluid-nav rounded-circle" src={pic} />
       </Nav>
     </div>
   );

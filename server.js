@@ -34,11 +34,40 @@ const userRouter = require("./backend/routes/user.router");
 const feedbackRouter = require("./backend/routes/feedback.router");
 const adminRouter = require("./backend/routes/admin.router");
 
-app.use("/api/learner", learnerRouter);
-app.use("/api/mentor", mentorRouter);
+// MIDDLE WARE AUTH ------------------------------------------------------------------------
+var admin = require("firebase-admin");
+var serviceAccount = require("./serviceAccount.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+function authMiddleware(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const idToken = authHeader && authHeader.split(" ")[1];
+  console.log("idToken -> ", idToken);
+
+  if (!idToken) {
+    res.json(401);
+  }
+  admin
+    .auth()
+    .verifyIdToken(idToken)
+    .then((decodedToken) => {
+      console.log(decodedToken);
+      const uid = decodedToken && decodedToken.uid;
+      if (uid != null && uid != undefined) next();
+    })
+    .catch((error) => {
+      res.json(401);
+    });
+}
+// -----------------------------------------------------------------------------
+
+app.use("/api/learner", authMiddleware, learnerRouter);
+app.use("/api/mentor", authMiddleware, mentorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
-app.use("/api/admin", adminRouter);
+app.use("/api/admin", authMiddleware, adminRouter);
 
 // app.get("*", (req, res) => {
 //   throw new Error("Page Not Found");
