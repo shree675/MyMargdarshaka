@@ -1,6 +1,6 @@
 // @ts-check
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./learner-home.css";
 import Card from "./card";
@@ -15,13 +15,18 @@ const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 // main page component
 const LearnerHome = (props) => {
   const [mentorData, setMentorData] = React.useState([]);
-  const [_, setCuruser] = useState("No user is logged in");
+  const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
   const [pageDetails, setPageDetails] = useState({ pageName: "home" });
 
   // obtaining the user's assigned mentors from the database
   const getData = async (learner_phone) => {
-    const res = await axios.get(`/api/learner/get-data/phone/${learner_phone}`);
+    if (curuser === "No user is logged in") return;
+    if (!phone) return;
+    console.log(curuser);
+    const res = await axios.get(`/api/learner/get-data/phone/${phone}`, {
+      headers: { Authorization: `Bearer ${curuser}` },
+    });
     const learner_id = res.data._id;
     const subjects = res.data.subjects;
 
@@ -30,7 +35,9 @@ const LearnerHome = (props) => {
     for (let i = 0; i < subjects.length; i++) {
       const sub = subjects[i];
       if (sub.mentor_id === "-1") continue;
-      const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`);
+      const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`, {
+        headers: { Authorization: `Bearer ${curuser}` },
+      });
       const mentor = res.data;
       let temp = {};
       const code = sub.code;
@@ -53,7 +60,7 @@ const LearnerHome = (props) => {
   };
 
   // verify that no user is currently logged in
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
       localStorage.getItem("userType") !== undefined &&
@@ -68,12 +75,8 @@ const LearnerHome = (props) => {
       window.location = "/admin-home";
     }
     verify(setCuruser, setPhone);
-    getData(phone);
-  }, [phone]);
-
-  React.useEffect(() => {
-    console.log(mentorData);
-  }, [mentorData]);
+    getData();
+  }, [phone, curuser]);
 
   // displaying the data
   return (
