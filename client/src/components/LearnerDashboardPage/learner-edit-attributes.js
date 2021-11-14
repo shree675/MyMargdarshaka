@@ -93,7 +93,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         new_subjects_array.push({
           code: added_subjects[i].code,
           mentor_id: mentor_ids[i],
-          consent: false,
+          //consent: false,
           chapters: data.default.chapters,
         });
       } else {

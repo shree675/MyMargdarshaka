@@ -41,25 +41,29 @@ async function getMentors(language, times, code) {
     "Classes.code": code,
     approved: true,
   });
-  //console.log("matched list", matched_list)
   return matched_list;
 }
 
 module.exports.findMatches = async (req, res) => {
   const language = req.body.language;
   const times = req.body.times;
-  //console.log(req.body)
   let codes = [];
   const subjects = req.body.subjects;
   subjects.forEach((subject) => {
     codes.push(subject.code);
   });
+  const type = req.body.type;
 
-  //console.log(language, times, codes);
   let mentors = [];
   for (let code of codes) {
     try {
       var response = await getMentors(language, times, code);
+      if (type === "reassign") {
+        const mentor_ids = response.map((res) => res._id);
+        res.json(mentor_ids);
+        return;
+      }
+      console.log("all mentors : ", response);
       //choose 1 among many responses and append to mentors
       var theChosenMentor = -1; //in case of multiple compatible mentors, assign the student to the mentor who has minimum students
       let min = 1000; //maximum number of students is assumed to be 1000 (realistic assumption)

@@ -19,7 +19,7 @@ const LandingPage = () => {
 
   return (
     <div className='landing-body'>
-      <button className='landing-gif' onClick={() => (window.location = "/")}>
+      <button className='landing-gif' onClick={() => (window.location = "/common-guidelines")}>
         <img src={homepage} className='landing-gif-img' />
       </button>
       <div className='landing-content1' style={{ height: window.innerHeight }}>
