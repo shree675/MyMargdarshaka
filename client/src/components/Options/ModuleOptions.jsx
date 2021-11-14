@@ -1,12 +1,16 @@
 import React from "react";
 
-import "./Options.css";
+import "./ModuleOptions.css";
 
 const Options = (props) => {
   const options = [
     {
       text: "Learn how to learn online",
-      handler: props.actionProvider.handleLearnOnline,
+      handler: () =>
+        props.actionProvider.handleLearnOnline(
+          "Learning online can be very challenging! There are so many distractions! So many resources! But there are ways to make the best of it! Do you want to know how?",
+          "learnOnlineStep1"
+        ),
       id: 1,
     },
     {
