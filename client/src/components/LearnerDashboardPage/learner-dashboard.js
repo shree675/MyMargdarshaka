@@ -9,6 +9,7 @@ import LearnerNavbar from "../Navbar/learner-navbar";
 import LearnerRequestChangeOfMentor from "./learner-change-mentor";
 import { verify } from "../../verifyUser";
 import "./learner-dashboard.css";
+import data from "../../data";
 
 // main page component
 const LearnerDashboard = () => {
@@ -34,6 +35,65 @@ const LearnerDashboard = () => {
         }
       })
       .catch((e) => console.log("VERY BAD ERROR"));
+  };
+
+  const changeMentor = async (subject) => {
+    console.log("change mentor for ", subject);
+    const class_code = data.codes[subject] + learnerData.Class;
+
+    const res = await axios.post(
+      `/api/mentor/signup/findmatches/`,
+      {
+        language: learnerData.language,
+        times: learnerData.times,
+        subjects: [{ code: class_code }],
+        type: "reassign",
+      },
+      {
+        headers: { Authorization: `Bearer ${curuser}` },
+      }
+    );
+
+    const oldMentorId = learnerData.subjects.filter(
+      (sub) => sub.code == class_code
+    )[0].mentor_id;
+    console.log("old mentor : ", oldMentorId);
+
+    let new_mentors = res.data.filter((m) => m != oldMentorId);
+
+    if (new_mentors.length == 0 || new_mentors[0] == -1) {
+      console.log("mentor not found");
+      return;
+    }
+
+    let i = Math.floor(Math.random() * new_mentors.length);
+    const newMentorId = new_mentors[i];
+    console.log("new mentor : ", newMentorId);
+
+    await axios.post(
+      `/api/mentor/remove-learner/${oldMentorId}`,
+      { class_code: class_code, learner_id: learnerData._id },
+      { headers: { Authorization: `Bearer ${curuser}` } }
+    );
+
+    await axios.post(
+      `/api/mentor/assign/update-by-id/${newMentorId}`,
+      { class_code: class_code, learner_id: learnerData._id },
+      { headers: { Authorization: `Bearer ${curuser}` } }
+    );
+
+    let temp_sub = learnerData.subjects.filter((sub) => sub.code != class_code);
+    temp_sub.push({
+      code: class_code,
+      mentor_id: newMentorId,
+      chapters: data.default.chapters,
+    });
+
+    await axios.post(
+      `/api/learner/update/id/${learnerData._id}`,
+      { ...learnerData, subjects: temp_sub },
+      { headers: { Authorization: `Bearer ${curuser}` } }
+    );
   };
 
   // verify if a user has already logged in
@@ -70,7 +130,7 @@ const LearnerDashboard = () => {
           </div>
         </div>
         <NIOSStatus details={learnerData} />
-        <LearnerRequestChangeOfMentor />
+        <LearnerRequestChangeOfMentor changeMentor={changeMentor} />
       </div>
     </div>
   );

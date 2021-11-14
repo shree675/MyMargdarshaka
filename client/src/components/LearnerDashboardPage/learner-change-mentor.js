@@ -4,7 +4,7 @@ import React from "react";
 import SubjectTitle from "./subject-title";
 import Card from "../LearnerHomePage/card";
 
-const LearnerRequestChangeOfMentor = () => {
+const LearnerRequestChangeOfMentor = ({ changeMentor }) => {
   const style = {
     backgroundColor: "#5D1049",
     color: "white",
@@ -42,7 +42,11 @@ const LearnerRequestChangeOfMentor = () => {
         <strong>REQUEST CHANGE OF MENTORS</strong>
       </h1>
 
-      <SubjectTitle style={style} subject="Mathematics" />
+      <SubjectTitle
+        style={style}
+        subject="Mathematics"
+        changeMentor={changeMentor}
+      />
 
       <div className="row justify-content-center">
         <div className="card-width">
@@ -56,7 +60,11 @@ const LearnerRequestChangeOfMentor = () => {
         </div>
       </div>
 
-      <SubjectTitle style={style} subject="Science" />
+      <SubjectTitle
+        style={style}
+        subject="Science"
+        changeMentor={changeMentor}
+      />
 
       <div className="row justify-content-center">
         <div className="card-width">
@@ -67,7 +75,11 @@ const LearnerRequestChangeOfMentor = () => {
         </div>
       </div>
 
-      <SubjectTitle style={style} subject="English" />
+      <SubjectTitle
+        style={style}
+        subject="English"
+        changeMentor={changeMentor}
+      />
 
       <div className="row justify-content-center">
         <div className="card-width">
