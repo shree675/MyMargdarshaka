@@ -41,7 +41,7 @@ const LearnerDashboard = () => {
     console.log("change mentor for ", subject);
     const class_code = data.codes[subject] + learnerData.Class;
 
-    const res = await axios.post(
+    let res = await axios.post(
       `/api/mentor/signup/findmatches/`,
       {
         language: learnerData.language,
@@ -93,6 +93,14 @@ const LearnerDashboard = () => {
       `/api/learner/update/id/${learnerData._id}`,
       { ...learnerData, subjects: temp_sub },
       { headers: { Authorization: `Bearer ${curuser}` } }
+    );
+
+    res = await axios.get(`/api/mentor/get-data/id/${newMentorId}`, {
+      headers: { Authorization: `Bearer ${curuser}` },
+    });
+    console.log("new mentor : ", res.data.name);
+    window.alert(
+      `New mentor : \n Name - ${res.data.name}\n Phone - ${res.data.phone} \n    has been assigned for \"${subject}\".`
     );
   };
 

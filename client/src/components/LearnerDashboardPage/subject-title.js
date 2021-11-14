@@ -10,7 +10,9 @@ import data from "../../data";
 
 const SubjectTitle = (props) => {
   const handleChangeMentor = (e) => {
-    const ok = window.confirm("Are you sure you want to change the mentor?");
+    const ok = window.confirm(
+      "\nNOTE : DO NOT CHANGE THE MENTOR UNLESS NECESSARY\nAre you sure you want to change the mentor?"
+    );
     if (!ok) return;
 
     props.changeMentor(props.subject);
