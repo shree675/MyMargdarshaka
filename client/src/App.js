@@ -22,6 +22,7 @@ import AdminHomePage from "./components/AdminHomePage/admin-home.js";
 import Chat from "./components/Chat/chat";
 import LearnerGuidelines from "./components/GuidelinesPage/learner-guidelines.js";
 import CommonGuidelines from "./components/GuidelinesPage/common-guidelines.js";
+import GettingStarted from "./components/GettingStarted/getting-started.js";
 
 // all user routes
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
           <Route exact path='/admin-home' component={AdminHomePage} /> // checked
           <Route exact path='/learner-guidelines' component={LearnerGuidelines} />
           <Route exact path='/common-guidelines' component={CommonGuidelines} />
+          <Route exact path='/getting-started' component={GettingStarted} />
           <Route exact path='/chat' component={Chat} /> // checked
           <Route path='/' component={Error} /> // checked
         </Switch>
