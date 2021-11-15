@@ -16,16 +16,7 @@ const LearnerGuidelines = () => {
       <div className="container">
         <div className="col">
           <div className="row">
-            <div className={"bubble"}>Hello there!</div>
-            {/* <ChatBubble
-              className={"bubble"}
-              messages={[
-                {
-                  image: "../../assets/lock.svg",
-                  text: "Hello! Good Morning!",
-                },
-              ]}
-            /> */}
+            <div className="bubble">Hello there!</div>
           </div>
           <div className="row">
             <img
@@ -34,10 +25,7 @@ const LearnerGuidelines = () => {
               style={{ width: "596px", height: "842px" }}
               alt=""
             />
-            <div
-              className="col"
-              style={{ width: "300px", backgroundColor: "white" }}
-            >
+            <div className="col" style={{ backgroundColor: "white" }}>
               <Chatbot
                 config={config}
                 actionProvider={ActionProvider}
