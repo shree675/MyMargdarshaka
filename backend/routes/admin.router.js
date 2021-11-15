@@ -4,5 +4,5 @@ const router = express.Router();
 const admin = require("../controllers/admin");
 
 router.route("/login/submitadmin").get(admin.login);
-router.route("/search/:id").get(admin.search);
+
 module.exports = router;

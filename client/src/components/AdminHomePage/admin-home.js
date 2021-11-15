@@ -127,6 +127,7 @@ class AdminHomePage extends React.Component {
       newIssues: [],
       manage: [],
       resolvedIssues: [],
+      searchResults: [],
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
@@ -191,7 +192,11 @@ class AdminHomePage extends React.Component {
       window.location = "/my-mentors";
     }
     this.updateIssues();
-    axios.get("/api/admin/search/hello");
+    axios.get("/api/mentor/search/6543210").then((e) => {
+      console.log(e);
+      let tempResults = e.data;
+      axios.get("/api/learner/search/6543210").then((e) => {});
+    });
   }
 
   render() {
