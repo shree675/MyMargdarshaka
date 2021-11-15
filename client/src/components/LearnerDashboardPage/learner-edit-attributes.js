@@ -75,12 +75,16 @@ const LearnerDashboardEditAttributes = ({ details }) => {
     );
 
     // finding matches for newly added subjects
-    const res = await axios.post(`/api/mentor/signup/findmatches/`, {
-      ...details,
-      times: times_array,
-      language,
-      subjects: added_subjects,
-    });
+    const res = await axios.post(
+      `/api/mentor/signup/findmatches/`,
+      {
+        ...details,
+        times: times_array,
+        language,
+        subjects: added_subjects,
+      },
+      { headers: { Authorization: `Bearer ${details.curuser}` } }
+    );
 
     const mentor_ids = res.data;
     console.log(mentor_ids);
@@ -109,21 +113,29 @@ const LearnerDashboardEditAttributes = ({ details }) => {
     );
 
     // updating learner table, both adding new subjects and removing removed subjects
-    await axios.post(`/api/learner/update/id/${details._id}`, {
-      ...details,
-      times: times_array,
-      language,
-      subjects: new_subjects_array,
-    });
+    await axios.post(
+      `/api/learner/update/id/${details._id}`,
+      {
+        ...details,
+        times: times_array,
+        language,
+        subjects: new_subjects_array,
+      },
+      { headers: { Authorization: `Bearer ${details.curuser}` } }
+    );
 
     console.log("mentor ids : ", mentor_ids);
     // updating mentors table, add learner_id for newly added mentors
     for (let i = 0; i < mentor_ids.length; i++) {
       if (mentor_ids[i] != -1) {
-        await axios.post(`/api/mentor/assign/update-by-id/${mentor_ids[i]}`, {
-          class_code: added_subjects[i].code,
-          learner_id: details._id,
-        });
+        await axios.post(
+          `/api/mentor/assign/update-by-id/${mentor_ids[i]}`,
+          {
+            class_code: added_subjects[i].code,
+            learner_id: details._id,
+          },
+          { headers: { Authorization: `Bearer ${details.curuser}` } }
+        );
       }
     }
 
@@ -135,7 +147,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         {
           class_code: removed_subjects[i].code,
           learner_id: details._id,
-        }
+        },
+        { headers: { Authorization: `Bearer ${details.curuser}` } }
       );
     }
 

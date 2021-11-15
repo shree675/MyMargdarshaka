@@ -7,10 +7,7 @@ const LearnOnline = (props) => {
     {
       text: props.nextActionText,
       handler: () =>
-        props.actionProvider.handleLearnOnline(
-          props.message,
-          props.widgetName
-        ),
+        props.actionProvider.handleLearnOnline(props.message, props.widgetName),
       id: 1,
     },
   ];
@@ -20,6 +17,16 @@ const LearnOnline = (props) => {
       {option.text}
     </button>
   ));
+
+  buttonsMarkup.push(
+    <button
+      key={3}
+      onClick={props.actionProvider.endConversation}
+      className="option-button"
+    >
+      Start over!
+    </button>
+  );
 
   return <div className="options-container">{buttonsMarkup}</div>;
 };

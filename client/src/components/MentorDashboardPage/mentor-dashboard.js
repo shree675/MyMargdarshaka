@@ -61,10 +61,14 @@ const MentorDashBoard = () => {
       <div className="container">
         <div className="row align-items-start">
           <div className="col-xl-3 col-12">
-            <MentorDashboardChangeDetails details={mentorData} />
+            <MentorDashboardChangeDetails
+              details={{ ...mentorData, curuser }}
+            />
           </div>
           <div className="col-xl-9 col-12">
-            <MentorDashboardEditAttributes details={mentorData} />
+            <MentorDashboardEditAttributes
+              details={{ ...mentorData, curuser }}
+            />
           </div>
         </div>
       </div>

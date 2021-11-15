@@ -11,6 +11,14 @@ class ActionProvider {
     this.addMessageToState(text);
   };
 
+  endConversation = (message, widget) => {
+    const text = this.createChatBotMessage("You can always start over!", {
+      widget: "options",
+    });
+    this.addMessageToState(text);
+  };
+
+
   handleFeedback = () => {
     const message = this.createChatBotMessage(
       "Please go to the following url and type in your issues",
