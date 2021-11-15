@@ -46,14 +46,12 @@ let Mentor = new Schema({
     type: Boolean,
     default: true, // remember to change to false
   },
-
   // open application means approved and rejected are false.
   // after rejected by admin, this is set to true
   rejected: {
     type: Boolean,
     default: false,
   },
-
   Classes: {
     type: [
       {
@@ -64,16 +62,17 @@ let Mentor = new Schema({
         },
       },
     ],
-
     /* required: true */
   },
-
   profile_picture_url: {
     type: String,
     default:
       "https://media.istockphoto.com/vectors/user-profile-icon-flat-red-round-button-vector-illustration-vector-id1162440985?k=20&m=1162440985&s=170667a&w=0&h=cQJ5HDdUKK_8nNDd_6RBoeDQfILERZnd_EirHTi7acI=",
   },
+  is_banned: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-(module.exports = mongoose.model("Mentor", Mentor)),
-  mongoose.model("chapter", chapter);
+(module.exports = mongoose.model("Mentor", Mentor)), mongoose.model("chapter", chapter);

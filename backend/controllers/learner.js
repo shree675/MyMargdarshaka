@@ -49,9 +49,7 @@ module.exports.getLearnerByPhone = async (req, res) => {
 
 module.exports.search = async (req, res) => {
   let parameter = req.params.id;
-  const results = await Learner.find({ phone: { $regex: parameter } });
-  console.log(results);
-  const results2 = await Learner.find({ name: { $regex: parameter } });
-  console.log(results2);
-  return results.concat(results2);
+  const results = await Learner.find({ phone: { $regex: parameter, $options: "i" } });
+  const results2 = await Learner.find({ name: { $regex: parameter, $options: "i" } });
+  res.send(results.concat(results2));
 };

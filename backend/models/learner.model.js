@@ -66,7 +66,6 @@ let Learner = new Schema({
     ],
     /* required: true */
   },
-
   NIOS_status: {
     type: String,
     default: "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
@@ -76,6 +75,10 @@ let Learner = new Schema({
       "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM",
       "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM",
     ],
+  },
+  is_banned: {
+    type: Boolean,
+    default: false,
   },
 });
 
