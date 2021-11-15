@@ -5,7 +5,27 @@ const Learner = require("../models/learner.model");
 const { mentorSchema } = require("../utils/joiSchemas");
 
 module.exports.createMentor = (req, res) => {
-  const { phone, name, email, language, time, approved, Classes, profile_picture_url } = req.body;
+  const {
+    phone,
+    name,
+    email,
+    language,
+    time,
+    approved,
+    Classes,
+    profile_picture_url,
+  } = req.body;
+
+  console.log({
+    phone,
+    name,
+    email,
+    language,
+    time,
+    approved,
+    Classes,
+    profile_picture_url,
+  });
 
   const mentor = new Mentor({
     phone,
@@ -17,6 +37,7 @@ module.exports.createMentor = (req, res) => {
     Classes,
     profile_picture_url,
   });
+
   //console.log(learner)
   mentorSchema.validate(mentor);
   mentor
@@ -65,7 +86,8 @@ module.exports.findMatches = async (req, res) => {
           //console.log(Class)
           if (Class.code == code) {
             //console.log(code, Class.students.length)
-            if (Class.students.length <= min) theChosenMentor = x._id.toString();
+            if (Class.students.length <= min)
+              theChosenMentor = x._id.toString();
           }
         }
       }
@@ -100,7 +122,12 @@ module.exports.removeLearnerById = async (req, res) => {
   let class_code = req.body.class_code;
   let learner_id = req.body.learner_id;
 
-  console.log("data recieved in remove route : ", mentor_id, class_code, learner_id);
+  console.log(
+    "data recieved in remove route : ",
+    mentor_id,
+    class_code,
+    learner_id
+  );
 
   let mentor = await Mentor.findById(mentor_id);
 
@@ -108,7 +135,9 @@ module.exports.removeLearnerById = async (req, res) => {
 
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
-      const stu_tmp = mentor.Classes[i].students.filter((stu) => stu.id != learner_id);
+      const stu_tmp = mentor.Classes[i].students.filter(
+        (stu) => stu.id != learner_id
+      );
       console.log("students array after removing : ", stu_tmp);
       mentor.Classes[i].students = stu_tmp;
       break;
@@ -173,7 +202,10 @@ module.exports.find_matches = async (req, res) => {
   const all_learners = await Learner.find({});
 
   for (let cur_learner of all_learners) {
-    if (cur_learner.language === mentor.language && cur_learner.times.includes(mentor.time)) {
+    if (
+      cur_learner.language === mentor.language &&
+      cur_learner.times.includes(mentor.time)
+    ) {
       // now search for subjects
       // for which a mentor is not asigned
 

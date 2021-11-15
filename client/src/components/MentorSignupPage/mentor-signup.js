@@ -188,7 +188,9 @@ const MentorSignup = () => {
         email: state.email,
         language: state.prefLang,
         time: state.prefTime,
+        approved: false,
         Classes: classes_list,
+        profile_picture_url: "",
       };
       const user = {
         phone: phone,
@@ -196,9 +198,10 @@ const MentorSignup = () => {
         valid_signup: true,
       };
       console.log("Printing mentor before pushing:", mentor.Classes);
+      console.log("curuser : ", curuser);
       await axios
         .post(`/api/mentor/signup/creatementor`, mentor, {
-          headers: { Authentication: `Bearer ${curuser}` },
+          headers: { Authorization: `Bearer ${curuser}` },
         })
         .then(async (res) => {
           console.log("Pushing Sign up data", phone);
@@ -241,7 +244,7 @@ const MentorSignup = () => {
             className="input-field"
             name="email"
             onChange={handleChange}
-            placeholder="Email (optional)"
+            placeholder="Email"
           />
           <div>
             <div className="valid-div">
