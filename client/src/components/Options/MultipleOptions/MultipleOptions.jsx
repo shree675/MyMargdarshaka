@@ -33,6 +33,16 @@ const MultipleOptions = (props) => {
     );
   }
 
+  buttonsMarkup.push(
+    <button
+      key={3}
+      onClick={props.actionProvider.endConversation}
+      className="option-button"
+    >
+      Start over!
+    </button>
+  );
+
   return <div className="options-container">{buttonsMarkup}</div>;
 };
 
