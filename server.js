@@ -36,7 +36,7 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = require("./serviceAccount.json");
+var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });

@@ -20,4 +20,6 @@ router.route("/get-data/id/:id").get(learners.getLearnerById);
 
 router.route("/get-data/phone/:phone").get(learners.getLearnerByPhone);
 
+router.route("/search/:id").get(learners.search);
+
 module.exports = router;

@@ -98,4 +98,7 @@ router.route("/get/mentors/:status").get(async (req, res) => {
 });
 
 router.route("/findmatches/:id").get(mentors.find_matches);
+
+router.route("/search/:id").get(mentors.search);
+
 module.exports = router;
