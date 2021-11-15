@@ -37,7 +37,7 @@ const config = {
       widgetName: "learnOnlineStep2",
       widgetFunc: (props) => <LearnOnline {...props} />,
       props: {
-        nextActionText: "Let's go!",
+        nextActionText: "Okay, next!",
         message:
           "Navigting around the web to find what is of your taste is a little cumbersome. The following tips might help you narrow down your search space:",
         widgetName: "learnOnlineStep3",
@@ -57,11 +57,25 @@ const config = {
 
     {
       widgetName: "learnOnlineStep4",
+      widgetFunc: (props) => <LearnOnline {...props} />,
+      props: {
+        nextActionText: "Okay, next!",
+        message: `Different people have different learning styles. Some people prefer video or audio, whil some prefer reading? What works better for you?`,
+        widgetName: "learnOnlineStep5",
+      },
+    },
+
+    {
+      widgetName: "learnOnlineStep5",
       widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
         nextActionText: "I prefer reading",
-        message: `Different people have different learning styles. Some people prefer video or audio, whil some prefer reading? What works better for you?`,
-        widgetName: "learnOnlineStep5",
+        message: `If you're more of a reading person, find articles and websites that have interactive
+        playgrounds.  Take understanding probability as an example. There might be games and
+        websites that present the information in a very enjoyable way. Searching for
+        "visualizing probability website" gives us this result https://seeingtheory.brown.edu/basic-probability/index.html and it is indeed a very fun
+        website.`,
+        widgetName: "learnOnlineStep6",
         otherOption: {
           nextActionText: "I prefer videos or audio",
           widgetName: "coolResourcesStep1",
@@ -71,24 +85,10 @@ const config = {
     },
 
     {
-      widgetName: "learnOnlineStep5",
-      widgetFunc: (props) => <LearnOnline {...props} />,
-      props: {
-        nextActionText: "YES!",
-        message: `If you're more of a reading person, find articles and websites that have interactive
-        playgrounds.  Take understanding probability as an example. There might be games and
-        websites that present the information in a very enjoyable way. Searching for
-        "visualizing probability website" gives us this result https://seeingtheory.brown.edu/basic-probability/index.html and it is indeed a very fun
-        website.`,
-        widgetName: "learnOnlineStep6",
-      },
-    },
-
-    {
       widgetName: "learnOnlineStep6",
       widgetFunc: (props) => <LearnOnline {...props} />,
       props: {
-        nextActionText: "COOL!",
+        nextActionText: "Next!",
         message: `You can also find questions to practice on a particular topic that you just learnt.
         Let's say you have just finished reading up on optics. What you can do to test
         your understanding is search for practice questions on optics. The search result
@@ -114,9 +114,9 @@ const config = {
 
     {
       widgetName: "coolResourcesStep1",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
-        nextActionText: "Okay, next!",
+        nextActionText: "YES!",
         message: `Do you want to learn the best science,
         technology, math, art and medicine?`,
         widgetName: "coolResourcesStep2",
@@ -125,7 +125,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep2",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
         nextActionText: "YES!",
         message: `Khan Academy - https://www.khanacademy.org/
@@ -137,6 +137,11 @@ const config = {
         4. The community of learners in the comments are quite active and respond to
         the questions.`,
         widgetName: "coolResourcesStep3",
+        otherOption: {
+          nextActionText: "No",
+          widgetName: "coolResourcesStep4",
+          message: `Do you want to learn a new language perhaps?`,
+        },
       },
     },
 
@@ -152,12 +157,17 @@ const config = {
 
     {
       widgetName: "coolResourcesStep4",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
         nextActionText: "YES!",
-        message: `Want to try out a new language? Just search for it! https://www.duolingo.com/
+        message: `Just search for it! https://www.duolingo.com/
         is a very fun place to explore`,
         widgetName: "coolResourcesStep5",
+        otherOption: {
+          nextActionText: "No",
+          widgetName: "coolResourcesStep6",
+          message: `Do you want to learn pretty much anything under the sun?!`,
+        },
       },
     },
 
@@ -166,7 +176,7 @@ const config = {
       widgetFunc: (props) => <LearnOnline {...props} />,
       props: {
         nextActionText: "Okay, next!",
-        message: `Do you want to learn pretty much anything under the sun!?`,
+        message: `Do you want to learn pretty much anything under the sun?!`,
         widgetName: "coolResourcesStep6",
       },
     },
@@ -190,7 +200,7 @@ const config = {
       widgetName: "coolResourcesStep7",
       widgetFunc: (props) => <LearnOnline {...props} />,
       props: {
-        nextActionText: "YES!",
+        nextActionText: "NICE!",
         message: `And now! Are you ready for something more advance and structured? Maybe you’re ready for professional certification that can help with boosting your career?`,
         widgetName: "coolResourcesStep8",
       },
@@ -200,7 +210,7 @@ const config = {
       widgetName: "coolResourcesStep8",
       widgetFunc: (props) => <LearnOnline {...props} />,
       props: {
-        nextActionText: "COOL!",
+        nextActionText: "Next!",
         message: `(Advanced) NPTEL - https://nptel.ac.in/\n
         1. Looking to just delve right into the depths of a subject? NPTEL is the place to
         go!\n
