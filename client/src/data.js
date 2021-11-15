@@ -35,9 +35,9 @@ const data = {
       {
         name: "Metals and Non-metals",
         subtopics: [
-          ["Physical properties", false],
-          ["Chemical properties of metals", false],
-          ["How do metals and non-metals react?", false],
+          ["Physical properties", true],
+          ["Chemical properties of metals", true],
+          ["How do metals and non-metals react?", true],
           ["Occurrence of Metals", false],
           ["Corrosion", false],
         ],
@@ -45,8 +45,8 @@ const data = {
       {
         name: "Carbon and its compounds",
         subtopics: [
-          ["Bonding in carbon", false],
-          ["Versatile nature of carbon", false],
+          ["Bonding in carbon", true],
+          ["Versatile nature of carbon", true],
           ["Chemical properties of carbon compounds", false],
           ["Important Carbon compunds", false],
           ["Sopas and detergents", false],
@@ -55,7 +55,7 @@ const data = {
       {
         name: "Life Processes",
         subtopics: [
-          ["What are life processes?", false],
+          ["What are life processes?", true],
           ["Nutrition", false],
           ["Respiration", false],
           ["Transportation", false],

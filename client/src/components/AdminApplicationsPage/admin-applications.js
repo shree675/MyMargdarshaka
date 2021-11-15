@@ -79,27 +79,36 @@ const rejApp = [
 const ApplicationCard = (props) => {
   const handleApprove = async (user) => {
     console.log("approve ", user.name);
-    await axios.post(`/api/mentor/update-by-id/${user._id}`, {
-      approved: true,
-    });
+    const tk = await localStorage.getItem("basicAuth");
+    await axios.post(
+      `/api/mentor/update-by-id/${user._id}`,
+      { approved: true },
+      { headers: { Authorization: `Basic ${tk}` } }
+    );
     props.setApproved(user._id);
-    await axios.get(`/api/mentor/findmatches/${user._id}`);
+    await axios.get(`/api/mentor/findmatches/${user._id}`, {
+      headers: { Authorization: `Basic ${tk}` },
+    });
   };
+
   const handleReject = async (user) => {
     console.log("reject ", user.name);
-    await axios.post(`/api/mentor/update-by-id/${user._id}`, {
-      rejected: true,
-    });
+    const tk = await localStorage.getItem("basicAuth");
+    await axios.post(
+      `/api/mentor/update-by-id/${user._id}`,
+      { rejected: true },
+      { headers: { Authorization: `Basic ${tk}` } }
+    );
     props.setRejected(user);
   };
 
   return (
-    <div className='admin-applications-card'>
-      <div className='admin-applications-card-row1'>
+    <div className="admin-applications-card">
+      <div className="admin-applications-card-row1">
         <div>{props.app.name}</div>
         <div>{props.app.phone}</div>
       </div>
-      <div className='admin-applications-card-row2'>
+      <div className="admin-applications-card-row2">
         <div>Email : {props.app.email}</div>
         <div>
           <b>Language : </b>
@@ -117,9 +126,9 @@ const ApplicationCard = (props) => {
         </div>
       </div>
 
-      <div className='admin-applications-card-row3'>
+      <div className="admin-applications-card-row3">
         <div
-          className='admin-applications-card-button'
+          className="admin-applications-card-button"
           onClick={() => {
             handleApprove(props.app); // approves a mentor application
           }}
@@ -128,7 +137,7 @@ const ApplicationCard = (props) => {
           APPROVE
         </div>
         <div
-          className='admin-applications-card-button'
+          className="admin-applications-card-button"
           onClick={() => {
             handleReject(props.app);
           }}
@@ -176,12 +185,16 @@ class AdminApplications extends React.Component {
 
   // will be passed to child (ApplicationCard) to set the parent state
   setApproved(mentor_id) {
-    const newOpenApp = this.state.openApplications.filter((app) => app._id != mentor_id);
+    const newOpenApp = this.state.openApplications.filter(
+      (app) => app._id != mentor_id
+    );
     this.setState({ openApplications: newOpenApp });
   }
 
   setRejected(mentor) {
-    const newOpenApp = this.state.openApplications.filter((app) => app._id != mentor._id);
+    const newOpenApp = this.state.openApplications.filter(
+      (app) => app._id != mentor._id
+    );
     this.setState({
       openApplications: newOpenApp,
       rejectedApplications: [...this.state.rejectedApplications, mentor],
@@ -194,12 +207,18 @@ class AdminApplications extends React.Component {
   }
 
   async getData() {
-    const res = await axios.get("/api/mentor/get/mentors/open");
+    const tk = await localStorage.getItem("basicAuth");
+    console.log("get Data tk : ", tk);
+    const res = await axios.get("/api/mentor/get/mentors/open", {
+      headers: { Authorization: `Basic ${tk}` },
+    });
     const openApp = res.data;
     //console.log(openApp);
     this.setState({ openApplications: openApp });
 
-    const res2 = await axios.get("/api/mentor/get/mentors/rejected");
+    const res2 = await axios.get("/api/mentor/get/mentors/rejected", {
+      headers: { Authorization: `Basic ${tk}` },
+    });
     const rejApp = res2.data;
     //console.log(rejApp);
     this.setState({ rejectedApplications: rejApp });
@@ -207,7 +226,10 @@ class AdminApplications extends React.Component {
 
   // verify if some user is already in session
   componentDidMount() {
-    if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
+    if (
+      localStorage.getItem("isloggedin") === null ||
+      localStorage.getItem("isloggedin") === "false"
+    ) {
       window.location = "/admin-auth";
     }
     if (
@@ -231,12 +253,16 @@ class AdminApplications extends React.Component {
     return (
       <div>
         <AdminNavbar />
-        <div className='admin-main'>
-          <div className='admin-applications-leftbox'>
-            <div className='admin-applications-tab-switcher'>
+        <div className="admin-main">
+          <div className="admin-applications-leftbox">
+            <div className="admin-applications-tab-switcher">
               <div
-                className='admin-applications-tab-button'
-                style={this.state.tab == 0 ? { border: "solid 3px red", opacity: 1 } : {}}
+                className="admin-applications-tab-button"
+                style={
+                  this.state.tab == 0
+                    ? { border: "solid 3px red", opacity: 1 }
+                    : {}
+                }
                 onClick={() => {
                   this.setState({ tab: 0 });
                 }}
@@ -244,8 +270,12 @@ class AdminApplications extends React.Component {
                 OPEN APPLICATIONS
               </div>
               <div
-                className='admin-applications-tab-button'
-                style={this.state.tab == 1 ? { border: "solid 3px red", opacity: 1 } : {}}
+                className="admin-applications-tab-button"
+                style={
+                  this.state.tab == 1
+                    ? { border: "solid 3px red", opacity: 1 }
+                    : {}
+                }
                 onClick={() => {
                   this.setState({ tab: 1 });
                 }}
@@ -253,17 +283,21 @@ class AdminApplications extends React.Component {
                 REJECTED APPLICATIONS
               </div>
             </div>
-            <div className='admin-applications-right-box-phone'>
+            <div className="admin-applications-right-box-phone">
               <CssTextField
-                id='outlined-basic'
-                label='🔍Search for User by Name or Phone Number'
-                variant='outlined'
+                id="outlined-basic"
+                label="🔍Search for User by Name or Phone Number"
+                variant="outlined"
                 value={this.state.searchText}
                 onChange={this.handleSearchTextChange}
                 onKeyUp={this.handleSubmitText}
               />
-              <div className='admin-applications-search-results'>
-                <div>{this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
+              <div className="admin-applications-search-results">
+                <div>
+                  {this.state.searchResultText !== ""
+                    ? `Search results for \"${this.state.searchResultText}\"`
+                    : ""}
+                </div>
                 {/* {newIssues.map((user, i) => (
                                     <div
                                         className='admin-applications-search-results-card'
@@ -281,32 +315,49 @@ class AdminApplications extends React.Component {
                                 ))}{" "} */}
               </div>
             </div>
-            <div style={this.state.tab == 1 ? { display: "none" } : {}} className='admin-applications-applications'>
+            <div
+              style={this.state.tab == 1 ? { display: "none" } : {}}
+              className="admin-applications-applications"
+            >
               {this.state.openApplications.map((item) => (
-                <ApplicationCard app={item} setApproved={this.setApproved} setRejected={this.setRejected} />
+                <ApplicationCard
+                  app={item}
+                  setApproved={this.setApproved}
+                  setRejected={this.setRejected}
+                />
               ))}
             </div>
-            <div style={this.state.tab == 0 ? { display: "none" } : {}} className='admin-applications-applications'>
+            <div
+              style={this.state.tab == 0 ? { display: "none" } : {}}
+              className="admin-applications-applications"
+            >
               {this.state.rejectedApplications.map((item) => (
                 <ApplicationCard app={item} rej={true} />
               ))}
             </div>
           </div>
-          <div className='admin-applications-right-box'>
+          <div className="admin-applications-right-box">
             <CssTextField
-              id='outlined-basic'
-              label='🔍Search for User by Name or Phone Number'
-              variant='outlined'
+              id="outlined-basic"
+              label="🔍Search for User by Name or Phone Number"
+              variant="outlined"
               value={this.state.searchText}
               onChange={this.handleSearchTextChange}
               onKeyUp={this.handleSubmitText}
             />
-            <div className='admin-applications-search-results'>
-              <div>{this.state.searchResultText != "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
+            <div className="admin-applications-search-results">
+              <div>
+                {this.state.searchResultText != ""
+                  ? `Search results for \"${this.state.searchResultText}\"`
+                  : ""}
+              </div>
               {
                 /* dummy data */
                 openApp.map((user, i) => (
-                  <div className='admin-applications-search-results-card' style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}>
+                  <div
+                    className="admin-applications-search-results-card"
+                    style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
+                  >
                     <div>
                       <div>{user.name}</div>
                       <div>{user.phone}</div>

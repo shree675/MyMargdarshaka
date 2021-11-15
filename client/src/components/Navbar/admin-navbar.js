@@ -3,7 +3,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
-import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
+import {
+  Nav,
+  NavLogo,
+  NavMenu,
+  Bars,
+  NavLink,
+  NavBtn,
+  NavBtnLink,
+} from "./navbarElements";
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
 import profileLogo from "../../assets/profile.svg";
@@ -41,15 +49,17 @@ const AdminNavbar = (props) => {
           }}
         >
           <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
-          <CloseIcon style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }} />
+          <CloseIcon
+            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
+          />
         </div>
-        <Link className='nav-link-mobile' to='/admin-applications'>
+        <Link className="nav-link-mobile" to="/admin-applications">
           APPLICATIONS
         </Link>
-        <Link className='nav-link-mobile' to='/admin-home'>
+        <Link className="nav-link-mobile" to="/admin-home">
           ISSUES
         </Link>
-        <Link className='nav-link-mobile' to='/admin-stats'>
+        <Link className="nav-link-mobile" to="/admin-stats">
           STATS
         </Link>
         <button
@@ -58,7 +68,7 @@ const AdminNavbar = (props) => {
             localStorage.setItem("isloggedin", "false");
             window.location = "/init-signin";
           }}
-          className='nav-logout-phone'
+          className="nav-logout-phone"
         >
           LOGOUT
         </button>
@@ -71,25 +81,29 @@ const AdminNavbar = (props) => {
         >
           <Bars />
         </div>
-        <NavLogo to='#'>
+        <NavLogo to="#">
           <img src={mainLogo} style={{ height: "80px" }} />
         </NavLogo>
         <NavMenu>
-          <NavLink to='/admin-applications'>APPLICATIONS</NavLink>
-          <NavLink to='/admin-home'>ISSUES</NavLink>
-          <NavLink to='/admin-stats'>STATS</NavLink>
+          <NavLink to="/admin-applications">APPLICATIONS</NavLink>
+          <NavLink to="/admin-home">ISSUES</NavLink>
+          <NavLink to="/admin-stats">STATS</NavLink>
           <button
             onClick={() => {
               // logout
               localStorage.setItem("isloggedin", "false");
+              localStorage.removeItem("basicAuth");
               window.location = "/init-signin";
             }}
-            className='nav-logout-pc'
+            className="nav-logout-pc"
           >
             LOGOUT
           </button>
         </NavMenu>
-        <img src='https://randomuser.me/api/portraits/thumb/men/40.jpg' className='img-fluid-nav rounded-circle' />
+        <img
+          src="https://randomuser.me/api/portraits/thumb/men/40.jpg"
+          className="img-fluid-nav rounded-circle"
+        />
       </Nav>
     </div>
   );
