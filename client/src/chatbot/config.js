@@ -15,7 +15,7 @@ const config = (props)=>
   botName: "Lola",
   name: props,
   initialMessages: [
-    createChatBotMessage(`Hello there `+ props +`!`, {
+    createChatBotMessage(`Hello there `+ props +`! How can I help you?`, {
       widget: "options",
     }),
   ],
@@ -78,8 +78,9 @@ const config = (props)=>
         message: `If you're more of a reading person, find articles and websites that have interactive
         playgrounds.  Take understanding probability as an example. There might be games and
         websites that present the information in a very enjoyable way. Searching for
-        "visualizing probability website" gives us this result https://seeingtheory.brown.edu/basic-probability/index.html and it is indeed a very fun
+        "visualizing probability website" gives us this result https://seeing-theory.brown.edu/basic-probability/index.html and it is indeed a very fun
         website.`,
+        link: "https://seeing-theory.brown.edu/basic-probability/index.html",
         widgetName: "learnOnlineStep6",
         otherOption: {
           nextActionText: "I prefer videos or audio",
@@ -88,7 +89,6 @@ const config = (props)=>
         },
       },
     },
-
     {
       widgetName: "learnOnlineStep6",
       widgetFunc: (props) => <SingleOption {...props} />,

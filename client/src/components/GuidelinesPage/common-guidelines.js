@@ -10,13 +10,13 @@ import ActionProvider from "../../chatbot/ActionProviderCommon";
 import "react-chatbot-kit/build/main.css";
 import "./guidelines.css";
 
-const LearnerGuidelines = () => {
+const CommonGuidelines = () => {
   return (
     <div className="body">
       <div className="container">
         <div className="col">
           <div className="row">
-            <div className="bubble">Hello there!</div>
+            <div className="bubble">Hello there Stranger! How can I help you?</div>
           </div>
           <div className="row">
             <img
@@ -27,7 +27,7 @@ const LearnerGuidelines = () => {
             />
             <div className="col">
               <Chatbot
-                config={config}
+                config={config("")}
                 actionProvider={ActionProvider}
                 messageParser={MessageParser}
               />
@@ -39,7 +39,7 @@ const LearnerGuidelines = () => {
   );
 };
 
-export default LearnerGuidelines;
+export default CommonGuidelines;
 
 
 
