@@ -4,7 +4,7 @@ class ActionProvider {
       this.setState = setStateFunc;
     }
   
-    handleLearnOnline = (message, widget) => {
+    handleSingleOption = (message, widget) => {
       const text = this.createChatBotMessage(message, {
         widget: widget,
       });
@@ -34,7 +34,7 @@ class ActionProvider {
         const message = this.createChatBotMessage(
           "Please go to the following illustrative tutorial that walks you through how to make the best of My Margdarshaka",
           {
-            widget: "getting-started",
+            widget: "gettingStarted",
           }
         );
     
@@ -45,7 +45,7 @@ class ActionProvider {
       const message = this.createChatBotMessage(
         "Here are a few commonly asked questions",
         {
-          widget: "faq",
+          widget: "commonfaq",
         }
       );
   
