@@ -48,9 +48,9 @@ const Card = (props) => {
           <p className={"card-text  " + showDetails}>
             {props.details["email"]}
           </p>
-          <p className={"card-text  " + showDetails}>
+          {/* <p className={"card-text  " + showDetails}>
             {props.details["phone"]}
-          </p>
+          </p> */}
 
           <a
             href="#"
