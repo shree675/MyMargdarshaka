@@ -75,7 +75,7 @@ const LearnerGuidelines = () => {
         <div className="container">
           <div className="col">
             <div className="row">
-              <div className="bubble">Hello there {name}!</div>
+              <div className="bubble">Hello there {name}! Hope you're doing well! </div>
             </div>
             <div className="row">
               <img
