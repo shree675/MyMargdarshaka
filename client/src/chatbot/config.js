@@ -7,10 +7,15 @@ import ModuleOptions from "../components/ChatbotLola/Options/ModuleOptions/Modul
 import SingleOption from "../components/ChatbotLola/Options/SingleOption/SingleOption";
 import MultipleOptions from "../components/ChatbotLola/Options/MultipleOptions/MultipleOptions";
 
-const config = {
+const config = (props)=> 
+{
+  console.log(props)
+  
+  return {  
   botName: "Lola",
+  name: props,
   initialMessages: [
-    createChatBotMessage(`Hello there!`, {
+    createChatBotMessage(`Hello there `+ props +`!`, {
       widget: "options",
     }),
   ],
@@ -289,6 +294,11 @@ const config = {
             answer: "You could ask your mentor any doubt using the chat feature available by clicking on the chat icon on your mentors card. ",
             widget: "myMentorsRedirect"
           },
+          {
+            question: "How do I update my preferences?",
+            answer: "You can update details such as your preferred time and preferred language of instruction in the dashboard page. Let me show you where it is?",
+            widget: "learnerDashboardRedirect"
+          },
         ],
       },
     },
@@ -321,19 +331,48 @@ const config = {
         ],
       },
     },
+    // mentor faq widget
+    {
+      widgetName: "mentorfaq",
+      widgetFunc: (props) => <FAQ {...props} />,
+      props: {
+        queries: [
+          {
+            question: "Where do I find my students?",
+            answer: "All your students are listed according to the subjects or classes that you teach, in your homepage named as ‘MY STUDENTS’. Shall w ehead over there and go meet them?",
+            widget: "myStudentsRedirect"
+          },
+          {
+            question: "How do I contact my students?",
+            answer: "You can reach out to your students using the chat functionality available by clicking on the chat icon under the corresponding tile on the MY STUDENTS page. Ask them to share their contact number with you for better communication. Let’s go reach out to them? ",
+            widget: "myStudentsRedirect"
+          },
+          {
+            question: "What is this NIOS exam and how does it work?",
+            answer: "NIOS is the National Institute of Open Schooling, provided by the Government of India. This means that you can teach your students informally. Then, you can guide them towards registering and taking the certification exams for the required subjects, and earning a Secondary School (Class 10) or Senior Secondary School (Class 12) Certificate. You can check out the NIOS website for details of registration and help your students. We highly recommend that you encourage your students to take the exams. Lets head over to the NIOS website and check it out?",
+            widget: "NIOSRedirect"
+          },
+          {
+            question: "How do I update my preferences?",
+            answer: "You can update details such as your preferred time and preferred language of instruction in the dashboard page. Let me show you where it is?",
+            widget: "mentorDashboardRedirect"
+          },
+        ],
+      },
+    },
     {
       widgetName: "myMentorsRedirect",
       widgetFunc: (props) => <URLButton {...props} />,
       props: {
         text: "YES, LETS GO!",
-        url: "/getting-started",
+        url: "/my-mentors",
       },
     },
     {
       widgetName: "NIOSRedirect",
       widgetFunc: (props) => <URLButton {...props} />,
       props: {
-        text: "YES, LETS GO!",
+        text: "SURE, LETS GO!",
         url: "https://nios.ac.in/admission.aspx",
       },
     },
@@ -341,8 +380,32 @@ const config = {
       widgetName: "signUpRedirect",
       widgetFunc: (props) => <URLButton {...props} />,
       props: {
-        text: "YES, LETS GO!",
+        text: "YES, LESSGO!",
         url: "/init-signin",
+      },
+    },
+    {
+      widgetName: "learnerDashboardRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES!",
+        url: "/learner-dashboard",
+      },
+    },
+    {
+      widgetName: "myStudentsRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES, LETS GO!",
+        url: "/my-students",
+      },
+    },
+    {
+      widgetName: "mentorDashboardRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES!",
+        url: "/mentor-dashboard",
       },
     },
     // **************************** FAQ WIDGETS [START]  ****************************
@@ -357,5 +420,5 @@ const config = {
     },
   ],
 };
-
+}
 export default config;

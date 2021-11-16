@@ -60,6 +60,35 @@ const Feedback = () => {
       if (user) {
         setCuruser(user.uid);
         setPhone(user.phoneNumber);
+
+        /*
+        await axios
+          .get("/api/learner/login/submitlearner")
+          .then((e) => {
+            e.data.map((data) => {
+              if (data.phone === user.phoneNumber) {
+                setName(data.name);
+                //console.log(data.name);
+                setUserType("learner");
+                //console.log(userType);
+              }
+            });
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
+        await axios
+          .get("/api/mentor/login/submitmentor")
+          .then((e) => {
+            e.data.map((data) => {
+              if (data.phone === user.phoneNumber) {
+                setName(data.name);
+                //console.log(data.name);
+                setUserType("mentor");
+                //console.log(userType);
+              }
+              */
+
         var tk;
         user.getIdToken(true).then(async (idToken) => {
           tk = idToken;
@@ -94,6 +123,7 @@ const Feedback = () => {
             })
             .catch((err) => {
               console.log(err.message);
+
             });
         });
       } else {
