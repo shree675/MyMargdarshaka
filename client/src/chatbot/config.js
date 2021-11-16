@@ -4,7 +4,7 @@ import FAQ from "../components/ChatbotLola/FAQ/FAQ";
 import URLButton from "../components/ChatbotLola/Buttons/URLButton";
 
 import ModuleOptions from "../components/ChatbotLola/Options/ModuleOptions/ModuleOptions";
-import LearnOnline from "../components/ChatbotLola/Options/LearnOnline/LearnOnline";
+import SingleOption from "../components/ChatbotLola/Options/SingleOption/SingleOption";
 import MultipleOptions from "../components/ChatbotLola/Options/MultipleOptions/MultipleOptions";
 
 const config = {
@@ -24,7 +24,7 @@ const config = {
 
     {
       widgetName: "learnOnlineStep1",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "YES!",
         message:
@@ -35,7 +35,7 @@ const config = {
 
     {
       widgetName: "learnOnlineStep2",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Okay, next!",
         message:
@@ -46,7 +46,7 @@ const config = {
 
     {
       widgetName: "learnOnlineStep3",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Okay, next!",
         message: `Use specific keywords relating to the topics when searching for something.
@@ -57,7 +57,7 @@ const config = {
 
     {
       widgetName: "learnOnlineStep4",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Okay, next!",
         message: `Different people have different learning styles. Some people prefer video or audio, whil some prefer reading? What works better for you?`,
@@ -86,7 +86,7 @@ const config = {
 
     {
       widgetName: "learnOnlineStep6",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Next!",
         message: `You can also find questions to practice on a particular topic that you just learnt.
@@ -147,7 +147,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep3",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Okay, next!",
         message: `Do you want to learn a new language perhaps?`,
@@ -173,7 +173,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep5",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Okay, next!",
         message: `Do you want to learn pretty much anything under the sun?!`,
@@ -183,7 +183,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep6",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "YES!",
         message: `YouTube - https://www.youtube.com/\n
@@ -198,7 +198,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep7",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "NICE!",
         message: `And now! Are you ready for something more advance and structured? Maybe you’re ready for professional certification that can help with boosting your career?`,
@@ -208,7 +208,7 @@ const config = {
 
     {
       widgetName: "coolResourcesStep8",
-      widgetFunc: (props) => <LearnOnline {...props} />,
+      widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "Next!",
         message: `(Advanced) NPTEL - https://nptel.ac.in/\n
@@ -233,6 +233,7 @@ const config = {
         url: "/feedback",
       },
     },
+    // **************************** FAQ WIDGETS [START]  ****************************
     // faq widget
     {
       widgetName: "faq",
@@ -262,9 +263,92 @@ const config = {
         ],
       },
     },
+    // learner faq widget
+    {
+      widgetName: "learnerfaq",
+      widgetFunc: (props) => <FAQ {...props} />,
+      props: {
+        queries: [
+          {
+            question: "Who are my Mentors?",
+            answer: "All your mentors are listed on your homepage called ‘MY MENTORS’. Shall we go take a look?",
+            widget: "myMentorsRedirect"
+          },
+          {
+            question: "How do I reach my mentor?",
+            answer: "You can reach out to your mentor using the chat functionality available by clicking on the chat icon under your mentors tile on the MY MENTORS page. Ask them to share their contact number with you. Let’s go reach out to them? ",
+            widget: "myMentorsRedirect"
+          },
+          {
+            question: "What is this NIOS exam and how does it work?",
+            answer: "NIOS is the National Institute of Open Schooling, provided by the Government of India. This means that you can obtain informal eduction from ANYWHERE that you want, such as from the Mentors on My Margdarshaka. Then, you can register to take the certification exams for the required subjects, and earn a Secondary School (Class 10) or Senior Secondary School (Class 12) Certificate. You need to register on their website for the exams. Shall we go to their website and read more about how it works exactly?",
+            widget: "NIOSRedirect"
+          },
+          {
+            question: "I have a doubt.",
+            answer: "You could ask your mentor any doubt using the chat feature available by clicking on the chat icon on your mentors card. ",
+            widget: "myMentorsRedirect"
+          },
+        ],
+      },
+    },
+    //common faq
+    {
+      widgetName: "commonfaq",
+      widgetFunc: (props) => <FAQ {...props} />,
+      props: {
+        queries: [
+          {
+            question: "How to use My Margdarshaka?",
+            answer: "Here is an illustrative tutorial on how to use My Margdarshaka. Let's go check it out?",
+            widget: "gettingStarted"
+          },
+          {
+            question: "How do I reach my mentor?",
+            answer: "You can reach out to your mentor using the chat functionality available by clicking on the chat icon under your mentors tile on the MY MENTORS page. Ask them to share their contact number with you. Let’s go sign up and get started? ",
+            widget: "signUpRedirect"
+          },
+          {
+            question: "What is this NIOS exam and how does it work?",
+            answer: "NIOS is the National Institute of Open Schooling, provided by the Government of India. This means that you can obtain informal eduction from ANYWHERE that you want, such as from the Mentors on My Margdarshaka. Then, you can register to take the certification exams for the required subjects, and earn a Secondary School (Class 10) or Senior Secondary School (Class 12) Certificate. You need to register on their website for the exams. Shall we go to their website and read more about how it works exactly?",
+            widget: "NIOSRedirect"
+          },
+          {
+            question: "I have a doubt.",
+            answer: "You could ask your mentor any doubt using the chat feature available by clicking on the chat icon on your mentors card. Let's go sign up and get started?",
+            widget: "signUpRedirect"
+          },
+        ],
+      },
+    },
+    {
+      widgetName: "myMentorsRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES, LETS GO!",
+        url: "/getting-started",
+      },
+    },
+    {
+      widgetName: "NIOSRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES, LETS GO!",
+        url: "https://nios.ac.in/admission.aspx",
+      },
+    },
+    {
+      widgetName: "signUpRedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "YES, LETS GO!",
+        url: "/init-signin",
+      },
+    },
+    // **************************** FAQ WIDGETS [START]  ****************************
     // getting started widget
     {
-      widgetName: "getting-started",
+      widgetName: "gettingStarted",
       widgetFunc: (props) => <URLButton {...props} />,
       props: {
         text: "Getting Started with My Margdarshaka",

@@ -1,13 +1,13 @@
 import React from "react";
 
-import "./LearnOnline.css";
+import "./SingleOption.css";
 
-const LearnOnline = (props) => {
+const SingleOption = (props) => {
   const options = [
     {
       text: props.nextActionText,
       handler: () =>
-        props.actionProvider.handleLearnOnline(props.message, props.widgetName),
+        props.actionProvider.handleSingleOption(props.message, props.widgetName),
       id: 1,
     },
   ];
@@ -31,4 +31,4 @@ const LearnOnline = (props) => {
   return <div className="options-container">{buttonsMarkup}</div>;
 };
 
-export default LearnOnline;
+export default SingleOption;

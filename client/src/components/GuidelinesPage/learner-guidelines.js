@@ -4,7 +4,7 @@ import React from "react";
 import Chatbot from "react-chatbot-kit";
 import config from "../../chatbot/config";
 import MessageParser from "../../chatbot/MessageParser";
-import ActionProvider from "../../chatbot/ActionProvider";
+import ActionProvider from "../../chatbot/ActionProviderLearner";
 // @ts-ignore
 import lola from "../../assets/lola_basic_motion.gif";
 import "react-chatbot-kit/build/main.css";

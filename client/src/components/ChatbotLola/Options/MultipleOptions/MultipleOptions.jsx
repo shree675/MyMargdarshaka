@@ -5,7 +5,7 @@ const MultipleOptions = (props) => {
     {
       text: props.nextActionText,
       handler: () =>
-        props.actionProvider.handleLearnOnline(props.message, props.widgetName),
+        props.actionProvider.handleSingleOption(props.message, props.widgetName),
       id: 1,
     },
   ];
@@ -21,7 +21,7 @@ const MultipleOptions = (props) => {
       <button
         key={2}
         onClick={() =>
-          props.actionProvider.handleLearnOnline(
+          props.actionProvider.handleSingleOption(
             props.otherOption.message,
             props.otherOption.widgetName
           )
