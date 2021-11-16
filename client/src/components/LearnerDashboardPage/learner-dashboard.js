@@ -131,10 +131,14 @@ const LearnerDashboard = () => {
       <div className="container-fluid">
         <div className="row align-items-end">
           <div className="col-lg-3 col-12">
-            <LearnerDashboardChangeDetails details={learnerData} />
+            <LearnerDashboardChangeDetails
+              details={{ ...learnerData, curuser }}
+            />
           </div>
           <div className="col-lg-9 col-12">
-            <LearnerDashboardEditAttributes details={learnerData} />
+            <LearnerDashboardEditAttributes
+              details={{ ...learnerData, curuser }}
+            />
           </div>
         </div>
         <NIOSStatus details={learnerData} />

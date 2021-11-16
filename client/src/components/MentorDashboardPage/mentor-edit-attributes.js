@@ -40,22 +40,23 @@ const LearnerDashboardEditAttributes = ({ details }) => {
   useEffect(() => {
     if (Object.keys(details).length > 0) {
       let tmp = { 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [] };
-      details.Classes.forEach((cls) => {
-        const code = cls.code;
+      if (details.Classes)
+        details.Classes.forEach((cls) => {
+          const code = cls.code;
 
-        let classNumber = Number(code[code.length - 1]);
-        if (classNumber <= 2) {
-          classNumber = Number(code.substr(code.length - 2, 2));
-        }
+          let classNumber = Number(code[code.length - 1]);
+          if (classNumber <= 2) {
+            classNumber = Number(code.substr(code.length - 2, 2));
+          }
 
-        const subName = getSubjectName(code);
+          const subName = getSubjectName(code);
 
-        if (tmp[classNumber] == undefined) {
-          tmp[classNumber] = [subName];
-        } else {
-          tmp[classNumber].push(subName);
-        }
-      });
+          if (tmp[classNumber] == undefined) {
+            tmp[classNumber] = [subName];
+          } else {
+            tmp[classNumber].push(subName);
+          }
+        });
       tmp.time = details.time;
       tmp.language = details.language;
       setState(tmp);
@@ -71,10 +72,16 @@ const LearnerDashboardEditAttributes = ({ details }) => {
   };
 
   const handleClickSave = async (e) => {
-    await axios.post(`/api/mentor/update-by-id/${details._id}`, {
-      time: state.time,
-      language: state.language,
-    });
+    await axios.post(
+      `/api/mentor/update-by-id/${details._id}`,
+      {
+        time: state.time,
+        language: state.language,
+      },
+      {
+        headers: { Authorization: `Bearer ${details.curuser}` },
+      }
+    );
   };
 
   return (

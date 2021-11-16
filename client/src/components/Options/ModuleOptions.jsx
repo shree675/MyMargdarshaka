@@ -23,6 +23,11 @@ const Options = (props) => {
       handler: props.actionProvider.handleFAQ,
       id: 3,
     },
+    {
+      text: "Getting Started with My Margdarshaka",
+      handler: props.actionProvider.handleGettingStarted,
+      id: 4,
+    },
   ];
 
   const buttonsMarkup = options.map((option) => (

@@ -7,6 +7,17 @@ const { mentorSchema } = require("../utils/joiSchemas");
 module.exports.createMentor = (req, res) => {
   const { phone, name, email, language, time, approved, Classes, profile_picture_url } = req.body;
 
+  console.log({
+    phone,
+    name,
+    email,
+    language,
+    time,
+    approved,
+    Classes,
+    profile_picture_url,
+  });
+
   const mentor = new Mentor({
     phone,
     name,
@@ -17,6 +28,7 @@ module.exports.createMentor = (req, res) => {
     Classes,
     profile_picture_url,
   });
+
   //console.log(learner)
   mentorSchema.validate(mentor);
   mentor
@@ -205,9 +217,20 @@ module.exports.find_matches = async (req, res) => {
 
 module.exports.search = async (req, res) => {
   let parameter = req.params.id;
-  const results = await Mentor.find({ phone: { $regex: parameter } });
-  console.log(results);
-  const results2 = await Mentor.find({ name: { $regex: parameter } });
-  console.log(results2);
-  return results.concat(results2);
+  const results = await Mentor.find({ phone: { $regex: parameter, $options: "i" } });
+  // console.log(results);
+  const results2 = await Mentor.find({ name: { $regex: parameter, $options: "i" } });
+  // console.log(results2);
+  res.send(results.concat(results2));
 };
+
+// module.exports.update = (req, res) => {
+//   let id = req.params.id;
+//   let data = req.body;
+//   Mentor.findByIdAndUpdate(id, { $set: data }, { new: true }, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     }
+//   });
+//   res.json("ok");
+// };
