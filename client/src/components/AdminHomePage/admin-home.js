@@ -272,6 +272,7 @@ class AdminHomePage extends React.Component {
                         const data = {
                           is_banned: true,
                         };
+                        axios.post("/api/user/update/newphone/" + user.phone, data);
                         if (user.NIOS_status !== undefined) {
                           axios
                             .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
@@ -349,6 +350,7 @@ class AdminHomePage extends React.Component {
                       const data = {
                         is_banned: true,
                       };
+                      axios.post("/api/user/update/newphone/" + user.phone, data);
                       if (user.NIOS_status !== undefined) {
                         axios
                           .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
