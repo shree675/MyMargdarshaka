@@ -3,10 +3,9 @@
   /* margin-top: 60px; */
 }
 
-
-.bubble {
+div.bubble {
   position: relative;
-  background: #f0cce2;
+  background-color: #f0cce2;
   color: rgb(8, 8, 8);
   /* font-family: Arial; */
   box-shadow: 1px 1px 20px white;
@@ -19,6 +18,7 @@
   padding: 30px;
   margin-top: 60px;
 }
+
 .bubble:after {
   content: "";
   position: absolute;
@@ -29,13 +29,13 @@
   border-color: #f0cce2 transparent;
   border-width: 20px 20px 0;
   bottom: -20px;
-  
+
   left: 70%;
   /* margin-left: 10px; */
   /* margin-right: -40px; */
 }
 .bubble:before {
-  /* background-color: none; */
+  background-color: none;
   opacity: 0;
 }
 /* .lola_gif {
@@ -48,6 +48,50 @@
   max-width: 50%;
   width: 596px;
   height: 842px;
-
 }
- 
+
+.react-chatbot-kit-chat-bot-avatar {
+  background-image: url("../../assets/lola-chatbot.svg");
+  background-size: cover;
+}
+
+.react-chatbot-kit-chat-bot-avatar-container {
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+}
+
+.react-chatbot-kit-chat-bot-avatar-letter {
+  display: none;
+}
+
+.react-chatbot-kit-chat-bot-message {
+  background-color: #720d5d;
+  margin-left: 0;
+}
+
+.react-chatbot-kit-chat-bot-message-arrow {
+  border-right: 8px solid #720d5d;
+}
+
+.react-chatbot-kit-chat-container {
+  width: 500px;
+}
+
+.react-chatbot-kit-user-chat-message {
+  background-color: #f0cce2;
+}
+
+.react-chatbot-kit-user-chat-message-arrow {
+  border-left: 8px solid #f0cce2;
+}
+
+.react-chatbot-kit-chat-btn-send {
+  background-color: #720d5d;
+  color: #f0cce2;
+}
+
+/* .lola-gif {
+  width: 50px;
+  height: 100px;
+} */
