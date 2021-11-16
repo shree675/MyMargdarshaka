@@ -8,7 +8,7 @@ const path = require("path");
 const axios = require("axios");
 const Admin = require("./backend/models/admin.model");
 
-//IMPORTANT NOTE: The connection string is available in the config.env file which is not included in the
+//IMPORTANT NOTE: The connection string is available in the .env file which is not included in the
 //GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
 const connectionString = process.env.MONGO_URI;
 

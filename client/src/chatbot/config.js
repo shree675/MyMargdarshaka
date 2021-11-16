@@ -1,11 +1,11 @@
 import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
-import FAQ from "../components/FAQ/FAQ";
-import Feedback from "../components/FeedbackButton/Feedback";
+import FAQ from "../components/ChatbotLola/FAQ/FAQ";
+import URLButton from "../components/ChatbotLola/Buttons/URLButton";
 
-import Options from "../components/Options/ModuleOptions";
-import LearnOnline from "../components/Options/LearnOnline/LearnOnline";
-import MultipleOptions from "../components/Options/MultipleOptions/MultipleOptions";
+import ModuleOptions from "../components/ChatbotLola/Options/ModuleOptions/ModuleOptions";
+import LearnOnline from "../components/ChatbotLola/Options/LearnOnline/LearnOnline";
+import MultipleOptions from "../components/ChatbotLola/Options/MultipleOptions/MultipleOptions";
 
 const config = {
   botName: "Lola",
@@ -17,7 +17,7 @@ const config = {
   widgets: [
     {
       widgetName: "options",
-      widgetFunc: (props) => <Options {...props} />,
+      widgetFunc: (props) => <ModuleOptions {...props} />,
     },
 
     // **************************** LEANR ONLINE [START]  ****************************
@@ -223,12 +223,14 @@ const config = {
 
     // **************************** COOL RESOURCES [END]  ****************************
 
-    // feedback widget
+    // feedback widget - 
+    //TODO: should show only for signed in people
     {
       widgetName: "feedback",
-      widgetFunc: (props) => <Feedback {...props} />,
+      widgetFunc: (props) => <URLButton {...props} />,
       props: {
-        url: "localhost:3000/feedback",
+        text: "Feedback",
+        url: "/feedback",
       },
     },
     // faq widget
@@ -258,6 +260,15 @@ const config = {
             answer: "Answer 5",
           },
         ],
+      },
+    },
+    // getting started widget
+    {
+      widgetName: "getting-started",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "Getting Started with My Margdarshaka",
+        url: "/getting-started",
       },
     },
   ],
