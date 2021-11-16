@@ -48,6 +48,7 @@ const Feedback = () => {
   const [phone, setPhone] = useState(null);
   const [name, setName] = useState(null);
   const [userType, setUserType] = useState(null);
+  const [idToken, setToken] = useState(null);
 
   // verify if a user is already logged in and set approprite navbar, name and phone number
   useEffect(() => {
@@ -59,6 +60,8 @@ const Feedback = () => {
       if (user) {
         setCuruser(user.uid);
         setPhone(user.phoneNumber);
+
+        /*
         await axios
           .get("/api/learner/login/submitlearner")
           .then((e) => {
@@ -84,11 +87,45 @@ const Feedback = () => {
                 setUserType("mentor");
                 //console.log(userType);
               }
+              */
+
+        var tk;
+        user.getIdToken(true).then(async (idToken) => {
+          tk = idToken;
+          console.log(tk);
+          await axios
+            .get("/api/learner/login/submitlearner", { headers: { Authorization: `Bearer ${tk}` } })
+            .then((e) => {
+              console.log(e);
+              e.data.map((data) => {
+                if (data.phone === user.phoneNumber) {
+                  setName(data.name);
+                  console.log(data.name);
+                  setUserType("learner");
+                  console.log(userType);
+                }
+              });
+            })
+            .catch((err) => {
+              console.log(err.message);
             });
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
+          await axios
+            .get("/api/mentor/login/submitmentor", { headers: { Authorization: `Bearer ${tk}` } })
+            .then((e) => {
+              e.data.map((data) => {
+                if (data.phone === user.phoneNumber) {
+                  setName(data.name);
+                  console.log(data.name);
+                  setUserType("mentor");
+                  console.log(userType);
+                }
+              });
+            })
+            .catch((err) => {
+              console.log(err.message);
+
+            });
+        });
       } else {
         window.location = "/init-signin";
       }
