@@ -32,9 +32,9 @@ class ActionProvider {
 
     handleGettingStarted = () => {
         const message = this.createChatBotMessage(
-          "Please go to the following url and type in your issues",
+          "Please go to the following illustrative tutorial that walks you through how to make the best of My Margdarshaka",
           {
-            widget: "feedback",
+            widget: "getting-started",
           }
         );
     

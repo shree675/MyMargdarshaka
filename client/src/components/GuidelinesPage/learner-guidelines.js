@@ -6,9 +6,9 @@ import config from "../../chatbot/config";
 import MessageParser from "../../chatbot/MessageParser";
 import ActionProvider from "../../chatbot/ActionProvider";
 // @ts-ignore
-import mentor from "../../assets/lola_basic_motion.gif";
+import lola from "../../assets/lola_basic_motion.gif";
 import "react-chatbot-kit/build/main.css";
-import "./common-guidelines.css";
+import "./guidelines.css";
 
 const LearnerGuidelines = () => {
   return (
@@ -22,7 +22,7 @@ const LearnerGuidelines = () => {
             <img
               className="col lola-gif"
               // style={{ width: "100px" }}
-              src={mentor}
+              src={lola}
               alt=""
             />
             <div className="col">

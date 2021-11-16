@@ -29,6 +29,16 @@ class ActionProvider {
 
     this.addMessageToState(message);
   };
+  handleGettingStarted = () => {
+    const message = this.createChatBotMessage(
+      "Please go to the following illustrative tutorial that walks you through how to make the best of My Margdarshaka",
+      {
+        widget: "getting-started",
+      }
+    );
+
+    this.addMessageToState(message);
+  };
 
   handleFAQ = () => {
     const message = this.createChatBotMessage(

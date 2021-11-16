@@ -38,13 +38,18 @@ div.bubble {
   background-color: none;
   opacity: 0;
 }
-/* .lola_gif {
-  max-width: 50%;
-} */
+
 .img {
   max-width: 50%;
   width: 596px;
   height: 842px;
+}
+
+.react-chatbot-kit-chat-container {
+  position: fixed;
+  bottom: 0%;
+  width: 8%;
+  right: 5%;
 }
 
 .react-chatbot-kit-chat-bot-avatar {
@@ -87,8 +92,3 @@ div.bubble {
   background-color: #720d5d;
   color: #f0cce2;
 }
-
-/* .lola-gif {
-  width: 50px;
-  height: 100px;
-} */
