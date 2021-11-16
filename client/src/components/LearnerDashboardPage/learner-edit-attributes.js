@@ -156,7 +156,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
   };
 
   useEffect(() => {
-    if (Object.keys(details).length > 0) {
+    if (Object.keys(details).length > 0 && details.subjects && details.times) {
       console.log(details);
       let tmp = {};
       details.subjects.forEach((sub) => {
@@ -169,7 +169,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
       setCopyOfSubjects(tmp);
 
       tmp = {};
-      details.times.map((timeSlot) => {
+      details.times.forEach((timeSlot) => {
         tmp[timeSlot] = true;
       });
 
