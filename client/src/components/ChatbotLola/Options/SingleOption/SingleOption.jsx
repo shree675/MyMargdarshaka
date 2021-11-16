@@ -1,11 +1,13 @@
 import React from "react";
 
-const MultipleOptions = (props) => {
+import "./SingleOption.css";
+
+const SingleOption = (props) => {
   const options = [
     {
       text: props.nextActionText,
       handler: () =>
-        props.actionProvider.handleLearnOnline(props.message, props.widgetName),
+        props.actionProvider.handleSingleOption(props.message, props.widgetName),
       id: 1,
     },
   ];
@@ -15,23 +17,6 @@ const MultipleOptions = (props) => {
       {option.text}
     </button>
   ));
-
-  if (props.otherOption != null) {
-    buttonsMarkup.push(
-      <button
-        key={2}
-        onClick={() =>
-          props.actionProvider.handleLearnOnline(
-            props.otherOption.message,
-            props.otherOption.widgetName
-          )
-        }
-        className="option-button"
-      >
-        {props.otherOption.nextActionText}
-      </button>
-    );
-  }
 
   buttonsMarkup.push(
     <button
@@ -46,4 +31,4 @@ const MultipleOptions = (props) => {
   return <div className="options-container">{buttonsMarkup}</div>;
 };
 
-export default MultipleOptions;
+export default SingleOption;

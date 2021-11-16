@@ -8,7 +8,7 @@ const path = require("path");
 const axios = require("axios");
 const Admin = require("./backend/models/admin.model");
 
-//IMPORTANT NOTE: The connection string is available in the config.env file which is not included in the
+//IMPORTANT NOTE: The connection string is available in the .env file which is not included in the
 //GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
 const connectionString = process.env.MONGO_URI;
 
@@ -38,9 +38,7 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(
-  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
-);
+var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -64,11 +62,12 @@ async function authMiddleware(req, res, next) {
       .auth()
       .verifyIdToken(idToken)
       .then((decodedToken) => {
-        //console.log(decodedToken);
+        console.log(decodedToken);
         const uid = decodedToken && decodedToken.uid;
         if (uid != null && uid != undefined) next();
       })
       .catch((error) => {
+        console.log(error);
         res.json(401);
       });
   } else if (tmp[0] === "Basic") {

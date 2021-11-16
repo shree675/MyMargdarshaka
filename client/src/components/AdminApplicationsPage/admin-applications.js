@@ -80,11 +80,7 @@ const ApplicationCard = (props) => {
   const handleApprove = async (user) => {
     console.log("approve ", user.name);
     const tk = await localStorage.getItem("basicAuth");
-    await axios.post(
-      `/api/mentor/update-by-id/${user._id}`,
-      { approved: true },
-      { headers: { Authorization: `Basic ${tk}` } }
-    );
+    await axios.post(`/api/mentor/update-by-id/${user._id}`, { approved: true }, { headers: { Authorization: `Basic ${tk}` } });
     props.setApproved(user._id);
     await axios.get(`/api/mentor/findmatches/${user._id}`, {
       headers: { Authorization: `Basic ${tk}` },
@@ -94,21 +90,17 @@ const ApplicationCard = (props) => {
   const handleReject = async (user) => {
     console.log("reject ", user.name);
     const tk = await localStorage.getItem("basicAuth");
-    await axios.post(
-      `/api/mentor/update-by-id/${user._id}`,
-      { rejected: true },
-      { headers: { Authorization: `Basic ${tk}` } }
-    );
+    await axios.post(`/api/mentor/update-by-id/${user._id}`, { rejected: true }, { headers: { Authorization: `Basic ${tk}` } });
     props.setRejected(user);
   };
 
   return (
-    <div className="admin-applications-card">
-      <div className="admin-applications-card-row1">
+    <div className='admin-applications-card'>
+      <div className='admin-applications-card-row1'>
         <div>{props.app.name}</div>
         <div>{props.app.phone}</div>
       </div>
-      <div className="admin-applications-card-row2">
+      <div className='admin-applications-card-row2'>
         <div>Email : {props.app.email}</div>
         <div>
           <b>Language : </b>
@@ -126,9 +118,9 @@ const ApplicationCard = (props) => {
         </div>
       </div>
 
-      <div className="admin-applications-card-row3">
+      <div className='admin-applications-card-row3'>
         <div
-          className="admin-applications-card-button"
+          className='admin-applications-card-button'
           onClick={() => {
             handleApprove(props.app); // approves a mentor application
           }}
@@ -137,7 +129,7 @@ const ApplicationCard = (props) => {
           APPROVE
         </div>
         <div
-          className="admin-applications-card-button"
+          className='admin-applications-card-button'
           onClick={() => {
             handleReject(props.app);
           }}
@@ -160,6 +152,8 @@ class AdminApplications extends React.Component {
       searchResultText: "",
       openApplications: [],
       rejectedApplications: [],
+      searchResults: [],
+      tk: localStorage.getItem("basicAuth"),
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
@@ -180,21 +174,37 @@ class AdminApplications extends React.Component {
       console.log(this.state.searchText);
       this.setState({ searchResultText: this.state.searchText });
       // submit this search text to Backend for Query
+      this.setState({ searchResults: [] });
+      axios
+        .get(`/api/mentor/search/${this.state.searchText}`, {
+          headers: { Authorization: `Basic ${this.state.tk}` },
+        })
+        .then((e) => {
+          this.setState({
+            searchResults: e.data.filter((user) => !user.is_banned),
+          });
+          axios
+            .get(`/api/learner/search/${this.state.searchText}`, {
+              headers: { Authorization: `Basic ${this.state.tk}` },
+            })
+            .then((e) => {
+              this.setState({
+                searchResults: this.state.searchResults.concat(e.data.filter((user) => !user.is_banned)),
+              });
+              console.log(this.state.searchResults);
+            });
+        });
     }
   }
 
   // will be passed to child (ApplicationCard) to set the parent state
   setApproved(mentor_id) {
-    const newOpenApp = this.state.openApplications.filter(
-      (app) => app._id != mentor_id
-    );
+    const newOpenApp = this.state.openApplications.filter((app) => app._id != mentor_id);
     this.setState({ openApplications: newOpenApp });
   }
 
   setRejected(mentor) {
-    const newOpenApp = this.state.openApplications.filter(
-      (app) => app._id != mentor._id
-    );
+    const newOpenApp = this.state.openApplications.filter((app) => app._id != mentor._id);
     this.setState({
       openApplications: newOpenApp,
       rejectedApplications: [...this.state.rejectedApplications, mentor],
@@ -226,10 +236,7 @@ class AdminApplications extends React.Component {
 
   // verify if some user is already in session
   componentDidMount() {
-    if (
-      localStorage.getItem("isloggedin") === null ||
-      localStorage.getItem("isloggedin") === "false"
-    ) {
+    if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
       window.location = "/admin-auth";
     }
     if (
@@ -253,16 +260,12 @@ class AdminApplications extends React.Component {
     return (
       <div>
         <AdminNavbar />
-        <div className="admin-main">
-          <div className="admin-applications-leftbox">
-            <div className="admin-applications-tab-switcher">
+        <div className='admin-main'>
+          <div className='admin-applications-leftbox'>
+            <div className='admin-applications-tab-switcher'>
               <div
-                className="admin-applications-tab-button"
-                style={
-                  this.state.tab == 0
-                    ? { border: "solid 3px red", opacity: 1 }
-                    : {}
-                }
+                className='admin-applications-tab-button'
+                style={this.state.tab == 0 ? { border: "solid 3px red", opacity: 1 } : {}}
                 onClick={() => {
                   this.setState({ tab: 0 });
                 }}
@@ -270,12 +273,8 @@ class AdminApplications extends React.Component {
                 OPEN APPLICATIONS
               </div>
               <div
-                className="admin-applications-tab-button"
-                style={
-                  this.state.tab == 1
-                    ? { border: "solid 3px red", opacity: 1 }
-                    : {}
-                }
+                className='admin-applications-tab-button'
+                style={this.state.tab == 1 ? { border: "solid 3px red", opacity: 1 } : {}}
                 onClick={() => {
                   this.setState({ tab: 1 });
                 }}
@@ -283,96 +282,119 @@ class AdminApplications extends React.Component {
                 REJECTED APPLICATIONS
               </div>
             </div>
-            <div className="admin-applications-right-box-phone">
+            <div className='admin-applications-right-box-phone'>
               <CssTextField
-                id="outlined-basic"
-                label="🔍Search for User by Name or Phone Number"
-                variant="outlined"
+                id='outlined-basic'
+                label='🔍Search for User by Name or Phone Number'
+                variant='outlined'
                 value={this.state.searchText}
                 onChange={this.handleSearchTextChange}
                 onKeyUp={this.handleSubmitText}
               />
-              <div className="admin-applications-search-results">
-                <div>
-                  {this.state.searchResultText !== ""
-                    ? `Search results for \"${this.state.searchResultText}\"`
-                    : ""}
-                </div>
-                {/* {newIssues.map((user, i) => (
-                                    <div
-                                        className='admin-applications-search-results-card'
-                                        style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
-                                    >
-                                        <div>
-                                            <div>{user.name}</div>
-                                            <div>{user.phone}</div>
-                                        </div>
-                                        <div onClick={() => {}}>
-                                            BAN USER
-                                            <IoBan style={{ color: "red", marginLeft: "1vw" }} />
-                                        </div>
-                                    </div>
-                                ))}{" "} */}
-              </div>
-            </div>
-            <div
-              style={this.state.tab == 1 ? { display: "none" } : {}}
-              className="admin-applications-applications"
-            >
-              {this.state.openApplications.map((item) => (
-                <ApplicationCard
-                  app={item}
-                  setApproved={this.setApproved}
-                  setRejected={this.setRejected}
-                />
-              ))}
-            </div>
-            <div
-              style={this.state.tab == 0 ? { display: "none" } : {}}
-              className="admin-applications-applications"
-            >
-              {this.state.rejectedApplications.map((item) => (
-                <ApplicationCard app={item} rej={true} />
-              ))}
-            </div>
-          </div>
-          <div className="admin-applications-right-box">
-            <CssTextField
-              id="outlined-basic"
-              label="🔍Search for User by Name or Phone Number"
-              variant="outlined"
-              value={this.state.searchText}
-              onChange={this.handleSearchTextChange}
-              onKeyUp={this.handleSubmitText}
-            />
-            <div className="admin-applications-search-results">
-              <div>
-                {this.state.searchResultText != ""
-                  ? `Search results for \"${this.state.searchResultText}\"`
-                  : ""}
-              </div>
-              {
-                /* dummy data */
-                openApp.map((user, i) => (
-                  <div
-                    className="admin-applications-search-results-card"
-                    style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
-                  >
+              <div className='admin-applications-search-results'>
+                <div>{this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
+                {this.state.searchResults.map((user, i) => (
+                  <div className='admin-applications-search-results-card' style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}>
                     <div>
-                      <div>{user.name}</div>
+                      <div style={{ fontWeight: "bold" }}>{user.name}</div>
                       <div>{user.phone}</div>
                     </div>
                     <div
-                      onClick={() => {
-                        this.handleBanUser(user);
+                      onClick={(event) => {
+                        const data = {
+                          is_banned: true,
+                        };
+                        axios.post("/api/user/update/newphone/" + user.phone, data);
+                        if (user.NIOS_status !== undefined) {
+                          axios
+                            .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                            .then(() => {
+                              const e = {
+                                keyCode: 13,
+                              };
+                              this.handleSubmitText(e);
+                            });
+                        } else {
+                          axios
+                            .post("/api/mentor/update-by-id/" + user._id, data, {
+                              headers: { Authorization: `Basic ${this.state.tk}` },
+                            })
+                            .then(() => {
+                              const e = {
+                                keyCode: 13,
+                              };
+                              this.handleSubmitText(e);
+                            });
+                        }
                       }}
                     >
                       BAN USER
                       <IoBan style={{ color: "red", marginLeft: "1vw" }} />
                     </div>
                   </div>
-                ))
-              }
+                ))}{" "}
+              </div>
+            </div>
+            <div style={this.state.tab == 1 ? { display: "none" } : {}} className='admin-applications-applications'>
+              {this.state.openApplications.map((item) => (
+                <ApplicationCard app={item} setApproved={this.setApproved} setRejected={this.setRejected} />
+              ))}
+            </div>
+            <div style={this.state.tab == 0 ? { display: "none" } : {}} className='admin-applications-applications'>
+              {this.state.rejectedApplications.map((item) => (
+                <ApplicationCard app={item} rej={true} />
+              ))}
+            </div>
+          </div>
+          <div className='admin-applications-right-box'>
+            <CssTextField
+              id='outlined-basic'
+              label='🔍Search for User by Name or Phone Number'
+              variant='outlined'
+              value={this.state.searchText}
+              onChange={this.handleSearchTextChange}
+              onKeyUp={this.handleSubmitText}
+            />
+            <div className='admin-applications-search-results'>
+              <div>{this.state.searchResultText != "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
+              {this.state.searchResults.map((user, i) => (
+                <div className='admin-applications-search-results-card' style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}>
+                  <div>
+                    <div style={{ fontWeight: "bold" }}>{user.name}</div>
+                    <div>{user.phone}</div>
+                  </div>
+                  <div
+                    onClick={(event) => {
+                      const data = {
+                        is_banned: true,
+                      };
+                      axios.post("/api/user/update/newphone/" + user.phone, data);
+                      if (user.NIOS_status !== undefined) {
+                        axios
+                          .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                          .then(() => {
+                            const e = {
+                              keyCode: 13,
+                            };
+                            this.handleSubmitText(e);
+                          });
+                      } else {
+                        axios
+                          .post("/api/mentor/update-by-id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                          .then(() => {
+                            const e = {
+                              keyCode: 13,
+                            };
+                            this.handleSubmitText(e);
+                          });
+                      }
+                    }}
+                  >
+                    BAN USER
+                    <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                  </div>
+                </div>
+              ))}{" "}
             </div>
           </div>
         </div>

@@ -4,11 +4,11 @@ import React from "react";
 import Chatbot from "react-chatbot-kit";
 import config from "../../chatbot/config";
 import MessageParser from "../../chatbot/MessageParser";
-import ActionProvider from "../../chatbot/ActionProvider";
+import ActionProvider from "../../chatbot/ActionProviderLearner";
 // @ts-ignore
-import mentor from "../../assets/virtual_mentor_antennae.gif";
-import "./common-guidelines.css";
+import lola from "../../assets/lola_basic_motion.gif";
 import "react-chatbot-kit/build/main.css";
+import "./guidelines.css";
 
 const LearnerGuidelines = () => {
   return (
@@ -20,12 +20,12 @@ const LearnerGuidelines = () => {
           </div>
           <div className="row">
             <img
-              className="col"
-              src={mentor}
-              style={{ width: "596px", height: "842px" }}
+              className="col lola-gif"
+              // style={{ width: "100px" }}
+              src={lola}
               alt=""
             />
-            <div className="col" style={{ backgroundColor: "white" }}>
+            <div className="col">
               <Chatbot
                 config={config}
                 actionProvider={ActionProvider}

@@ -60,17 +60,15 @@ const MentorHome = () => {
       // query data for each student of a class code and store
       console.log(code, students);
       for (let j = 0; j < students.length; j++) {
-        const res = await axios.get(
-          `/api/learner/get-data/id/${students[j].id}`,
-          {
-            headers: { Authorization: `Bearer ${curuser}` },
-          }
-        );
+        const res = await axios.get(`/api/learner/get-data/id/${students[j].id}`, {
+          headers: { Authorization: `Bearer ${curuser}` },
+        });
         let student_data = res.data;
         console.log("students data", student_data);
         if (student_data != null) {
           student_data.learner_id = student_data._id;
           student_data.mentor_id = mentor_id;
+          student_data.is_banned = student_data.is_banned;
         }
         tmp[code].push(student_data);
       }
@@ -106,32 +104,27 @@ const MentorHome = () => {
   return (
     <>
       {pageDetails.pageName != "home" ? (
-        <MentorSubjectDetails
-          setPageDetails={setPageDetails}
-          subDetails={pageDetails.details}
-        />
+        <MentorSubjectDetails setPageDetails={setPageDetails} subDetails={pageDetails.details} />
       ) : (
-        <div className="mentor-home">
+        <div className='mentor-home'>
           <Navbar />
-          <div className="mentor-curvature"></div>
-          <div className="container-fluid">
-            <div className="mentor-curvature"></div>
-            <div className="row px-3">
-              <div className="d-none d-xl-flex col-md-3 mb-3">
+          <div className='mentor-curvature'></div>
+          <div className='container-fluid'>
+            <div className='mentor-curvature'></div>
+            <div className='row px-3'>
+              <div className='d-none d-xl-flex col-md-3 mb-3'>
                 {/* TODO: remove hardcoded color */}
-                <div className="card mt-3 p-5" style={style}>
-                  <div className="lola-panel">
-                    <div className="speech-bubble">
+                <div className='card mt-3 p-5' style={style}>
+                  <div className='lola-panel'>
+                    <div className='speech-bubble'>
                       <div className={"mentor-bubble"}>
                         <div>
-                          Hello there! I'm Lola! You will find your list of
-                          assigned students here for every subject you have
-                          opted to teach. Click on the subject card to view the
-                          syllabus and the students’s progress.
+                          Hello there! I'm Lola! You will find your list of assigned students here for every subject you have opted to
+                          teach. Click on the subject card to view the syllabus and the students’s progress.
                         </div>
-                        <div className="mentor-button-space">
+                        <div className='mentor-button-space'>
                           <button
-                            className="init-signin-button"
+                            className='init-signin-button'
                             onClick={() => {
                               window.location = "/mentor-guidelines";
                             }}
@@ -149,10 +142,10 @@ const MentorHome = () => {
                     students’s progress.
                   </p> */}
                     </div>
-                    <div className="lola">
+                    <div className='lola'>
                       {
-                        <p className="lola">
-                          <img src={lola} style={{ opacity: "0" }} alt="" />
+                        <p className='lola'>
+                          <img src={lola} style={{ opacity: "0" }} alt='' />
                         </p>
                       }
                     </div>
@@ -166,18 +159,13 @@ const MentorHome = () => {
                 ...details
               }]
             } */}
-              <div className="col">
+              <div className='col'>
                 {Object.keys(studentsData).map((classCode) => (
-                  <div className="row p-3">
-                    <SubjectTitle
-                      style={style}
-                      classCode={classCode}
-                      details={details}
-                      setPageDetails={setPageDetails}
-                    />
+                  <div className='row p-3'>
+                    <SubjectTitle style={style} classCode={classCode} details={details} setPageDetails={setPageDetails} />
 
                     {studentsData[classCode].map((details) => (
-                      <div className="col-6 col-md-3" id="mentor-home-learners">
+                      <div className='col-6 col-md-3' id='mentor-home-learners'>
                         <Card
                           details={{
                             ...details,

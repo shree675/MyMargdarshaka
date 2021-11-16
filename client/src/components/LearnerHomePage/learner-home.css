@@ -24,6 +24,13 @@
   padding-bottom: 20px;
 }
 
+.banned-status {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 480px) {
   #learner-home-mentors {
     margin: 0px !important;

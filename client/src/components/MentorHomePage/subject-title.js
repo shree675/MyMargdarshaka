@@ -3,7 +3,6 @@
 import React from "react";
 
 // @ts-ignore
-import { ReactComponent as ReassignMentors } from "../../assets/reassign_mentors.svg";
 import data from "../../data";
 // import refresh from "../../assets/reassign_mentors.svg";
 // import "./mentor-home.css";
@@ -22,9 +21,7 @@ const SubjectTitle = (props) => {
         <button
           className="col-1 me-3"
           style={{ background: "none", border: "none" }}
-        >
-          <ReassignMentors />
-        </button>
+        ></button>
 
         <a
           className={"btn btn-warning text-white "}

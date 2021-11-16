@@ -1,10 +1,12 @@
-class ActionProvider {
+class ActionProviderLearner {
   constructor(createChatBotMessage, setStateFunc) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
   }
 
-  handleLearnOnline = (message, widget) => {
+  id = "learner"
+
+  handleSingleOption = (message, widget) => {
     const text = this.createChatBotMessage(message, {
       widget: widget,
     });
@@ -18,7 +20,6 @@ class ActionProvider {
     this.addMessageToState(text);
   };
 
-
   handleFeedback = () => {
     const message = this.createChatBotMessage(
       "Please go to the following url and type in your issues",
@@ -29,12 +30,22 @@ class ActionProvider {
 
     this.addMessageToState(message);
   };
+  handleGettingStarted = () => {
+    const message = this.createChatBotMessage(
+      "Please go to the following illustrative tutorial that walks you through how to make the best of My Margdarshaka",
+      {
+        widget: "gettingStarted",
+      }
+    );
+
+    this.addMessageToState(message);
+  };
 
   handleFAQ = () => {
     const message = this.createChatBotMessage(
       "Here are a few commonly asked questions",
       {
-        widget: "faq",
+        widget: "learnerfaq",
       }
     );
 
@@ -49,4 +60,4 @@ class ActionProvider {
   };
 }
 
-export default ActionProvider;
+export default ActionProviderLearner;

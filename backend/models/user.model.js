@@ -24,6 +24,10 @@ let User = new Schema({
     required: true,
     default: false,
   },
+  is_banned: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", User);

@@ -150,6 +150,10 @@ const Authentication = () => {
         if (user.phone === p) {
           console.log("Valid phone number matched: ", p);
           setValidUser(true);
+          if (user.is_banned) {
+            alert("You have been banned from logging in. Please contact an administrator.");
+            window.location = "/";
+          }
           if (user.user_type == "mentor") {
             userType = "mentor";
             setCusomUserType("mentor");

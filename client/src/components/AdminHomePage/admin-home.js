@@ -128,6 +128,7 @@ class AdminHomePage extends React.Component {
       manage: [],
       resolvedIssues: [],
       searchResults: [],
+      tk: localStorage.getItem("basicAuth"),
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSubmitText = this.handleSubmitText.bind(this);
@@ -145,6 +146,26 @@ class AdminHomePage extends React.Component {
       console.log(this.state.searchText);
       this.setState({ searchResultText: this.state.searchText });
       // submit this search text to Backend for Query
+      this.setState({ searchResults: [] });
+      axios
+        .get(`/api/mentor/search/${this.state.searchText}`, {
+          headers: { Authorization: `Basic ${this.state.tk}` },
+        })
+        .then((e) => {
+          this.setState({
+            searchResults: e.data.filter((user) => !user.is_banned),
+          });
+          axios
+            .get(`/api/learner/search/${this.state.searchText}`, {
+              headers: { Authorization: `Basic ${this.state.tk}` },
+            })
+            .then((e) => {
+              this.setState({
+                searchResults: this.state.searchResults.concat(e.data.filter((user) => !user.is_banned)),
+              });
+              console.log(this.state.searchResults);
+            });
+        });
     }
   }
 
@@ -192,11 +213,6 @@ class AdminHomePage extends React.Component {
       window.location = "/my-mentors";
     }
     this.updateIssues();
-    axios.get("/api/mentor/search/6543210").then((e) => {
-      console.log(e);
-      let tempResults = e.data;
-      axios.get("/api/learner/search/6543210").then((e) => {});
-    });
   }
 
   render() {
@@ -245,21 +261,46 @@ class AdminHomePage extends React.Component {
               />
               <div className='admin-applications-search-results'>
                 <div>{this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
-                {/* {newIssues.map((user, i) => (
-                                    <div
-                                        className='admin-applications-search-results-card'
-                                        style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
-                                    >
-                                        <div>
-                                            <div>{user.name}</div>
-                                            <div>{user.phone}</div>
-                                        </div>
-                                        <div onClick={() => {}}>
-                                            BAN USER
-                                            <IoBan style={{ color: "red", marginLeft: "1vw" }} />
-                                        </div>
-                                    </div>
-                                ))}{" "} */}
+                {this.state.searchResults.map((user, i) => (
+                  <div className='admin-applications-search-results-card' style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}>
+                    <div>
+                      <div style={{ fontWeight: "bold" }}>{user.name}</div>
+                      <div>{user.phone}</div>
+                    </div>
+                    <div
+                      onClick={(event) => {
+                        const data = {
+                          is_banned: true,
+                        };
+                        axios.post("/api/user/update/newphone/" + user.phone, data);
+                        if (user.NIOS_status !== undefined) {
+                          axios
+                            .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                            .then(() => {
+                              const e = {
+                                keyCode: 13,
+                              };
+                              this.handleSubmitText(e);
+                            });
+                        } else {
+                          axios
+                            .post("/api/mentor/update-by-id/" + user._id, data, {
+                              headers: { Authorization: `Basic ${this.state.tk}` },
+                            })
+                            .then(() => {
+                              const e = {
+                                keyCode: 13,
+                              };
+                              this.handleSubmitText(e);
+                            });
+                        }
+                      }}
+                    >
+                      BAN USER
+                      <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                    </div>
+                  </div>
+                ))}{" "}
               </div>
             </div>
             <div
@@ -298,28 +339,44 @@ class AdminHomePage extends React.Component {
             />
             <div className='admin-applications-search-results'>
               <div>{this.state.searchResultText !== "" ? `Search results for \"${this.state.searchResultText}\"` : ""}</div>
-              {/* {
-                                openApp.map((user, i) => (
-                                    <div
-                                        className='admin-applications-search-results-card'
-                                        style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}
-                                    >
-                                        <div>
-                                            <div>{user.name}</div>
-                                            <div>{user.phone}</div>
-                                        </div>
-                                        <div
-                                            onClick={() => {
-                                                this.handleBanUser(user);
-                                            }}
-                                        >
-                                            BAN USER
-                                            <IoBan style={{ color: "red", marginLeft: "1vw" }} />
-                                        </div>
-                                    </div>
-                                ))
-                            }{" "}
-                            */}
+              {this.state.searchResults.map((user, i) => (
+                <div className='admin-applications-search-results-card' style={{ background: i % 2 == 0 ? "#E8DEE5" : "#F9F6F8" }}>
+                  <div>
+                    <div style={{ fontWeight: "bold" }}>{user.name}</div>
+                    <div>{user.phone}</div>
+                  </div>
+                  <div
+                    onClick={(event) => {
+                      const data = {
+                        is_banned: true,
+                      };
+                      axios.post("/api/user/update/newphone/" + user.phone, data);
+                      if (user.NIOS_status !== undefined) {
+                        axios
+                          .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                          .then(() => {
+                            const e = {
+                              keyCode: 13,
+                            };
+                            this.handleSubmitText(e);
+                          });
+                      } else {
+                        axios
+                          .post("/api/mentor/update-by-id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
+                          .then(() => {
+                            const e = {
+                              keyCode: 13,
+                            };
+                            this.handleSubmitText(e);
+                          });
+                      }
+                    }}
+                  >
+                    BAN USER
+                    <IoBan style={{ color: "red", marginLeft: "1vw" }} />
+                  </div>
+                </div>
+              ))}{" "}
             </div>
           </div>
         </div>

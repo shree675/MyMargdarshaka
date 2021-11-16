@@ -1,13 +1,11 @@
 import React from "react";
 
-import "./LearnOnline.css";
-
-const LearnOnline = (props) => {
+const MultipleOptions = (props) => {
   const options = [
     {
       text: props.nextActionText,
       handler: () =>
-        props.actionProvider.handleLearnOnline(props.message, props.widgetName),
+        props.actionProvider.handleSingleOption(props.message, props.widgetName),
       id: 1,
     },
   ];
@@ -17,6 +15,23 @@ const LearnOnline = (props) => {
       {option.text}
     </button>
   ));
+
+  if (props.otherOption != null) {
+    buttonsMarkup.push(
+      <button
+        key={2}
+        onClick={() =>
+          props.actionProvider.handleSingleOption(
+            props.otherOption.message,
+            props.otherOption.widgetName
+          )
+        }
+        className="option-button"
+      >
+        {props.otherOption.nextActionText}
+      </button>
+    );
+  }
 
   buttonsMarkup.push(
     <button
@@ -31,4 +46,4 @@ const LearnOnline = (props) => {
   return <div className="options-container">{buttonsMarkup}</div>;
 };
 
-export default LearnOnline;
+export default MultipleOptions;

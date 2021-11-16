@@ -42,4 +42,22 @@ router.route("/update/:phone").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
+
+router.route("/update/newphone/:id").post((req, res) => {
+  User.find({ phone: req.params.id })
+    .then((users) => {
+      if (users.length == 0) {
+        console.log("user not found");
+        return;
+      }
+      let user = users[0];
+      user.is_banned = req.body.is_banned;
+      user
+        .save()
+        .then(() => res.json("Ban status updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
