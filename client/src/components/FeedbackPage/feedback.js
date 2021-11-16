@@ -65,9 +65,9 @@ const Feedback = () => {
             e.data.map((data) => {
               if (data.phone === user.phoneNumber) {
                 setName(data.name);
-                console.log(data.name);
+                //console.log(data.name);
                 setUserType("learner");
-                console.log(userType);
+                //console.log(userType);
               }
             });
           })
@@ -80,9 +80,9 @@ const Feedback = () => {
             e.data.map((data) => {
               if (data.phone === user.phoneNumber) {
                 setName(data.name);
-                console.log(data.name);
+                //console.log(data.name);
                 setUserType("mentor");
-                console.log(userType);
+                //console.log(userType);
               }
             });
           })

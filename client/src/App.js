@@ -21,6 +21,7 @@ import TestPage from "./components/TestPage/test.js";
 import AdminHomePage from "./components/AdminHomePage/admin-home.js";
 import LearnerGuidelines from "./components/GuidelinesPage/learner-guidelines.js";
 import CommonGuidelines from "./components/GuidelinesPage/common-guidelines.js";
+import MentorGuidelines from "./components/GuidelinesPage/mentor-guidelines.js";
 import GettingStarted from "./components/GettingStarted/getting-started.js";
 
 // all user routes
@@ -47,6 +48,7 @@ class App extends Component {
           <Route exact path='/admin-home' component={AdminHomePage} /> // checked
           <Route exact path='/learner-guidelines' component={LearnerGuidelines} />
           <Route exact path='/common-guidelines' component={CommonGuidelines} />
+          <Route exact path='/mentor-guidelines' component={MentorGuidelines} />
           <Route exact path='/getting-started' component={GettingStarted} />
           <Route path='/' component={Error} /> // checked
         </Switch>
