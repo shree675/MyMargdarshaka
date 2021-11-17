@@ -1,6 +1,6 @@
 //@ts-check
 
-import React, { Component, useEffect } from "react";
+import React from "react";
 import main_logo from "../../assets/main-logo.svg";
 import homepage from "../../assets/homepage.gif";
 import "@lottiefiles/lottie-player";

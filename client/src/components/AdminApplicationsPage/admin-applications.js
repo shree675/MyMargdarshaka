@@ -80,7 +80,14 @@ const ApplicationCard = (props) => {
   const handleApprove = async (user) => {
     console.log("approve ", user.name);
     const tk = await localStorage.getItem("basicAuth");
-    await axios.post(`/api/mentor/update-by-id/${user._id}`, { approved: true }, { headers: { Authorization: `Basic ${tk}` } });
+    await axios
+      .post(`/api/mentor/update-by-id/${user._id}`, { approved: true }, { headers: { Authorization: `Basic ${tk}` } })
+      .then((e) => {
+        axios.get(`/api/sendemail/${props.app.email}`).catch((err) => {
+          console.log(err);
+          alert("Error: Email could not be sent to the approved candidate");
+        });
+      });
     props.setApproved(user._id);
     await axios.get(`/api/mentor/findmatches/${user._id}`, {
       headers: { Authorization: `Basic ${tk}` },
