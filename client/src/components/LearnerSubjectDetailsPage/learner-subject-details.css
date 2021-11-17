@@ -62,12 +62,14 @@
   margin-top: 5px;
   margin-bottom: 5px;
   width: 90%;
-  height: 35px;
+  min-height: 6vh;
+  height: 6vh;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding-left: 1vw;
 }
 
 .learner-chapter-element > input {

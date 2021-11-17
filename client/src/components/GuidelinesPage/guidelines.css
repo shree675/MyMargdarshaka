@@ -59,10 +59,13 @@ div.bubble {
   background-size: cover;
 }
 
-.react-chatbot-kit-chat-bot-avatar-container {
-  background-color: transparent;
+.react-chatbot-kit-chat-bot-avatar {
   width: 50px;
   height: 50px;
+}
+
+.react-chatbot-kit-chat-bot-avatar-container {
+  background-color: transparent;
 }
 
 .react-chatbot-kit-chat-bot-avatar-letter {

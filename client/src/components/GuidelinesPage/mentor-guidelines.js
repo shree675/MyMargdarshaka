@@ -13,64 +13,61 @@ import axios from "axios";
 import { verify } from "../../verifyUser";
 import MentorNavbar from "../Navbar/mentor-navbar";
 
-
 const MentorGuidelines = () => {
-    
-    const [name, setName] = useState("Cutie");
-    const [newConfig, setNewConfig] = useState(null);
-    const [curuser, setCuruser] = useState("No user is logged in");
-    const [phone, setPhone] = useState("");
-    //const [userType, setUserType] = useState(null);
+  const [name, setName] = useState("Cutie");
+  const [newConfig, setNewConfig] = useState(null);
+  const [curuser, setCuruser] = useState("No user is logged in");
+  const [phone, setPhone] = useState("");
+  //const [userType, setUserType] = useState(null);
 
-    // obtaining the user's assigned mentors from the database
-    const getData = async (mentor_phone) => {
-      if (curuser === "No user is logged in") return;
-      if (!phone) return;
-      
-      const res = await axios.get(`/api/mentor/get-data/phone/${phone}`, {
-        headers: { Authorization: `Bearer ${curuser}` },
-      });
-      const name = res.data.name;
-      setName(name);
-      setNewConfig(config(name))
-          
-    };
-  
-    // verify that no user is currently logged in
-    useEffect(() => {
-      if (
-        localStorage.getItem("userType") !== null &&
-        localStorage.getItem("userType") !== undefined &&
-        localStorage.getItem("userType") === "learner"
-      ) {
-        window.location = "/learner-guidelines";
-      } else if (
-        localStorage.getItem("isloggedin") !== null &&
-        localStorage.getItem("isloggedin") !== undefined &&
-        localStorage.getItem("isloggedin") === "true"
-      ) {
-        window.location = "/admin-home";
-      }
-      verify(setCuruser, setPhone);
-      getData();
-    }, [phone, curuser]);
+  // obtaining the user's assigned mentors from the database
+  const getData = async (mentor_phone) => {
+    if (curuser === "No user is logged in") return;
+    if (!phone) return;
 
-    useEffect( () => {
-      setNewConfig(config(name))
-      //console.log("The current name is", name)
-    }, [name])
+    const res = await axios.get(`/api/mentor/get-data/phone/${phone}`, {
+      headers: { Authorization: `Bearer ${curuser}` },
+    });
+    const name = res.data.name;
+    setName(name);
+    setNewConfig(config(name));
+  };
 
-    useEffect( () => {
-      /* console.log("The current name in config is", newConfig)
+  // verify that no user is currently logged in
+  useEffect(() => {
+    if (
+      localStorage.getItem("userType") !== null &&
+      localStorage.getItem("userType") !== undefined &&
+      localStorage.getItem("userType") === "learner"
+    ) {
+      window.location = "/learner-guidelines";
+    } else if (
+      localStorage.getItem("isloggedin") !== null &&
+      localStorage.getItem("isloggedin") !== undefined &&
+      localStorage.getItem("isloggedin") === "true"
+    ) {
+      window.location = "/admin-home";
+    }
+    verify(setCuruser, setPhone);
+    getData();
+  }, [phone, curuser]);
+
+  useEffect(() => {
+    setNewConfig(config(name));
+    //console.log("The current name is", name)
+  }, [name]);
+
+  useEffect(() => {
+    /* console.log("The current name in config is", newConfig)
       if(newConfig != null && newConfig.name == "Cutie")
       {
         console.log("we should reload")
         
       } */
-    }, [newConfig])
+  }, [newConfig]);
   return (
-    <div >
-        <MentorNavbar />
+    <div>
+      <MentorNavbar />
       <div className="body">
         <div className="container">
           <div className="col">
@@ -85,12 +82,17 @@ const MentorGuidelines = () => {
                 alt=""
               />
               <div className="col">
-                {((newConfig!= null && newConfig.name !=undefined && newConfig.name != "Cutie"))? <Chatbot
-                  config= {newConfig}
-                  actionProvider={ActionProvider}
-                  messageParser={MessageParser}
-                />: <div></div>}
-                
+                {newConfig != null &&
+                newConfig.name != undefined &&
+                newConfig.name != "Cutie" ? (
+                  <Chatbot
+                    config={newConfig}
+                    actionProvider={ActionProvider}
+                    messageParser={MessageParser}
+                  />
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           </div>

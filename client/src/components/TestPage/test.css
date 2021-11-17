@@ -1,3 +1,9 @@
+.test-main {
+  margin-top: -3vh;
+  border-radius: 20px;
+  background: white;
+}
+
 .test-header {
   color: #5d1049;
   display: block;

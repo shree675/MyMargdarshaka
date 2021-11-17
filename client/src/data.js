@@ -30,53 +30,71 @@ const data = {
 
   //some example data pf subtopics for one or 2 class codes
   ENG9: ["Punctuation", "grammar", "Reading", "Writing"],
-  SCI10: {
-    chapters: [
-      {
-        name: "Metals and Non-metals",
-        subtopics: [
-          ["Physical properties", true],
-          ["Chemical properties of metals", true],
-          ["How do metals and non-metals react?", true],
-          ["Occurrence of Metals", false],
-          ["Corrosion", false],
-        ],
-      },
-      {
-        name: "Carbon and its compounds",
-        subtopics: [
-          ["Bonding in carbon", true],
-          ["Versatile nature of carbon", true],
-          ["Chemical properties of carbon compounds", false],
-          ["Important Carbon compunds", false],
-          ["Sopas and detergents", false],
-        ],
-      },
-      {
-        name: "Life Processes",
-        subtopics: [
-          ["What are life processes?", true],
-          ["Nutrition", false],
-          ["Respiration", false],
-          ["Transportation", false],
-          ["Excretion", false],
-        ],
-      },
-      {
-        name: "Electricity",
-        subtopics: [
-          ["Electric current and circuit", false],
-          ["Electric potential and potential difference", false],
-          ["Circuit Diagram", false],
-          ["OHM's Law", false],
-          ["Factors on which the resistance of a conductor depends", false],
-          ["Resistance of a system of resistors", false],
-          ["Heating effect of Electric current", false],
-          ["Electric power", false],
-        ],
-      },
-    ],
-  },
+  SCI10: [
+    {
+      name: "Metals and Non-metals",
+      subtopics: [
+        ["Physical properties", true],
+        ["Chemical properties of metals", true],
+        ["How do metals and non-metals react?", true],
+        ["Occurrence of Metals", false],
+        ["Corrosion", false],
+      ],
+      completedTests: ["Physical properties", "Chemical properties of metals"],
+      pendingTests: [
+        "How do metals and non-metals react?",
+        "Occurrence of Metals",
+        "Corrosion",
+      ],
+    },
+    {
+      name: "Carbon and its compounds",
+      subtopics: [
+        ["Bonding in carbon", true],
+        ["Versatile nature of carbon", true],
+        ["Chemical properties of carbon compounds", false],
+        ["Important Carbon compunds", false],
+        ["Sopas and detergents", false],
+      ],
+      completedTests: ["Bonding in carbon", "Versatile nature of carbon"],
+      pendingTests: [
+        "Chemical properties of carbon compounds",
+        "Important Carbon compunds",
+        "Sopas and detergents",
+      ],
+    },
+    {
+      name: "Life Processes",
+      subtopics: [
+        ["What are life processes?", true],
+        ["Nutrition", false],
+        ["Respiration", false],
+        ["Transportation", false],
+        ["Excretion", false],
+      ],
+      completedTests: ["What are life processes?", "Nutrition", "Respiration"],
+      pendingTests: ["Transportation", "Excretion"],
+    },
+    {
+      name: "Electricity",
+      subtopics: [
+        ["Electric current and circuit", false],
+        ["Electric potential and potential difference", false],
+        ["Circuit Diagram", false],
+        ["OHM's Law", false],
+        ["Factors on which the resistance of a conductor depends", false],
+        ["Resistance of a system of resistors", false],
+        ["Heating effect of Electric current", false],
+        ["Electric power", false],
+        ["Electric power-2", false],
+      ],
+      pendingTests: [
+        "Electric current and circuit",
+        "Electric potential and potential difference",
+      ],
+      completedTests: ["Circuit Diagram", "OHM's Law"],
+    },
+  ],
 
   default: {
     chapters: [
