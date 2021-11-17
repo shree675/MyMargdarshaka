@@ -80,7 +80,6 @@ const config = (props)=>
         websites that present the information in a very enjoyable way. Searching for
         "visualizing probability website" gives us this result https://seeing-theory.brown.edu/basic-probability/index.html and it is indeed a very fun
         website.`,
-        link: "https://seeing-theory.brown.edu/basic-probability/index.html",
         widgetName: "learnOnlineStep6",
         otherOption: {
           nextActionText: "I prefer videos or audio",
@@ -99,7 +98,16 @@ const config = (props)=>
         your understanding is search for practice questions on optics. The search result
         https://www.learncbse.in/mcq-questions-for-class-10-science-with-answers/
         contains nicely put questions relating to that topic.`,
-        widgetName: "options",
+        link: "https://seeing-theory.brown.edu/basic-probability/index.html",
+        widgetName: "CBSERedirect",
+      },
+    },
+    {
+      widgetName: "CBSERedirect",
+      widgetFunc: (props) => <URLButton {...props} />,
+      props: {
+        text: "GO TO LINK!",
+        url: "https://www.learncbse.in/mcq-questions-for-class-10-science-with-answers/",
       },
     },
 
@@ -141,6 +149,7 @@ const config = (props)=>
         3. Their philosophy of "Teaching for mastery" is extraordinarily effective!\n
         4. The community of learners in the comments are quite active and respond to
         the questions.`,
+        
         widgetName: "coolResourcesStep3",
         otherOption: {
           nextActionText: "No",
@@ -154,6 +163,7 @@ const config = (props)=>
       widgetName: "coolResourcesStep3",
       widgetFunc: (props) => <SingleOption {...props} />,
       props: {
+        link: "https://www.khanacademy.org/",
         nextActionText: "Okay, next!",
         message: `Do you want to learn a new language perhaps?`,
         widgetName: "coolResourcesStep4",
@@ -167,6 +177,7 @@ const config = (props)=>
         nextActionText: "YES!",
         message: `Just search for it! https://www.duolingo.com/
         is a very fun place to explore`,
+        
         widgetName: "coolResourcesStep5",
         otherOption: {
           nextActionText: "No",
@@ -182,6 +193,7 @@ const config = (props)=>
       props: {
         nextActionText: "Okay, next!",
         message: `Do you want to learn pretty much anything under the sun?!`,
+        link: "https://www.duolingo.com/",
         widgetName: "coolResourcesStep6",
       },
     },
@@ -197,6 +209,7 @@ const config = (props)=>
         high chance.\n
         3. If you like a particular explanation, check if they have a playlist on that topic
         in the description or on their channel!\n`,
+        
         widgetName: "coolResourcesStep7",
       },
     },
@@ -207,6 +220,7 @@ const config = (props)=>
       props: {
         nextActionText: "NICE!",
         message: `And now! Are you ready for something more advance and structured? Maybe you’re ready for professional certification that can help with boosting your career?`,
+        link: "https://www.youtube.com/",
         widgetName: "coolResourcesStep8",
       },
     },
@@ -222,7 +236,7 @@ const config = (props)=>
         2. NPTEL contains organized content for a particular course. These are
         university level courses but if you're the adventurous and passionate kind, this
         is your home.\n`,
-        widgetName: "options",
+        widgetName: "NIOSRedirect",
       },
     },
 
@@ -239,35 +253,6 @@ const config = (props)=>
       },
     },
     // **************************** FAQ WIDGETS [START]  ****************************
-    // faq widget
-    {
-      widgetName: "faq",
-      widgetFunc: (props) => <FAQ {...props} />,
-      props: {
-        queries: [
-          {
-            question: "Question 1",
-            answer: "Answer 1",
-          },
-          {
-            question: "Question 2",
-            answer: "Answer 2",
-          },
-          {
-            question: "Question 3",
-            answer: "Answer 3",
-          },
-          {
-            question: "Question 4",
-            answer: "Answer 4",
-          },
-          {
-            question: "Question 5",
-            answer: "Answer 5",
-          },
-        ],
-      },
-    },
     // learner faq widget
     {
       widgetName: "learnerfaq",
@@ -408,7 +393,7 @@ const config = (props)=>
         url: "/mentor-dashboard",
       },
     },
-    // **************************** FAQ WIDGETS [START]  ****************************
+    // **************************** FAQ WIDGETS [END]  ****************************
     // getting started widget
     {
       widgetName: "gettingStarted",

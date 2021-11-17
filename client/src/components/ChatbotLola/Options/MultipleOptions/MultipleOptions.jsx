@@ -1,9 +1,11 @@
 import React from "react";
 
-const handleGotoLink = (url) => {
-  console.log(url)
-  //window.location = url
+let url = ""
 
+const handleGotoLink = () => {
+  //console.log(url)
+  //window.location = url
+  window.open(url, '_blank')
 }
 
 const MultipleOptions = (props) => {
@@ -39,18 +41,20 @@ const MultipleOptions = (props) => {
       </button>
     );
   }
-  /* if(props.link != null && props.link !=undefined && props.link != "")
+  if(props.link != null && props.link !=undefined && props.link != "")
   {
+    url = props.link
     buttonsMarkup.push(
       <button
+        target = '_blank'
         key={i++}
-        onClick={handleGotoLink(props.link)}
+        onClick={handleGotoLink}
         className="option-button"
       >
         GO TO LINK!
       </button>
     );
-  } */
+  }
 
   buttonsMarkup.push(
     <button
