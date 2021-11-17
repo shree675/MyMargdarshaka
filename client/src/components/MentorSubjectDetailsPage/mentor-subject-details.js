@@ -11,7 +11,7 @@ const defaultClassCode = "SCI10";
 
 const Chapters = ({ handleClickChapter, classCode }) => {
   const chapters = [];
-  (data[classCode] || data[defaultClassCode]).chapters.forEach((ch) => {
+  (data[classCode] || data[defaultClassCode]).forEach((ch) => {
     chapters.push(ch.name);
   });
 
@@ -72,9 +72,8 @@ const Chapters = ({ handleClickChapter, classCode }) => {
 };
 
 const SubTopics = ({ curChapter, classCode }) => {
-  const subTopics = (data[classCode] || data[defaultClassCode]).chapters[
-    curChapter
-  ].subtopics;
+  const subTopics = (data[classCode] || data[defaultClassCode])[curChapter]
+    .subtopics;
 
   return (
     <div className="mentor-subject-details-subtopics">
@@ -106,12 +105,26 @@ const SubTopics = ({ curChapter, classCode }) => {
 };
 
 const PendingTests = ({ pendingTests }) => {
+  const handleLaunchTest = (topic) => {
+    alert(`Test has been launched on \"${topic}\"`);
+  };
   return (
     <div className="mentor-tests-tab-inner">
       {pendingTests.map((topic) => (
         <div className="mentor-subtopic-test-element">
-          <div style={{ marginLeft: "10px" }}>{topic}</div>
-          <div className="mentor-launch-test-button">LAUNCH TEST</div>
+          <div
+            style={{ marginLeft: "10px", marginTop: "-10px", width: "10vw" }}
+          >
+            {topic.length < 20 ? topic : topic.substring(0, 20) + "....."}
+          </div>
+          <div
+            className="mentor-launch-test-button"
+            onClick={(e) => {
+              handleLaunchTest(topic);
+            }}
+          >
+            LAUNCH TEST
+          </div>
         </div>
       ))}
     </div>
@@ -123,7 +136,11 @@ const CompletedTests = ({ completedTests }) => {
     <div className="mentor-tests-tab-inner">
       {completedTests.map((topic) => (
         <div className="mentor-subtopic-test-element">
-          <div style={{ marginLeft: "10px" }}>{topic}</div>
+          <div
+            style={{ marginLeft: "10px", marginTop: "-10px", width: "10vw" }}
+          >
+            {topic.length < 20 ? topic : topic.substring(0, 20) + "....."}
+          </div>
           <div className="mentor-launch-test-button">VIEW DETAILS</div>
         </div>
       ))}
@@ -210,10 +227,6 @@ class MentorSubjectDetails extends React.Component {
           <div
             style={{ width: "30%", display: "flex", flexDirection: "column" }}
           >
-            {/* <Link to='/my-students' className='mentor-subject-details-back'>
-              BACK
-            </Link> */}
-
             <div
               className="mentor-subject-details-back"
               onClick={() => {
@@ -244,10 +257,16 @@ class MentorSubjectDetails extends React.Component {
 
             <Tests
               pendingTests={
-                data.chapters.Science[this.state.curChapter].pendingTests
+                //data.chapters.Science[this.state.curChapter].pendingTests
+                (data[this.state.classCode] || data[defaultClassCode])[
+                  this.state.curChapter
+                ].pendingTests
               }
               completedTests={
-                data.chapters.Science[this.state.curChapter].completedTests
+                //data.chapters.Science[this.state.curChapter].completedTests
+                (data[this.state.classCode] || data[defaultClassCode])[
+                  this.state.curChapter
+                ].completedTests
               }
             />
           </div>

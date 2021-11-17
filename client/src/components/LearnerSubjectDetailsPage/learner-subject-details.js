@@ -11,7 +11,7 @@ const defaultClassCode = "SCI10";
 
 const Chapters = ({ handleClickChapter, classCode }) => {
   const chapters = [];
-  (data[classCode] || data[defaultClassCode]).chapters.forEach((ch) => {
+  (data[classCode] || data[defaultClassCode]).forEach((ch) => {
     chapters.push(ch.name);
   });
 
@@ -73,9 +73,8 @@ const Chapters = ({ handleClickChapter, classCode }) => {
 
 const SubTopics = ({ curChapter, classCode }) => {
   //const subTopics = data.chapters.Science[curChapter].subtopics;
-  const subTopics = (data[classCode] || data[defaultClassCode]).chapters[
-    curChapter
-  ].subtopics;
+  const subTopics = (data[classCode] || data[defaultClassCode])[curChapter]
+    .subtopics;
 
   return (
     <div className="learner-subject-details-subtopics">
@@ -103,12 +102,21 @@ const SubTopics = ({ curChapter, classCode }) => {
 };
 
 const PendingTests = ({ pendingTests }) => {
+  const handleTakeTest = (e) => {
+    window.location = "/test";
+  };
   return (
     <div className="learner-tests-tab-inner">
       {pendingTests.map((topic) => (
         <div className="learner-subtopic-test-element">
-          <div style={{ marginLeft: "10px" }}>{topic}</div>
-          <div className="learner-launch-test-button">TAKE TEST</div>
+          <div
+            style={{ marginLeft: "10px", marginTop: "-10px", width: "10vw" }}
+          >
+            {topic.length < 20 ? topic : topic.substring(0, 20) + "....."}
+          </div>
+          <div className="learner-launch-test-button" onClick={handleTakeTest}>
+            TAKE TEST
+          </div>
         </div>
       ))}
     </div>
@@ -192,7 +200,10 @@ class SubjectDetails extends React.Component {
 
             <PendingTests
               pendingTests={
-                data.chapters.Science[this.state.curChapter].pendingTests
+                //data.chapters.Science[this.state.curChapter].pendingTests
+                (data[this.state.classCode] || data[defaultClassCode])[
+                  this.state.curChapter
+                ].pendingTests
               }
             />
           </div>
