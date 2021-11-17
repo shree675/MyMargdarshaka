@@ -93,7 +93,10 @@ const SubTopics = ({ curChapter, classCode }) => {
         SubTopics
       </div>
       {subTopics.map((t) => (
-        <div className="learner-chapter-element">{t}</div>
+        <div className="learner-chapter-element">
+          <input type="checkbox" checked={t[1]} />
+          {t[0].length < 20 ? t[0] : t[0].substring(0, 20) + "....."}
+        </div>
       ))}
     </div>
   );
