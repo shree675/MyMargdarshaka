@@ -91,13 +91,14 @@ const SubTopics = ({ curChapter, classCode }) => {
       >
         SubTopics
       </div>
-      {subTopics.map((ch) => (
+      {/* TODO : put a SAVE button so that the mentor can change the status of a subtopic*/}
+      {subTopics.map((t) => (
         <div
           className="mentor-chapter-element"
-          style={{ background: "white", color: "#5D1049" }}
+          style={{ background: "#f0cce2", color: "#5D1049" }}
         >
-          <input type="checkbox" />
-          {ch}
+          <input type="checkbox" checked={t[1]} />
+          {t[0].length < 20 ? t[0] : t[0].substring(0, 20) + "....."}
         </div>
       ))}
     </div>

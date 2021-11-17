@@ -73,7 +73,7 @@ const data = {
           ["Resistance of a system of resistors", false],
           ["Heating effect of Electric current", false],
           ["Electric power", false],
-          ["Electric power 2", false],
+          ["Electric power-2", false],
         ],
       },
     ],
