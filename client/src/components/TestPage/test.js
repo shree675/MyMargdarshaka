@@ -16,7 +16,9 @@ const buttonStyle = {
 };
 
 const Test = () => {
+
   return (
+    
     <div>
       <LearnerNavbar />
       <div className="test-main">
@@ -66,6 +68,7 @@ const Test = () => {
           </div>
         </div>
       </div>
+      {alert("Please note that this test functionality is representative which means that no real test is being conducted using this platform.")}
     </div>
   );
 };

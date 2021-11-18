@@ -1,10 +1,11 @@
 //@ts-check
 
-import React from "react";
+import React, { useEffect } from "react";
 import main_logo from "../../assets/main-logo.svg";
 import homepage from "../../assets/homepage.gif";
 import "@lottiefiles/lottie-player";
 import "./landing.css";
+
 
 // main page component
 const LandingPage = () => {
