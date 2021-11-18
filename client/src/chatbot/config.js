@@ -78,7 +78,7 @@ const config = (props)=>
         message: `If you're more of a reading person, find articles and websites that have interactive
         playgrounds.  Take understanding probability as an example. There might be games and
         websites that present the information in a very enjoyable way. Searching for
-        "visualizing probability website" gives us this result https://seeing-theory.brown.edu/basic-probability/index.html and it is indeed a very fun
+        "visualizing probability website" gives us this result https://seeing-theory .brown.edu/basic-pro bability/index.html and it is indeed a very fun
         website.`,
         widgetName: "learnOnlineStep6",
         otherOption: {
@@ -96,7 +96,7 @@ const config = (props)=>
         message: `You can also find questions to practice on a particular topic that you just learnt.
         Let's say you have just finished reading up on optics. What you can do to test
         your understanding is search for practice questions on optics. The search result
-        https://www.learncbse.in/mcq-questions-for-class-10-science-with-answers/
+        https://www.learncbse .in/mcq-questions-f or-class-10-science- with-answers/
         contains nicely put questions relating to that topic.`,
         link: "https://seeing-theory.brown.edu/basic-probability/index.html",
         widgetName: "CBSERedirect",
@@ -141,7 +141,7 @@ const config = (props)=>
       widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
         nextActionText: "YES!",
-        message: `Khan Academy - https://www.khanacademy.org/
+        message: `Khan Academy - https://www.khanaca demy.org/
         1. Khan Academy might be your go-to place to learn all things science,
         technology, math, art and medicine.\n
         2. They have topics divided into smaller units and each unit contains a well
@@ -175,7 +175,7 @@ const config = (props)=>
       widgetFunc: (props) => <MultipleOptions {...props} />,
       props: {
         nextActionText: "YES!",
-        message: `Just search for it! https://www.duolingo.com/
+        message: `Just search for it! https://www.duolingo .com/
         is a very fun place to explore`,
         
         widgetName: "coolResourcesStep5",
@@ -193,7 +193,7 @@ const config = (props)=>
       props: {
         nextActionText: "Okay, next!",
         message: `Do you want to learn pretty much anything under the sun?!`,
-        link: "https://www.duolingo.com/",
+        link: "https://www.duolingo. com/",
         widgetName: "coolResourcesStep6",
       },
     },
@@ -203,7 +203,7 @@ const config = (props)=>
       widgetFunc: (props) => <SingleOption {...props} />,
       props: {
         nextActionText: "YES!",
-        message: `YouTube - https://www.youtube.com/\n
+        message: `YouTube - https://www.youtube. com/\n
         1. A great wealth of knowledge where tons of educators share their explanations.\n
         2. You will find the explanation in the language you are comfortable with a very
         high chance.\n
