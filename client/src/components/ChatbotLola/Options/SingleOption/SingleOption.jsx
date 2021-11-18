@@ -6,7 +6,11 @@ let url = ""
 
 const handleGotoLink = () => {
   //console.log(url)
-  window.location = url
+  //window.location = url
+  let a= document.createElement('a');
+  a.target= '_blank';
+  a.href= url;
+  a.click();
 }
 
 const SingleOption = (props) => {
