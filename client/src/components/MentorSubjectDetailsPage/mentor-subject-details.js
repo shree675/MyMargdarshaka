@@ -106,7 +106,7 @@ const SubTopics = ({ curChapter, classCode }) => {
 
 const PendingTests = ({ pendingTests }) => {
   const handleLaunchTest = (topic) => {
-    alert(`Test has been launched on \"${topic}\"`);
+    alert(`Test has been launched on \"${topic}\". Please note that this functionality is representative which means that no real test is being conducted for the students.`);
   };
   return (
     <div className="mentor-tests-tab-inner">
@@ -132,6 +132,9 @@ const PendingTests = ({ pendingTests }) => {
 };
 
 const CompletedTests = ({ completedTests }) => {
+  const handleTestDetails = (topic) => {
+    alert(`Test details of topic: \"${topic}\"are available here. Please note that this functionality is representative hence there is no real data of tests results and details avaiable.`);
+  };
   return (
     <div className="mentor-tests-tab-inner">
       {completedTests.map((topic) => (
@@ -141,7 +144,7 @@ const CompletedTests = ({ completedTests }) => {
           >
             {topic.length < 20 ? topic : topic.substring(0, 20) + "....."}
           </div>
-          <div className="mentor-launch-test-button">VIEW DETAILS</div>
+          <div className="mentor-launch-test-button" onClick={(e) => {handleTestDetails(topic);}}>VIEW DETAILS</div>
         </div>
       ))}
     </div>
