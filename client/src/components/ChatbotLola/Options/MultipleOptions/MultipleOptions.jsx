@@ -5,7 +5,11 @@ let url = ""
 const handleGotoLink = () => {
   //console.log(url)
   //window.location = url
-  window.open(url, '_blank')
+  //window.open(url)
+  let a= document.createElement('a');
+  a.target= '_blank';
+  a.href= url;
+  a.click();
 }
 
 const MultipleOptions = (props) => {
