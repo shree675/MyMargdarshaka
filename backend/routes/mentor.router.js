@@ -31,7 +31,9 @@ router.route("/signup/findmatches/").post(mentors.findMatches);
 }); */
 
 // normal update by phone
-router.route("/assign/update-by-phone/:phone").post(mentors.updateMentorByPhone);
+router
+  .route("/assign/update-by-phone/:phone")
+  .post(mentors.updateMentorByPhone);
 
 // normal update by id
 router.route("/update-by-id/:id").post(mentors.updateMentorById);
@@ -54,7 +56,7 @@ router.route("/assign/update-by-id/:id").post(async (req, res) => {
 
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
-      mentor.Classes[i].students.push({ id: learner_id, consent: false });
+      mentor.Classes[i].students.push({ id: learner_id /*consent: false */ });
       console.log("students after pushing : ", mentor.Classes[i].students);
       //const field = "Classes." + i + ".students";
       //await Mentor.findByIdAndUpdate(mentor_id, {

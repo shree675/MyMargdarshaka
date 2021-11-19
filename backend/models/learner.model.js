@@ -58,7 +58,7 @@ let Learner = new Schema({
       {
         code: { type: String, required: true },
         mentor_id: { type: String, default: "-1" },
-        consent: { type: Boolean, default: false },
+        /*consent: { type: Boolean, default: false },*/
         chapters: {
           type: [chapter],
         },

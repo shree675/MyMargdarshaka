@@ -55,7 +55,9 @@ const LearnerDashboard = () => {
       }
     );
 
-    const oldMentorId = learnerData.subjects.filter((sub) => sub.code == class_code)[0].mentor_id;
+    const oldMentorId = learnerData.subjects.filter(
+      (sub) => sub.code == class_code
+    )[0].mentor_id;
     console.log("old mentor : ", oldMentorId);
 
     let new_mentors = res.data.filter((m) => m != oldMentorId);
@@ -98,7 +100,9 @@ const LearnerDashboard = () => {
       headers: { Authorization: `Bearer ${curuser}` },
     });
     console.log("new mentor : ", res.data.name);
-    window.alert(`New mentor : \n Name - ${res.data.name}\n Phone - ${res.data.phone} \n    has been assigned for \"${subject}\".`);
+    window.alert(
+      `New mentor : \n Name - ${res.data.name}\n Phone - ${res.data.phone} \n    has been assigned for \"${subject}\".`
+    );
   };
 
   // verify if a user has already logged in
@@ -122,20 +126,27 @@ const LearnerDashboard = () => {
   }, [phone, curuser]);
 
   return (
-    <div className='mb-3 learner-bg'>
+    <div className="mb-3 learner-bg">
       <LearnerNavbar />
-      <div className='learner-curvature'></div>
-      <div className='container-fluid'>
-        <div className='row align-items-end'>
-          <div className='col-lg-3 col-12'>
-            <LearnerDashboardChangeDetails details={{ ...learnerData, curuser }} />
+      <div className="learner-curvature"></div>
+      <div className="container-fluid">
+        <div className="row align-items-end">
+          <div className="col-lg-3 col-12">
+            <LearnerDashboardChangeDetails
+              details={{ ...learnerData, curuser }}
+            />
           </div>
-          <div className='col-lg-9 col-12'>
-            <LearnerDashboardEditAttributes details={{ ...learnerData, curuser }} />
+          <div className="col-lg-9 col-12">
+            <LearnerDashboardEditAttributes
+              details={{ ...learnerData, curuser }}
+            />
           </div>
         </div>
         <NIOSStatus details={learnerData} />
-        <LearnerRequestChangeOfMentor changeMentor={changeMentor} />
+        <LearnerRequestChangeOfMentor
+          details={learnerData}
+          changeMentor={changeMentor}
+        />
       </div>
     </div>
   );

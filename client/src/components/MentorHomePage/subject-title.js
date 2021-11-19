@@ -15,7 +15,7 @@ const SubjectTitle = (props) => {
           <h4>
             {data.getSubjectName(props.classCode) +
               " " +
-              props.classCode[props.classCode.length - 1]}
+              data.getClassNumber(props.classCode)}
           </h4>
         </div>
         <button
