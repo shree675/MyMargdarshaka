@@ -17,10 +17,16 @@ module.exports.feedbackSchema = Joi.object({
 });
 
 module.exports.learnerSchema = Joi.object({
-  phone: Joi.string().required().length(10),
+  phone: Joi.string().required(),
   name: Joi.string().required(),
   email: Joi.string().email(),
-  language: Joi.string().valid("Telugu", "Hindi", "English", "Kannada"),
+  language: Joi.string().valid(
+    "Telugu",
+    "Hindi",
+    "English",
+    "Kannada",
+    "Malayalam"
+  ),
   time: Joi.string().valid("Morning", "Afternoon", "Evening"),
   profile_picture_url: Joi.string().uri(),
   // NIOS_status: Joi.string().valid("I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM")
@@ -30,7 +36,13 @@ module.exports.mentorSchema = Joi.object({
   phone: Joi.string().required(),
   name: Joi.string().required(),
   email: Joi.string().email(),
-  language: Joi.string().valid("Telugu", "Hindi", "English", "Kannada"),
+  language: Joi.string().valid(
+    "Telugu",
+    "Hindi",
+    "English",
+    "Kannada",
+    "Malayalam"
+  ),
   time: Joi.string().valid("Morning", "Afternoon", "Evening"),
   approved: Joi.boolean().required(),
   profile_picture_url: Joi.string().uri(),

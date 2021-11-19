@@ -75,4 +75,5 @@ let Mentor = new Schema({
   },
 });
 
-(module.exports = mongoose.model("Mentor", Mentor)), mongoose.model("chapter", chapter);
+(module.exports = mongoose.model("Mentor", Mentor)),
+  mongoose.model("chapter", chapter);
