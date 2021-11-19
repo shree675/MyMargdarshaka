@@ -167,7 +167,9 @@ const LearnerSignup = () => {
 
       console.log("Printing learner before pushing:", learner);
       await axios
-        .post(`/api/learner/signup/createlearner`, learner)
+        .post(`/api/learner/signup/createlearner`, learner, {
+          headers: { Authorization: `Bearer ${curuser}` },
+        })
         .then((res) => console.log("Pushing Sign up data"));
 
       await axios
@@ -227,16 +229,18 @@ const LearnerSignup = () => {
         let cur_code = codes[i];
         let cur_mentor_id = mentors[i];
 
-        await axios.post(
-          `/api/mentor/assign/update-by-id/${cur_mentor_id}`,
-          {
-            class_code: cur_code,
-            learner_id,
-          },
-          {
-            headers: { Authorization: `Bearer ${curuser}` },
-          }
-        );
+        if (cur_mentor_id != "-1") {
+          await axios.post(
+            `/api/mentor/assign/update-by-id/${cur_mentor_id}`,
+            {
+              class_code: cur_code,
+              learner_id,
+            },
+            {
+              headers: { Authorization: `Bearer ${curuser}` },
+            }
+          );
+        }
       }
       console.log("click here 6");
 

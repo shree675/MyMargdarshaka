@@ -167,10 +167,22 @@ const data = {
     ],
   },
   getSubjectName: (code) => {
-    //console.log(code);
-    code = code && code.substring(0, code.length - 1);
+    let classNumber = Number(code[code.length - 1]);
+    if (classNumber <= 2) {
+      code = code.substr(0, code.length - 2);
+    } else {
+      code = code.substr(0, code.length - 1);
+    }
     const subName = data.codeToSubName[code];
     return subName;
+  },
+  getClassNumber: (code) => {
+    let classNumber = Number(code[code.length - 1]);
+    if (classNumber <= 2) {
+      return Number(code.substring(code.length - 2, code.length));
+    } else {
+      return classNumber;
+    }
   },
   test: [
     {

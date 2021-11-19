@@ -21,7 +21,11 @@ const SubjectTitle = (props) => {
     <div className="card p-3 col-12 mb-3" style={props.style}>
       <div className="row justify-content-between">
         <div className="col-10">
-          <h4>{props.subject}</h4>
+          <h4>
+            {data.getSubjectName(props.classCode) +
+              " " +
+              data.getClassNumber(props.classCode)}
+          </h4>
         </div>
         <button
           className="col-1 me-3"

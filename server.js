@@ -38,7 +38,9 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
+var serviceAccount = JSON.parse(
+  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
+);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -53,7 +55,7 @@ async function authMiddleware(req, res, next) {
 
   if (tmp[0] === "Bearer") {
     const idToken = tmp[1];
-    console.log("idToken -> ", idToken);
+    //console.log("idToken -> ", idToken);
 
     if (!idToken) {
       res.json(401);
@@ -62,7 +64,7 @@ async function authMiddleware(req, res, next) {
       .auth()
       .verifyIdToken(idToken)
       .then((decodedToken) => {
-        console.log(decodedToken);
+        //console.log(decodedToken);
         const uid = decodedToken && decodedToken.uid;
         if (uid != null && uid != undefined) next();
       })
