@@ -16,7 +16,9 @@ const CommonGuidelines = () => {
       <div className="container">
         <div className="col">
           <div className="row">
-            <div className="bubble">Hello there Stranger! How can I help you?</div>
+            <div className="bubble">
+              Hello there Stranger! How can I help you?
+            </div>
           </div>
           <div className="row">
             <img
@@ -40,7 +42,3 @@ const CommonGuidelines = () => {
 };
 
 export default CommonGuidelines;
-
-
-
-

@@ -5,12 +5,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
-const axios = require("axios");
 const Admin = require("./backend/models/admin.model");
+const nodemailer = require("nodemailer");
 
 //IMPORTANT NOTE: The connection string is available in the .env file which is not included in the
 //GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
-const connectionString = process.env.MONGO_URI;
+
+// const connectionString = process.env.MONGO_URI;
+const connectionString = "mongodb://localhost:27017/my-margdarshaka";
 
 const app = express();
 app.use(cors());
@@ -104,6 +106,35 @@ app.use("/api/admin", adminRouter);
 
 /* app.use('/pref',prefRouter);
 app.use('/api',apiRouter); */
+
+app.get("/api/sendemail/:id", (req, res, next) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "mymargdarshaka@gmail.com",
+      pass: process.env.ACC_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  const mailOptions = {
+    from: "mymargdarshaka@gmail.com",
+    to: req.params.id,
+    subject: "Your application has been approved",
+    text: "Congratulations!\n\n\tWe are happy to inform you that your application to MyMargdarshaka for the post of 'Mentor' has been approved.\n\tLog onto https://mymargdarshaka.herokuapp.com/authentication:mentor with your credentials and get started!\nWe wish you a great learning experience!\n\nRegards\nMyMargdarshaka Team\nhttps://mymargdarshaka.herokuapp.com/",
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.send(info);
+    }
+  });
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

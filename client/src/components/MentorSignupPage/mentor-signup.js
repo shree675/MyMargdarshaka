@@ -344,7 +344,7 @@ const MentorSignup = () => {
           ))}
         </div>
         <div className="valid-div" style={{ marginLeft: "-140px" }}>
-          {state.subCheck ? "" : "*select atleast one subject"}
+          {state.subCheck ? "" : "*select at least one subject"}
         </div>
       </div>
       <div className="submit-button" onClick={handleClick}>
