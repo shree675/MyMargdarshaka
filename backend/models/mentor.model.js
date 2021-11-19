@@ -44,7 +44,8 @@ let Mentor = new Schema({
   },
   approved: {
     type: Boolean,
-    default: true, // remember to change to false
+    //default: true, // remember to change to false
+    default: false,
   },
   // open application means approved and rejected are false.
   // after rejected by admin, this is set to true
@@ -56,7 +57,7 @@ let Mentor = new Schema({
     type: [
       {
         code: { type: String, required: true },
-        students: [{ id: { type: String }, consent: { type: Boolean } }],
+        students: [{ id: { type: String } /*consent: { type: Boolean }*/ }],
         chapters: {
           type: [chapter],
         },
@@ -75,4 +76,5 @@ let Mentor = new Schema({
   },
 });
 
-(module.exports = mongoose.model("Mentor", Mentor)), mongoose.model("chapter", chapter);
+(module.exports = mongoose.model("Mentor", Mentor)),
+  mongoose.model("chapter", chapter);
