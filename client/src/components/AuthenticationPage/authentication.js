@@ -67,6 +67,7 @@ const Authentication = () => {
   const [valid_user, setValidUser] = useState(false);
   const [customUserType, setCusomUserType] = useState(userType);
 
+  // checking the type of the user
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -94,6 +95,7 @@ const Authentication = () => {
     verify();
   }, []);
 
+  // function to verify the user
   const verify = async () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
@@ -150,6 +152,7 @@ const Authentication = () => {
         if (user.phone === p) {
           console.log("Valid phone number matched: ", p);
           setValidUser(true);
+          // checking if the user is banned
           if (user.is_banned) {
             alert("You have been banned from logging in. Please contact an administrator.");
             window.location = "/";
@@ -247,6 +250,7 @@ const Authentication = () => {
     config: { mass: 10, tension: 550, friction: 140 },
   }));
 
+  // frontend component of the page
   return (
     <div className='auth-body'>
       <div className='auth-heading'>Verify your phone number</div>
@@ -293,6 +297,7 @@ const Authentication = () => {
                 id='auth-signin-button'
                 className='auth-button'
                 onClick={(e) => {
+                  // function to sign in the user
                   if (phone != undefined && phone != null && phone != "") {
                     setToggle(false);
                     verifyPhone(e); // verify if all fields are filled
@@ -338,6 +343,7 @@ const Authentication = () => {
                 id='auth-signin-button'
                 className='auth-button'
                 onClick={(e) => {
+                  // function to sign in the user
                   if (otp != null && otp != undefined && otp != "") {
                     verifyOtp(e); // verify if all fields are filled
                   } else {

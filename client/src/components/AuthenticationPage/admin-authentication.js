@@ -43,10 +43,7 @@ const CssTextField = styled(TextField)({
 // main page component
 const AdminAuthentication = () => {
   // react spring animation
-  const calc = (x, y) => [
-    x - window.innerWidth / 2,
-    y - window.innerHeight / 2,
-  ];
+  const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
   const trans1 = (x, y) => `translate3d(${x / 16}px,${y / 16}px,0)`;
   const trans2 = (x, y) => `translate3d(${x / 7.5}px,${y / 7.5}px,0)`;
   const [props, set] = useSpring(() => ({
@@ -120,55 +117,53 @@ const AdminAuthentication = () => {
     }
   };
 
+  // frontend component of the page
   return (
-    <div className="admin-body">
-      <div className="auth-body">
-        <div className="auth-heading">You are signing in as an admin</div>
-        <div
-          className="auth-content"
-          onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}
-        >
-          <div className="auth-phone-svg">
-            <img src={auth_background} className="auth-background-img" />
+    <div className='admin-body'>
+      <div className='auth-body'>
+        <div className='auth-heading'>You are signing in as an admin</div>
+        <div className='auth-content' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+          <div className='auth-phone-svg'>
+            <img src={auth_background} className='auth-background-img' />
             <animated.div style={{ transform: props.xy.to(trans1) }}>
-              <img src={humans} className="auth-humans" />
-              <img src={waveback} className="auth-wave-back" />
+              <img src={humans} className='auth-humans' />
+              <img src={waveback} className='auth-wave-back' />
             </animated.div>
             <animated.div style={{ transform: props.xy.to(trans2) }}>
-              <img src={wavefront} className="auth-wave-front" />
+              <img src={wavefront} className='auth-wave-front' />
             </animated.div>
           </div>
-          <div className="auth-content-body">
-            <div className="auth-91">
-              <img src={lock} className="auth-svg"></img>
+          <div className='auth-content-body'>
+            <div className='auth-91'>
+              <img src={lock} className='auth-svg'></img>
             </div>
             <br></br>
             <br></br>
-            <div className="auth-text">
+            <div className='auth-text'>
               <CssTextField
                 fullWidth
-                label="Username"
-                id="auth-textfield"
-                defaultValue=""
-                size="small"
-                placeholder=""
-                color="error"
+                label='Username'
+                id='auth-textfield'
+                defaultValue=''
+                size='small'
+                placeholder=''
+                color='error'
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
               />
             </div>
             <br></br>
-            <div className="auth-text">
+            <div className='auth-text'>
               <CssTextField
                 fullWidth
-                label="Password"
-                id="auth-textfield"
-                defaultValue=""
-                size="small"
-                placeholder=""
-                color="error"
-                type="password"
+                label='Password'
+                id='auth-textfield'
+                defaultValue=''
+                size='small'
+                placeholder=''
+                color='error'
+                type='password'
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
@@ -176,10 +171,11 @@ const AdminAuthentication = () => {
             </div>
             <br></br>
             <br></br>
-            <div className="">
+            <div className=''>
               <button
-                className="auth-button"
+                className='auth-button'
                 onClick={() => {
+                  // function to handle sign in
                   if (
                     username != "" &&
                     username != null &&
@@ -198,8 +194,8 @@ const AdminAuthentication = () => {
               </button>
             </div>
           </div>
-          <img src={humans} className="auth-humans-phone" />
-          <img src={auth_background} className="auth-background-img-phone" />
+          <img src={humans} className='auth-humans-phone' />
+          <img src={auth_background} className='auth-background-img-phone' />
         </div>
       </div>
     </div>

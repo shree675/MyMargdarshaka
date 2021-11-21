@@ -20,6 +20,7 @@ const InitiateSignin = () => {
     config: { mass: 10, tension: 550, friction: 140 },
   }));
 
+  // checking if the user is already signed in
   useEffect(() => {
     if (
       localStorage.getItem("userType") !== null &&
@@ -42,6 +43,7 @@ const InitiateSignin = () => {
     }
   }, []);
 
+  // frontend component of the page
   return (
     <div className='init-signin-body'>
       <div className='init-signin-content1' onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
