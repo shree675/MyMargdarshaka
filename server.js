@@ -1,5 +1,5 @@
 //@ts-check
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: "./client/.env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -45,7 +45,9 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
+var serviceAccount = JSON.parse(
+  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
+);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -101,10 +103,11 @@ app.use("/api/admin", adminRouter);
 //   throw new Error("Page Not Found");
 // });
 
-// app.use((err, req, res, next) => {
-//   console.log("BAD ERROR");
-//   // render the error page ... HOW?
-// });
+app.use((err, req, res, next) => {
+  console.log("BAD ERROR");
+  // render the error page ... HOW?
+  res.sendFile(path.join(__dirname, "../public/error.html"));
+});
 
 // service to send emails
 app.get("/api/sendemail/:id", (req, res, next) => {
