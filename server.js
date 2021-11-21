@@ -11,7 +11,7 @@ const nodemailer = require("nodemailer");
 //IMPORTANT NOTE: The connection string is available in the .env file which is not included in the
 //GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
 
-// run the command mongod before running the app locally, to start up the local database. Please refer to contributing.md for more details 
+// run the command mongod before running the app locally, to start up the local database. Please refer to contributing.md for more details
 // If you do not have access to the main mongodb atlas database, you will have to run use the script and seeds provided for a dummy local database
 
 // const connectionString = process.env.MONGO_URI;
@@ -44,9 +44,7 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(
-  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
-);
+var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -97,7 +95,6 @@ app.use("/api/mentor", authMiddleware, mentorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
 app.use("/api/admin", adminRouter);
-// app.use("/api/admin", authMiddleware, adminRouter);
 
 // app.get("*", (req, res) => {
 //   throw new Error("Page Not Found");
@@ -108,9 +105,7 @@ app.use("/api/admin", adminRouter);
 //   // render the error page ... HOW?
 // });
 
-/* app.use('/pref',prefRouter);
-app.use('/api',apiRouter); */
-
+// service to send emails
 app.get("/api/sendemail/:id", (req, res, next) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",

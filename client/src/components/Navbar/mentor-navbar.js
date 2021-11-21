@@ -1,16 +1,9 @@
 //@ts-check
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
-import {
-  Nav,
-  NavLogo,
-  NavMenu,
-  Bars,
-  NavLink,
-  NavBtn,
-  NavBtnLink,
-} from "./navbarElements";
+import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
 // @ts-ignore
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
@@ -29,6 +22,7 @@ const Navbar = (props) => {
   const [curuser, setCuruser] = useState("No user is logged in");
 
   useEffect(() => {
+    // setting the user's profile picture
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setPhone(user.phoneNumber);
@@ -48,6 +42,7 @@ const Navbar = (props) => {
     verify(setCuruser, setPhone);
   }, [phone, curuser]);
 
+  // frontend component to display the navbar
   return (
     <div>
       <div
@@ -77,20 +72,18 @@ const Navbar = (props) => {
           }}
         >
           <div style={{ color: "white", marginLeft: "20vw" }}>CLOSE</div>
-          <CloseIcon
-            style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }}
-          />
+          <CloseIcon style={{ color: "white", fontSize: "3vh", marginLeft: "5vw" }} />
         </div>
-        <Link className="nav-link-mobile" to="/mentor-guidelines">
+        <Link className='nav-link-mobile' to='/mentor-guidelines'>
           GUIDELINES
         </Link>
-        <Link className="nav-link-mobile" to="/my-students">
+        <Link className='nav-link-mobile' to='/my-students'>
           MY STUDENTS
         </Link>
-        <Link className="nav-link-mobile" to="/mentor-dashboard">
+        <Link className='nav-link-mobile' to='/mentor-dashboard'>
           DASHBOARD
         </Link>
-        <Link className="nav-link-mobile" to="/feedback">
+        <Link className='nav-link-mobile' to='/feedback'>
           FEEDBACK
         </Link>
         <button
@@ -100,7 +93,7 @@ const Navbar = (props) => {
             localStorage.clear();
             window.location = "/init-signin";
           }}
-          className="nav-logout-phone"
+          className='nav-logout-phone'
         >
           LOGOUT
         </button>
@@ -113,14 +106,14 @@ const Navbar = (props) => {
         >
           <Bars />
         </div>
-        <NavLogo to="#">
+        <NavLogo to='#'>
           <img src={mainLogo} style={{ height: "80px" }} />
         </NavLogo>
         <NavMenu>
-          <NavLink to="/mentor-guidelines">GUIDELINES</NavLink>
-          <NavLink to="/my-students">MY STUDENTS</NavLink>
-          <NavLink to="/mentor-dashboard">DASHBOARD</NavLink>
-          <NavLink to="/feedback">FEEDBACK</NavLink>
+          <NavLink to='/mentor-guidelines'>GUIDELINES</NavLink>
+          <NavLink to='/my-students'>MY STUDENTS</NavLink>
+          <NavLink to='/mentor-dashboard'>DASHBOARD</NavLink>
+          <NavLink to='/feedback'>FEEDBACK</NavLink>
           <button
             onClick={() => {
               // logout
@@ -128,12 +121,13 @@ const Navbar = (props) => {
               localStorage.clear();
               window.location = "/init-signin";
             }}
-            className="nav-logout-pc"
+            className='nav-logout-pc'
           >
             LOGOUT
           </button>
         </NavMenu>
-        <img className="img-fluid-nav rounded-circle" src={pic} />
+        {/* displaying the user's profile picture */}
+        <img className='img-fluid-nav rounded-circle' src={pic} />
       </Nav>
     </div>
   );

@@ -6,7 +6,6 @@ import homepage from "../../assets/homepage.gif";
 import "@lottiefiles/lottie-player";
 import "./landing.css";
 
-
 // main page component
 const LandingPage = () => {
   // when arrow is clicked
@@ -18,6 +17,7 @@ const LandingPage = () => {
     localStorage.clear();
   },[]); */
 
+  // frontend component to display the homepage
   return (
     <div className='landing-body'>
       <button className='landing-gif' onClick={() => (window.location = "/common-guidelines")}>

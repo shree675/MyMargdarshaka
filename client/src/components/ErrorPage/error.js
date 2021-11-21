@@ -91,7 +91,6 @@ const Error = () => {
         });
         console.log(tempuserType);
         setUserType(tempuserType);
-      } else {
       }
     });
   };
@@ -104,9 +103,10 @@ const Error = () => {
     config: { mass: 10, tension: 550, friction: 140 },
   }));
 
+  // frontend component of the page
   return (
     <div>
-      {userType === "unknown" ? null : userType === "learner" ? ( // setting the right navbar
+      {userType === "unknown" ? null : userType === "learner" ? ( // setting the correct navbar
         <LearnerNavbar />
       ) : (
         <MentorNavbar />

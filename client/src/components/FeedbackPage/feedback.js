@@ -61,46 +61,17 @@ const Feedback = () => {
         setCuruser(user.uid);
         setPhone(user.phoneNumber);
 
-        /*
-        await axios
-          .get("/api/learner/login/submitlearner")
-          .then((e) => {
-            e.data.map((data) => {
-              if (data.phone === user.phoneNumber) {
-                setName(data.name);
-                //console.log(data.name);
-                setUserType("learner");
-                //console.log(userType);
-              }
-            });
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
-        await axios
-          .get("/api/mentor/login/submitmentor")
-          .then((e) => {
-            e.data.map((data) => {
-              if (data.phone === user.phoneNumber) {
-                setName(data.name);
-                //console.log(data.name);
-                setUserType("mentor");
-                //console.log(userType);
-              }
-              */
-
+        // obtaining the middleware token to protect routes
         var tk;
         user.getIdToken(true).then(async (idToken) => {
           tk = idToken;
-          console.log(tk);
+          // setting the user instance
           await axios
             .get("/api/learner/login/submitlearner", { headers: { Authorization: `Bearer ${tk}` } })
             .then((e) => {
-              console.log(e);
               e.data.map((data) => {
                 if (data.phone === user.phoneNumber) {
                   setName(data.name);
-                  console.log(data.name);
                   setUserType("learner");
                   console.log(userType);
                 }
@@ -123,7 +94,6 @@ const Feedback = () => {
             })
             .catch((err) => {
               console.log(err.message);
-
             });
         });
       } else {
@@ -132,6 +102,7 @@ const Feedback = () => {
     });
   };
 
+  // frontend component of the page
   return (
     <div>
       {userType === null ? null : userType === "learner" ? ( // setting the navbar appropriately
@@ -163,6 +134,7 @@ const Feedback = () => {
             value={issueType}
             label='Issue Type'
             onChange={(e) => {
+              // function to set an issue type
               setIssueType(e.target.value);
               if (e.target.value == 10) {
                 setIssue("Report Abuse");
@@ -206,6 +178,7 @@ const Feedback = () => {
           <button
             className='feedback-button'
             onClick={() => {
+              // function to submit the feedback
               var err = 0;
               if (subject == null || issue == null || body == null) {
                 err = 1;
