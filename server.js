@@ -17,13 +17,13 @@ const nodemailer = require("nodemailer");
 
 // const connectionString = process.env.MONGO_URI;
 // const connectionString = "mongodb://localhost:27017/my-margdarshaka";
-const connectionString = process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
+const connectionString =
+  process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "3mb" }));
 /* app.use(express.json()); */
-
 mongoose.connect(connectionString);
 const connection = mongoose.connection;
 connection.once("open", function () {
@@ -45,7 +45,9 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
+var serviceAccount = JSON.parse(
+  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
+);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -97,14 +99,23 @@ app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
 app.use("/api/admin", adminRouter);
 
+app.get("/getToken", (req, res) => {
+  res.json(process.env.REACT_APP_HUGGINGFACE_TOKEN);
+});
+
 // app.get("*", (req, res) => {
 //   throw new Error("Page Not Found");
 // });
 
-// app.use((err, req, res, next) => {
-//   console.log("BAD ERROR");
-//   // render the error page ... HOW?
-// });
+app.use((err, req, res, next) => {
+  console.log("BAD ERROR");
+  // render the error page ... HOW?
+  console.log("DIRNAME", __dirname);
+
+  // for developers, you can check console for the stack trace
+  console.log("ERROR", err);
+  next();
+});
 
 // service to send emails
 app.get("/api/sendemail/:id", (req, res, next) => {

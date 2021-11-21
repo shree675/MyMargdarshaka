@@ -34,10 +34,15 @@ module.exports.getfeedbacks = (req, res) => {
 module.exports.update = (req, res) => {
   let id = req.params.id;
   let data = req.body;
-  Feedback.findByIdAndUpdate(id, { $set: data }, { new: true }, function (err, result) {
-    if (err) {
-      console.log(err);
+  Feedback.findByIdAndUpdate(
+    id,
+    { $set: data },
+    { new: true },
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
     }
-  });
+  );
   res.json("ok");
 };
