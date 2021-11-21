@@ -1,7 +1,6 @@
 const Feedback = require("../models/feedback.model");
 
 module.exports.submitfeedback = (req, res) => {
-  throw new Error("Method not implemented");
   const phone = req.body.phone;
   const issueSubject = req.body.issueSubject;
   const issueType = req.body.issueType;
