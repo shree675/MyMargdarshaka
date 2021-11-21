@@ -34,33 +34,14 @@ const CssTextField = styled(TextField)({
   },
 });
 
-// dummy data with format
-const resolvedIssues = [
-  {
-    type: "Other",
-    subject: "lorem ipsum dolor sit amet",
-    name: "Kenta Emilie",
-    phone: "1234567890",
-    timestamp: "Oct 12, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  },
-  {
-    type: "Platform issue issue issue issue issue issue issue",
-    subject:
-      "lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el lorem ipsum dolor sit amet, consectetur adipisicing el",
-    name: "Sebastián Abdul",
-    phone: "1234567890",
-    timestamp: "Oct 12, 2015",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
-
 // card component
 const ApplicationCard = (props) => {
   // console.log(props);
   if (props.app === undefined) {
     return null;
   }
+
+  // frontend components of each card
   return (
     <div className='admin-applications-card'>
       <div className='admin-applications-card-row1'>
@@ -80,11 +61,13 @@ const ApplicationCard = (props) => {
           <div
             className='admin-applications-card-button'
             onClick={(e) => {
+              // function to make the admin take up the issue
               let username = localStorage.getItem("username");
               const data = {
                 status: 0,
                 assignedTo: username,
               };
+              // repopulating the list
               axios
                 .post("/api/feedback/update/" + props.app._id, data)
                 .then(() => props.updateIssues())
@@ -97,11 +80,13 @@ const ApplicationCard = (props) => {
           <div
             className='admin-applications-card-button'
             onClick={() => {
+              // function to make the admin resolve the issue
               let username = localStorage.getItem("username");
               const data = {
                 status: 1,
                 assignedTo: username,
               };
+              // repopulating the list
               axios
                 .post("/api/feedback/update/" + props.app._id, data)
                 .then(() => props.updateIssues())
@@ -147,6 +132,7 @@ class AdminHomePage extends React.Component {
       this.setState({ searchResultText: this.state.searchText });
       // submit this search text to Backend for Query
       this.setState({ searchResults: [] });
+      // searching both the databases for matches
       axios
         .get(`/api/mentor/search/${this.state.searchText}`, {
           headers: { Authorization: `Basic ${this.state.tk}` },
@@ -169,6 +155,7 @@ class AdminHomePage extends React.Component {
     }
   }
 
+  // funciton to populate the issues lists
   updateIssues() {
     axios
       .get("/api/feedback/getfeedbacks")
@@ -215,6 +202,7 @@ class AdminHomePage extends React.Component {
     this.updateIssues();
   }
 
+  // frontend component of the main application
   render() {
     return (
       <div>
@@ -250,6 +238,7 @@ class AdminHomePage extends React.Component {
                 RESOLVED ISSUES
               </div>
             </div>
+            {/* search field on mobile devices */}
             <div className='admin-applications-right-box-phone'>
               <CssTextField
                 id='outlined-basic'
@@ -269,11 +258,13 @@ class AdminHomePage extends React.Component {
                     </div>
                     <div
                       onClick={(event) => {
+                        // function to ban the user
                         const data = {
                           is_banned: true,
                         };
                         axios.post("/api/user/update/newphone/" + user.phone, data);
                         if (user.NIOS_status !== undefined) {
+                          // banning the learner
                           axios
                             .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                             .then(() => {
@@ -283,6 +274,7 @@ class AdminHomePage extends React.Component {
                               this.handleSubmitText(e);
                             });
                         } else {
+                          // banning the mentor
                           axios
                             .post("/api/mentor/update-by-id/" + user._id, data, {
                               headers: { Authorization: `Basic ${this.state.tk}` },
@@ -328,6 +320,7 @@ class AdminHomePage extends React.Component {
               ))}
             </div>
           </div>
+          {/* search field on desktop devices */}
           <div className='admin-applications-right-box'>
             <CssTextField
               id='outlined-basic'
@@ -347,11 +340,13 @@ class AdminHomePage extends React.Component {
                   </div>
                   <div
                     onClick={(event) => {
+                      // function to ban the user
                       const data = {
                         is_banned: true,
                       };
                       axios.post("/api/user/update/newphone/" + user.phone, data);
                       if (user.NIOS_status !== undefined) {
+                        // banning the learner
                         axios
                           .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                           .then(() => {
@@ -361,6 +356,7 @@ class AdminHomePage extends React.Component {
                             this.handleSubmitText(e);
                           });
                       } else {
+                        // banning the mentor
                         axios
                           .post("/api/mentor/update-by-id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                           .then(() => {

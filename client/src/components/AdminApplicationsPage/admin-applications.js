@@ -3,7 +3,6 @@
 import React from "react";
 import AdminNavbar from "../Navbar/admin-navbar";
 import axios from "axios";
-
 import "./admin-applications.css";
 import TextField from "@mui/material/TextField";
 import { IoBan } from "react-icons/io5";
@@ -35,54 +34,18 @@ const CssTextField = styled(TextField)({
   },
 });
 
-// dummy data with format
-const openApp = [
-  {
-    name: "Arvind",
-    phone: "1234567890",
-    email: "abc@gmail.com",
-    subjects: ["HIN10", "MAT10", "SOC9"],
-    language: "hindi",
-    timeSlot: "morning",
-  },
-  {
-    name: "Raj kumar",
-    phone: "1234567890",
-    email: "abc@gmail.com",
-    subjects: ["HIN10", "MAT10", "SOC9"],
-    language: "hindi",
-    timeSlot: "morning",
-  },
-];
-
-// dummy data with format
-const rejApp = [
-  {
-    name: "Aashrith",
-    phone: "1234567890",
-    email: "abc@gmail.com",
-    subjects: ["HIN10", "MAT10", "SOC9"],
-    language: "hindi",
-    timeSlot: "morning",
-  },
-  {
-    name: "Anil",
-    phone: "1234567890",
-    email: "abc@gmail.com",
-    subjects: ["HIN10", "MAT10", "SOC9"],
-    language: "hindi",
-    timeSlot: "morning",
-  },
-];
-
 // card component
 const ApplicationCard = (props) => {
+  // function to approve a mentor
   const handleApprove = async (user) => {
     console.log("approve ", user.name);
+    // middleware token for protection
     const tk = await localStorage.getItem("basicAuth");
+    // updating the database to approve mentor
     await axios
       .post(`/api/mentor/update-by-id/${user._id}`, { approved: true }, { headers: { Authorization: `Basic ${tk}` } })
       .then((e) => {
+        // sending a confirmation email to the approved mentor
         axios.get(`/api/sendemail/${props.app.email}`).catch((err) => {
           console.log(err);
           alert("Error: Email could not be sent to the approved candidate");
@@ -95,12 +58,15 @@ const ApplicationCard = (props) => {
   };
 
   const handleReject = async (user) => {
+    // function to reject a mentor
     console.log("reject ", user.name);
     const tk = await localStorage.getItem("basicAuth");
+    // updating the database to reject the mentor
     await axios.post(`/api/mentor/update-by-id/${user._id}`, { rejected: true }, { headers: { Authorization: `Basic ${tk}` } });
     props.setRejected(user);
   };
 
+  // frontend components of each card to render in the page
   return (
     <div className='admin-applications-card'>
       <div className='admin-applications-card-row1'>
@@ -187,6 +153,7 @@ class AdminApplications extends React.Component {
           headers: { Authorization: `Basic ${this.state.tk}` },
         })
         .then((e) => {
+          // searching the users in both databases
           this.setState({
             searchResults: e.data.filter((user) => !user.is_banned),
           });
@@ -224,11 +191,13 @@ class AdminApplications extends React.Component {
   }
 
   async getData() {
+    // middleware token
     const tk = await localStorage.getItem("basicAuth");
     console.log("get Data tk : ", tk);
     const res = await axios.get("/api/mentor/get/mentors/open", {
       headers: { Authorization: `Basic ${tk}` },
     });
+    // populating accepted and rejected applications
     const openApp = res.data;
     //console.log(openApp);
     this.setState({ openApplications: openApp });
@@ -259,10 +228,11 @@ class AdminApplications extends React.Component {
     ) {
       window.location = "/my-mentors";
     }
-    console.log("comp did mount");
+    // console.log("comp did mount");
     this.getData();
   }
 
+  // rendering the frontend page
   render() {
     return (
       <div>
@@ -289,6 +259,7 @@ class AdminApplications extends React.Component {
                 REJECTED APPLICATIONS
               </div>
             </div>
+            {/* search field in mobile view */}
             <div className='admin-applications-right-box-phone'>
               <CssTextField
                 id='outlined-basic'
@@ -308,11 +279,13 @@ class AdminApplications extends React.Component {
                     </div>
                     <div
                       onClick={(event) => {
+                        // function to ban a user
                         const data = {
                           is_banned: true,
                         };
                         axios.post("/api/user/update/newphone/" + user.phone, data);
                         if (user.NIOS_status !== undefined) {
+                          // banning the learner
                           axios
                             .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                             .then(() => {
@@ -322,6 +295,7 @@ class AdminApplications extends React.Component {
                               this.handleSubmitText(e);
                             });
                         } else {
+                          // banning the mentor
                           axios
                             .post("/api/mentor/update-by-id/" + user._id, data, {
                               headers: { Authorization: `Basic ${this.state.tk}` },
@@ -353,6 +327,7 @@ class AdminApplications extends React.Component {
               ))}
             </div>
           </div>
+          {/* search field in desktop view */}
           <div className='admin-applications-right-box'>
             <CssTextField
               id='outlined-basic'
@@ -372,11 +347,13 @@ class AdminApplications extends React.Component {
                   </div>
                   <div
                     onClick={(event) => {
+                      // functio to ban a user
                       const data = {
                         is_banned: true,
                       };
                       axios.post("/api/user/update/newphone/" + user.phone, data);
                       if (user.NIOS_status !== undefined) {
+                        // banning the learner
                         axios
                           .post("/api/learner/update/id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                           .then(() => {
@@ -386,6 +363,7 @@ class AdminApplications extends React.Component {
                             this.handleSubmitText(e);
                           });
                       } else {
+                        // banning the mentor
                         axios
                           .post("/api/mentor/update-by-id/" + user._id, data, { headers: { Authorization: `Basic ${this.state.tk}` } })
                           .then(() => {

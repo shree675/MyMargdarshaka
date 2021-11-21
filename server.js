@@ -45,9 +45,7 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(
-  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
-);
+var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -98,7 +96,6 @@ app.use("/api/mentor", authMiddleware, mentorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/feedback", feedbackRouter);
 app.use("/api/admin", adminRouter);
-// app.use("/api/admin", authMiddleware, adminRouter);
 
 // app.get("*", (req, res) => {
 //   throw new Error("Page Not Found");
@@ -109,9 +106,7 @@ app.use("/api/admin", adminRouter);
 //   // render the error page ... HOW?
 // });
 
-/* app.use('/pref',prefRouter);
-app.use('/api',apiRouter); */
-
+// service to send emails
 app.get("/api/sendemail/:id", (req, res, next) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
