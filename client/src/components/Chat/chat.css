@@ -130,6 +130,10 @@
   margin-right: 10px;
 }
 
+.chat-container #sc-launcher > div:nth-of-type(2) form:nth-of-type(3) > div:first-child.sc-user-input-text {
+  overflow-y: hidden !important;
+}
+
 .chat-container #sc-launcher > div:nth-of-type(2) div:nth-of-type(2).sc-message-list {
   padding: 10px;
 }

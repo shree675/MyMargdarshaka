@@ -60,7 +60,9 @@ const Card = (props) => {
           )}
 
           {/* displaying the chat box */}
-          {props.details["learner_id"] === undefined || props.details["mentor_id"] === undefined ? null : (
+          {props.details["learner_id"] === undefined ||
+          props.details["mentor_id"] === undefined ||
+          props.details["is_banned"] ? null : (
             <div className='card-chat'>
               <Chat
                 collection_name={props.details["learner_id"] + props.details["mentor_id"]}

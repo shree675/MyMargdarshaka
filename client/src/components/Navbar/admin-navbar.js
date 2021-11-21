@@ -19,7 +19,7 @@ const AdminNavbar = (props) => {
         style={
           open
             ? {
-                height: "50vh",
+                height: "40vh",
                 background: "#5d1049",
                 display: "block",
                 paddingTop: "5vh",

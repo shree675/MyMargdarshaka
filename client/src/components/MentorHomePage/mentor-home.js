@@ -10,6 +10,7 @@ import SubjectTitle from "./subject-title";
 import { verify } from "../../verifyUser";
 /* import lola from "../../assets/lola_more_glow.gif"; */
 import lola from "../../assets/lola_small_and_moves.gif";
+import firebase from "../../firebase";
 
 // main component
 const MentorHome = () => {
@@ -46,6 +47,13 @@ const MentorHome = () => {
     console.log(res.data);
     const mentor_id = res.data._id;
     const classes = res.data.Classes;
+
+    if (res.data.is_banned) {
+      alert("You have been banned. Please contact your administrator.");
+      firebase.auth().signOut();
+      localStorage.clear();
+      window.location = "/init-signin";
+    }
 
     // tmp object will store all the data and is used to update the state
     let tmp = {};

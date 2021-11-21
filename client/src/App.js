@@ -23,6 +23,7 @@ import LearnerGuidelines from "./components/GuidelinesPage/learner-guidelines.js
 import CommonGuidelines from "./components/GuidelinesPage/common-guidelines.js";
 import MentorGuidelines from "./components/GuidelinesPage/mentor-guidelines.js";
 import GettingStarted from "./components/GettingStarted/getting-started.js";
+import Chat from "./components/Chat/chat.js";
 
 // all user routes
 class App extends Component {
@@ -32,11 +33,11 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={LandingPage} /> // checked
           <Route exact path='/init-signin' component={InitiateSignin} /> // checked
-          <Route exact path='/authentication:id' component={Authentication} /> // checked
+          <Route exact path='/authentication:id' component={Authentication} /> // checked again
           <Route exact path='/learner-signup' component={LearnerSignup} /> // checked
           <Route exact path='/mentor-signup' component={MentorSignup} /> // checked
           <Route exact path='/feedback' component={Feedback} /> // checked
-          <Route exact path='/admin-auth' component={AdminAuthentication} /> // checked
+          <Route exact path='/admin-auth' component={AdminAuthentication} /> // checked again
           <Route exact path='/mentor-dashboard' component={MentorDashBoard} /> // checked
           <Route exact path='/learner-dashboard' component={LearnerDashboard} /> // checked
           <Route exact path='/my-mentors' component={LearnerHomepage} /> // checked
@@ -44,13 +45,13 @@ class App extends Component {
           <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} /> // checked
           <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} /> // checked
           <Route exact path='/test' component={TestPage} /> // checked
-          <Route exact path='/admin-applications' component={AdminApplications} /> // checked
-          <Route exact path='/admin-home' component={AdminHomePage} /> // checked
+          <Route exact path='/admin-applications' component={AdminApplications} /> // checked again
+          <Route exact path='/admin-home' component={AdminHomePage} /> // checked again
           <Route exact path='/learner-guidelines' component={LearnerGuidelines} />
           <Route exact path='/common-guidelines' component={CommonGuidelines} />
           <Route exact path='/mentor-guidelines' component={MentorGuidelines} />
           <Route exact path='/getting-started' component={GettingStarted} />
-          <Route path='/' component={Error} /> // checked
+          <Route path='/' component={Chat} /> // checked
         </Switch>
       </Router>
     );

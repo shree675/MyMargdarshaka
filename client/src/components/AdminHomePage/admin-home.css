@@ -210,11 +210,12 @@
   .admin-applications-card-button {
     box-sizing: border-box;
     width: fit-content;
+    padding: 1vw;
     padding-left: 2vw;
     padding-right: 2vw;
     margin-top: 1vh;
     height: fit-content;
-    font-size: 3.5vw;
+    font-size: 3.2vw;
   }
   .admin-applications-right-box {
     display: none;

@@ -9,6 +9,7 @@ import Navbar from "../Navbar/learner-navbar";
 import LearnerSubjectDetails from "../LearnerSubjectDetailsPage/learner-subject-details";
 import data from "../../data";
 import { verify } from "../../verifyUser";
+import firebase from "../../firebase";
 
 const borderStyle = { borderColor: "#ff0000", borderRadius: "20px" };
 
@@ -29,6 +30,13 @@ const LearnerHome = (props) => {
     });
     const learner_id = res.data._id;
     const subjects = res.data.subjects;
+
+    if (res.data.is_banned) {
+      alert("You have been banned. Please contact your administrator.");
+      firebase.auth().signOut();
+      localStorage.clear();
+      window.location = "/init-signin";
+    }
 
     let mentor_data = [];
 
