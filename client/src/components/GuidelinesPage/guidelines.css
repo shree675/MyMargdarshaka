@@ -3,6 +3,7 @@
   /* margin-top: 60px; */
   border-radius: 20px 20px 0 0;
   margin-top: -20px;
+  min-height: 100vh;
 }
 
 div.bubble {
@@ -31,7 +32,6 @@ div.bubble {
   border-color: #f0cce2 transparent;
   border-width: 20px 20px 0;
   bottom: -20px;
-
   left: 70%;
   /* margin-left: 10px; */
   /* margin-right: -40px; */
@@ -96,4 +96,43 @@ div.bubble {
 .react-chatbot-kit-chat-btn-send {
   background-color: #720d5d;
   color: #f0cce2;
+}
+
+@media screen and (max-width: 480px) {
+  .react-chatbot-kit-chat-container {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
+  .lola-gif {
+    width: 15%;
+  }
+
+  div.bubble {
+    position: relative;
+    background-color: #f0cce2;
+    color: rgb(8, 8, 8);
+    box-shadow: 1px 1px 20px white;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    width: 150px;
+    height: 80px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 40px;
+  }
+
+  .bubble:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-color: #f0cce2 transparent;
+    border-width: 20px 20px 0;
+    bottom: -20px;
+    left: 60%;
+  }
 }
