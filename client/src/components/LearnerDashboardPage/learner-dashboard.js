@@ -38,6 +38,7 @@ const LearnerDashboard = () => {
       .catch((e) => console.log("VERY BAD ERROR"));
   };
 
+  // this function is passed into the child component
   const changeMentor = async (subject) => {
     console.log("change mentor for ", subject);
     const class_code = data.codes[subject] + learnerData.Class;
@@ -55,11 +56,13 @@ const LearnerDashboard = () => {
       }
     );
 
+    // getting the old mentor ID
     const oldMentorId = learnerData.subjects.filter(
       (sub) => sub.code == class_code
     )[0].mentor_id;
     console.log("old mentor : ", oldMentorId);
 
+    // avoiding the old mentor
     let new_mentors = res.data.filter((m) => m != oldMentorId);
 
     if (new_mentors.length == 0 || new_mentors[0] == -1) {
@@ -67,22 +70,26 @@ const LearnerDashboard = () => {
       return;
     }
 
+    // randomly choosing an index for new mentors
     let i = Math.floor(Math.random() * new_mentors.length);
     const newMentorId = new_mentors[i];
     console.log("new mentor : ", newMentorId);
 
+    // removing the learner id from the old mentor
     await axios.post(
       `/api/mentor/remove-learner/${oldMentorId}`,
       { class_code: class_code, learner_id: learnerData._id },
       { headers: { Authorization: `Bearer ${curuser}` } }
     );
 
+    // adding the learner id to the new mentor
     await axios.post(
       `/api/mentor/assign/update-by-id/${newMentorId}`,
       { class_code: class_code, learner_id: learnerData._id },
       { headers: { Authorization: `Bearer ${curuser}` } }
     );
 
+    // updaing the learner with the new mentor
     let temp_sub = learnerData.subjects.filter((sub) => sub.code != class_code);
     temp_sub.push({
       code: class_code,
@@ -96,6 +103,8 @@ const LearnerDashboard = () => {
       { headers: { Authorization: `Bearer ${curuser}` } }
     );
 
+    // displaying the alert showing
+    // the new mentor details
     res = await axios.get(`/api/mentor/get-data/id/${newMentorId}`, {
       headers: { Authorization: `Bearer ${curuser}` },
     });
