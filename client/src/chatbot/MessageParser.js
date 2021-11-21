@@ -4,14 +4,14 @@ import fetch from "node-fetch";
 // require("dotenv").config();
 // import env from "react-dotenv";
 
-console.log("TOKEN", window.env.REACT_APP_HUGGINGFACE_TOKEN);
+console.log("TOKEN", process.env.REACT_APP_HUGGINGFACE_TOKEN);
 
 async function query(data) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large",
     {
       headers: {
-        Authorization: `Bearer ${window.env.REACT_APP_HUGGINGFACE_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_HUGGINGFACE_TOKEN}`,
       },
       method: "POST",
       body: JSON.stringify(data),
