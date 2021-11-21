@@ -49,6 +49,10 @@ const LearnerDashboardChangeDetails = ({ details }) => {
     });
   };
 
+  useEffect(() => {
+    console.log("-> state : ", state);
+  }, [state]);
+
   return (
     <div className="learner-dashboard-change-details">
       <div
