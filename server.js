@@ -1,5 +1,5 @@
 //@ts-check
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config({ path: ".env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -11,12 +11,13 @@ const nodemailer = require("nodemailer");
 //IMPORTANT NOTE: The connection string is available in the .env file which is not included in the
 //GitHUb repository. Please add it to your local repo manually when you wish to run the web-app locally
 
-// run the command mongod before running the app locally, to start up the local database. Please refer to contributing.md for more details 
+// run the command mongod before running the app locally, to start up the local database. Please refer to contributing.md for more details
 // If you do not have access to the main mongodb atlas database, you will have to run use the script and seeds provided for a dummy local database
 
 // const connectionString = process.env.MONGO_URI;
 // const connectionString = "mongodb://localhost:27017/my-margdarshaka";
-const connectionString = process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
+const connectionString =
+  process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
 
 const app = express();
 app.use(cors());
