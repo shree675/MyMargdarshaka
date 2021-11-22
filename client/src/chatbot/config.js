@@ -64,7 +64,7 @@ const config = (props) => {
         widgetFunc: (props) => <SingleOption {...props} />,
         props: {
           nextActionText: "Okay, next!",
-          message: `Different people have different learning styles. Some people prefer video or audio, whil some prefer reading? What works better for you?`,
+          message: `Different people have different learning styles. Some people prefer video or audio, while some prefer reading? What works better for you?`,
           widgetName: "learnOnlineStep5",
         },
       },
@@ -199,7 +199,7 @@ const config = (props) => {
         props: {
           nextActionText: "Okay, next!",
           message: `Do you want to learn pretty much anything under the sun?!`,
-          link: "https://www.duolingo.com/",
+          
           widgetName: "coolResourcesStep6",
         },
       },
@@ -210,7 +210,7 @@ const config = (props) => {
       props: {
         nextActionText: "Okay, next!",
         message: `Do you want to learn pretty much anything under the sun?!`,
-        link: "https://www.duolingo. com/",
+        link: "https://www.duolingo.com/",
         widgetName: "coolResourcesStep6",
       },
     },
@@ -253,7 +253,7 @@ const config = (props) => {
         2. NPTEL contains organized content for a particular course. These are
         university level courses but if you're the adventurous and passionate kind, this
         is your home.\n`,
-          widgetName: "NIOSRedirect",
+          widgetName: "NPTELRedirect",
         },
       },
 
@@ -351,7 +351,7 @@ const config = (props) => {
             {
               question: "Where do I find my students?",
               answer:
-                "All your students are listed according to the subjects or classes that you teach, in your homepage named as ‘MY STUDENTS’. Shall w ehead over there and go meet them?",
+                "All your students are listed according to the subjects or classes that you teach, in your homepage named as ‘MY STUDENTS’. Shall we head over there and go meet them?",
               widget: "myStudentsRedirect",
             },
             {
@@ -389,6 +389,14 @@ const config = (props) => {
         props: {
           text: "SURE, LETS GO!",
           url: "https://nios.ac.in/admission.aspx",
+        },
+      },
+      {
+        widgetName: "NPTELRedirect",
+        widgetFunc: (props) => <URLButton {...props} />,
+        props: {
+          text: "SURE, LETS GO!",
+          url: "https://nptel.ac.in/",
         },
       },
       {

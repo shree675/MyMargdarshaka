@@ -41,8 +41,8 @@ class App extends Component {
           <Route exact path='/learner-dashboard' component={LearnerDashboard} /> // checked
           <Route exact path='/my-mentors' component={LearnerHomepage} /> // checked
           <Route exact path='/my-students' component={MentorHome} /> // checked
-          <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} /> // checked
-          <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} /> // checked
+          {/* <Route exact path='/mentor-subject-details' component={MentorSubjectDetails} /> // checked
+          <Route exact path='/learner-subject-details' component={LearnerSubjectDetails} /> // checked */}
           <Route exact path='/test' component={TestPage} /> // checked
           <Route exact path='/admin-applications' component={AdminApplications} /> // checked again
           <Route exact path='/admin-home' component={AdminHomePage} /> // checked again

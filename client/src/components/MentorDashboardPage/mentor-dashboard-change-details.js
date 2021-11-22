@@ -44,9 +44,17 @@ const LearnerDashboardChangeDetails = ({ details }) => {
   const handleClick = async () => {
     validate();
     // update DB
-    await axios.post(`/api/mentor/update-by-id/${details._id}`, state, {
-      headers: { Authorization: `Bearer ${details.curuser}` },
-    });
+    console.log(
+      "state in handle Click : ",
+      state,
+      " mentor id : ",
+      details._id
+    );
+    await axios
+      .post(`/api/mentor/update-by-id/${details._id}`, state, {
+        headers: { Authorization: `Bearer ${details.curuser}` },
+      })
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
