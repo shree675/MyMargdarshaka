@@ -20,6 +20,8 @@ const nodemailer = require("nodemailer");
 const connectionString =
   process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
 
+console.log("connection string : ", connectionString);
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "3mb" }));
