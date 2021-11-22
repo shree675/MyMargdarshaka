@@ -1,13 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { slides } from "./slider-data";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import lola from "../../assets/lola_with_sparkle_trail.gif";
 import "../GuidelinesPage/guidelines.css";
 import "./getting-started.css";
+import axios from "axios";
+import firebase from "../../firebase";
 
 const GettingStarted = () => {
   const [current, setCurrent] = useState(0);
+  const [userType, setUserType] = useState("unknown");
+  const [curuser, setCuruser] = useState(null);
   const length = slides.length;
+
+  useEffect(() => {
+    verify();
+  }, []);
+
+  const verify = async () => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        setCuruser(user.uid);
+        //setPhone(user.phoneNumber);
+
+        // obtaining the middleware token to protect routes
+        var tk;
+        user.getIdToken(true).then(async (idToken) => {
+          tk = idToken;
+          // setting the user instance
+          await axios
+            .get("/api/learner/login/submitlearner", { headers: { Authorization: `Bearer ${tk}` } })
+            .then((e) => {
+              e.data.map((data) => {
+                if (data.phone === user.phoneNumber) {
+                  //setName(data.name);
+                  setUserType("learner");
+                  console.log(userType);
+                }
+              });
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+          await axios
+            .get("/api/mentor/login/submitmentor", { headers: { Authorization: `Bearer ${tk}` } })
+            .then((e) => {
+              e.data.map((data) => {
+                if (data.phone === user.phoneNumber) {
+                  //setName(data.name);
+                  //console.log(data.name);
+                  setUserType("mentor");
+                  console.log(userType);
+                }
+              });
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+        });
+      } else {
+        setUserType("unknown");
+        console.log(userType);
+      }
+    });
+  };
+
+
+
+
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -120,7 +180,9 @@ const GettingStarted = () => {
                       <button
                         className="init-signin-button"
                         onClick={() => {
-                          window.location = "/common-guidelines";
+                          if (userType === "learner") window.location = "/learner-guidelines";
+                          else if(userType === "mentor") window.location = "/mentor-guidelines";
+                          else window.location = "/common-guidelines";
                         }}
                       >
                         DONE
