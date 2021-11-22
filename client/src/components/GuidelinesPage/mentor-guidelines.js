@@ -6,7 +6,7 @@ import config from "../../chatbot/config";
 import MessageParser from "../../chatbot/MessageParser";
 import ActionProvider from "../../chatbot/ActionProviderMentor";
 // @ts-ignore
-import lola from "../../assets/lola_basic_motion.gif";
+import lola from "../../assets/lola_speaking.gif";
 import "react-chatbot-kit/build/main.css";
 import "./guidelines.css";
 import axios from "axios";
