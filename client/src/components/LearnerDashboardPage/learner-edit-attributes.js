@@ -40,6 +40,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
 
   const handleClick = async (e) => {
     console.log("clicked");
+    
 
     // converting the times object to times array
     const times_array = Object.keys(times).filter((key) => times[key]);
@@ -151,7 +152,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         { headers: { Authorization: `Bearer ${details.curuser}` } }
       );
     }
-
+    alert('Changes saved')
     window.location.reload(true);
   };
 

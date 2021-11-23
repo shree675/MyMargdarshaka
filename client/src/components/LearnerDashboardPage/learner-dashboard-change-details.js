@@ -50,6 +50,8 @@ const LearnerDashboardChangeDetails = ({ details }) => {
         headers: { Authorization: `Bearer ${details.curuser}` },
       })
       .catch((e) => console.log(e));
+
+    alert('Changes saved')
   };
 
   return (
