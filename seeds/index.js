@@ -1,11 +1,12 @@
-const axios = require("axios");
 const mongoose = require("mongoose");
 const Mentor = require("../backend/models/mentor.model");
 const Learner = require("../backend/models/learner.model");
+const User = require("../backend/models/user.model");
+const Admin = require("../backend/models/admin.model");
 const { mentorSchema, learnerSchema } = require("../backend/utils/joiSchemas");
 const mentors = require("./dummy_mentors.json");
 const learners = require("./dummy_learners.json");
-const { post } = require("../backend/routes/learner.router");
+const admins = require("./dummy_admin.json");
 
 const url = "mongodb://localhost:27017/my-margdarshaka";
 
@@ -21,6 +22,15 @@ db.once("open", function () {
 });
 
 const seedDB = async () => {
+  await User.deleteMany({}).catch((err) => console.log(err));
+
+  await Admin.deleteMany({}).catch((err) => console.log(err));
+  for (let admin of admins) {
+    console.log(admin);
+    const newAdmin = new Admin(admin);
+    await newAdmin.save().catch((err) => console.log(err));
+  }
+
   console.log("seeding mentors: start");
   await Mentor.deleteMany({}).catch((e) => console.log(e));
   for (let mentor of mentors) {
@@ -34,7 +44,7 @@ const seedDB = async () => {
   }
   console.log("seeding mentors: done");
 
-  console.log("seeding learner: start");
+  console.log("seeding learners: start");
   await Learner.deleteMany({}).catch((e) => console.log(e));
   for (let learner of learners) {
     // console.log(learner);
@@ -48,17 +58,9 @@ const seedDB = async () => {
       .save()
       // .then((t) => console.log(t))
       .catch((e) => console.log("ERROR: ", e));
-
-    // await axios
-    //   .post(`/api/learner/signup/createlearner`, learner)
-    //   .then((res) => console.log("Pushing Sign up data"));
-
-    // post(`/api/learner/signup/createlearner`, learner).then((res) => {
-    //   console.log("Pushing Sign up data");
-    // });
   }
 
-  console.log("seeding learner: done");
+  console.log("seeding learners: done");
 };
 
 seedDB().then(() => {

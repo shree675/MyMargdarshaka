@@ -1,0 +1,160 @@
+{
+  "id": "2aec6b0-b1e-b8cf-2c07-d180e12aaf0",
+  "type": "array",
+  "valueType": "",
+  "children": [
+    {
+      "id": "fb3466-a75a-2be5-eff8-c25ffbc45022",
+      "type": "object",
+      "valueType": "object",
+      "children": [
+        {
+          "id": "4dbeac0-b43-e138-dd31-04f7d8cebc14",
+          "type": "value",
+          "valueType": "regexp",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "phone",
+          "valueOptions": { "text": "\\+91\\d{10}" },
+          "nullValue": "0"
+        },
+        {
+          "id": "75ba765-0f53-48f-3332-85f16adf511",
+          "type": "value",
+          "valueType": "fullName",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "name",
+          "valueOptions": { "gender": "any", "language": "en" },
+          "nullValue": "0"
+        },
+        {
+          "id": "33ea3e2-0f4-ef22-08c-01e1034eea31",
+          "type": "value",
+          "valueType": "email",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "email",
+          "valueOptions": {},
+          "nullValue": "0"
+        },
+        {
+          "id": "d07f4-5be2-60bb-143-a24eccddcda3",
+          "type": "value",
+          "valueType": "regexp",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "time",
+          "valueOptions": { "text": "(Morning)|(Afternoon)|(Evening)" },
+          "nullValue": "0"
+        },
+        {
+          "id": "33b8710-d60d-32c1-8b0-7a0e5f21edf8",
+          "type": "value",
+          "valueType": "regexp",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "language",
+          "valueOptions": {
+            "text": "(Telugu)|(Hindi)|(English)|(Kannada)|(Malayalam)"
+          },
+          "nullValue": "0"
+        },
+        {
+          "id": "631510-3525-df2c-a07-3a5fb54ce04",
+          "type": "value",
+          "valueType": "bool",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "approved",
+          "valueOptions": { "trueRatio": "100" },
+          "nullValue": "0"
+        },
+        {
+          "id": "0bad5c-02a-b032-2de-70e1814c73d7",
+          "type": "value",
+          "valueType": "bool",
+          "children": [],
+          "repeatCount": ["1", "100"],
+          "fieldName": "rejected",
+          "valueOptions": { "trueRatio": "0" },
+          "nullValue": "0"
+        },
+        {
+          "id": "a3fa76-65ef-58ba-cefc-8a0e68d80b45",
+          "type": "array",
+          "valueType": "array",
+          "children": [
+            {
+              "id": "20db2e6-31d0-ea1e-a858-34f8d4f77b5f",
+              "type": "object",
+              "valueType": "object",
+              "children": [
+                {
+                  "id": "7a178ad-7332-0c-12ba-fb1f4802b8e8",
+                  "type": "value",
+                  "valueType": "regexp",
+                  "children": [],
+                  "repeatCount": ["1", "100"],
+                  "fieldName": "code",
+                  "valueOptions": {
+                    "text": "(((TEL)|(HIN)|(ENG)|(KAN)|(MAL)|(MAT)|(SCI)|(SOC))([6-9]))|((PHY|CHE|BIO|MAT)(10|11))"
+                  },
+                  "nullValue": "0"
+                },
+                {
+                  "id": "6b4532-8d2-de54-c8ec-cb62a60e0",
+                  "type": "array",
+                  "valueType": "array",
+                  "children": [
+                    {
+                      "id": "fecfcf-d80-128e-cc3d-78b44d4b7cc",
+                      "type": "object",
+                      "valueType": "object",
+                      "children": [
+                        {
+                          "id": "8e6f346-433f-ac27-dd58-1c573ace416d",
+                          "type": "value",
+                          "valueType": "constant",
+                          "children": [],
+                          "repeatCount": ["1", "100"],
+                          "fieldName": "name",
+                          "valueOptions": { "text": "Chapter" },
+                          "nullValue": "0"
+                        }
+                      ],
+                      "repeatCount": ["1", "100"],
+                      "fieldName": "",
+                      "valueOptions": {},
+                      "nullValue": "0"
+                    }
+                  ],
+                  "repeatCount": ["1", "10"],
+                  "fieldName": "chapters",
+                  "valueOptions": {},
+                  "nullValue": "0"
+                }
+              ],
+              "repeatCount": ["1", "100"],
+              "fieldName": "",
+              "valueOptions": {},
+              "nullValue": "0"
+            }
+          ],
+          "repeatCount": ["1", "10"],
+          "fieldName": "Classes",
+          "valueOptions": {},
+          "nullValue": "0"
+        }
+      ],
+      "repeatCount": ["1", "100"],
+      "fieldName": "",
+      "valueOptions": {},
+      "nullValue": "0"
+    }
+  ],
+  "repeatCount": ["1000", "1000"],
+  "fieldName": "",
+  "valueOptions": {},
+  "nullValue": "0"
+}
