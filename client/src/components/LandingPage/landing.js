@@ -13,9 +13,9 @@ const LandingPage = () => {
     window.scrollTo(0, window.innerHeight + window.scrollY);
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     localStorage.clear();
-  },[]); */
+  },[]);
 
   // frontend component to display the homepage
   return (
