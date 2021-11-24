@@ -198,7 +198,7 @@ const MentorSignup = () => {
         valid_signup: true,
       };
       console.log("Printing mentor before pushing:", mentor.Classes);
-      console.log("curuser : ", curuser);
+      //console.log("curuser : ", curuser);
       await axios
         .post(`/api/mentor/signup/creatementor`, mentor, {
           headers: { Authorization: `Bearer ${curuser}` },

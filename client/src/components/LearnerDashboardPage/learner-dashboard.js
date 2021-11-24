@@ -22,7 +22,7 @@ const LearnerDashboard = () => {
   // method to retrieve user's details from database
   const getData = async () => {
     if (!phone) return;
-    console.log(curuser);
+    //console.log(curuser);
     if (curuser === "No user is logged in") return;
     axios
       .get(`/api/learner/get-data/phone/${phone}`, {
