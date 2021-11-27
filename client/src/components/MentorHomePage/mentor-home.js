@@ -32,6 +32,7 @@ const MentorHome = () => {
 
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
+  
 
   // format : {"SCI6" : [{name: "Aashrith", ...}]}
   const [studentsData, setStudentsData] = useState({});
@@ -103,11 +104,15 @@ const MentorHome = () => {
     }
     verify(setCuruser, setPhone);
     getData();
+
   }, [phone, curuser]);
 
   useEffect(() => {
     console.log(studentsData);
   }, [studentsData]);
+  useEffect(()=> {
+    alert('If you have just signed up, your students will not be visible here. Once your application is approved, your assigned students will show up here')
+  }, [])
 
   return (
     <>

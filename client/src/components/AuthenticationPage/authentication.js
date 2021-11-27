@@ -91,9 +91,9 @@ const Authentication = () => {
   }, []);
 
   // verify if a user is already logged in
-  /* useEffect(() => {
+  useEffect(() => {
     verify();
-  }, []); */
+  }, []);
 
   // function to verify the user
   const verify = async () => {

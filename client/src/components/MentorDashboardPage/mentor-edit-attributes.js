@@ -72,6 +72,7 @@ const LearnerDashboardEditAttributes = ({ details }) => {
   };
 
   const handleClickSave = async (e) => {
+
     await axios.post(
       `/api/mentor/update-by-id/${details._id}`,
       {
@@ -82,6 +83,8 @@ const LearnerDashboardEditAttributes = ({ details }) => {
         headers: { Authorization: `Bearer ${details.curuser}` },
       }
     );
+    alert('Changes saved')
+    //window.location = '/my-students'
   };
 
   return (
