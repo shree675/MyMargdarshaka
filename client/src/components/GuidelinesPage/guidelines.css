@@ -5,6 +5,9 @@
   margin-top: -20px;
   min-height: 100vh;
 }
+.optional-signin {
+  margin-top: 50px;
+}
 
 div.bubble {
   position: relative;
@@ -137,3 +140,4 @@ div.bubble {
     left: 60%;
   }
 }
+
