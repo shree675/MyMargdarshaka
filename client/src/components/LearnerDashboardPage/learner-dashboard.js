@@ -114,6 +114,18 @@ const LearnerDashboard = () => {
     );
   };
 
+  const handleNiosSave = (niosStatus) => {
+    axios.post(
+      `/api/learner/update/id/${learnerData._id}`,
+      {
+        NIOS_status: niosStatus,
+      },
+      {
+        headers: { Authorization: `Bearer ${curuser}` },
+      }
+    );
+  };
+
   // verify if a user has already logged in
   useEffect(() => {
     console.log("in dashboard");
@@ -151,7 +163,7 @@ const LearnerDashboard = () => {
             />
           </div>
         </div>
-        <NIOSStatus details={learnerData} />
+        <NIOSStatus details={learnerData} handleNiosSave={handleNiosSave} />
         <LearnerRequestChangeOfMentor
           details={learnerData}
           changeMentor={changeMentor}

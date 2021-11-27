@@ -94,6 +94,10 @@ const LearnerDashboardChangeDetails = ({ details }) => {
           name="img"
           accept="image/*"
           onChange={(e) => {
+            if (e.target.files[0].size >= 500000) {
+              alert("please upload images of size less than 500kb");
+              return;
+            }
             let reader = new FileReader();
             reader.onload = function (ev) {
               setProfilePic(ev.target.result);
