@@ -102,6 +102,7 @@ div.bubble {
   .react-chatbot-kit-chat-container {
     width: 90%;
     margin-bottom: 10px;
+    height: 50%;
   }
 
   .lola-gif {

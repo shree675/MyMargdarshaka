@@ -35,7 +35,7 @@ class App extends Component {
           <Route exact path='/authentication:id' component={Authentication} /> // checked again
           <Route exact path='/learner-signup' component={LearnerSignup} /> // checked
           <Route exact path='/mentor-signup' component={MentorSignup} /> // checked
-          <Route exact path='/feedback' component={Feedback} /> // checked
+          <Route exact path='/feedback' component={Feedback} /> // checked again
           <Route exact path='/admin-auth' component={AdminAuthentication} /> // checked again
           <Route exact path='/mentor-dashboard' component={MentorDashBoard} /> // checked
           <Route exact path='/learner-dashboard' component={LearnerDashboard} /> // checked
@@ -46,11 +46,11 @@ class App extends Component {
           <Route exact path='/test' component={TestPage} /> // checked
           <Route exact path='/admin-applications' component={AdminApplications} /> // checked again
           <Route exact path='/admin-home' component={AdminHomePage} /> // checked again
-          <Route exact path='/learner-guidelines' component={LearnerGuidelines} />
-          <Route exact path='/common-guidelines' component={CommonGuidelines} />
-          <Route exact path='/mentor-guidelines' component={MentorGuidelines} />
-          <Route exact path='/getting-started' component={GettingStarted} />
-          <Route path='/' component={Error} /> // checked
+          <Route exact path='/learner-guidelines' component={LearnerGuidelines} /> // checked again
+          <Route exact path='/common-guidelines' component={CommonGuidelines} /> // checked again
+          <Route exact path='/mentor-guidelines' component={MentorGuidelines} /> // checked again
+          <Route exact path='/getting-started' component={GettingStarted} /> // checked again
+          <Route path='/' component={Error} /> // checked again
         </Switch>
       </Router>
     );
