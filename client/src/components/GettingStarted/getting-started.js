@@ -171,6 +171,16 @@ const GettingStarted = () => {
                       >
                         DONE
                       </button>
+                      
+                      <div className = 'optional-signin'>
+                      {userType === null ? null : (userType === "learner" || userType === "mentor") ? null : (<button
+                        className='init-signin-button'
+                        onClick={() => { window.location = "/init-signin"; }}
+                      >
+                        SIGN IN
+                      </button>)}
+                      
+                      </div>
                     </div>
                   </div>
                 </div>
