@@ -124,6 +124,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
               value={state.phone}
               placeholder="9876543210"
               required
+              readOnly
             />
             <div className="valid-feedback">Looks good!</div>
             <div className="invalid-feedback">

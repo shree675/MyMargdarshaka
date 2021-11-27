@@ -92,8 +92,15 @@ const GettingStarted = () => {
                   aria-current='true'
                   aria-label='Slide 1'
                 ></button>
-                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='1' aria-label='Slide 2'></button>
-                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='2' aria-label='Slide 3'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='3' aria-label='Slide 4'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='4' aria-label='Slide 5'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='5' aria-label='Slide 6'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='6' aria-label='Slide 7'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='7' aria-label='Slide 8'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='8' aria-label='Slide 9'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='9' aria-label='Slide 10'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='10' aria-label='Slide 11'></button>
+                <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='11' aria-label='Slide 12'></button>
               </div>
               <div class='carousel-inner'>
                 <div class='carousel-item active'>
@@ -104,6 +111,33 @@ const GettingStarted = () => {
                 </div>
                 <div class='carousel-item'>
                   <img class='d-block w-100' src={slides[2].image} alt='Third slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[3].image} alt='Fourth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[4].image} alt='Fifth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[5].image} alt='Sixth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[6].image} alt='Seventh slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[7].image} alt='Eigth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[8].image} alt='Nineth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[9].image} alt='Tenth slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[10].image} alt='Eleventh slide' />
+                </div>
+                <div class='carousel-item'>
+                  <img class='d-block w-100' src={slides[11].image} alt='Twelfth slide' />
                 </div>
               </div>
               <button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide='prev'>

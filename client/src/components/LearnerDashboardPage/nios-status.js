@@ -39,12 +39,12 @@ const NIOSStatus = ({ details }) => {
               style={{
                 borderColor: "#5D1049",
                 ...(niosStatus ===
-                "I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM"
+                "I HAVE REGISTERED FOR NIOS BUT DID NOT TAKE THE EXAM"
                   ? { background: "#5D1049", color: "white" }
                   : {}),
               }}
             >
-              I DIDN’T REGISTER FOR NIOS / DIDN’T TAKE THE EXAM
+              I HAVE REGISTERED FOR NIOS BUT DID NOT TAKE THE EXAM
             </button>
           </div>
         </div>
@@ -56,12 +56,12 @@ const NIOSStatus = ({ details }) => {
               style={{
                 borderColor: "#5D1049",
                 ...(niosStatus ===
-                "I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM"
+                "I HAVE TAKEN THE EXAM AND AM WAITING FOR RESULTS"
                   ? { background: "#5D1049", color: "white" }
                   : {}),
               }}
             >
-              I HAVE REGISTERED FOR NIOS AND TOOK THE EXAM
+              I HAVE TAKEN THE EXAM AND AM WAITING FOR RESULTS
             </button>
           </div>
           <div className="col mb-3">
@@ -80,6 +80,7 @@ const NIOSStatus = ({ details }) => {
           </div>
         </div>
         <div className="mx-auto mb-3">
+          {/* TODO:Aashrith : Update NIOS status */}
           <Button text="SAVE" />
         </div>
       </div>

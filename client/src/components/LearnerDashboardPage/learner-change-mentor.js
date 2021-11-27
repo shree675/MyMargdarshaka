@@ -2,7 +2,6 @@
 
 import React from "react";
 import SubjectTitle from "./subject-title";
-import Card from "../LearnerHomePage/card";
 
 const LearnerRequestChangeOfMentor = ({ details, changeMentor }) => {
   const style = {

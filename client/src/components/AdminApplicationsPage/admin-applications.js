@@ -81,7 +81,7 @@ const ApplicationCard = (props) => {
         </div>
         <div>
           <b>Time slot : </b>
-          {props.app.timeSlot}
+          {props.app.time}
         </div>
         <div>
           <b>Classes : </b>

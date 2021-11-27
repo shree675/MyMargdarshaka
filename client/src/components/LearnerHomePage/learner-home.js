@@ -24,7 +24,7 @@ const LearnerHome = (props) => {
   const getData = async (learner_phone) => {
     if (curuser === "No user is logged in") return;
     if (!phone) return;
-    console.log(curuser);
+    //console.log(curuser);
     const res = await axios.get(`/api/learner/get-data/phone/${phone}`, {
       headers: { Authorization: `Bearer ${curuser}` },
     });
@@ -53,7 +53,7 @@ const LearnerHome = (props) => {
       temp.name = mentor.name;
       temp.learner_id = learner_id;
       temp.mentor_id = mentor._id;
-      temp.Class = Number(code[code.length - 1]);
+      temp.Class = data.getClassNumber(code);
       temp.email = mentor.email;
       temp.phone = mentor.phone;
       temp.hasPendingTests = false;
@@ -91,50 +91,72 @@ const LearnerHome = (props) => {
   return (
     <div>
       {pageDetails.pageName != "home" ? (
-        <LearnerSubjectDetails setPageDetails={setPageDetails} subDetails={pageDetails.details} />
+        <LearnerSubjectDetails
+          setPageDetails={setPageDetails}
+          subDetails={pageDetails.details}
+        />
       ) : (
-        <div className='learner-home learner-bg'>
+        <div className="learner-home learner-bg">
           <Navbar />
-          <div className='learner-curvature'></div>
-          <div className='container-fluid p-0 learner-bg'>
-            <div className='row m-3' style={borderStyle}>
-              <div className='col-md card p-3 me-md-2 mb-3 mb-md-0' style={borderStyle}>
+          <div className="learner-curvature"></div>
+          <div className="container-fluid p-0 learner-bg">
+            <div className="row m-3" style={borderStyle}>
+              <div
+                className="col-md card p-3 me-md-2 mb-3 mb-md-0"
+                style={borderStyle}
+              >
                 <h1>
                   <strong>MENTORS</strong>
                 </h1>
-                <div className='row'>
+                <div className="row">
                   {mentorData.map((mentorDetails, i) => {
                     return (
-                      <div key={i} className='col-8 mx-auto col-sm-6 mx-md-0' id='learner-home-mentors'>
-                        <Card details={{ ...mentorDetails, userType: "learner" }} setPageDetails={setPageDetails} />
+                      <div
+                        key={i}
+                        className="col-8 mx-auto col-sm-6 mx-md-0"
+                        id="learner-home-mentors"
+                      >
+                        <Card
+                          details={{ ...mentorDetails, userType: "learner" }}
+                          setPageDetails={setPageDetails}
+                        />
                       </div>
                     );
                   })}
                 </div>
               </div>
-              <div className='col-md card p-3' style={borderStyle}>
-                <h1 className='mb-3'>
+              <div className="col-md card p-3" style={borderStyle}>
+                <h1 className="mb-3">
                   <strong>YOUR PROGRESS</strong>
                 </h1>
-                <div className='row mb-3'>
-                  <div className='col'>
-                    <ProgressChart percent_complete={10} subject={"Mathematics"} />
+                <div className="row mb-3">
+                  <div className="col">
+                    <ProgressChart
+                      percent_complete={10}
+                      subject={"Mathematics"}
+                    />
                   </div>
-                  <div className='col'>
-                    <ProgressChart percent_complete={20} subject={"Social Studies"} />
+                  <div className="col">
+                    <ProgressChart
+                      percent_complete={20}
+                      subject={"Social Studies"}
+                    />
                   </div>
-                  <div className='col'>
+                  <div className="col">
                     <ProgressChart percent_complete={30} subject={"Science"} />
                   </div>
                 </div>
-                <div className='row'>
-                  <div className='col'>
+                <div className="row">
+                  <div className="col">
                     <ProgressChart percent_complete={40} subject={"Biology"} />
                   </div>
-                  <div className='col'>
-                    <ProgressChart percent_complete={50} subject={"Chemistry"} />
+                  <div className="col">
+                    <ProgressChart
+                      percent_complete={50}
+                      subject={"Chemistry"}
+                    />
                   </div>
-                  <div className='col'>
+                  <div className="col">
                     <ProgressChart percent_complete={60} subject={"Physics"} />
                   </div>
                 </div>
