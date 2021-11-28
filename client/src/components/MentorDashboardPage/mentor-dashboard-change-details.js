@@ -94,12 +94,20 @@ const LearnerDashboardChangeDetails = ({ details }) => {
           name="img"
           accept="image/*"
           onChange={(e) => {
-            let reader = new FileReader();
-            reader.onload = function (ev) {
-              setProfilePic(ev.target.result);
-              setState({ ...state, ["profile_picture_url"]: ev.target.result });
-            };
-            reader.readAsDataURL(e.target.files[0]);
+            console.log("FILES", e.target.files[0]);
+            if (e.target.files[0].size >= 500000) {
+              alert("Please upload images of size lower than 500KB");
+            } else {
+              let reader = new FileReader();
+              reader.onload = function (ev) {
+                setProfilePic(ev.target.result);
+                setState({
+                  ...state,
+                  ["profile_picture_url"]: ev.target.result,
+                });
+              };
+              reader.readAsDataURL(e.target.files[0]);
+            }
           }}
         />
 

@@ -190,7 +190,8 @@ const MentorSignup = () => {
         time: state.prefTime,
         approved: false,
         Classes: classes_list,
-        profile_picture_url: "",
+        profile_picture_url:
+          "https://media.istockphoto.com/vectors/user-profile-icon-flat-red-round-button-vector-illustration-vector-id1162440985?k=20&m=1162440985&s=170667a&w=0&h=cQJ5HDdUKK_8nNDd_6RBoeDQfILERZnd_EirHTi7acI=",
       };
       const user = {
         phone: phone,
