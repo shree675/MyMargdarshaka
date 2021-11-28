@@ -12,27 +12,32 @@ import "./guidelines.css";
 
 const CommonGuidelines = () => {
   return (
-    <div className="body">
-      <div className="container">
-        <div className="col">
-          <div className="row">
-            <div className="bubble">
-              Hello there Stranger! How can I help you?
-            </div>
+    <div className='body' style={{ marginTop: "0px", borderRadius: "0px" }}>
+      <div className='container'>
+        <div className='col'>
+          <div className='row'>
+            <div className='bubble'>Hello there Stranger! How can I help you?</div>
           </div>
-          <div className="row">
+          <div className='col'>
+            <div className = 'optional-signin'>
+            <button
+                        className='init-signin-button'
+                        onClick={() => { window.location = "/init-signin"; }}
+                      >
+                        SIGN IN
+                      </button>
+            </div>
+          
+          </div>
+          <div className='row'>
             <img
-              className="col lola-gif"
+              className='col lola-gif'
               // style={{ width: "100px" }}
               src={lola}
-              alt=""
+              alt=''
             />
-            <div className="col">
-              <Chatbot
-                config={config("")}
-                actionProvider={ActionProvider}
-                messageParser={MessageParser}
-              />
+            <div className='col'>
+              <Chatbot config={config("")} actionProvider={ActionProvider} messageParser={MessageParser} />
             </div>
           </div>
         </div>
