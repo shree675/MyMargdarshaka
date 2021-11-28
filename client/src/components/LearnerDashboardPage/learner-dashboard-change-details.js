@@ -43,7 +43,7 @@ const LearnerDashboardChangeDetails = ({ details }) => {
 
   const handleClick = async () => {
     if (state.name === "") {
-      alert("Please enter a name and/or email");
+      alert("Please enter a name");
       return;
     }
     validate();
