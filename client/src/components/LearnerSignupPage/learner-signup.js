@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { verify } from "../../verifyUser";
+import "@lottiefiles/lottie-player";
 
 const { classes, primSubs, secSubs, langs, times } = data;
 
@@ -26,6 +27,7 @@ const LearnerSignup = () => {
   });
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
+  const [show, setShow] = useState(false);
 
   // verify if a user is already logged in
   useEffect(() => {
@@ -80,6 +82,7 @@ const LearnerSignup = () => {
   };
 
   const handleClick = async () => {
+    setShow(true);
     //assign mentors button clicked
     //on sign-up, we first push all sign up data to database
 
@@ -172,9 +175,7 @@ const LearnerSignup = () => {
         })
         .then((res) => console.log("Pushing Sign up data"));
 
-      await axios
-        .post(`/api/user/update/` + phone, user)
-        .then((res) => console.log("User table has been updated", res));
+      await axios.post(`/api/user/update/` + phone, user).then((res) => console.log("User table has been updated", res));
       console.log("click here 3");
 
       //Matching algorithm
@@ -192,13 +193,9 @@ const LearnerSignup = () => {
 
       //updating the learner database with the assigned mentors
       console.log(learner);
-      let res2 = await axios.post(
-        `/api/learner/assign/update/` + phone,
-        learner,
-        {
-          headers: { Authorization: `Bearer ${curuser}` },
-        }
-      );
+      let res2 = await axios.post(`/api/learner/assign/update/` + phone, learner, {
+        headers: { Authorization: `Bearer ${curuser}` },
+      });
       console.log("Learner table has been updated ", res2);
       console.log("click here 4");
 
@@ -213,12 +210,9 @@ const LearnerSignup = () => {
         codes.push(subject.code);
       });
 
-      let learner_data = await axios.get(
-        `/api/learner/get-data/phone/${phone}`,
-        {
-          headers: { Authorization: `Bearer ${curuser}` },
-        }
-      );
+      let learner_data = await axios.get(`/api/learner/get-data/phone/${phone}`, {
+        headers: { Authorization: `Bearer ${curuser}` },
+      });
       console.log(learner_data.data);
       let learner_id = learner_data.data._id.toString();
       console.log(learner_id);
@@ -243,71 +237,46 @@ const LearnerSignup = () => {
         }
       }
       console.log("click here 6");
-
+      setShow(false);
       alert("Sign up Successful!");
       window.location = "/my-mentors";
     }
   };
 
   return (
-    <div className="learner-signup-main">
+    <div className='learner-signup-main'>
       <div style={{ width: "800px" }}>
-        <div className="learner-signup-title">Sign Up</div>
-        <div className="learner-signup-img-div-phone">
-          <img
-            src={imgSrc}
-            style={{ width: "80%", margin: "0", padding: "0" }}
-          />
+        <div className='learner-signup-title'>Sign Up</div>
+        <div className='learner-signup-img-div-phone'>
+          <img src={imgSrc} style={{ width: "80%", margin: "0", padding: "0" }} />
         </div>
-        <div className="valid-div">
-          {state.nameValid ? "" : "*this field is required"}
-        </div>
+        <div className='valid-div'>{state.nameValid ? "" : "*this field is required"}</div>
+        <input className='learner-signup-input-field' name='name' onChange={handleChange} placeholder='Name' /> <br />
         <input
-          className="learner-signup-input-field"
-          name="name"
+          type='email'
+          className='learner-signup-input-field'
+          name='email'
           onChange={handleChange}
-          placeholder="Name"
-        />{" "}
-        <br />
-        <input
-          type="email"
-          className="learner-signup-input-field"
-          name="email"
-          onChange={handleChange}
-          placeholder="Email (optional)"
+          placeholder='Email (optional)'
         />
         <div>
-          <div className="valid-div">
-            {state.langValid ? "" : "*this field is required"}
-          </div>
-          <select
-            className="learner-signup-input-field"
-            name="prefLang"
-            onChange={handleChange}
-            value={state.prefLang}
-          >
-            <option
-              className="learner-signup-dropdown"
-              value=""
-              disabled
-              selected
-            >
+          <div className='valid-div'>{state.langValid ? "" : "*this field is required"}</div>
+          <select className='learner-signup-input-field' name='prefLang' onChange={handleChange} value={state.prefLang}>
+            <option className='learner-signup-dropdown' value='' disabled selected>
               Preferred Language
             </option>
             {langs.map((lang) => (
-              <option className="learner-signup-dropdown" value={lang}>
+              <option className='learner-signup-dropdown' value={lang}>
                 {lang}
               </option>
             ))}
           </select>
         </div>
-        <div className="learner-signup-bottom-row">
-          <div className="learner-signup-class-sub">
-            <span className="learner-signup-class-label">
-              Class & Subjects :{" "}
-            </span>
+        <div className='learner-signup-bottom-row'>
+          <div className='learner-signup-class-sub'>
+            <span className='learner-signup-class-label'>Class & Subjects : </span>
 
-            <select onChange={handleChange} name="class" value={state.Class}>
+            <select onChange={handleChange} name='class' value={state.Class}>
               {classes.map((cls) => (
                 <option value={cls}>Class {cls}</option>
               ))}
@@ -318,12 +287,12 @@ const LearnerSignup = () => {
                 {primSubs.map((sub) => (
                   <div>
                     <input
-                      type="Checkbox"
-                      name="subs"
+                      type='Checkbox'
+                      name='subs'
                       value={sub}
                       checked={state.subs.includes(sub)}
                       onChange={handleChange}
-                      id="learner-checkbox"
+                      id='learner-checkbox'
                     />
                     <label>{sub}</label>
                   </div>
@@ -335,51 +304,56 @@ const LearnerSignup = () => {
                 {secSubs.map((sub) => (
                   <div>
                     <input
-                      type="Checkbox"
-                      name="subs"
+                      type='Checkbox'
+                      name='subs'
                       value={sub}
                       checked={state.subs.includes(sub)}
                       onChange={handleChange}
-                      id="learner-checkbox"
+                      id='learner-checkbox'
                     />
                     <label>{sub}</label>
                   </div>
                 ))}
               </div>
             )}
-            <div className="valid-div">
-              {state.subValid ? "" : "*this field is required"}
-            </div>
+            <div className='valid-div'>{state.subValid ? "" : "*this field is required"}</div>
           </div>
 
-          <div className="learner-signup-pref-time">
-            <div className="learner-signup-pref-time-title">
-              Preferred Timeslots :{" "}
-            </div>
+          <div className='learner-signup-pref-time'>
+            <div className='learner-signup-pref-time-title'>Preferred Timeslots : </div>
             <div>
               {times.map((time) => (
                 <div>
-                  <input
-                    type="Checkbox"
-                    name="times"
-                    value={time}
-                    onChange={handleChange}
-                    id="learner-checkbox"
-                  />
+                  <input type='Checkbox' name='times' value={time} onChange={handleChange} id='learner-checkbox' />
                   <label>{time}</label>
                 </div>
               ))}
             </div>
-            <div className="valid-div">
-              {state.timeValid ? "" : "*this field is required"}
-            </div>
+            <div className='valid-div'>{state.timeValid ? "" : "*this field is required"}</div>
           </div>
         </div>
-        <div className="learner-signup-submit-button" onClick={handleClick}>
-          ASSIGN MENTORS
-        </div>
+        {!show ? (
+          <div className='learner-signup-submit-button' onClick={handleClick}>
+            ASSIGN MENTORS
+          </div>
+        ) : (
+          <lottie-player
+            src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+            background='transparent'
+            speed='1'
+            style={{
+              width: "35px",
+              textAlign: `center`,
+              zIndex: "12",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            loop
+            autoplay
+          ></lottie-player>
+        )}
       </div>
-      <div className="learner-signup-img-div">
+      <div className='learner-signup-img-div'>
         <img src={imgSrc} />
       </div>
     </div>

@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import firebase from "../../firebase";
+import "@lottiefiles/lottie-player";
 
 // custom styles for materialui textfields
 const CssTextField = styled(TextField)({
@@ -48,6 +49,7 @@ const Feedback = () => {
   const [phone, setPhone] = useState(null);
   const [name, setName] = useState(null);
   const [userType, setUserType] = useState(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     verify();
@@ -172,43 +174,62 @@ const Feedback = () => {
             }}
           />
           <div className='feedback-height'></div>
-          <button
-            className='feedback-button'
-            onClick={() => {
-              // function to submit the feedback
-              var err = 0;
-              if (subject == null || issue == null || body == null) {
-                err = 1;
-                alert("Please fill all the entries");
-              }
-              var feedback = {
-                phone: phone,
-                issueSubject: subject,
-                issueType: issue,
-                issueBody: body,
-                username: name,
-                assignedTo: "none",
-                status: 0, // 0 means not resolved yet, 1 means resolved
-                timestamp: new Date().toString(),
-              };
-              // uploading the feedback to the database
-              if (!err) {
-                axios
-                  .post("/api/feedback/api/submitfeedback", feedback)
-                  .then((res) => {
-                    alert("Feedback submitted successfully");
-                    if (userType === "learner") window.location = "/my-mentors";
-                    else window.location = "/my-students";
-                  })
-                  .catch((err) => {
-                    console.error(err);
-                    alert("Feedback submission failed. Check console for further details");
-                  });
-              }
-            }}
-          >
-            SUBMIT
-          </button>
+          {!show ? (
+            <button
+              className='feedback-button'
+              onClick={() => {
+                setShow(true);
+                // function to submit the feedback
+                var err = 0;
+                if (subject == null || issue == null || body == null) {
+                  err = 1;
+                  alert("Please fill all the entries");
+                }
+                var feedback = {
+                  phone: phone,
+                  issueSubject: subject,
+                  issueType: issue,
+                  issueBody: body,
+                  username: name,
+                  assignedTo: "none",
+                  status: 0, // 0 means not resolved yet, 1 means resolved
+                  timestamp: new Date().toString(),
+                };
+                // uploading the feedback to the database
+                if (!err) {
+                  axios
+                    .post("/api/feedback/api/submitfeedback", feedback)
+                    .then((res) => {
+                      setShow(false);
+                      alert("Feedback submitted successfully");
+                      if (userType === "learner") window.location = "/my-mentors";
+                      else window.location = "/my-students";
+                    })
+                    .catch((err) => {
+                      console.error(err);
+                      alert("Feedback submission failed. Check console for further details");
+                    });
+                }
+              }}
+            >
+              SUBMIT
+            </button>
+          ) : (
+            <lottie-player
+              src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+              background='transparent'
+              speed='1'
+              style={{
+                width: "35px",
+                textAlign: `center`,
+                zIndex: "12",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              loop
+              autoplay
+            ></lottie-player>
+          )}
         </div>
       </div>
     </div>

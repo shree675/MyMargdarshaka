@@ -29,9 +29,9 @@ const MentorSignup = () => {
     prefTimeCheck: true,
     subCheck: true,
   });
-
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
+  const [show, setShow] = useState(false);
 
   // reroute if a different user is logged in
   useEffect(() => {
@@ -101,6 +101,7 @@ const MentorSignup = () => {
   };
 
   const handleClick = async () => {
+    setShow(true);
     console.log(state);
 
     let temp = {};
@@ -208,6 +209,7 @@ const MentorSignup = () => {
       //update valid user
       await axios.post(`/api/user/update/` + phone, user).then((res) => console.log("User table has been updated"));
 
+      setShow(false);
       alert("Sign up Successful!");
       window.location = "/my-students";
     }
@@ -302,9 +304,26 @@ const MentorSignup = () => {
           {state.subCheck ? "" : "*select at least one subject"}
         </div>
       </div>
-      <div className='submit-button' onClick={handleClick}>
-        ASSIGN STUDENTS
-      </div>
+      {!show ? (
+        <div className='submit-button' onClick={handleClick}>
+          ASSIGN STUDENTS
+        </div>
+      ) : (
+        <lottie-player
+          src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+          background='transparent'
+          speed='1'
+          style={{
+            width: "35px",
+            textAlign: `center`,
+            zIndex: "12",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+          loop
+          autoplay
+        ></lottie-player>
+      )}
     </div>
   );
 };

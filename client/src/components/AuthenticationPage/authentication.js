@@ -14,6 +14,7 @@ import firebase from "../../firebase";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "@lottiefiles/lottie-player";
 
 // custom styles for materialui textfields
 const CssTextField = styled(TextField)({
@@ -66,6 +67,7 @@ const Authentication = () => {
   const [valid_learner, setValidLearner] = useState(false);
   const [valid_user, setValidUser] = useState(false);
   const [customUserType, setCusomUserType] = useState(userType);
+  const [show, setShow] = useState(false);
 
   // checking the type of the user
   useEffect(() => {
@@ -198,6 +200,7 @@ const Authentication = () => {
 
   // function signs in the user
   const verifyOtp = (e) => {
+    setShow(true);
     e.preventDefault();
     let otpInput = otp;
     let otpConfirm = window.confirmationResult;
@@ -339,20 +342,37 @@ const Authentication = () => {
             <br></br>
             <br></br>
             <div className=''>
-              <button
-                id='auth-signin-button'
-                className='auth-button'
-                onClick={(e) => {
-                  // function to sign in the user
-                  if (otp != null && otp != undefined && otp != "" && otp.length === 6) {
-                    verifyOtp(e); // verify if all fields are filled
-                  } else {
-                    alert("Please enter a valid OTP");
-                  }
-                }}
-              >
-                SUBMIT
-              </button>
+              {!show ? (
+                <button
+                  id='auth-signin-button'
+                  className='auth-button'
+                  onClick={(e) => {
+                    // function to sign in the user
+                    if (otp != null && otp != undefined && otp != "" && otp.length === 6) {
+                      verifyOtp(e); // verify if all fields are filled
+                    } else {
+                      alert("Please enter a valid OTP");
+                    }
+                  }}
+                >
+                  SUBMIT
+                </button>
+              ) : (
+                <lottie-player
+                  src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+                  background='transparent'
+                  speed='1'
+                  style={{
+                    width: "35px",
+                    textAlign: `center`,
+                    zIndex: "12",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  loop
+                  autoplay
+                ></lottie-player>
+              )}
             </div>
           </div>
         )}
