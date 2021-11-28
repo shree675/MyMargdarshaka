@@ -215,20 +215,23 @@ const Feedback = () => {
               SUBMIT
             </button>
           ) : (
-            <lottie-player
-              src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
-              background='transparent'
-              speed='1'
-              style={{
-                width: "35px",
-                textAlign: `center`,
-                zIndex: "12",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-              loop
-              autoplay
-            ></lottie-player>
+            <div className='feedback-button' style={{ backgroundColor: "white" }}>
+              <lottie-player
+                src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+                background='transparent'
+                speed='1'
+                style={{
+                  width: "35px",
+                  textAlign: `center`,
+                  zIndex: "12",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  marginTop: "20px",
+                }}
+                loop
+                autoplay
+              ></lottie-player>
+            </div>
           )}
         </div>
       </div>

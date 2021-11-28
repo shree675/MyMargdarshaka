@@ -347,7 +347,7 @@ const LearnerSignup = () => {
               zIndex: "12",
               marginLeft: "auto",
               marginRight: "auto",
-              marginTop: "50px",
+              marginTop: "20px",
             }}
             loop
             autoplay
