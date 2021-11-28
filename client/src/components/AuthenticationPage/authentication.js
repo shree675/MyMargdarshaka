@@ -273,7 +273,11 @@ const Authentication = () => {
               <CssTextField
                 fullWidth
                 onChange={(e) => {
-                  setPhone(e.target.value);
+                  // allow only numbers
+                  const re = /^[0-9\b]+$/;
+                  if (e.target.value === "" || re.test(e.target.value)) {
+                    setPhone(e.target.value);
+                  }
                 }}
                 label='Phone Number'
                 id='auth-textfield'
@@ -292,12 +296,13 @@ const Authentication = () => {
                 className='auth-button'
                 onClick={(e) => {
                   // function to sign in the user
-                  if (phone != undefined && phone != null && phone != "") {
+                  if (phone != undefined && phone != null && phone != "" && (phone.length == 10 || phone.length == 12)) {
                     setToggle(false);
                     verifyPhone(e); // verify if all fields are filled
                     setPhone("");
                   } else {
-                    alert("Please enter your phone number");
+                    setPhone("");
+                    alert("Please enter a valid phone number");
                   }
                 }}
               >
@@ -339,10 +344,10 @@ const Authentication = () => {
                 className='auth-button'
                 onClick={(e) => {
                   // function to sign in the user
-                  if (otp != null && otp != undefined && otp != "") {
+                  if (otp != null && otp != undefined && otp != "" && otp.length === 6) {
                     verifyOtp(e); // verify if all fields are filled
                   } else {
-                    alert("Please enter your OTP");
+                    alert("Please enter a valid OTP");
                   }
                 }}
               >

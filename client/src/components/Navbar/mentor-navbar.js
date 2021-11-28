@@ -91,7 +91,7 @@ const Navbar = (props) => {
             // logout
             firebase.auth().signOut();
             localStorage.clear();
-            window.location = "/init-signin";
+            window.location = "/";
           }}
           className='nav-logout-phone'
         >
@@ -120,7 +120,7 @@ const Navbar = (props) => {
               // logout
               firebase.auth().signOut();
               localStorage.clear();
-              window.location = "/init-signin";
+              window.location = "/";
             }}
             className='nav-logout-pc'
           >
