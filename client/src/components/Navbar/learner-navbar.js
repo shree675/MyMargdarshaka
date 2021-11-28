@@ -9,7 +9,6 @@ import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navb
 // @ts-ignore
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
-import profileLogo from "../../assets/profile.svg";
 import axios from "axios";
 
 // main component
@@ -67,6 +66,7 @@ const LearnerNavbar = (props) => {
             alignItems: "center",
           }}
           onClick={() => {
+            // mobile view
             setOpen(false);
           }}
         >
@@ -101,6 +101,7 @@ const LearnerNavbar = (props) => {
       <Nav style={open ? { display: "none" } : {}}>
         <div
           onClick={() => {
+            // for mobile view
             setOpen(true);
           }}
         >
@@ -134,6 +135,5 @@ const LearnerNavbar = (props) => {
     </div>
   );
 };
-//'https://randomuser.me/api/portraits/thumb/men/40.jpg'
 
 export default LearnerNavbar;

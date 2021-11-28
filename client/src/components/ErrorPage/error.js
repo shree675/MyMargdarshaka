@@ -40,7 +40,6 @@ const CssTextField = styled(TextField)({
 // main page component
 const Error = () => {
   const [curuser, setCuruser] = useState(null);
-  //   const [phone, setPhone] = useState(null);
   var phone = null;
   var tempuserType = "unknown";
   const [userType, setUserType] = useState("unknown");
@@ -60,17 +59,15 @@ const Error = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         setCuruser(user.uid);
-        // setPhone(user.phoneNumber);
         phone = user.phoneNumber;
 
         await axios.get("/api/user/login/getUser").then((e) => {
-          //console.log("*****************")
           console.log(phone);
 
           e.data.map((userData) => {
             let p = userData.phone;
+            // appending '+91'
             if (p[0] != "+") p = "+91" + p;
-            console.log("*****", phone, p);
 
             if (phone === p) {
               console.log("Valid phone number matched: ", p);
@@ -78,7 +75,6 @@ const Error = () => {
                 console.log("mentor found");
                 setUserType("mentor");
                 tempuserType = "mentor";
-                console.log(tempuserType);
               } else if (userData.user_type === "learner") {
                 setUserType("learner");
                 tempuserType = "learner";
@@ -89,7 +85,6 @@ const Error = () => {
             }
           });
         });
-        console.log(tempuserType);
         setUserType(tempuserType);
       }
     });
@@ -128,7 +123,6 @@ const Error = () => {
           <button
             className='error-button'
             onClick={() => {
-              console.log("clicked");
               // route based on user type
               if (userType == "unknown") window.location = "/init-signin";
               else if (userType == "learner") window.location = "/my-mentors";

@@ -75,7 +75,6 @@ const AdminAuthentication = () => {
 
   // method to authenticate the user
   const submit = async (e) => {
-    // e.preventDefault();
     if (username == null || password == null) {
       alert("Please fill all the fields");
       return;
@@ -102,6 +101,7 @@ const AdminAuthentication = () => {
       console.log(res.data);
       res.data.map((data) => {
         if (data.username == username && data.password == encryptedPassword) {
+          // setting user session
           localStorage.setItem("isloggedin", "true");
           localStorage.setItem("username", username);
           successfulLogin = true;
@@ -139,6 +139,7 @@ const AdminAuthentication = () => {
             </div>
             <br></br>
             <br></br>
+            {/* username field */}
             <div className='auth-text'>
               <CssTextField
                 fullWidth
@@ -154,6 +155,7 @@ const AdminAuthentication = () => {
               />
             </div>
             <br></br>
+            {/* password field */}
             <div className='auth-text'>
               <CssTextField
                 fullWidth

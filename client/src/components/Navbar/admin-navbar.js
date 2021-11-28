@@ -6,7 +6,6 @@ import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
 import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
-import profileLogo from "../../assets/profile.svg";
 
 // main page component
 const AdminNavbar = (props) => {

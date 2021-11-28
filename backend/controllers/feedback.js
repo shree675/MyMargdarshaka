@@ -1,5 +1,6 @@
 const Feedback = require("../models/feedback.model");
 
+// route to submit feedback
 module.exports.submitfeedback = (req, res) => {
   const phone = req.body.phone;
   const issueSubject = req.body.issueSubject;
@@ -25,24 +26,21 @@ module.exports.submitfeedback = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+// route to get all feedbacks from database
 module.exports.getfeedbacks = (req, res) => {
   Feedback.find()
     .then((e) => res.json(e))
     .catch((err) => res.status(400).json("notfound"));
 };
 
+// route to update a particular feedback
 module.exports.update = (req, res) => {
   let id = req.params.id;
   let data = req.body;
-  Feedback.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true },
-    function (err, result) {
-      if (err) {
-        console.log(err);
-      }
+  Feedback.findByIdAndUpdate(id, { $set: data }, { new: true }, function (err, result) {
+    if (err) {
+      console.log(err);
     }
-  );
+  });
   res.json("ok");
 };

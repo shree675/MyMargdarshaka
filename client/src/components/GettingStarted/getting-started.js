@@ -1,3 +1,5 @@
+//@ts-check
+
 import React, { useState, useEffect } from "react";
 import { slides } from "./slider-data";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
@@ -7,6 +9,7 @@ import "./getting-started.css";
 import axios from "axios";
 import firebase from "../../firebase";
 
+// main function component
 const GettingStarted = () => {
   const [current, setCurrent] = useState(0);
   const [userType, setUserType] = useState("unknown");
@@ -17,11 +20,11 @@ const GettingStarted = () => {
     verify();
   }, []);
 
+  // verify the user session
   const verify = async () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         setCuruser(user.uid);
-        //setPhone(user.phoneNumber);
 
         // obtaining the middleware token to protect routes
         var tk;
@@ -33,9 +36,7 @@ const GettingStarted = () => {
             .then((e) => {
               e.data.map((data) => {
                 if (data.phone === user.phoneNumber) {
-                  //setName(data.name);
                   setUserType("learner");
-                  console.log(userType);
                 }
               });
             })
@@ -47,10 +48,7 @@ const GettingStarted = () => {
             .then((e) => {
               e.data.map((data) => {
                 if (data.phone === user.phoneNumber) {
-                  //setName(data.name);
-                  //console.log(data.name);
                   setUserType("mentor");
-                  console.log(userType);
                 }
               });
             })
@@ -60,15 +58,16 @@ const GettingStarted = () => {
         });
       } else {
         setUserType("unknown");
-        console.log(userType);
       }
     });
   };
 
+  // function to switch to next slide in carousel
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
   };
 
+  // function to switch to previous slide in carousel
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
@@ -77,6 +76,7 @@ const GettingStarted = () => {
     return null;
   }
 
+  // displaying the frontend of the page
   return (
     <div className='body' style={{ minHeight: "105vh", width: "100%" }}>
       <div className='container'>
@@ -84,6 +84,7 @@ const GettingStarted = () => {
           <div class='col-sm-10 mt-5'>
             <div id='carouselExampleIndicators' class='carousel slide' data-bs-ride='carousel'>
               <div class='carousel-indicators'>
+                {/* saving all slides and swtiching to them */}
                 <button
                   type='button'
                   data-bs-target='#carouselExampleIndicators'
@@ -171,15 +172,19 @@ const GettingStarted = () => {
                       >
                         DONE
                       </button>
-                      
-                      <div className = 'optional-signin'>
-                      {userType === null ? null : (userType === "learner" || userType === "mentor") ? null : (<button
-                        className='init-signin-button'
-                        onClick={() => { window.location = "/init-signin"; }}
-                      >
-                        SIGN IN
-                      </button>)}
-                      
+
+                      <div className='optional-signin'>
+                        {userType === null ? null : userType === "learner" || userType === "mentor" ? null : (
+                          <button
+                            className='init-signin-button'
+                            onClick={() => {
+                              // if user is not logged in
+                              window.location = "/init-signin";
+                            }}
+                          >
+                            SIGN IN
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>

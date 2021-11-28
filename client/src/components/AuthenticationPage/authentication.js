@@ -1,4 +1,5 @@
 //@ts-check
+
 import React, { useState, useEffect } from "react";
 import auth_background from "../../assets/auth-background-comp.svg";
 import wavefront from "../../assets/wavefront.svg";
@@ -13,7 +14,6 @@ import firebase from "../../firebase";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { verify } from "../../verifyUser";
 
 // custom styles for materialui textfields
 const CssTextField = styled(TextField)({
@@ -95,7 +95,7 @@ const Authentication = () => {
     verify();
   }, []);
 
-  // function to verify the user
+  // function to verify the user session
   const verify = async () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
@@ -130,9 +130,8 @@ const Authentication = () => {
     });
   };
 
-  // sends otp
+  // function that sends otp
   const verifyPhone = async (e) => {
-    //e.preventDefault();
     //query the mongodb users database -
     // 1. if number does not exist - continue with sign up process
     // 2. if number exists but sign up is not successful - continue with sign up
@@ -141,13 +140,12 @@ const Authentication = () => {
 
     await axios.get("/api/user/login/getUser").then((e) => {
       console.log(e);
+      // appending '+91'
       if (phone[0] != "+") setPhone("+91" + phone);
-      console.log("Phone number was updated");
 
       e.data.map((user) => {
         let p = phone;
         if (p[0] != "+") p = "+91" + p;
-        //console.log("*****", user.phone, p);
 
         if (user.phone === p) {
           console.log("Valid phone number matched: ", p);
@@ -174,8 +172,6 @@ const Authentication = () => {
               setValidMentor(false);
             }
           }
-          console.log("Phone number found ", p);
-        } else {
         }
       });
     });
@@ -184,9 +180,9 @@ const Authentication = () => {
     let phoneNumber = phone;
     if (phone[0] != "+") phoneNumber = "+91" + phoneNumber;
     setPhone(phoneNumber);
-    console.log(phoneNumber);
     const appVerifier = window.recaptchaVerifier;
 
+    // sending the OTP
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -200,7 +196,7 @@ const Authentication = () => {
       });
   };
 
-  // signs in the user
+  // function signs in the user
   const verifyOtp = (e) => {
     e.preventDefault();
     let otpInput = otp;
@@ -215,7 +211,6 @@ const Authentication = () => {
           user_type: userType,
           valid_signup: false,
         };
-        console.log("Printing user before pushing:", user);
 
         // checks if the user is a first time user and routes appropriately
         if (!valid_user) {
@@ -244,7 +239,6 @@ const Authentication = () => {
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
   const trans1 = (x, y) => `translate3d(${x / 16}px,${y / 16}px,0)`;
   const trans2 = (x, y) => `translate3d(${x / 7.5}px,${y / 7.5}px,0)`;
-  const trans3 = (x, y) => `translate3d(${x / 6}px,${y / 6}px,0)`;
   const [props, set] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
@@ -312,6 +306,7 @@ const Authentication = () => {
             </div>
           </div>
         ) : (
+          // OTP page
           <div className='auth-content-body'>
             <div className='auth-91'>
               <span>

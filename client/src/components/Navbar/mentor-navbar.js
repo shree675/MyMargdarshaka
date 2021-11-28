@@ -31,7 +31,6 @@ const Navbar = (props) => {
             headers: { Authorization: `Bearer ${curuser}` },
           })
           .then((data) => {
-            // console.log(data);
             setPic(data.data.profile_picture_url);
           })
           .catch((err) => {
@@ -68,6 +67,7 @@ const Navbar = (props) => {
             alignItems: "center",
           }}
           onClick={() => {
+            // mobile view
             setOpen(false);
           }}
         >
@@ -101,6 +101,7 @@ const Navbar = (props) => {
       <Nav style={open ? { display: "none" } : {}}>
         <div
           onClick={() => {
+            // for mobile view
             setOpen(true);
           }}
         >

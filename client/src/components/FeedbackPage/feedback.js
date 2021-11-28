@@ -48,13 +48,12 @@ const Feedback = () => {
   const [phone, setPhone] = useState(null);
   const [name, setName] = useState(null);
   const [userType, setUserType] = useState(null);
-  const [idToken, setToken] = useState(null);
 
-  // verify if a user is already logged in and set approprite navbar, name and phone number
   useEffect(() => {
     verify();
   }, []);
 
+  // verify if a user is already logged in and set approprite navbar, name and phone number
   const verify = async () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
@@ -73,7 +72,6 @@ const Feedback = () => {
                 if (data.phone === user.phoneNumber) {
                   setName(data.name);
                   setUserType("learner");
-                  console.log(userType);
                 }
               });
             })
@@ -86,9 +84,7 @@ const Feedback = () => {
               e.data.map((data) => {
                 if (data.phone === user.phoneNumber) {
                   setName(data.name);
-                  console.log(data.name);
                   setUserType("mentor");
-                  console.log(userType);
                 }
               });
             })
@@ -115,6 +111,7 @@ const Feedback = () => {
         <div className='feedback-content-left'>
           <img src={feedbackcomp} className='feedback-img'></img>
         </div>
+        {/* displaying all three fields */}
         <div className='feedback-content-right'>
           <CssTextField
             id='subject-input'
@@ -199,7 +196,6 @@ const Feedback = () => {
                 axios
                   .post("/api/feedback/api/submitfeedback", feedback)
                   .then((res) => {
-                    console.log(res);
                     alert("Feedback submitted successfully");
                     if (userType === "learner") window.location = "/my-mentors";
                     else window.location = "/my-students";

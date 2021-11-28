@@ -228,7 +228,6 @@ class AdminApplications extends React.Component {
     ) {
       window.location = "/my-mentors";
     }
-    // console.log("comp did mount");
     this.getData();
   }
 
