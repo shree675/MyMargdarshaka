@@ -105,11 +105,12 @@ div.bubble {
   .react-chatbot-kit-chat-container {
     width: 90%;
     margin-bottom: 10px;
-    height: 50%;
+    height: 65%;
   }
 
   .lola-gif {
     width: 15%;
+    margin-top: -10px;
   }
 
   div.bubble {
@@ -124,7 +125,7 @@ div.bubble {
     height: 80px;
     border-radius: 20px;
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 15px;
   }
 
   .bubble:after {
@@ -139,5 +140,8 @@ div.bubble {
     bottom: -20px;
     left: 60%;
   }
-}
 
+  .init-signin-button {
+    margin-left: 55vw;
+  }
+}

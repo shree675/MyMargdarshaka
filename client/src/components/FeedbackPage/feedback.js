@@ -178,7 +178,6 @@ const Feedback = () => {
             <button
               className='feedback-button'
               onClick={() => {
-                setShow(true);
                 // function to submit the feedback
                 var err = 0;
                 if (subject == null || issue == null || body == null) {
@@ -197,6 +196,7 @@ const Feedback = () => {
                 };
                 // uploading the feedback to the database
                 if (!err) {
+                  setShow(true);
                   axios
                     .post("/api/feedback/api/submitfeedback", feedback)
                     .then((res) => {
@@ -206,6 +206,7 @@ const Feedback = () => {
                       else window.location = "/my-students";
                     })
                     .catch((err) => {
+                      setShow(false);
                       console.error(err);
                       alert("Feedback submission failed. Check console for further details");
                     });
