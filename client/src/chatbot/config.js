@@ -1,3 +1,18 @@
+/**
+ * The config file is critical to the functioning of the chatbot.
+ * It essentailly contains the definition of all the "widgets" - where widgets are the
+ * basic unit of responses that the chatbot has. A widget can be extended and designed to 
+ * do a variety of things. The file consists of a list of widgets where eachwidget has certain fields such as
+ * widgetName and widgetFunc. widgetFunc further defines the Option module that handles the funcitonality of 
+ * the particular widget. SingleOption, ModuleOptions and MultipleOptions are each designed to take the specific 
+ * data such as the text message to the displayed as props.
+ * 
+ * Mainly the list of widgets is divided into: LEARN ONLINE, COOL RESOURCES, FAQ WIDGETS, GETTING STARTED.
+ * All three versions of the chatbot (the learner-guidelines version, the learner guidelines version and the 
+ * common-guidelines version, all use the same config file, but with different ActionProvider files. Hence this 
+ * config file contains all the possible widgets)
+ */
+
 import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import FAQ from "../components/ChatbotLola/FAQ/FAQ";
@@ -20,12 +35,15 @@ const config = (props) => {
     ],
     widgets: [
       {
+        //"options" is the main menu widget which provied the options buttons of Learning Online, Getting Started, FAQ etc
         widgetName: "options",
         widgetFunc: (props) => <ModuleOptions {...props} />,
       },
 
       // **************************** LEANR ONLINE [START]  ****************************
 
+      //here are a sequence of widgets, where one leads to the next one in semantic sequence, to handle the 
+      //conversation wiht Lola about how to learn online
       {
         widgetName: "learnOnlineStep1",
         widgetFunc: (props) => <SingleOption {...props} />,
@@ -101,6 +119,9 @@ const config = (props) => {
           widgetName: "CBSERedirect",
         },
       },
+      //Note: The link that is being passed in the props is for the previous widget in the sequence. 
+      //The message being passed in props corresponds to the next widget, and the message information
+      //reflects the same, but the link does not match the message because it corrponds to the previous one
       {
         widgetName: "CBSERedirect",
         widgetFunc: (props) => <URLButton {...props} />,
@@ -110,20 +131,11 @@ const config = (props) => {
         },
       },
 
-      // **************************** LEANR ONLINE [END]  ****************************
+      // **************************** LEARN ONLINE [END]  ****************************
 
       // **************************** COOL RESOURCES [START]  ****************************
-
-      // {
-      //   widgetName: "coolResources",
-      //   widgetFunc: (props) => <LearnOnline {...props} />,
-      //   props: {
-      //     nextActionText: "Okay, next!",
-      //     message: `The internet is filled with the most wonderful resources to learn anything, quite literally! Do you want to know some of the best audio and video learning resources out there?!`,
-      //     widgetName: "coolResourcesStep1",
-      //   },
-      // },
-
+      //This sequence of widgets handles the conversation about Cool online learning resources, 
+      //The learning online module leads to this sequence, based on the user's response
       {
         widgetName: "coolResourcesStep1",
         widgetFunc: (props) => <MultipleOptions {...props} />,
@@ -270,6 +282,8 @@ const config = (props) => {
         },
       },
       // **************************** FAQ WIDGETS [START]  ****************************
+      //All the 3 versions have different FAQ handling, hence to modularise it, the FAQ optject takes in a whole bunch 
+      //of questions and 
       // learner faq widget
       {
         widgetName: "learnerfaq",
