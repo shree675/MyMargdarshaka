@@ -1,3 +1,10 @@
+/**
+ * Multiple options is a module created to help modularize all the responses from the 
+ * chatbot that consist of two options buttons apart from the start over option.
+ * It takes the handling fucntions of the chatbot such as actionProvider, through props
+ * GO TO LINK button opens the link in a new tab
+ */
+
 import React from "react";
 
 let url = ""
@@ -45,6 +52,7 @@ const MultipleOptions = (props) => {
       </button>
     );
   }
+  //if the body containis a link, this code generates an option button that takes you to the specified link
   if(props.link != null && props.link !=undefined && props.link != "")
   {
     url = props.link

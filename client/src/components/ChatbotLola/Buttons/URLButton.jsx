@@ -1,3 +1,8 @@
+/**
+ * This module is used for chatbot responses that are essentailly just redirects. 
+ * It provides an extra check layer to confirm the redirect, then opens the new
+ * link in the same page
+ */
 import React from "react";
 import "./URLButton.css";
 
