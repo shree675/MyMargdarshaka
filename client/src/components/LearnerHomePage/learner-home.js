@@ -41,17 +41,30 @@ const LearnerHome = (props) => {
       window.location = "/init-signin";
     }
 
+    /* 
+      this array will contain the data of all the mentors 
+      assigned to the student and each mentor's data will be shown
+      on a card in the homepage
+    */
     let mentor_data = [];
 
     for (let i = 0; i < subjects.length; i++) {
+
       const sub = subjects[i];
+      // avoid subjects for which the mentor hasnt been assigned
       if (sub.mentor_id === "-1") continue;
+
       const res = await axios(`/api/mentor/get-data/id/${sub.mentor_id}`, {
         headers: { Authorization: `Bearer ${curuser}` },
       });
+
       const mentor = res.data;
+
+      // fill temp with the data of each mentor
+      // the push to the array
       let temp = {};
       const code = sub.code;
+
       temp.subject = data.codeToSubName[code.substring(0, code.length - 1)];
       temp.name = mentor.name;
       temp.learner_id = learner_id;
@@ -64,6 +77,7 @@ const LearnerHome = (props) => {
       temp.userType = "learner";
       temp.profile_picture_url = mentor.profile_picture_url;
       temp.is_banned = mentor.is_banned;
+
       mentor_data.push(temp);
     }
 

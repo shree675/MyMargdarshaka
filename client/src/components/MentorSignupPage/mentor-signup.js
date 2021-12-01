@@ -53,7 +53,8 @@ const MentorSignup = () => {
 
   useEffect(() => {
     axios.get("/api/user/login/getUser").then((e) => {
-      //call user table and check if sign up is unsuccessful or not (in case someone tries to break the system with multiple sign ups with same phone number)
+      //call user table and check if sign up is unsuccessful or not 
+      //(in case someone tries to break the system with multiple sign ups with same phone number)
       e.data.map((user) => {
         let p = phone;
         if (p[0] != "+") p = "+91" + p;
@@ -106,6 +107,8 @@ const MentorSignup = () => {
 
     let temp = {};
 
+    // if any of the fields length is 0
+    // set the check as false
     if (state.name.length == 0) temp.nameCheck = false;
     else temp.nameCheck = true;
 
@@ -120,6 +123,7 @@ const MentorSignup = () => {
 
     temp.subCheck = false;
 
+    // check if atleast one sub from atleast one class is chosen
     for (let i = 6; i <= 12; i++) {
       if (state.clsAndSub[i].length != 0) {
         temp.subCheck = true;
@@ -164,6 +168,8 @@ const MentorSignup = () => {
       });
 
       const classes_list = [];
+      // convert all the subjects to codes, and push to the classes_list
+      // Science 7 --> SCI7
       console.log(state.clsAndSub);
       for (let i = 6; i <= 12; i++) {
         let subjects = state.clsAndSub[i];

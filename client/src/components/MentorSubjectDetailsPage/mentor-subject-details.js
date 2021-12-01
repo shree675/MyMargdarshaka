@@ -9,6 +9,7 @@ import { verify } from "../../verifyUser";
 
 const defaultClassCode = "SCI10";
 
+// Used as child component of the main component "MentorSubjectDetails"
 const Chapters = ({ handleClickChapter, classCode }) => {
   const chapters = [];
   (data[classCode] || data[defaultClassCode]).forEach((ch) => {
@@ -71,6 +72,7 @@ const Chapters = ({ handleClickChapter, classCode }) => {
   );
 };
 
+// Used as child component of the main component "MentorSubjectDetails"
 const SubTopics = ({ curChapter, classCode }) => {
   const subTopics = (data[classCode] || data[defaultClassCode])[curChapter]
     .subtopics;
@@ -104,6 +106,7 @@ const SubTopics = ({ curChapter, classCode }) => {
   );
 };
 
+// Used as child component of the main component "MentorSubjectDetails"
 const PendingTests = ({ pendingTests }) => {
   const handleLaunchTest = (topic) => {
     alert(`Test has been launched on \"${topic}\". Please note that this functionality is representative which means that no real test is being conducted for the students.`);
@@ -131,6 +134,7 @@ const PendingTests = ({ pendingTests }) => {
   );
 };
 
+// Used as child component of the main component "MentorSubjectDetails"
 const CompletedTests = ({ completedTests }) => {
   const handleTestDetails = (topic) => {
     alert(`Test details of topic: \"${topic}\"are available here. Please note that this functionality is representative hence there is no real data of tests results and details avaiable.`);
@@ -151,6 +155,7 @@ const CompletedTests = ({ completedTests }) => {
   );
 };
 
+// Used as child component of the main component "MentorSubjectDetails"
 const Tests = ({ pendingTests, completedTests }) => {
   const [tab, setTab] = React.useState(0);
 

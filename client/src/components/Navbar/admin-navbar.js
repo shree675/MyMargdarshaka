@@ -53,8 +53,9 @@ const AdminNavbar = (props) => {
         </Link>
         <button
           onClick={() => {
-            // logout
+            // logout, update the localStorage
             localStorage.setItem("isloggedin", "false");
+            localStorage.removeItem("basicAuth");
             window.location = "/";
           }}
           className='nav-logout-phone'
@@ -81,6 +82,7 @@ const AdminNavbar = (props) => {
             onClick={() => {
               // logout
               localStorage.setItem("isloggedin", "false");
+              // remove the basicAuth token 
               localStorage.removeItem("basicAuth");
               window.location = "/";
             }}
