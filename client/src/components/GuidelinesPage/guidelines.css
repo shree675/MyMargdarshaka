@@ -5,6 +5,9 @@
   margin-top: -20px;
   min-height: 100vh;
 }
+.optional-signin {
+  margin-top: 50px;
+}
 
 div.bubble {
   position: relative;
@@ -102,10 +105,12 @@ div.bubble {
   .react-chatbot-kit-chat-container {
     width: 90%;
     margin-bottom: 10px;
+    height: 65%;
   }
 
   .lola-gif {
     width: 15%;
+    margin-top: -10px;
   }
 
   div.bubble {
@@ -120,7 +125,7 @@ div.bubble {
     height: 80px;
     border-radius: 20px;
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 15px;
   }
 
   .bubble:after {
@@ -134,5 +139,9 @@ div.bubble {
     border-width: 20px 20px 0;
     bottom: -20px;
     left: 60%;
+  }
+
+  .init-signin-button {
+    margin-left: 55vw;
   }
 }

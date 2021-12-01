@@ -43,6 +43,8 @@
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 32px;
   padding-right: 32px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .landing-button span {
@@ -50,6 +52,8 @@
   display: inline-block;
   position: relative;
   transition: 0.25s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .landing-button span:after {
@@ -62,15 +66,21 @@
   top: -25px;
   right: -20px;
   transition: 0.25s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .landing-button:hover span {
   padding-right: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .landing-button:hover span:after {
   opacity: 1;
   right: -20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .landing-content2 {

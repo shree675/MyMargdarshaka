@@ -15,17 +15,11 @@ const nodemailer = require("nodemailer");
 // run the command mongod before running the app locally, to start up the local database. Please refer to contributing.md for more details
 // If you do not have access to the main mongodb atlas database, you will have to run use the script and seeds provided for a dummy local database
 
-// const connectionString = process.env.MONGO_URI;
-// const connectionString = "mongodb://localhost:27017/my-margdarshaka";
-const connectionString =
-  process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
-
-console.log("connection string : ", connectionString);
+const connectionString = process.env.MONGO_URI || "mongodb://localhost:27017/my-margdarshaka";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "3mb" }));
-/* app.use(express.json()); */
 mongoose.connect(connectionString);
 const connection = mongoose.connection;
 connection.once("open", function () {
@@ -35,10 +29,6 @@ connection.once("open", function () {
 //-------------------------------------------
 app.use(cors());
 
-// app.get("/api/message", (req, res) => {
-//     res.send("Message from the server: If you are seeing this message, then it means the app is successfully deployed");
-// });
-
 const learnerRouter = require("./backend/routes/learner.router");
 const mentorRouter = require("./backend/routes/mentor.router");
 const userRouter = require("./backend/routes/user.router");
@@ -47,9 +37,8 @@ const adminRouter = require("./backend/routes/admin.router");
 
 // MIDDLE WARE AUTH ------------------------------------------------------------------------
 var admin = require("firebase-admin");
-var serviceAccount = JSON.parse(
-  Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString()
-);
+// converting the string into a json service account object
+var serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT_CRED, "base64").toString());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -64,8 +53,6 @@ async function authMiddleware(req, res, next) {
 
   if (tmp[0] === "Bearer") {
     const idToken = tmp[1];
-    //console.log("idToken -> ", idToken);
-
     if (!idToken) {
       res.json(401);
     }
@@ -73,7 +60,6 @@ async function authMiddleware(req, res, next) {
       .auth()
       .verifyIdToken(idToken)
       .then((decodedToken) => {
-        //console.log(decodedToken);
         const uid = decodedToken && decodedToken.uid;
         if (uid != null && uid != undefined) next();
       })
@@ -105,15 +91,8 @@ app.get("/getToken", (req, res) => {
   res.json(process.env.REACT_APP_HUGGINGFACE_TOKEN);
 });
 
-// app.get("*", (req, res) => {
-//   throw new Error("Page Not Found");
-// });
-
 app.use((err, req, res, next) => {
   console.log("BAD ERROR");
-  // render the error page ... HOW?
-  console.log("DIRNAME", __dirname);
-
   // for developers, you can check console for the stack trace
   console.log("ERROR", err);
   next();
@@ -121,6 +100,7 @@ app.use((err, req, res, next) => {
 
 // service to send emails
 app.get("/api/sendemail/:id", (req, res, next) => {
+  // creating a transporter service
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -139,6 +119,7 @@ app.get("/api/sendemail/:id", (req, res, next) => {
     text: "Congratulations!\n\n\tWe are happy to inform you that your application to MyMargdarshaka for the post of 'Mentor' has been approved.\n\tLog onto https://mymargdarshaka.herokuapp.com/authentication:mentor with your credentials and get started!\nWe wish you a great learning experience!\n\nRegards\nMyMargdarshaka Team\nhttps://mymargdarshaka.herokuapp.com/",
   };
 
+  // sending the email
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);

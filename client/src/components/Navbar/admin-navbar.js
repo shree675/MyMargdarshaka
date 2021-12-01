@@ -6,7 +6,6 @@ import { IoIosCloseCircle as CloseIcon } from "react-icons/io";
 import { Nav, NavLogo, NavMenu, Bars, NavLink, NavBtn, NavBtnLink } from "./navbarElements";
 import "./navbar.css";
 import mainLogo from "../../assets/main-logo.svg";
-import profileLogo from "../../assets/profile.svg";
 
 // main page component
 const AdminNavbar = (props) => {
@@ -56,7 +55,7 @@ const AdminNavbar = (props) => {
           onClick={() => {
             // logout
             localStorage.setItem("isloggedin", "false");
-            window.location = "/init-signin";
+            window.location = "/";
           }}
           className='nav-logout-phone'
         >
@@ -83,7 +82,7 @@ const AdminNavbar = (props) => {
               // logout
               localStorage.setItem("isloggedin", "false");
               localStorage.removeItem("basicAuth");
-              window.location = "/init-signin";
+              window.location = "/";
             }}
             className='nav-logout-pc'
           >

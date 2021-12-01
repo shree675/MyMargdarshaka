@@ -4,17 +4,9 @@ const Mentor = require("../models/mentor.model");
 const Learner = require("../models/learner.model");
 const { mentorSchema } = require("../utils/joiSchemas");
 
+// route to create a new mentor
 module.exports.createMentor = (req, res) => {
-  const {
-    phone,
-    name,
-    email,
-    language,
-    time,
-    approved,
-    Classes,
-    profile_picture_url,
-  } = req.body;
+  const { phone, name, email, language, time, approved, Classes, profile_picture_url } = req.body;
 
   console.log({
     phone,
@@ -38,7 +30,6 @@ module.exports.createMentor = (req, res) => {
     profile_picture_url,
   });
 
-  //console.log(learner)
   mentorSchema.validate(mentor);
   mentor
     .save()
@@ -46,6 +37,7 @@ module.exports.createMentor = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+// route to get all mentors
 async function getMentors(language, times, code) {
   let mentors = [];
   var matched_list = await Mentor.find({
@@ -57,6 +49,7 @@ async function getMentors(language, times, code) {
   return matched_list;
 }
 
+// route to find matching mentors in the matching algorithm
 module.exports.findMatches = async (req, res) => {
   const language = req.body.language;
   const times = req.body.times;
@@ -86,14 +79,12 @@ module.exports.findMatches = async (req, res) => {
           //console.log(Class)
           if (Class.code == code) {
             //console.log(code, Class.students.length)
-            if (Class.students.length <= min)
-              theChosenMentor = x._id.toString();
+            if (Class.students.length <= min) theChosenMentor = x._id.toString();
           }
         }
       }
       // mentors ordered accordong to class codes order
       mentors.push(theChosenMentor);
-      //console.log(mentors);
     } catch (err) {
       console.log(err);
     }
@@ -101,6 +92,7 @@ module.exports.findMatches = async (req, res) => {
   res.json(mentors);
 };
 
+// route to update a mentor
 module.exports.updateMentorByPhone = async (req, res) => {
   let phone = req.params.phone;
   let data = req.body;
@@ -109,6 +101,7 @@ module.exports.updateMentorByPhone = async (req, res) => {
   res.json("ok");
 };
 
+// route to update a mentor
 module.exports.updateMentorById = async (req, res) => {
   let id = req.params.id;
   let data = req.body;
@@ -117,17 +110,13 @@ module.exports.updateMentorById = async (req, res) => {
   res.json("ok");
 };
 
+// route to remove a learner from the mentor's list
 module.exports.removeLearnerById = async (req, res) => {
   let mentor_id = req.params.id;
   let class_code = req.body.class_code;
   let learner_id = req.body.learner_id;
 
-  console.log(
-    "data recieved in remove route : ",
-    mentor_id,
-    class_code,
-    learner_id
-  );
+  console.log("data recieved in remove route : ", mentor_id, class_code, learner_id);
 
   let mentor = await Mentor.findById(mentor_id);
 
@@ -135,10 +124,7 @@ module.exports.removeLearnerById = async (req, res) => {
 
   for (let i = 0; i < classes.length; i++) {
     if (classes[i].code === class_code) {
-      const stu_tmp = mentor.Classes[i].students.filter(
-        (stu) => stu.id != learner_id
-      );
-      console.log("students array after removing : ", stu_tmp);
+      const stu_tmp = mentor.Classes[i].students.filter((stu) => stu.id != learner_id);
       mentor.Classes[i].students = stu_tmp;
       break;
     }
@@ -148,44 +134,41 @@ module.exports.removeLearnerById = async (req, res) => {
     .save()
     .then(() => res.json("Mentor status updated!"))
     .catch((err) => res.status(400).json("Error: " + err));
-
-  //console.log(id, data);
-  //await Mentor.findByIdAndUpdate(id, { $set: data });
-  //res.json("ok");
 };
 
+// route to get all mentors
 module.exports.getMentorById = async (req, res) => {
   let id = req.params.id;
   let data = await Mentor.findById(id).exec();
   res.json(data);
 };
 
+// route to get all mentors
 module.exports.getMentorByPhone = async (req, res) => {
   let phone = req.params.phone;
   let data = await Mentor.findOne({ phone }).exec();
   res.json(data);
 };
 
+// route to get status of mentor
 module.exports.getMentorStatus = async (req, res) => {
   let status = req.params.status;
 
   if (status === "open") {
     const data = await Mentor.find({ approved: false, rejected: false });
-    //console.log(data);
     res.json(data);
   } else if (status === "approved") {
     const data = await Mentor.find({ approved: true, rejected: false });
-    //console.log(data);
     res.json(data);
   } else if (status === "rejected") {
     const data = await Mentor.find({ approved: false, rejected: true });
-    //console.log(data);
     res.json(data);
   } else {
     res.status(404).json("Status is not correct.");
   }
 };
 
+// mentor matching algorithm
 module.exports.find_matches = async (req, res) => {
   // logic for matching students with the new mentor for
   // subjects for which they dont have mentor
@@ -202,10 +185,7 @@ module.exports.find_matches = async (req, res) => {
   const all_learners = await Learner.find({});
 
   for (let cur_learner of all_learners) {
-    if (
-      cur_learner.language === mentor.language &&
-      cur_learner.times.includes(mentor.time)
-    ) {
+    if (cur_learner.language === mentor.language && cur_learner.times.includes(mentor.time)) {
       // now search for subjects
       // for which a mentor is not asigned
 
@@ -235,26 +215,14 @@ module.exports.find_matches = async (req, res) => {
   res.json("updated");
 };
 
+// route to search a particular mentor
 module.exports.search = async (req, res) => {
   let parameter = req.params.id;
   const results = await Mentor.find({
     phone: { $regex: parameter, $options: "i" },
   });
-  // console.log(results);
   const results2 = await Mentor.find({
     name: { $regex: parameter, $options: "i" },
   });
-  // console.log(results2);
   res.send(results.concat(results2));
 };
-
-// module.exports.update = (req, res) => {
-//   let id = req.params.id;
-//   let data = req.body;
-//   Mentor.findByIdAndUpdate(id, { $set: data }, { new: true }, function (err, result) {
-//     if (err) {
-//       console.log(err);
-//     }
-//   });
-//   res.json("ok");
-// };

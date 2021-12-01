@@ -83,11 +83,15 @@ const ApplicationCard = (props) => {
           <b>Time slot : </b>
           {props.app.time}
         </div>
-        <div>
-          <b>Classes : </b>
-          {props.app.Classes.map((cls) => (
-            <div style={{ marginLeft: "2vw" }}>{cls.code}</div>
-          ))}
+        <div style={{ width: "90%" }}>
+          <span>
+            <b>Classes: </b>
+          </span>
+          <span style={{ width: "90%", overflowWrap: "break-word" }}>
+            {props.app.Classes.map((cls) => (
+              <span style={{ marginLeft: "2vw" }}>{cls.code}</span>
+            ))}
+          </span>
         </div>
       </div>
 
@@ -228,7 +232,6 @@ class AdminApplications extends React.Component {
     ) {
       window.location = "/my-mentors";
     }
-    // console.log("comp did mount");
     this.getData();
   }
 
