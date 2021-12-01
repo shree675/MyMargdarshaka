@@ -20,6 +20,7 @@ const LearnerDashboard = () => {
   const [learnerData, setLearnerData] = useState({});
 
   // method to retrieve user's details from database
+  // will be called in useEffect
   const getData = async () => {
     if (!phone) return;
     //console.log(curuser);
@@ -38,11 +39,13 @@ const LearnerDashboard = () => {
       .catch((e) => console.log("VERY BAD ERROR"));
   };
 
-  // this function is passed into the child component
+  // used to change the mentor for a subject
+  // this function is passed into the child component "LearnerRequestChangeOfMentor"
   const changeMentor = async (subject) => {
     console.log("change mentor for ", subject);
     const class_code = data.codes[subject] + learnerData.Class;
 
+    // find a new match
     let res = await axios.post(
       `/api/mentor/signup/findmatches/`,
       {
@@ -114,6 +117,8 @@ const LearnerDashboard = () => {
     );
   };
 
+  // function to save the NIOS status
+  // will be passed into the child component "NIOSStatus"
   const handleNiosSave = (niosStatus) => {
     axios.post(
       `/api/learner/update/id/${learnerData._id}`,
@@ -146,6 +151,7 @@ const LearnerDashboard = () => {
     getData();
   }, [phone, curuser]);
 
+  // pass learnerData to every child component
   return (
     <div className="mb-3 learner-bg">
       <LearnerNavbar />
