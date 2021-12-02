@@ -108,7 +108,7 @@ $ npm run dev
 <img src="./arch.png"><img/>
 
 ## Contributing 
-Contributions and pull requests are welcome. For more information on structure and modules, please refer to [contributing.md](contributing.md).
+Contributions and pull requests are welcome. For more information on structure and modules and the environment variables, please refer to [contributing.md](contributing.md).
 
 ## About Lola the Firefly
 <img src="https://user-images.githubusercontent.com/58718144/144436410-0e558801-4f2a-4ffd-836e-0a26ecc75021.gif" width=250 />

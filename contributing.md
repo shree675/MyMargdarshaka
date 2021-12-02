@@ -18,6 +18,15 @@ A few API keys are required for the project to work. The steps to get each of th
 2. SERVICE_ACCOUTN_CRED: Follow [this](https://cloud.google.com/docs/authentication/#create_service_account) link to create a service account. Store the details obtained using base64 encoding in the environment variable.
 3. REACT_APP_HUGGINGFACE_TOKEN: Create an account on [HuggingFace](https://huggingface.co/). You can create an API key using [this](https://huggingface.co/settings/token) link 
 
+### How to setup a local database
+The project currently uses a local database to store the data. The steps to setup the database are as follows:
+
+1. Download MongoDB community server from [here](https://www.mongodb.com/try/community)
+2. Create a folder named ```data``` in C: drive
+3. Inside the ```data``` folder, create a folder named ```db```
+4. Open a command prompt and run ```mongod```
+5. Now, in the project, run ```node seeds``` to populate the database with the dummy data. Make sure to check the ```connectionString``` string in ```server.js``` file to make sure that the database is connected to the local database.
+
 
 ### Overall Project structure
 This is a Full MERN stack web appplication. The backend contains Mongoose Schemas for the MongoDB database in the [models](backend/models) folder and routers in the [routes](backend/routes) folder. 
