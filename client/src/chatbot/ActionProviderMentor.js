@@ -1,10 +1,12 @@
+// A few helper functions for the chatbot to render messages in the mentor guidelines page
+
 class ActionProviderLearner {
   constructor(createChatBotMessage, setStateFunc) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
   }
 
-  id = "learner"
+  id = "learner";
 
   handleSingleOption = (message, widget) => {
     const text = this.createChatBotMessage(message, {

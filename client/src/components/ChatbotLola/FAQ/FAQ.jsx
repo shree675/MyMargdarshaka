@@ -1,3 +1,6 @@
+// FAQ module that contains most frequently asked questions
+// about the platform along with curated guides
+
 import React from "react";
 
 const FAQ = (props) => {

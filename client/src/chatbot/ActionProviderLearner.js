@@ -1,3 +1,5 @@
+// A few helper functions for the chatbot to render messages in the learner guidelines page
+
 class ActionProviderLearner {
   constructor(createChatBotMessage, setStateFunc) {
     this.createChatBotMessage = createChatBotMessage;

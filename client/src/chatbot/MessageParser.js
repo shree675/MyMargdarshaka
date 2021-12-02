@@ -1,14 +1,16 @@
+// This file contains the functionality that the bot uses to parse the user's message
+
 import messages from "./messages";
 import axios from "axios";
 import fetch from "node-fetch";
-// require("dotenv").config();
-// import env from "react-dotenv";
 
+// helper function that sends a request to the API
+// and returns the response
 async function query(data) {
   const res = await axios.get("/getToken");
   console.log("TOKEN", res);
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large",
+    "https://api-inference.huggingface.co/models/facebook/blenderbot-1B-distill",
     {
       headers: {
         Authorization: `Bearer ${res.data}`,
@@ -106,9 +108,10 @@ class MessageParser {
         })
         .catch((error) => console.log(error));
     } else if (
-      response.generated_text !== null ||
-      response.generated_text !== "" ||
-      response.generated_text !== undefined
+      (response.generated_text !== null ||
+        response.generated_text !== "" ||
+        response.generated_text !== undefined) &&
+      response.error === undefined
     ) {
       this.actionProvider.handleSingleOption(
         response.generated_text,
@@ -118,9 +121,7 @@ class MessageParser {
     } else {
       let i = Math.floor(Math.random()) % messages.default.length;
       let message = messages.default[i];
-      //console.log(message)
       this.actionProvider.handleSingleOption(message, "options");
-      //this.actionProvider.handleSingleOption("I'm sorry, I didn't quite understand that. Please choose on of the options I can help you with. ", "options");
     }
   }
 }

@@ -1,3 +1,5 @@
+// a single chatbot option
+
 import React from "react";
 
 import "./SingleOption.css";

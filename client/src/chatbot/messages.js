@@ -1,3 +1,5 @@
+// A few default messages for the chatbot.
+
 const messages = {
     questions: ["Hmmm...I’m afraid I don’t know how to answer that. Maybe I can help you with one of these?",
                 "I wish I could help you with that but unfortunately I didn’t understand. Can I help you with one of these instead?",
