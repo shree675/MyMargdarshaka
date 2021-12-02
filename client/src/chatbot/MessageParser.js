@@ -8,7 +8,7 @@ async function query(data) {
   const res = await axios.get("/getToken");
   console.log("TOKEN", res);
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/facebook/blenderbot-1B-distill",
+    "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large",
     {
       headers: {
         Authorization: `Bearer ${res.data}`,
