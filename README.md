@@ -53,7 +53,7 @@ $ npm run dev
 * Get started on the subjects and have a happy learning experience!
 * For conversation, you can chat with your assigned mentor using the chat box provided on each subject card.
 * You can provide regular feedback about the platform or experience in the feedback page.
-* If you need insights on how best to use this platform or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<sup>1</sup> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
+* If you need insights on how best to use this platform or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<a href="https://github.com/shree675/MyMargdarshaka#about-lola-the-firefly"><sup>1</sup></a> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
 * You can view your progress on the right panel and you can change your details or request for a change in mentor in the dashboard page.
 * Click on 'LOGOUT' on the navbar to logout.
 
@@ -66,7 +66,7 @@ $ npm run dev
 * Get started on the subjects and have a happy teaching experience!
 * For conversation, you can chat with your assigned student using the chat box provided for each subject.
 * You can provide regular feedback about the platform or experience in the feedback page.
-* If you need insights on how best to use this platform as amentor or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<sup>1</sup> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
+* If you need insights on how best to use this platform as amentor or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<a href="https://github.com/shree675/MyMargdarshaka#about-lola-the-firefly"><sup>1</sup></a> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
 * You can change your details or add/remove subjects you would like to teach in the dashboard page.
 * Click on 'LOGOUT' on the navbar to logout.
 
@@ -78,8 +78,6 @@ $ npm run dev
 * Assess and approve new mentor applications in the applications page.
 * Search the user on the right panel to ban him/her.
 * Click on 'LOGOUT' on the navbar to logout.
-
-<sup>1</sup>Lola is a custom-built character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
 
 ## Screenshots
 *Landing page*
@@ -110,4 +108,10 @@ $ npm run dev
 <img src="./arch.png"><img/>
 
 ## Contributing 
-Contributions and pull requests are welcome. For more information on structure and modules, please refer to this [contributing.md file](contributing.md)
+Contributions and pull requests are welcome. For more information on structure and modules, please refer to [contributing.md](contributing.md).
+
+## About Lola the Firefly
+<img src="https://user-images.githubusercontent.com/58718144/144436410-0e558801-4f2a-4ffd-836e-0a26ecc75021.gif" width=250 />
+Lola is a custom-built virtual mentor interactive character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
+
+Lola can help you learn how to use this application by redirecting you to the Getting Started page, where an automatic slideshow walks you through the application's working. It helps provide insights on how best to make use of this platform in all aspects.
