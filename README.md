@@ -110,4 +110,6 @@ $ npm run dev
 <img src="./arch.png"><img/>
 
 ## Contributing 
-Contributions and pull requests are welcome. For more information on structure and modules, please refer to this [contributing.md file](contributing.md)
+Contributions and pull requests are welcome. For more information on structure and modules, please refer to this [contributing.md](contributing.md).
+
+![with sparkle trail](https://user-images.githubusercontent.com/58718144/144436410-0e558801-4f2a-4ffd-836e-0a26ecc75021.gif)
