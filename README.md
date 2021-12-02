@@ -79,8 +79,6 @@ $ npm run dev
 * Search the user on the right panel to ban him/her.
 * Click on 'LOGOUT' on the navbar to logout.
 
-<sup>1</sup>Lola is a custom-built character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
-
 ## Screenshots
 *Landing page*
 ![Screenshot (571)](https://user-images.githubusercontent.com/58718144/144431616-81269f16-7ca3-43c0-95c2-9621c7b36fe8.png)
@@ -112,4 +110,9 @@ $ npm run dev
 ## Contributing 
 Contributions and pull requests are welcome. For more information on structure and modules, please refer to [contributing.md](contributing.md).
 
+## About Lola the Firefly
 <img src="https://user-images.githubusercontent.com/58718144/144436410-0e558801-4f2a-4ffd-836e-0a26ecc75021.gif" width=250 />
+
+Lola is a custom-built virtual mentor interactive character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
+
+Lola can help you learn how to use this application by redirecting you to the Getting Started page, where an automatic slideshow walks you through the application's working. It helps provide insights on how best to make use of this platform in all aspects.
