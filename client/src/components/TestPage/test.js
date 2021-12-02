@@ -1,9 +1,11 @@
-import React from "react";
+//@ts-check
 
+import React from "react";
 import LearnerNavbar from "../Navbar/learner-navbar";
 import data from "../../data";
 import "./test.css";
 
+// custom css for button
 const buttonStyle = {
   height: "30px",
   width: "100px",
@@ -15,26 +17,35 @@ const buttonStyle = {
   cursor: "pointer",
 };
 
+// main page component
 const Test = () => {
+  // displaying the frontend of the page
   return (
     <div>
       <LearnerNavbar />
-      <div className="test-main">
-        <div className="test-header">Test</div>
-        <div className="test-content">
-          {data.test.map((item, i) => (
-            <div>
-              <div className="test-question">{`Question ${i + 1} : ${
-                item.q
-              }`}</div>
-              {item.op.map((opt) => (
-                <div style={{ paddingLeft: "20px" }}>
-                  <input type="checkbox" className="test-checkbox" />
-                  <label style={{ marginLeft: "10px" }}>{opt}</label>
-                </div>
-              ))}
-            </div>
-          ))}
+      <div className='test-main'>
+        <div className='test-header'>Test</div>
+        <div className='test-content'>
+          {data.test.map(
+            (
+              item,
+              i // displaying the questions
+            ) => (
+              <div>
+                <div className='test-question'>{`Question ${i + 1} : ${item.q}`}</div>
+                {item.op.map(
+                  (
+                    opt // displaying the options
+                  ) => (
+                    <div style={{ paddingLeft: "20px" }}>
+                      <input type='checkbox' className='test-checkbox' />
+                      <label style={{ marginLeft: "10px" }}>{opt}</label>
+                    </div>
+                  )
+                )}
+              </div>
+            )
+          )}
         </div>
         <div
           style={{
@@ -58,6 +69,7 @@ const Test = () => {
               marginLeft: "20px",
             }}
             onClick={() => {
+              // function to mimic test submission
               window.location = "/my-mentors";
               alert("Submitted successfully.");
             }}

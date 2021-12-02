@@ -29,9 +29,9 @@ const MentorSignup = () => {
     prefTimeCheck: true,
     subCheck: true,
   });
-
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("Null phone");
+  const [show, setShow] = useState(false);
 
   // reroute if a different user is logged in
   useEffect(() => {
@@ -53,7 +53,8 @@ const MentorSignup = () => {
 
   useEffect(() => {
     axios.get("/api/user/login/getUser").then((e) => {
-      //call user table and check if sign up is unsuccessful or not (in case someone tries to break the system with multiple sign ups with same phone number)
+      //call user table and check if sign up is unsuccessful or not 
+      //(in case someone tries to break the system with multiple sign ups with same phone number)
       e.data.map((user) => {
         let p = phone;
         if (p[0] != "+") p = "+91" + p;
@@ -101,11 +102,13 @@ const MentorSignup = () => {
   };
 
   const handleClick = async () => {
-    console.log("clicked");
+    setShow(true);
     console.log(state);
 
     let temp = {};
 
+    // if any of the fields length is 0
+    // set the check as false
     if (state.name.length == 0) temp.nameCheck = false;
     else temp.nameCheck = true;
 
@@ -120,6 +123,7 @@ const MentorSignup = () => {
 
     temp.subCheck = false;
 
+    // check if atleast one sub from atleast one class is chosen
     for (let i = 6; i <= 12; i++) {
       if (state.clsAndSub[i].length != 0) {
         temp.subCheck = true;
@@ -140,7 +144,6 @@ const MentorSignup = () => {
       console.log("ok");
 
       await axios.get("/api/user/login/getUser").then((e) => {
-        //console.log("*****************")
         console.log(e);
         if (phone[0] != "+") setPhone("+91" + phone);
         console.log("Phone number was updated");
@@ -165,6 +168,8 @@ const MentorSignup = () => {
       });
 
       const classes_list = [];
+      // convert all the subjects to codes, and push to the classes_list
+      // Science 7 --> SCI7
       console.log(state.clsAndSub);
       for (let i = 6; i <= 12; i++) {
         let subjects = state.clsAndSub[i];
@@ -208,61 +213,30 @@ const MentorSignup = () => {
           console.log("Pushing Sign up data", phone);
         });
       //update valid user
-      await axios
-        .post(`/api/user/update/` + phone, user)
-        .then((res) => console.log("User table has been updated"));
+      await axios.post(`/api/user/update/` + phone, user).then((res) => console.log("User table has been updated"));
 
+      setShow(false);
       alert("Sign up Successful!");
       window.location = "/my-students";
     }
   };
 
   return (
-    <div className="mentor-main">
-      <div className="mentor-row-1">
+    <div className='mentor-main'>
+      <div className='mentor-row-1'>
         <div>
-          <div className="title">Sign Up</div>
-          <div className="mentor-signup-img-div-phone">
-            <img
-              src={imgSrc}
-              style={{ width: "80%", margin: "0", padding: "0" }}
-            />
+          <div className='title'>Sign Up</div>
+          <div className='mentor-signup-img-div-phone'>
+            <img src={imgSrc} style={{ width: "80%", margin: "0", padding: "0" }} />
           </div>
-          <div className="valid-div">
-            {state.nameCheck ? "" : "*this field is required"}
-          </div>
-          <input
-            className="input-field"
-            name="name"
-            onChange={handleChange}
-            placeholder="Name"
-          />{" "}
-          <br />
-          <div className="valid-div">
-            {state.emailCheck ? "" : "*this field is required"}
-          </div>
-          <input
-            className="input-field"
-            name="email"
-            onChange={handleChange}
-            placeholder="Email"
-          />
+          <div className='valid-div'>{state.nameCheck ? "" : "*this field is required"}</div>
+          <input className='input-field' name='name' onChange={handleChange} placeholder='Name' /> <br />
+          <div className='valid-div'>{state.emailCheck ? "" : "*this field is required"}</div>
+          <input className='input-field' name='email' onChange={handleChange} placeholder='Email' />
           <div>
-            <div className="valid-div">
-              {state.prefTimeCheck ? "" : "*this field is required"}
-            </div>
-            <select
-              className="input-field"
-              name="prefTime"
-              onChange={handleChange}
-              value={state.prefTime}
-            >
-              <option
-                value=""
-                className="mentor-signup-dropdown"
-                disabled
-                selected
-              >
+            <div className='valid-div'>{state.prefTimeCheck ? "" : "*this field is required"}</div>
+            <select className='input-field' name='prefTime' onChange={handleChange} value={state.prefTime}>
+              <option value='' className='mentor-signup-dropdown' disabled selected>
                 Preferred Timeslot
               </option>
               {times.map((time) => (
@@ -271,21 +245,9 @@ const MentorSignup = () => {
             </select>
           </div>
           <div>
-            <div className="valid-div">
-              {state.prefLangCheck ? "" : "*this field is required"}
-            </div>
-            <select
-              className="input-field"
-              name="prefLang"
-              onChange={handleChange}
-              value={state.prefLang}
-            >
-              <option
-                value=""
-                className="mentor-signup-dropdown"
-                disabled
-                selected
-              >
+            <div className='valid-div'>{state.prefLangCheck ? "" : "*this field is required"}</div>
+            <select className='input-field' name='prefLang' onChange={handleChange} value={state.prefLang}>
+              <option value='' className='mentor-signup-dropdown' disabled selected>
                 Preferred Language
               </option>
               {langs.map((lang) => (
@@ -294,7 +256,7 @@ const MentorSignup = () => {
             </select>
           </div>
         </div>
-        <div className="img-div">
+        <div className='img-div'>
           <img src={imgSrc} />
         </div>
       </div>
@@ -305,17 +267,17 @@ const MentorSignup = () => {
           alignItems: "center",
         }}
       >
-        <div className="class-and-sub">
+        <div className='class-and-sub'>
           {classes.map((cls) => (
             <div>
-              <div className="class-name">Class {cls}</div>
+              <div className='class-name'>Class {cls}</div>
               {cls <= 10 && (
-                <div className="subs-box">
+                <div className='subs-box'>
                   {primSubs.map((sub) => (
                     <div style={{ marginBottom: "10px" }}>
                       <input
-                        type="Checkbox"
-                        name="clsAndSub"
+                        type='Checkbox'
+                        name='clsAndSub'
                         value={`${sub} ${cls}`}
                         onChange={handleChange}
                         style={{ marginLeft: "20px" }}
@@ -326,12 +288,12 @@ const MentorSignup = () => {
                 </div>
               )}
               {cls > 10 && (
-                <div className="subs-box">
+                <div className='subs-box'>
                   {secSubs.map((sub) => (
                     <div style={{ marginBottom: "10px" }}>
                       <input
-                        type="Checkbox"
-                        name="clsAndSub"
+                        type='Checkbox'
+                        name='clsAndSub'
                         value={`${sub} ${cls}`}
                         onChange={handleChange}
                         style={{ marginLeft: "20px" }}
@@ -344,13 +306,31 @@ const MentorSignup = () => {
             </div>
           ))}
         </div>
-        <div className="valid-div" style={{ marginLeft: "-140px" }}>
+        <div className='valid-div' style={{ marginLeft: "-140px" }}>
           {state.subCheck ? "" : "*select at least one subject"}
         </div>
       </div>
-      <div className="submit-button" onClick={handleClick}>
-        ASSIGN STUDENTS
-      </div>
+      {!show ? (
+        <div className='submit-button' onClick={handleClick}>
+          ASSIGN STUDENTS
+        </div>
+      ) : (
+        <lottie-player
+          src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+          background='transparent'
+          speed='1'
+          style={{
+            width: "35px",
+            textAlign: `center`,
+            zIndex: "12",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "20px",
+          }}
+          loop
+          autoplay
+        ></lottie-player>
+      )}
     </div>
   );
 };

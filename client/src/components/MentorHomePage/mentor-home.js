@@ -8,9 +8,9 @@ import Card from "../LearnerHomePage/card";
 import MentorSubjectDetails from "../MentorSubjectDetailsPage/mentor-subject-details";
 import SubjectTitle from "./subject-title";
 import { verify } from "../../verifyUser";
-/* import lola from "../../assets/lola_more_glow.gif"; */
 import lola from "../../assets/lola_small_and_moves.gif";
 import firebase from "../../firebase";
+import "@lottiefiles/lottie-player";
 
 // main component
 const MentorHome = () => {
@@ -32,7 +32,7 @@ const MentorHome = () => {
 
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
-  
+  const [show, setShow] = useState(false);
 
   // format : {"SCI6" : [{name: "Aashrith", ...}]}
   const [studentsData, setStudentsData] = useState({});
@@ -41,6 +41,7 @@ const MentorHome = () => {
   // gets the data from DB and updates the state "studentsData"
   const getData = async () => {
     if (!phone) return;
+    setShow(true);
     if (curuser === "No user is logged in") return;
     const res = await axios.get(`/api/mentor/get-data/phone/${phone}`, {
       headers: { Authorization: `Bearer ${curuser}` },
@@ -83,6 +84,7 @@ const MentorHome = () => {
       }
     }
 
+    setShow(false);
     // set the state
     setStudentsData(tmp);
   };
@@ -104,15 +106,16 @@ const MentorHome = () => {
     }
     verify(setCuruser, setPhone);
     getData();
-
   }, [phone, curuser]);
 
   useEffect(() => {
     console.log(studentsData);
   }, [studentsData]);
-  useEffect(()=> {
-    alert('If you have just signed up, your students will not be visible here. Once your application is approved, your assigned students will show up here')
-  }, [])
+  useEffect(() => {
+    alert(
+      "If you have just signed up, your students will not be visible here. Once your application is approved, your assigned students will show up here"
+    );
+  }, []);
 
   return (
     <>
@@ -172,25 +175,43 @@ const MentorHome = () => {
                 ...details
               }]
             } */}
-              <div className='col'>
-                {Object.keys(studentsData).map((classCode) => (
-                  <div className='row p-3'>
-                    <SubjectTitle style={style} classCode={classCode} details={details} setPageDetails={setPageDetails} />
+              {!show ? (
+                <div className='col'>
+                  {Object.keys(studentsData).map((classCode) => (
+                    <div className='row p-3'>
+                      <SubjectTitle style={style} classCode={classCode} details={details} setPageDetails={setPageDetails} />
 
-                    {studentsData[classCode].map((details) => (
-                      <div className='col-6 col-md-3' id='mentor-home-learners'>
-                        <Card
-                          details={{
-                            ...details,
-                            hasConsented: true,
-                            userType: "mentor",
-                          }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
+                      {studentsData[classCode].map((details) => (
+                        <div className='col-6 col-md-3' id='mentor-home-learners'>
+                          <Card
+                            details={{
+                              ...details,
+                              hasConsented: true,
+                              userType: "mentor",
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <lottie-player
+                  src='https://assets3.lottiefiles.com/packages/lf20_aenqe9xz.json'
+                  background='transparent'
+                  speed='1'
+                  style={{
+                    width: "60px",
+                    textAlign: `center`,
+                    zIndex: "12",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: "15%",
+                  }}
+                  loop
+                  autoplay
+                ></lottie-player>
+              )}
             </div>
           </div>
         </div>

@@ -1,8 +1,10 @@
 //@ts-check
+
 import { FaBars } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
+// styles for all navbars
 export const Nav = styled.nav`
   background: #5d1049;
   height: 120px;

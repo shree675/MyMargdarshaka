@@ -36,7 +36,6 @@ const CssTextField = styled(TextField)({
 
 // card component
 const ApplicationCard = (props) => {
-  // console.log(props);
   if (props.app === undefined) {
     return null;
   }
@@ -162,16 +161,19 @@ class AdminHomePage extends React.Component {
       .then((data) => {
         this.setState({
           newIssues: data.data.map((e) => {
+            // new issues
             if (e.assignedTo === "none") {
               return e;
             }
           }),
           manage: data.data.map((e) => {
+            // managing issues
             if (e.assignedTo === localStorage.getItem("username") && e.status === 0) {
               return e;
             }
           }),
           resolvedIssues: data.data.map((e) => {
+            // resolved issues
             if (e.assignedTo === localStorage.getItem("username") && e.status === 1) {
               return e;
             }
@@ -181,7 +183,7 @@ class AdminHomePage extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  // mehtod to verify if a user is already logged in
+  // method to verify if a user is already logged in
   componentDidMount() {
     if (localStorage.getItem("isloggedin") === null || localStorage.getItem("isloggedin") === "false") {
       window.location = "/admin-auth";

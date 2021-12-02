@@ -13,12 +13,12 @@ import axios from "axios";
 import { verify } from "../../verifyUser";
 import LearnerNavbar from "../Navbar/learner-navbar";
 
+// main page component
 const LearnerGuidelines = () => {
   const [name, setName] = useState("Cutie");
   const [newConfig, setNewConfig] = useState(null);
   const [curuser, setCuruser] = useState("No user is logged in");
   const [phone, setPhone] = useState("");
-  //const [userType, setUserType] = useState(null);
 
   // obtaining the user's assigned mentors from the database
   const getData = async (learner_phone) => {
@@ -54,7 +54,6 @@ const LearnerGuidelines = () => {
 
   useEffect(() => {
     setNewConfig(config(name));
-    //console.log("The current name is", name)
   }, [name]);
 
   useEffect(() => {
@@ -65,33 +64,23 @@ const LearnerGuidelines = () => {
         
       } */
   }, [newConfig]);
+
+  // displaying the frontend of the page
   return (
     <div>
       <LearnerNavbar />
-      <div className="body">
-        <div className="container">
-          <div className="col">
-            <div className="row">
-              <div className="bubble">
-                Hello there {name}! Hope you're doing well!{" "}
-              </div>
+      <div className='body'>
+        <div className='container'>
+          <div className='col'>
+            <div className='row'>
+              <div className='bubble'>Hello there {name}! Hope you're doing well! </div>
             </div>
-            <div className="row">
-              <img
-                className="col lola-gif"
-                // style={{ width: "100px" }}
-                src={lola}
-                alt=""
-              />
-              <div className="col">
-                {newConfig != null &&
-                newConfig.name != undefined &&
-                newConfig.name != "Cutie" ? (
-                  <Chatbot
-                    config={newConfig}
-                    actionProvider={ActionProvider}
-                    messageParser={MessageParser}
-                  />
+            <div className='row'>
+              <img className='col lola-gif' src={lola} alt='' />
+              <div className='col'>
+                {newConfig != null && newConfig.name != undefined && newConfig.name != "Cutie" ? (
+                  // embedding the chatbot
+                  <Chatbot config={newConfig} actionProvider={ActionProvider} messageParser={MessageParser} />
                 ) : (
                   <div></div>
                 )}

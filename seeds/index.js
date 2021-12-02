@@ -1,3 +1,5 @@
+//@ts-check
+
 const mongoose = require("mongoose");
 const Mentor = require("../backend/models/mentor.model");
 const Learner = require("../backend/models/learner.model");
@@ -34,7 +36,6 @@ const seedDB = async () => {
   console.log("seeding mentors: start");
   await Mentor.deleteMany({}).catch((e) => console.log(e));
   for (let mentor of mentors) {
-    // console.log(mentor);
     const { error } = mentorSchema.validate(mentor, { allowUnknown: true });
     if (error) {
       break;
@@ -47,17 +48,13 @@ const seedDB = async () => {
   console.log("seeding learners: start");
   await Learner.deleteMany({}).catch((e) => console.log(e));
   for (let learner of learners) {
-    // console.log(learner);
     const { error } = learnerSchema.validate(learner, { allowUnknown: true });
     if (error) {
       console.log(error);
       break;
     }
     const l = new Learner(learner);
-    await l
-      .save()
-      // .then((t) => console.log(t))
-      .catch((e) => console.log("ERROR: ", e));
+    await l.save().catch((e) => console.log("ERROR: ", e));
   }
 
   console.log("seeding learners: done");
