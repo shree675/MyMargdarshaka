@@ -52,7 +52,6 @@ class MessageParser {
       );
     } else if (
       lowercase.includes("how are you") ||
-      lowercase.includes("you") ||
       lowercase.includes("whats up") ||
       lowercase.includes("sup") ||
       lowercase.includes("wyd")
@@ -107,18 +106,10 @@ class MessageParser {
         })
         .catch((error) => console.log(error));
     } else if (
-      lowercase.includes("?") ||
-      lowercase.includes("how") ||
-      lowercase.includes("what") ||
-      lowercase.includes("when") ||
-      lowercase.includes("why") ||
-      lowercase.includes("where")
+      response.generated_text !== null ||
+      response.generated_text !== "" ||
+      response.generated_text !== undefined
     ) {
-      let i = Math.floor(Math.random()) % messages.questions.length;
-      let message = messages.questions[i];
-      //console.log(message)
-      this.actionProvider.handleSingleOption(message, "options");
-    } else if (response.generated_text) {
       this.actionProvider.handleSingleOption(
         response.generated_text,
         "options"

@@ -11,6 +11,14 @@ The project currently consists of the main functionality which matches learners 
 2. Preferred Time slot
 3. Class and subjects interested in teaching or learning
 
+### Getting the API keys
+A few API keys are required for the project to work. The steps to get each of them are as follows:
+
+1. REACT_APP_FIREBASE_API_KEY: This is the API key for the Firebase Authentication system. Go to [Firebase](https://console.firebase.google.com) and create a new project. You will find the API Key named as Web API key in the project settings.
+2. SERVICE_ACCOUTN_CRED: Follow [this](https://cloud.google.com/docs/authentication/#create_service_account) link to create a service account. Store the details obtained using base64 encoding in the environment variable.
+3. REACT_APP_HUGGINGFACE_TOKEN: Create an account on [HuggingFace](https://huggingface.co/). You can create an API key using [this](https://huggingface.co/settings/token) link 
+
+
 ### Overall Project structure
 This is a Full MERN stack web appplication. The backend contains Mongoose Schemas for the MongoDB database in the [models](backend/models) folder and routers in the [routes](backend/routes) folder. 
 The [server.js](server.js) connects the MongoDB Database. 
