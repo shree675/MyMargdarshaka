@@ -53,7 +53,7 @@ $ npm run dev
 * Get started on the subjects and have a happy learning experience!
 * For conversation, you can chat with your assigned mentor using the chat box provided on each subject card.
 * You can provide regular feedback about the platform or experience in the feedback page.
-* If you need insights on how best to use this platform or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<sup>*</sup> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
+* If you need insights on how best to use this platform or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<a href="https://github.com/shree675/MyMargdarshaka/blob/main/README.md#:~:text=Lola%20is%20a%20custom%20character%20that%20uses%20an%20NLP%20based%20BERT%20conversation%20model%20that%20helps%20provide%20suitable%20answers%20to%20the%20input%20queries."><sup>1</sup></a> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
 * You can view your progress on the right panel and you can change your details or request for a change in mentor in the dashboard page.
 * Click on 'LOGOUT' on the navbar to logout.
 
@@ -66,7 +66,7 @@ $ npm run dev
 * Get started on the subjects and have a happy teaching experience!
 * For conversation, you can chat with your assigned student using the chat box provided for each subject.
 * You can provide regular feedback about the platform or experience in the feedback page.
-* If you need insights on how best to use this platform as amentor or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
+* If you need insights on how best to use this platform as amentor or if you have a question, then head over to the guidelines page by selecting the 'GUIDELINES' button on the navbar. Interact with the virtual mentor Lola<a href="https://github.com/shree675/MyMargdarshaka/blob/main/README.md#:~:text=Lola%20is%20a%20custom%20character%20that%20uses%20an%20NLP%20based%20BERT%20conversation%20model%20that%20helps%20provide%20suitable%20answers%20to%20the%20input%20queries."><sup>1</sup></a> by typing in your queries or clicking on the provided chips to gain insights and advice on how to make most use of this platform.
 * You can change your details or add/remove subjects you would like to teach in the dashboard page.
 * Click on 'LOGOUT' on the navbar to logout.
 
@@ -79,7 +79,7 @@ $ npm run dev
 * Search the user on the right panel to ban him/her.
 * Click on 'LOGOUT' on the navbar to logout.
 
-<sup>*</sup>Lola is a custom character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
+<sup>1</sup>Lola is a custom-built character that uses an NLP based BERT conversation model that helps provide suitable answers to the input queries.
 
 ## Screenshots
 *Landing page*
