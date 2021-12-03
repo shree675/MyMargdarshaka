@@ -98,7 +98,7 @@ $ npm run dev
 
 ## Releases
 1. Checkout the Release 1 demo video [here](https://www.youtube.com/watch?v=iYpwh7IrSR8).
-2. Checkout the Release 2 demo video here.
+2. Checkout the Release 2 demo video [here](https://youtu.be/3wZg3v7AcuM).
 
 ## Tools and Technologies Used
 * MERN stack with Firebase for the user authentication and database to store messages
