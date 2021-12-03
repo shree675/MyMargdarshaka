@@ -10,7 +10,7 @@ async function query(data) {
   const res = await axios.get("/getToken");
   console.log("TOKEN", res);
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/facebook/blenderbot-1B-distill",
+    "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill",
     {
       headers: {
         Authorization: `Bearer ${res.data}`,
@@ -33,7 +33,11 @@ class MessageParser {
     // console.log(message);
     const lowercase = message.toLowerCase();
     const response = await query(lowercase);
-    console.log(response);
+    console.log("RESPONSE", response);
+    console.log(
+      "FOO",
+      response.error ? response.error : response.generated_text
+    );
 
     if (
       lowercase.includes("what is your name") ||
@@ -107,12 +111,7 @@ class MessageParser {
           );
         })
         .catch((error) => console.log(error));
-    } else if (
-      (response.generated_text !== null ||
-        response.generated_text !== "" ||
-        response.generated_text !== undefined) &&
-      response.error === undefined
-    ) {
+    } else if (!response.error && response.generated_text) {
       this.actionProvider.handleSingleOption(
         response.generated_text,
         "options"
